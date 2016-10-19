@@ -31,17 +31,25 @@ function get_games(date_data,league_data) {
         success: function (response) {
             console.log(response);
 
-            //for(var i=0;i<response.length;i++){
+            for(var i=0;i<response.length;i++){
                 var game = $('<div>').addClass('game').on('click', function (){
                     console.log('game clicked!')
                 });
-                $('<span>').text(response.away_long).addClass('teams_playing').appendTo(game);
-                $('<span>').text(response.home_long).addClass('teams_playing').appendTo(game);
-                $('<span>').text(response.date).addClass('game_date').appendTo(game);
-                $('<img>').attr('src',response.home_pic).addClass('home_img').appendTo(game);
-                $('<img>').attr('src',response.away_pic).addClass('away_img').appendTo(game);
-                $('.game_landing').append(game);
+                var game_landing = $('<div>').addClass('game_landing');
+                var bet_landing = $('<div>').addClass('bet_landing');
+                //bet data
+
+                //game data
+                $('<span>').text(response[i].away_long).addClass('teams_playing').appendTo(game);
+                $('<span>').text(response[i].home_long).addClass('teams_playing').appendTo(game);
+                $('<span>').text(response[i].date).addClass('game_date').appendTo(game);
+                $('<img>').attr('src',response[i].home_pic).addClass('home_img').appendTo(game);
+                $('<img>').attr('src',response[i].away_pic).addClass('away_img').appendTo(game);
+
+                $(game_landing).append(game);
+                $('.sched_landing').append(game_landing);
             //};
+            }
         }
     });
 }
