@@ -33,12 +33,21 @@ function get_games(date_data,league_data) {
 
             for(var i=0;i<response.length;i++){
                 var game = $('<div>').addClass('game').on('click', function (){
-                    console.log('game clicked!')
+                    $(this).parent().find('.bet').slideToggle();
+                });
+                var bet = $('<div>').addClass('bet').on('click', function (){
+                   //betting send to server function goes here!---------------------------
                 });
                 var game_landing = $('<div>').addClass('game_landing');
                 var bet_landing = $('<div>').addClass('bet_landing');
                 //bet data
-
+                $('<span>').text(response[i].favorite[0]).appendTo(bet);
+                $('<span>').text(response[i].favorite[1]).appendTo(bet);
+                $('<span>').text(response[i].money_line[0]).appendTo(bet);
+                $('<span>').text(response[i].money_line[1]).appendTo(bet);
+                $('<span>').text("OVER "+response[i].over_under).appendTo(bet);
+                $('<span>').text("UNDER "+response[i].over_under).appendTo(bet);
+                $('<span>').text('CONFIRM').addClass('confirm').appendTo(bet);
                 //game data
                 $('<span>').text(response[i].away_long).addClass('teams_playing').appendTo(game);
                 $('<span>').text(response[i].home_long).addClass('teams_playing').appendTo(game);
@@ -46,7 +55,8 @@ function get_games(date_data,league_data) {
                 $('<img>').attr('src',response[i].home_pic).addClass('home_img').appendTo(game);
                 $('<img>').attr('src',response[i].away_pic).addClass('away_img').appendTo(game);
 
-                $(game_landing).append(game);
+                //appending data to game and bet, appending game and bet to landing zone
+                $(game_landing).append(game, bet);
                 $('.sched_landing').append(game_landing);
             //};
             }
