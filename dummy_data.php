@@ -1,4 +1,5 @@
 <?php
+session_start();
 /**
  * Created by PhpStorm.
  * User: Kyle
@@ -9,7 +10,6 @@
 //date_default_timezone_set('America/Los_Angeles');
 date_default_timezone_set('America/New_York');
 //create dummy game data for week 7
-
 
 //nfl teams
 $nfl_teams = [
@@ -57,22 +57,30 @@ $nfl_teams = [
 //favorite => [10,-10]
 
 $nfl_games_2016 = [
-    ['ID'=>1, 'away'=>5, 'home'=>11 , 'date'=>'2016-10-20 20:25', 'money_line'=>[350,-450], 'over_under'=>47, 'favorite'=>[10,-10]]
+    ['ID'=>1, 'away'=>5, 'home'=>11 , 'date'=>'2016-10-20 20:25', 'money_line'=>[350,-450], 'over_under'=>47, 'favorite'=>[10,-10]],
+    ['ID'=>2, 'away'=>21, 'home'=>16 , 'date'=>'2016-10-23 09:30', 'money_line'=>[-150,130], 'over_under'=>44.5, 'favorite'=>[-2,2]],
+    ['ID'=>3, 'away'=>18, 'home'=>24 , 'date'=>'2016-10-23 13:00', 'money_line'=>[-140,120], 'over_under'=>40, 'favorite'=>[1.5,-1.5]],
+    ['ID'=>4, 'away'=>20, 'home'=>15 , 'date'=>'2016-10-23 13:00', 'money_line'=>[255,-310], 'over_under'=>49, 'favorite'=>[7,-7]],
+    ['ID'=>5, 'away'=>31, 'home'=>10 , 'date'=>'2016-10-23 13:00', 'money_line'=>[-105,-115], 'over_under'=>51, 'favorite'=>[1,-1]]
 ];
 //$game_data = [,];
+$output = [];
 
-$output = [
-    'away_long'=>$nfl_teams[ $nfl_games_2016[0]['away'] ]['long_name'],
-    'away_abbr'=>$nfl_teams[ $nfl_games_2016[0]['away'] ]['abbr_name'],
-    'away_pic'=>$nfl_teams[ $nfl_games_2016[0]['away'] ]['logo_src'],
-    'home_long'=>$nfl_teams[ $nfl_games_2016[0]['home'] ]['long_name'],
-    'home_abbr'=>$nfl_teams[ $nfl_games_2016[0]['home'] ]['abbr_name'],
-    'home_pic'=>$nfl_teams[ $nfl_games_2016[0]['home'] ]['logo_src'],
-    'date'=>$nfl_games_2016[0]['date'],
-    'money_line'=>$nfl_games_2016[0]['money_line'],
-    'over_under'=>$nfl_games_2016[0]['over_under'],
-    'favorite'=>$nfl_games_2016[0]['favorite']
-];
+for($GAME_NUMBER  = 0; $GAME_NUMBER < count($nfl_games_2016); $GAME_NUMBER ++){
+    $temp = [
+        'away_long'=>$nfl_teams[ $nfl_games_2016[$GAME_NUMBER]['away'] ]['long_name'],
+        'away_abbr'=>$nfl_teams[ $nfl_games_2016[$GAME_NUMBER]['away'] ]['abbr_name'],
+        'away_pic'=>$nfl_teams[ $nfl_games_2016[$GAME_NUMBER]['away'] ]['logo_src'],
+        'home_long'=>$nfl_teams[ $nfl_games_2016[$GAME_NUMBER]['home'] ]['long_name'],
+        'home_abbr'=>$nfl_teams[ $nfl_games_2016[$GAME_NUMBER]['home'] ]['abbr_name'],
+        'home_pic'=>$nfl_teams[ $nfl_games_2016[$GAME_NUMBER]['home'] ]['logo_src'],
+        'date'=>$nfl_games_2016[$GAME_NUMBER]['date'],
+        'money_line'=>$nfl_games_2016[$GAME_NUMBER]['money_line'],
+        'over_under'=>$nfl_games_2016[$GAME_NUMBER]['over_under'],
+        'favorite'=>$nfl_games_2016[$GAME_NUMBER]['favorite']
+    ];
+    array_push($output, $temp);
+}
 
 $encoded_output = json_encode($output);
 print($encoded_output);
