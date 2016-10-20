@@ -54,10 +54,10 @@ function get_games(date_data,league_data) {
                     high_light(this,i,'money_line',1,response[i].money_line[1],response[i].money_line[1]);
                 }}(i));
                 $('<span>').text("UNDER "+response[i].over_under[0]).appendTo(bet).on('click', function(i){return function (){
-                    high_light(this,i,'money_line',0,response[i].over_under[0],response[i].over_under[1]);
+                    high_light(this,i,'over_under',0,response[i].over_under[0],response[i].over_under[1]);
                 }}(i));
                 $('<span>').text("OVER "+response[i].over_under[0]).appendTo(bet).on('click', function(i){return function (){
-                    high_light(this,i,'money_line',1,response[i].over_under[0],response[i].over_under[2]);
+                    high_light(this,i,'over_under',1,response[i].over_under[0],response[i].over_under[2]);
                 }}(i));
                 $('<span>').text('CONFIRM').addClass('confirm').appendTo(bet).on('click', function (){
                     send_data(this);
