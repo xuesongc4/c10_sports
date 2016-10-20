@@ -78,6 +78,7 @@ body{
 .game{
     border: solid 2px black;
     height: 100px;
+    background-color: lightcoral;
 }
 .bet{
     border: solid 2px black;
