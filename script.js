@@ -53,4 +53,3 @@ function get_games(date_data,league_data) {
         }
     });
 }
-
