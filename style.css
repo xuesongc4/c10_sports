@@ -78,8 +78,15 @@ body{
 .game{
     border: solid 2px black;
     height: 100px;
+    background-color: lightcoral;
 }
 .bet{
     border: solid 2px black;
     height: 100px;
+    display:none;
+    background-color: whitesmoke;
+}
+
+.selected{
+    border: 5px red solid;
 }
