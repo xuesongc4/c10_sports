@@ -81,5 +81,52 @@ for($GAME_NUMBER  = 0; $GAME_NUMBER < count($nfl_games_2016); $GAME_NUMBER ++){
     array_push($output, $temp);
 }
 
+$bet_array = [
+    ['user'=>0, 'amount'=>100, 'bet_type'=>'over_under', 'bet_first_option'=>true, ],
+    ['user'=>0]
+];
+
 $encoded_output = json_encode($output);
 print($encoded_output);
+
+?>
+
+<html>
+<head>
+    <script>
+        //will return the amount of money won on the bet
+        //final score rendered as an array with first score representing away score and second the home team's score
+        //bet_first_side is a boolean value to determine if the player bet the first option in the bet type (i.e. bet away team in spread or money line and over in an over/under bet
+        function check_wins(game, final_score, amount, bet_type, bet_first_side, odds, line){
+            if(bet_type === 'over_under'){
+                var total_score = final_score[0] + final_score[1];
+
+                //check win conditions for over_under bet
+                    //if
+
+//                if(total_score > line){
+//                    calculate_win_total()
+//                }
+            }else if(bet_type === 'spread'){
+
+            }else{
+                console.log('not sure how this works yet')
+            }
+
+        }
+
+        function calculate_win_total(bet_amount, odds) {
+            var win = null;
+            if(odds < 0){
+                odds *= -1;
+                win = 100 / odds * bet_amount;
+            }else{
+                win = odds / 100 * bet_amount;
+            }
+            return bet_amount + win;
+        }
+
+    </script>
+</head>
+<body></body>
+</html>
