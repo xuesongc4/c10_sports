@@ -98,20 +98,43 @@ print($encoded_output);
         //final score rendered as an array with first score representing away score and second the home team's score
         //bet_first_side is a boolean value to determine if the player bet the first option in the bet type (i.e. bet away team in spread or money line and over in an over/under bet
         function check_wins(game, final_score, amount, bet_type, bet_first_side, odds, line){
+            var win_amount = null;
             if(bet_type === 'over_under'){
                 var total_score = final_score[0] + final_score[1];
+                if(total_score > line){ //only bets for the over win, other bets will return no money
+                    if(bet_first_side){ //bet for first side is true when the over is bet on
+                        win_amount = calculate_win_total(amount, odds);
+                    }else{
+                        win_amount = 0;
+                    }
+                }else if(total_score < line){ //only bets for the under win, other bets will return no money
+                    if(!bet_first_side) { //bet for first side is false when the under is bet on
+                        win_amount = calculate_win_total(amount, odds);
+                    }else{
+                        win_amount = 0;
+                    }
+                }else{  //a push occurs and you get your money back, one is unable to place a bet on a tie (i believe, at least in this type of bet)
+                    win_amount = amount;
+                }
+            }else if(bet_type === 'spread'){       //bet is on spread
+                var spread = final_score[0] - final_score[1];
+                if()
+//                var spread =
+                //
 
-                //check win conditions for over_under bet
-                    //if
 
-//                if(total_score > line){
-//                    calculate_win_total()
-//                }
-            }else if(bet_type === 'spread'){
 
-            }else{
+                if(bet_first_side) {  //bet is for away team
+
+                }else{      //bet is for away team
+
+                }
+
+            }else{          //else bet is on money line
                 console.log('not sure how this works yet')
             }
+
+            console.log('winnings: ', win_amount);
 
         }
 
@@ -128,5 +151,11 @@ print($encoded_output);
 
     </script>
 </head>
-<body></body>
+<body>
+    <script>
+        //check_wins(game, final_score, amount, bet_type, bet_first_side, odds, line)
+        check_wins(1,       [8,40],     100, 'over_under', true,            -110, 47);
+        check_wins(1,       [8,40],     100, 'over_under', false,            -110, 47);
+    </script>
+</body>
 </html>
