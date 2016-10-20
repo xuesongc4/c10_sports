@@ -82,4 +82,6 @@ body{
 .bet{
     border: solid 2px black;
     height: 100px;
+    display:none;
+    background-color: whitesmoke;
 }
