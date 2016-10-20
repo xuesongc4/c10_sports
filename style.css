@@ -85,3 +85,7 @@ body{
     display:none;
     background-color: whitesmoke;
 }
+
+.selected{
+    border: 5px red solid;
+}
