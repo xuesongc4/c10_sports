@@ -118,7 +118,7 @@ print($encoded_output);
                 }
             }else if(bet_type === 'spread'){       //bet is on spread
                 var spread = final_score[0] - final_score[1];
-                if()
+//                if()
 //                var spread =
                 //
 
