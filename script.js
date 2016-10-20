@@ -41,13 +41,27 @@ function get_games(date_data,league_data) {
                 var game_landing = $('<div>').addClass('game_landing');
                 var bet_landing = $('<div>').addClass('bet_landing');
                 //bet data
-                $('<span>').text(response[i].favorite[0]).appendTo(bet);
-                $('<span>').text(response[i].favorite[1]).appendTo(bet);
-                $('<span>').text(response[i].money_line[0]).appendTo(bet);
-                $('<span>').text(response[i].money_line[1]).appendTo(bet);
-                $('<span>').text("OVER "+response[i].over_under).appendTo(bet);
-                $('<span>').text("UNDER "+response[i].over_under).appendTo(bet);
-                $('<span>').text('CONFIRM').addClass('confirm').appendTo(bet);
+                $('<span>').text(response[i].spread[0],response[i].spread[2]).appendTo(bet).on('click', function(i){return function (){
+                    high_light(this,i,response[i].spread[0],'');
+                }}(i));
+                $('<span>').text(response[i].spread[1],response[i].spread[3]).appendTo(bet).on('click',function(i){return function (){
+                    high_light(this,i,response[i].spread[1],'');
+                }}(i));
+                $('<span>').text(response[i].money_line[0]).appendTo(bet).on('click', function(i){return function (){
+                    high_light(this,i,response[i].money_line[0],'');
+                }}(i));
+                $('<span>').text(response[i].money_line[1]).appendTo(bet).on('click', function(i){return function (){
+                    high_light(this,i,response[i].money_line[1],'');
+                }}(i));
+                $('<span>').text("OVER "+response[i].over_under).appendTo(bet).on('click', function(i){return function (){
+                    high_light(this,i,response[i].over_under,'over','');
+                }}(i));
+                $('<span>').text("UNDER "+response[i].over_under).appendTo(bet).on('click', function(i){return function (){
+                    high_light(this,i,response[i].over_under,'under','');
+                }}(i));
+                $('<span>').text('CONFIRM').addClass('confirm').appendTo(bet).on('click', function (){
+                    high_light(this,'confirm');
+                });
                 //game data
                 $('<span>').text(response[i].away_long).addClass('teams_playing').appendTo(game);
                 $('<span>').text(response[i].home_long).addClass('teams_playing').appendTo(game);
@@ -64,3 +78,12 @@ function get_games(date_data,league_data) {
     });
 }
 
+function high_light(highlighter, confirm,game_id,type_bet,side,current_line){
+
+    $(highlighter).addClass('selected');
+    console.log('game id: '+game_id);
+    console.log('type bet: '+type_bet);
+    console.log('side: '+side);
+    console.log('current line: '+current_line);
+    console.log('confirm: '+ confirm);
+}
