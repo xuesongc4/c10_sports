@@ -76,7 +76,7 @@ for($GAME_NUMBER  = 0; $GAME_NUMBER < count($nfl_games_2016); $GAME_NUMBER ++){
         'date'=>$nfl_games_2016[$GAME_NUMBER]['date'],
         'money_line'=>$nfl_games_2016[$GAME_NUMBER]['money_line'],
         'over_under'=>$nfl_games_2016[$GAME_NUMBER]['over_under'],
-        'favorite'=>$nfl_games_2016[$GAME_NUMBER]['spread']
+        'spread'=>$nfl_games_2016[$GAME_NUMBER]['spread']
     ];
     array_push($output, $temp);
 }
