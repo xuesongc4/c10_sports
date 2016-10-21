@@ -139,29 +139,44 @@ print($encoded_output);
                     }
                 }
             }else{          //else bet is on money line
-                /* to check the spread simply compare the final score
-                * if the bet is for the away team and the away team won, then calculate win, if they lose user loses and gains no money, if the teams tie then it is a push and the user gets the wager amount back
-                * if the bet is for the home team and the away team won, then calculate win, if they lose user loses and gains no money, if the teams tie then it is a push and the user gets the wager amount back*/
-                if(bet_first_side){
-                    if(final_score[0] > final_score[1]){        //away team wins
-                        win_amount = calculate_win_total(wager, odds);
-                    }else if(final_score[0] < final_score[1]){  //home team wins
-                        win_amount = 0;
-                    }else{                                      //tie
-                        win_amount = wager;
-                    }
-                }else{
-                    if(final_score[0] < final_score[1]){        //home team wins
-                        win_amount =calculate_win_total(wager, odds);
-                    }else if(final_score[0] > final_score[1]){  //away team wins
-                        win_amount = 0;
-                    }else{                                      //tie
-                        win_amount = wager;
-                    }
-                }
+                win_amount = check_money_line_win(bet_first_side, wager, odds, final_score);
             }
             console.log('win_amount: ', win_amount);
         }
+
+        function check_over_under_win(){
+
+        }
+        function check_spread_win(){
+
+        }
+
+        /* to check the spread simply compare the final score
+         * if the bet is for the away team and the away team won, then calculate win, if they lose user loses and gains no money, if the teams tie then it is a push and the user gets the wager amount back
+         * if the bet is for the home team and the away team won, then calculate win, if they lose user loses and gains no money, if the teams tie then it is a push and the user gets the wager amount back*/
+        function check_money_line_win(bet_away, wager, odds, final_score){
+            var win_amount = null;
+            if(bet_away){
+                if(final_score[0] > final_score[1]){        //away team wins
+                    win_amount = calculate_win_total(wager, odds);
+                }else if(final_score[0] < final_score[1]){  //home team wins
+                    win_amount = 0;
+                }else{                                      //tie
+                    win_amount = wager;
+                }
+            }else{
+                if(final_score[0] < final_score[1]){        //home team wins
+                    win_amount =calculate_win_total(wager, odds);
+                }else if(final_score[0] > final_score[1]){  //away team wins
+                    win_amount = 0;
+                }else{                                      //tie
+                    win_amount = wager;
+                }
+            }
+            return win_amount;
+        }
+
+
 
         function calculate_win_total(bet_amount, odds) {
             var win = null;
