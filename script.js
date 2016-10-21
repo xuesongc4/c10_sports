@@ -10,6 +10,8 @@ $(document).ready(function () {
     $('#league_nfl').on('click', function () {
        console.log('nfl click!');
 
+        $('.date_landing').empty();
+
         for(var i=1;i<=17;i++){
             var week = $('<div>').addClass('dates').text('Week '+i).data('league','nfl').on('click', function (){
                 get_games('Week'+i,'nfl');
@@ -21,6 +23,7 @@ $(document).ready(function () {
 
 //filling dom with dummy data ------------------------------
 function get_games(date_data,league_data) {
+    $('.sched_landing').empty();
     $.ajax({
         dataType: 'json',
         data: {
@@ -86,6 +89,7 @@ function high_light(highlighter, game_id1,type_of_bet1,side1,bet_line1,current_o
       bet_line:bet_line1,
       current_odds:current_odds1
     };
+    $('.bet, span').removeClass('selected')
     $(highlighter).addClass('selected');
     console.log('bet data being saved: ',high_light.bet_data);
 }
