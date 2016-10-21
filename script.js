@@ -8,7 +8,7 @@ $(document).ready(function () {
         $('.whole_menu').animate({width: 'toggle'});
     });
     $('#league_nfl').on('click', function () {
-       console.log('nfl click!');
+        console.log('nfl click!');
 
         $('.date_landing').empty();
 
@@ -39,7 +39,7 @@ function get_games(date_data,league_data) {
                     $(this).parent().find('.bet').slideToggle();
                 });
                 var bet = $('<div>').addClass('bet').on('click', function (){
-                   //betting send to server function goes here!---------------------------
+                    //betting send to server function goes here!---------------------------
                 });
                 var game_landing = $('<div>').addClass('game_landing');
                 var bet_landing = $('<div>').addClass('bet_landing');
@@ -75,7 +75,7 @@ function get_games(date_data,league_data) {
                 //appending data to game and bet, appending game and bet to landing zone
                 $(game_landing).append(game, bet);
                 $('.sched_landing').append(game_landing);
-            //};
+                //};
             }
         }
     });
@@ -83,11 +83,11 @@ function get_games(date_data,league_data) {
 
 function high_light(highlighter, game_id1,type_of_bet1,side1,bet_line1,current_odds1){
     high_light.bet_data={
-      game_id: game_id1,
-      type_of_bet:type_of_bet1,
-      side:side1,
-      bet_line:bet_line1,
-      current_odds:current_odds1
+        game_id: game_id1,
+        type_of_bet:type_of_bet1,
+        side:side1,
+        bet_line:bet_line1,
+        current_odds:current_odds1
     };
     $('.bet, span').removeClass('selected')
     $(highlighter).addClass('selected');
