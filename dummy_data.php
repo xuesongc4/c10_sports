@@ -81,5 +81,115 @@ for($GAME_NUMBER  = 0; $GAME_NUMBER < count($nfl_games_2016); $GAME_NUMBER ++){
     array_push($output, $temp);
 }
 
+$bet_array = [
+    ['user'=>0, 'amount'=>100, 'bet_type'=>'over_under', 'bet_first_option'=>true, ],
+    ['user'=>0]
+];
+
 $encoded_output = json_encode($output);
 print($encoded_output);
+
+?>
+
+<html>
+<head>
+    <script>
+        //will return the amount of money won on the bet
+        //final score rendered as an array with first score representing away score and second the home team's score
+        //bet_first_side is a boolean value to determine if the player bet the first option in the bet type (i.e. bet away team in spread or money line and over in an over/under bet
+        function check_wins(game, final_score, wager, bet_type, bet_first_side, odds, line){
+            var win_amount = null;
+            if(bet_type === 'over_under'){
+                var total_score = final_score[0] + final_score[1];
+                if(total_score > line){ //only bets for the over win, other bets will return no money
+                    if(bet_first_side){ //bet for first side is true when the over is bet on
+                        win_amount = calculate_win_total(wager, odds);
+                    }else{
+                        win_amount = 0;
+                    }
+                }else if(total_score < line){ //only bets for the under win, other bets will return no money
+                    if(!bet_first_side) { //bet for first side is false when the under is bet on
+                        win_amount = calculate_win_total(wager, odds);
+                    }else{
+                        win_amount = 0;
+                    }
+                }else{  //a push occurs and you get your money back, one is unable to place a bet on a tie (i believe, at least in this type of bet)
+                    win_amount = wager;
+                }
+            }else if(bet_type === 'spread'){       //bet is on spread
+                /* to check spread: 1) always add line to the home side in final score
+                            2) find out what side we bet on
+                            3) compare appended final scores. side we bet on must be strictly greater than other side*/
+                final_score[1] += line;
+                if(bet_first_side) {  //bet is for away team
+                    if(final_score[0] > final_score[1]){
+                        win_amount = calculate_win_total(wager, odds);
+                    }else if(final_score[0] < final_score[1]){
+                        win_amount = 0;
+                    }else{
+                        win_amount = wager;
+                    }
+                }else{      //bet is for away team
+                    if(final_score[0] < final_score[1]) {
+                        win_amount = calculate_win_total(wager, odds);
+                    }else if(final_score[0] > final_score[1]){
+                        win_amount = 0;
+                    }else{
+                        win_amount = wager;
+                    }
+                }
+            }else{          //else bet is on money line
+                /* to check the spread simply compare the final score
+                * if the bet is for the away team and the away team won, then calculate win, if they lose user loses and gains no money, if the teams tie then it is a push and the user gets the wager amount back
+                * if the bet is for the home team and the away team won, then calculate win, if they lose user loses and gains no money, if the teams tie then it is a push and the user gets the wager amount back*/
+                if(bet_first_side){
+                    if(final_score[0] > final_score[1]){        //away team wins
+                        win_amount = calculate_win_total(wager, odds);
+                    }else if(final_score[0] < final_score[1]){  //home team wins
+                        win_amount = 0;
+                    }else{                                      //tie
+                        win_amount = wager;
+                    }
+                }else{
+                    if(final_score[0] < final_score[1]){        //home team wins
+                        win_amount =calculate_win_total(wager, odds);
+                    }else if(final_score[0] > final_score[1]){  //away team wins
+                        win_amount = 0;
+                    }else{                                      //tie
+                        win_amount = wager;
+                    }
+                }
+            }
+            console.log('win_amount: ', win_amount);
+        }
+
+        function calculate_win_total(bet_amount, odds) {
+            var win = null;
+            if(odds < 0){
+                odds *= -1;
+                win = 100 / odds * bet_amount;
+            }else{
+                win = odds / 100 * bet_amount;
+            }
+            return bet_amount + win;
+        }
+
+    </script>
+</head>
+<body>
+    <script>
+//        //check_wins(game, final_score, amount, bet_type, bet_first_side, odds, line)
+//        check_wins(1, [8,40], 100, 'over_under', true, -110, 47);
+//        check_wins(1, [8,40], 100, 'over_under', false, -110, 47);
+
+//        //check_wins(game, final_score, amount, bet_type, bet_first_side, odds, line)
+//        check_wins(1, [100,3], 100, 'spread', true, -110, -10); //expect lose
+//        check_wins(1, [60,70], 100, 'spread', false, -110, -10);
+
+        //check_wins(game, final_score, amount, bet_type, bet_first_side, odds, line)
+        check_wins(1,       [100,3],     100, 'money_line', true,          450); // no line in money line because it is already incorporated//expect win
+        check_wins(1,       [85,70],     100, 'money_line', true,            -300);
+
+    </script>
+</body>
+</html>
