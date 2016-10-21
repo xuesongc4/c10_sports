@@ -187,8 +187,8 @@ print($encoded_output);
 //        check_wins(1, [60,70], 100, 'spread', false, -110, -10);
 
         //check_wins(game, final_score, amount, bet_type, bet_first_side, odds, line)
-        check_wins(1,       [100,3],     100, 'money_line', true,          450); // no line in money line because it is already incorporated//expect win
-        check_wins(1,       [85,70],     100, 'money_line', true,            -300);
+        check_wins(1, [100,3], 100, 'money_line', true, 450); // no line in money line because it is already incorporated//expect win
+        check_wins(1, [85,70], 100, 'money_line', true, -300);
 
     </script>
 </body>
