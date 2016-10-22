@@ -21,27 +21,8 @@ function check_wins(game, final_score, wager, bet_type, bet_first_side, odds, li
             win_amount = wager;
         }
     }else if(bet_type === 'spread'){       //bet is on spread
-        /* to check spread: 1) always add line to the home side in final score
-         2) find out what side we bet on
-         3) compare appended final scores. side we bet on must be strictly greater than other side*/
-        final_score[1] += line;
-        if(bet_first_side) {  //bet is for away team
-            if(final_score[0] > final_score[1]){
-                win_amount = calculate_win_total(wager, odds);
-            }else if(final_score[0] < final_score[1]){
-                win_amount = 0;
-            }else{
-                win_amount = wager;
-            }
-        }else{      //bet is for away team
-            if(final_score[0] < final_score[1]) {
-                win_amount = calculate_win_total(wager, odds);
-            }else if(final_score[0] > final_score[1]){
-                win_amount = 0;
-            }else{
-                win_amount = wager;
-            }
-        }
+        win_amount = check_spread_win(bet_first_side , wager, odds, line, final_score);
+
     }else{          //else bet is on money line
         win_amount = check_money_line_win(bet_first_side, wager, odds, final_score);
     }
@@ -51,8 +32,31 @@ function check_wins(game, final_score, wager, bet_type, bet_first_side, odds, li
 function check_over_under_win(){
 
 }
-function check_spread_win(){
 
+/* to check spread: 1) always add line to the home side in final score
+ 2) find out what side we bet on
+ 3) compare appended final scores. side we bet on must be strictly greater than other side*/
+function check_spread_win(bet_away, wager, odds, line, final_score){
+    var win_amount = null;
+    final_score[1] += line;
+    if(bet_away) {  //bet is for away team
+        if(final_score[0] > final_score[1]){
+            win_amount = calculate_win_total(wager, odds);
+        }else if(final_score[0] < final_score[1]){
+            win_amount = 0;
+        }else{
+            win_amount = wager;
+        }
+    }else{      //bet is for away team
+        if(final_score[0] < final_score[1]) {
+            win_amount = calculate_win_total(wager, odds);
+        }else if(final_score[0] > final_score[1]){
+            win_amount = 0;
+        }else{
+            win_amount = wager;
+        }
+    }
+    return win_amount;
 }
 
 /* to check the spread simply compare the final score
@@ -92,9 +96,6 @@ function calculate_win_total(bet_amount, odds) {
     }
     return bet_amount + win;
 }
-
-
-
 
 //        //check_wins(game, final_score, amount, bet_type, bet_first_side, odds, line)
 //        check_wins(1, [8,40], 100, 'over_under', true, -110, 47);

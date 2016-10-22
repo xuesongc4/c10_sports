@@ -11,6 +11,7 @@ date_default_timezone_set('America/New_York');
 
 
 $output = $_POST;
+$output = 'yo, you made a bet successfully';
 
 $encoded_output = json_encode($output);
 print($encoded_output);

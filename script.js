@@ -100,7 +100,7 @@ function send_data(highlighter) {
     $.ajax({
         dataType: 'json',
         data: this.bet_data,
-        url: "dummy_data.php",
+        url: "make_bet.php",
         success: function (response) {
             console.log('bet data being sent is: ',bet_data);
             console.log("success?", response);
