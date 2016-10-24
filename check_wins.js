@@ -4,38 +4,39 @@
 function check_wins(game, final_score, wager, bet_type, bet_first_side, odds, line){
     var win_amount = null;
     if(bet_type === 'over_under'){
-        var total_score = final_score[0] + final_score[1];
-        if(total_score > line){ //only bets for the over win, other bets will return no money
-            if(bet_first_side){ //bet for first side is true when the over is bet on
-                win_amount = calculate_win_total(wager, odds);
-            }else{
-                win_amount = 0;
-            }
-        }else if(total_score < line){ //only bets for the under win, other bets will return no money
-            if(!bet_first_side) { //bet for first side is false when the under is bet on
-                win_amount = calculate_win_total(wager, odds);
-            }else{
-                win_amount = 0;
-            }
-        }else{  //a push occurs and you get your money back, one is unable to place a bet on a tie (i believe, at least in this type of bet)
-            win_amount = wager;
-        }
+        win_amount = check_over_under_win(bet_first_side , wager, odds, line, final_score);
     }else if(bet_type === 'spread'){       //bet is on spread
         win_amount = check_spread_win(bet_first_side , wager, odds, line, final_score);
-
     }else{          //else bet is on money line
         win_amount = check_money_line_win(bet_first_side, wager, odds, final_score);
     }
     console.log('win_amount: ', win_amount);
 }
 
-function check_over_under_win(){
-
+function check_over_under_win(bet_over , wager, odds, line, final_score){
+    var total_score = final_score[0] + final_score[1];
+    if(total_score > line){ //only bets for the over win, other bets will return no money
+        if(bet_over){ //bet for first side is true when the over is bet on
+            win_amount = calculate_win_total(wager, odds);
+        }else{
+            win_amount = 0;
+        }
+    }else if(total_score < line){ //only bets for the under win, other bets will return no money
+        if(!bet_over) { //bet for first side is false when the under is bet on
+            win_amount = calculate_win_total(wager, odds);
+        }else{
+            win_amount = 0;
+        }
+    }else{  //a push occurs and you get your money back, one is unable to place a bet on a tie (i believe, at least in this type of bet)
+        win_amount = wager;
+    }
+    return win_amount;
 }
 
-/* to check spread: 1) always add line to the home side in final score
- 2) find out what side we bet on
- 3) compare appended final scores. side we bet on must be strictly greater than other side*/
+/* to check spread:
+    1) always add line to the home side in final score
+    2) find out what side we bet on
+    3) compare appended final scores. side we bet on must be strictly greater than other side*/
 function check_spread_win(bet_away, wager, odds, line, final_score){
     var win_amount = null;
     final_score[1] += line;
@@ -83,8 +84,6 @@ function check_money_line_win(bet_away, wager, odds, final_score){
     }
     return win_amount;
 }
-
-
 
 function calculate_win_total(bet_amount, odds) {
     var win = null;
