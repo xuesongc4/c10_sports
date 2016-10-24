@@ -17,14 +17,16 @@ $small_dummy_data = 'Array ([0] => stdClass Object ( [id] => 651565924 [spread] 
 
 $json_encoded = json_encode($small_dummy_data);
 
-$dummy_bets = "[['ID'=>'1', 'type_of_bet'=>'over_under', 'side'=>'true', 'odds'=>'-107', 'line'=>'40.5'], ['ID'=>'2', 'type_of_bet'=>'over_under', 'side'=>'under', 'odds'=>'-103', 'line'=>'40.5']]";
+$dummy_bets = "[['ID'=>'1', 'type_of_bet'=>'over_under', 'side'=>'true', 'odds'=>'-107', 'line'=>'40.5'], ['ID'=>'2', 'type_of_bet'=>'over_under', 'side'=>'under', 'odds'=>'-103', 'line'=>'40.5'], ['ID'=>'3', 'type_of_bet'=>'money_line', 'side'=>'true', 'odds'=>'-107']]";
 
 ?>
 <!--<script>check_wins()</script>-->
 $check_winner = <script>check_wins(1,'34-17', <?php $dummy_bets[1]['type_of_bet']?>, <?php $dummy_bets[1]['side']?>, <?php $dummy_bets[1]['odds']?>, <?php $dummy_bets[1]['line']?> )</script>;
+$check_winner = check_wins(1,'34-17', <?php $dummy_bets[1]['type_of_bet']?>, <?php $dummy_bets[1]['side']?>, <?php $dummy_bets[1]['odds']?>, <?php $dummy_bets[1]['line']?> );
 
 print($check_winner);
 <!--echo "<pre>";-->
 <!--print_r($json_encoded);-->
 <!--echo "</pre>";-->
 ?>
+
