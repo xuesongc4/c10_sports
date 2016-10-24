@@ -66,9 +66,11 @@ function get_games(date_data,league_data) {
                     send_data(this);
                 });
                 //game data
-                $('<span>').text(response[i].away_long).addClass('teams_playing').appendTo(game);
-                $('<span>').text(response[i].home_long).addClass('teams_playing').appendTo(game);
                 $('<span>').text(response[i].date).addClass('game_date').appendTo(game);
+                var div_teams_playing = $('<div>').addClass('teams_playing_div');
+                $('<span>').text(response[i].home_long).addClass('teams_playing').appendTo(div_teams_playing);
+                $('<span>').text(response[i].away_long).addClass('teams_playing').appendTo(div_teams_playing);
+                div_teams_playing.appendTo(game);
                 $('<img>').attr('src',response[i].home_pic).addClass('home_img').appendTo(game);
                 $('<img>').attr('src',response[i].away_pic).addClass('away_img').appendTo(game);
 

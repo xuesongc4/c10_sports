@@ -5,9 +5,10 @@
 .league_landing{
     width:100%;
     height: 10%;
+    margin-left: 10%
 }
 .date_landing{
-    background-color: #33ccff;
+    background-color: lightgray;
     height: 3%;
     text-align: center;
     overflow: scroll;
@@ -42,7 +43,7 @@
     width: 9%;
     height: 46%;
     display:inherit;
-    background-color: #1DA1F2;
+    background-color: lightgray;
     z-index: 10;
 }
 
@@ -76,12 +77,13 @@ body{
     font-size:38px;
     padding:8px;
 }
-.home_img, .away_img{
+.home_img, .away_img {
     display: inline-block;
     height: 55px;
     position: relative;
-    left: 42%;
-    top: 53px;
+    left: 50%;
+    transform: translateX(-186%);
+    margin: 0 4%;
 }
 /*.away_img{*/
     /*display: inline-block;*/
@@ -90,16 +92,14 @@ body{
 /*}*/
 .game{
     border: solid 2px black;
-    height: 173px;
+    padding: 2%;
     background-color: white;
-
 }
 .bet{
     border: solid 2px black;
     height: 100px;
     display:none;
     background-color: whitesmoke;
-    border-radius: 25px;
 }
 
 .selected{
@@ -115,8 +115,10 @@ body{
     font-family: 'Concert One', cursive;
 }
 .teams_playing{
-    margin:auto;
+    margin:4%;
     position:relative;
-    top:10vh;
-    left: 37%;
+}
+
+.teams_playing_div {
+    text-align: center;
 }
