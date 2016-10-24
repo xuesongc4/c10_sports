@@ -90,3 +90,11 @@ body{
 .selected{
     border: 5px red solid;
 }
+
+.modal-header, .modal-body {
+    text-align: center;
+}
+
+.confirm-mdl, .cancel-mdl {
+    margin: 10px;
+}
