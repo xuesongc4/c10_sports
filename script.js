@@ -65,12 +65,12 @@ function get_games(date_data,league_data) {
                 $('<span>').text('CONFIRM').addClass('confirm btn btn-default').appendTo(bet).on('click', function (){
                     // Show confirm modal with confirm and cancel buttons - all options clear highlight selectors
                     $('#confirm_modal').modal('show');
-                    $('.modal-body .confirm-mdl').click(function(){
+                    $('.modal-body .confirm-mdl').on('click', function(){
                         send_data(this);
                     });
-                    $('.modal-body .confirm-mdl, .modal-body .cancel-mdl, .modal-header .close').click(function(){
+                    $('#confirm_modal').on('hidden.bs.modal', function (){
                         $('span').removeClass('selected');
-                    })
+                    });
                 });
                 //game data
                 $('<span>').text(response[i].away_long).addClass('teams_playing').appendTo(game);
