@@ -11,6 +11,7 @@ date_default_timezone_set('America/New_York');
 //create dummy game data for week 7
 
 //nfl teams
+//all IDs should start 0 not 1 because of unsigned ints start at 0
 $nfl_teams = [
     ['ID'=>0,'long_name'=>'Arizona Cardinals','abbr_name'=>'ARI','logo_src'=>'images/ARI.png'],
     ['ID'=>1,'long_name'=>'Atlanta Falcons','abbr_name'=>'ATL','logo_src'=>'images/ATL.png'],
