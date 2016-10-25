@@ -1,20 +1,28 @@
+*{
+    font-family: 'Roboto Condensed', sans-serif;
+}
+
 .league_landing{
-    background-color: lavender;
     width:100%;
     height: 10%;
+    margin-left: 10%
 }
-.date_landing{
-    background-color:lightblue;
-    height: 10%;
+.date_landing {
+    background-color: lightgray;
+    height: 4%;
     text-align: center;
     overflow: scroll;
     vertical-align: middle;
     padding: 0;
+    margin: auto;
+    width: 80%;
 }
 .sched_landing{
     background-color: lightgrey;
-    width:100%;
+    width:80%;
     height: 80%;
+    position: center;
+    margin:auto;
 }
 
 .container{
@@ -32,10 +40,10 @@
     top:0px;
     left:0px;
     position: absolute;
-    width: 40%;
-    height: 100%;
+    width: 9%;
+    height: 46%;
     display:inherit;
-    background-color: #1DA1F2;
+    background-color: lightgray;
     z-index: 10;
 }
 
@@ -52,7 +60,7 @@ body{
     font-size:0;
 }
 .container{
-    font-size:30px;
+    font-size:20px;
 }
 
 .dates{
@@ -60,25 +68,32 @@ body{
     border: solid 2px black;
     height: 100%;
     width: 18%;
+    line-height:100%;
 }
 
 .league_button{
     display: inline-block;
+    font-family: 'Khand', sans-serif;
+    font-size:38px;
+    padding:8px;
 }
-.home_img{
+.home_img, .away_img {
     display: inline-block;
-    float: right;
-    height: 100px;
+    height: 55px;
+    position: relative;
+    left: 50%;
+    transform: translateX(-186%);
+    margin: 0 4%;
 }
-.away_img{
-    display: inline-block;
-    float: right;
-    height: 100px;
-}
+/*.away_img{*/
+    /*display: inline-block;*/
+    /*float: right;*/
+    /*height: 100px;*/
+/*}*/
 .game{
     border: solid 2px black;
-    height: 100px;
-    background-color: lightcoral;
+    padding: 2%;
+    background-color: white;
 }
 .bet{
     border: solid 2px black;
@@ -88,7 +103,24 @@ body{
 }
 
 .selected{
-    border: 5px red solid;
+    border: 2px black solid;
+    border-radius: 60px;
+}
+
+.game_date{
+    background-color: white;
+    display:block;
+    text-align: center;
+    font-size: 107%;
+    font-family: 'Concert One', cursive;
+}
+.teams_playing{
+    margin:4%;
+    position:relative;
+}
+
+.teams_playing_div {
+    text-align: center;
 }
 
 .modal-header, .modal-body {
