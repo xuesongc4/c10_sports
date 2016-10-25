@@ -1,3 +1,32 @@
+$(document).ready(function(){
+    applyEventHandlers();
+});
+
+function applyEventHandlers(){
+    $('button').click(function(){
+        check_the_winnings_of_bet(1);
+    });
+}
+
+function check_the_winnings_of_bet(bet_number){
+    // console.log('ima check the winnings');
+    $.ajax({
+        url: 'dummy_bet_data.php',
+        method: 'post',
+        dataType: 'json',
+        data: {bet_id: 0},
+        success: function (response) {
+            console.log('reached the server');
+            console.log(response);
+            //need to change game and final score
+            console.log(check_wins('game', [40,30], +response.wager, +response.type_of_bet, response.side, +response.odds, +response.line));
+        },
+        error: function (response) {
+            console.log('FAILED to reach the server');
+        }
+    });
+}
+
 //will return the amount of money won on the bet
 //final score rendered as an array with first score representing away score and second the home team's score
 //bet_first_side is a boolean value to determine if the player bet the first option in the bet type (i.e. bet away team in spread or money line and over in an over/under bet
@@ -104,6 +133,6 @@ function calculate_win_total(bet_amount, odds) {
 //        check_wins(1, [100,3], 100, 'spread', true, -110, -10); //expect lose
 //        check_wins(1, [60,70], 100, 'spread', false, -110, -10);
 
-//check_wins(game, final_score, amount, bet_type, bet_first_side, odds, line)
-check_wins(1, [100,3], 100, 'money_line', true, 450); // no line in money line because it is already incorporated//expect win
-check_wins(1, [85,70], 100, 'money_line', true, -300);
+// //check_wins(game, final_score, amount, bet_type, bet_first_side, odds, line)
+// check_wins(1, [100,3], 100, 'money_line', true, 450); // no line in money line because it is already incorporated//expect win
+// check_wins(1, [85,70], 100, 'money_line', true, -300);

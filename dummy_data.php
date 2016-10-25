@@ -65,7 +65,7 @@ $nfl_games_2016 = [
 
 $output = [];
 
-for($GAME_NUMBER  = 0; $GAME_NUMBER < count($nfl_games_2016); $GAME_NUMBER ++){
+for($GAME_NUMBER = 0; $GAME_NUMBER < count($nfl_games_2016); $GAME_NUMBER ++){
     $temp = [
         'away_long'=>$nfl_teams[ $nfl_games_2016[$GAME_NUMBER]['away'] ]['long_name'],
         'away_abbr'=>$nfl_teams[ $nfl_games_2016[$GAME_NUMBER]['away'] ]['abbr_name'],
@@ -80,11 +80,6 @@ for($GAME_NUMBER  = 0; $GAME_NUMBER < count($nfl_games_2016); $GAME_NUMBER ++){
     ];
     array_push($output, $temp);
 }
-
-$bet_array = [
-    ['user'=>0, 'amount'=>100, 'bet_type'=>'over_under', 'bet_first_option'=>true, ],
-    ['user'=>0]
-];
 
 $encoded_output = json_encode($output);
 print($encoded_output);

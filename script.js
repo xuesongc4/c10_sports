@@ -89,7 +89,7 @@ function high_light(highlighter, game_id1,type_of_bet1,side1,bet_line1,current_o
         bet_line:bet_line1,
         current_odds:current_odds1
     };
-    $('.bet, span').removeClass('selected')
+    $('.bet, span').removeClass('selected');
     $(highlighter).addClass('selected');
     console.log('bet data being saved: ',high_light.bet_data);
 }
