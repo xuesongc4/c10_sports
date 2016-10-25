@@ -62,8 +62,15 @@ function get_games(date_data,league_data) {
                 $('<span>').text("OVER "+response[i].over_under[0]).appendTo(bet).on('click', function(i){return function (){
                     high_light(this,i,'over_under',1,response[i].over_under[0],response[i].over_under[2]);
                 }}(i));
-                $('<span>').text('CONFIRM').addClass('confirm').appendTo(bet).on('click', function (){
-                    send_data(this);
+                $('<span>').text('CONFIRM').addClass('confirm btn btn-default').appendTo(bet).on('click', function (){
+                    // Show confirm modal with confirm and cancel buttons - all options clear highlight selectors
+                    $('#confirm_modal').modal('show');
+                    $('.modal-body .confirm-mdl').on('click', function(){
+                        send_data(this);
+                    });
+                    $('#confirm_modal').on('hidden.bs.modal', function (){
+                        $('span').removeClass('selected');
+                    });
                 });
                 //game data
                 $('<span>').text(response[i].date).addClass('game_date').appendTo(game);
@@ -91,7 +98,7 @@ function high_light(highlighter, game_id1,type_of_bet1,side1,bet_line1,current_o
         bet_line:bet_line1,
         current_odds:current_odds1
     };
-    $('.bet, span').removeClass('selected')
+    $('.bet, span').removeClass('selected');
     $(highlighter).addClass('selected');
     console.log('bet data being saved: ',high_light.bet_data);
 }

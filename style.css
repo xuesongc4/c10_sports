@@ -7,15 +7,15 @@
     height: 10%;
     margin-left: 10%
 }
-.date_landing{
+.date_landing {
     background-color: lightgray;
-    height: 3%;
+    height: 4%;
     text-align: center;
     overflow: scroll;
     vertical-align: middle;
     padding: 0;
-    margin:auto;
-    width:80%;
+    margin: auto;
+    width: 80%;
 }
 .sched_landing{
     background-color: lightgrey;
@@ -121,4 +121,12 @@ body{
 
 .teams_playing_div {
     text-align: center;
+}
+
+.modal-header, .modal-body {
+    text-align: center;
+}
+
+.confirm-mdl, .cancel-mdl {
+    margin: 10px;
 }
