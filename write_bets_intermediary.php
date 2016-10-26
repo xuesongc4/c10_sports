@@ -13,10 +13,14 @@ $file_name = 'written_bets.php';
 
 // Open the file to get existing content
 $current = file_get_contents($file_name);
+
+//json encode
+$current = json_encode($current);
+
 //strip the final brace to allow for more appended data
-rtrim($current, "}");
+rtrim($current, "]\"");
 // Append a new bet to the file
-$current .= ','.$json_encoded.'}';
+$current .= ','.$json_encoded.']';
 // Write the contents back to the file
 file_put_contents($file_name, $current);
 

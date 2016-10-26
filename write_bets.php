@@ -16,7 +16,7 @@
 <body>
     <input type="radio" name="form_type" value="multiple_choice" checked="true">Multiple Choice<br>
     <input type="radio" name="form_type" value="free_form">Free Form<br>
-    <form action="written_dummy_bets.php" method="post">
+    <form action="write_bets_intermediary.php" method="post">
         <div id="multiple_choice">
             <div>
                 <p>Type of bet</p>

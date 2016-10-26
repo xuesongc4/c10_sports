@@ -1,1 +1,1 @@
-{},{"bet_type":"spread","first_side":"true","odds":"110","line":"-7"}},{"bet_type":"over\/under","first_side":"true","odds":"110","line":"-7"}}
+"\"[]\",{\"bet_type\":\"spread\",\"first_side\":\"true\",\"odds\":\"110\",\"line\":\"-7\"}]",{"bet_type":"moneyline","first_side":"true","odds":"110","line":"-7"}]
