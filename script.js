@@ -64,6 +64,13 @@ function get_games(date_data,league_data) {
                 }}(i));
                 $('<span>').text('CONFIRM').addClass('confirm btn btn-default').appendTo(bet).on('click', function (){
                     // Show confirm modal with confirm and cancel buttons - all options clear highlight selectors
+                    var selected_bet = $('span').hasClass('selected');
+                    if (selected_bet){
+                        console.log('testing modal content');
+                        var selected_bet_text = $(selected_bet).text(); //TODO: this doesn't work
+                        $('.modal-body').append('<p>');
+                        $('p').append(selected_bet_text);
+                    }
                     $('#confirm_modal').modal('show');
                     $('.modal-body .confirm-mdl').on('click', function(){
                         send_data(this);
