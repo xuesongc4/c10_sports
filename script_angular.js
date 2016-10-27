@@ -12,7 +12,7 @@ app.factory("myFactory", function($http, $q){
                 headers: {'Content-Type': 'application/x-www-form-urlencoded'}
             })
                 .then(function (response) {
-                    data.bet_data = response;
+                    data.bet_data = response.data;
                     console.log("response in my factory: ",data);
                     q.resolve(data.bet_data);
                 }, function () {
@@ -25,8 +25,10 @@ app.factory("myFactory", function($http, $q){
 });
 
 app.controller('controller', function (myFactory) {
+    this.menu_toggle = false;
     var self = this;
     this.sendData={};
+    this.displayData={};
 
     this.getGameData = function (game){
         self.sendData.date = game;
@@ -34,21 +36,14 @@ app.controller('controller', function (myFactory) {
 
         myFactory.getData()
             .then(function(response){
-                console.log("response from server is: ",response)
+                for(var i=0;i<response.length;i++){
+                  response[i].bet_toggle = false;
+                };
+                console.log("response with toggle information: ",response)
+                self.displayData=response;
             },
         function(response){
             console('error!');
         });
     };
 });
-
-// app.directive("schedLanding", function(){
-//     return {
-//         restrict: 'AE',
-//         templateUrl: 'games_to_bet.html',
-//         controller: function(){
-//         this.arr = myFactory.bet_data;
-//     },
-//     controllerAs: 'sc'
-//     }
-// });

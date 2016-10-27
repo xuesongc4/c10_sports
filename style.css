@@ -33,18 +33,19 @@
 .menu_button{
     border: solid 2px black;
 }
-.whole_menu{
-    display: none;
-}
+/*.whole_menu{*/
+    /*display: none;*/
+/*}*/
 .menu{
     top:0px;
     left:0px;
     position: absolute;
-    width: 9%;
-    height: 46%;
+    width: 40%;
+    height: 100%;
     display:inherit;
     background-color: lightgray;
     z-index: 10;
+    border-right: 3px black solid;
 }
 
 .menu_close{
@@ -54,6 +55,7 @@
     height: 100%;
     width: 60%;
     z-index: 5;
+    background-color: rgba(0,0,0,.3);
 }
 body{
     margin:0;
@@ -98,7 +100,6 @@ body{
 .bet{
     border: solid 2px black;
     height: 100px;
-    display:none;
     background-color: whitesmoke;
 }
 
