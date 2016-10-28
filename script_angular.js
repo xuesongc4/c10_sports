@@ -21,14 +21,50 @@ app.factory("myFactory", function($http, $q){
                 });
             return q.promise
         };
+
+    data.sendData = function (betData){
+        return $http({
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+            method: 'post',
+            url: 'make_bet.php',
+            data: $.param(betData)
+        })
+    };
     return data;
 });
 
 app.controller('controller', function (myFactory) {
-    this.menu_toggle = false;
     var self = this;
+    this.menu_toggle = true;
+    this.gotData = false;
+
+    this.highlight=[];
     this.sendData={};
     this.displayData={};
+    this.saveBetData={};
+
+    this.sendBetData= function(){
+        self.highlight =[];
+        console.log('the bet data I am sending the server is: ',self.saveBetData);
+        myFactory.sendData(self.saveBetData)
+            .then(function (response) {
+                console.log('bet succesfully sent: ', response);
+                self.saveBetData = {};
+            }),
+                function(response) {
+                alert('error!');
+            }
+    };
+
+    this.saveData = function (index,type_of_bet,side,spread,odds,select_index){
+        self.saveBetData.game_id=index;
+        self.saveBetData.side=side;
+        self.saveBetData.type_of_bet=type_of_bet;
+        self.saveBetData.spread=spread;
+        self.saveBetData.odds=odds;
+        self.highlight = [];
+        self.highlight[select_index] = 'selected';
+    };
 
     this.getGameData = function (game){
         self.sendData.date = game;
@@ -39,8 +75,9 @@ app.controller('controller', function (myFactory) {
                 for(var i=0;i<response.length;i++){
                   response[i].bet_toggle = false;
                 };
-                console.log("response with toggle information: ",response)
+                console.log("response with toggle information: ",response);
                 self.displayData=response;
+                self.gotData = true;
             },
         function(response){
             console('error!');
