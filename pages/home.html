@@ -30,13 +30,13 @@
             <img class="away_img" src={{bet_data.home_pic}}>
         </div>
         <div class="bet" ng-show="bet_data.bet_toggle">
-            <span ng-class="ic.highlight[0]" ng-click="ic.saveData($index,'spread',0,bet_data.spread[0],bet_data.spread[2],0)">{{bet_data.spread[0]}}{{bet_data.spread[2]}}</span>
-            <span ng-class="ic.highlight[1]" ng-click="ic.saveData($index,'spread',1,bet_data.spread[1],bet_data.spread[3],1)">{{bet_data.spread[1]}}{{bet_data.spread[3]}}</span>
-            <span ng-class="ic.highlight[2]" ng-click="ic.saveData($index,'money_line',0,bet_data.money_line[0],bet_data.money_line[0],2)">{{bet_data.money_line[0]}}</span>
-            <span ng-class="ic.highlight[3]" ng-click="ic.saveData($index,'money_line',1,bet_data.money_line[1],bet_data.money_line[1],3)">{{bet_data.money_line[1]}}</span>
-            <span ng-class="ic.highlight[4]" ng-click="ic.saveData($index,'over_under',0,bet_data.over_under[0],bet_data.over_under[1],4)">Under {{bet_data.over_under[0]}}{{bet_data.over_under[1]}}</span>
-            <span ng-class="ic.highlight[5]" ng-click="ic.saveData($index,'over_under',1,bet_data.over_under[0],bet_data.over_under[1],5)">Over {{bet_data.over_under[0]}}{{bet_data.over_under[1]}}</span>
-            <span ng-click="ic.sendBetData()">Confirm</span>
+            <div class='spread_bet'ng-class="ic.highlight[0]" ng-click="ic.saveData($index,'spread',0,bet_data.spread[0],bet_data.spread[2],0)">{{bet_data.spread[0]}}{{bet_data.spread[2]}}</div>
+            <div class='spread_bet'ng-class="ic.highlight[1]" ng-click="ic.saveData($index,'spread',1,bet_data.spread[1],bet_data.spread[3],1)">{{bet_data.spread[1]}}{{bet_data.spread[3]}}</div>
+            <div class='spread_bet'ng-class="ic.highlight[2]" ng-click="ic.saveData($index,'money_line',0,bet_data.money_line[0],bet_data.money_line[0],2)">{{bet_data.money_line[0]}}</div>
+            <div class='spread_bet'ng-class="ic.highlight[3]" ng-click="ic.saveData($index,'money_line',1,bet_data.money_line[1],bet_data.money_line[1],3)">{{bet_data.money_line[1]}}</div>
+            <div class='spread_bet'ng-class="ic.highlight[4]" ng-click="ic.saveData($index,'over_under',0,bet_data.over_under[0],bet_data.over_under[1],4)">Under {{bet_data.over_under[0]}}{{bet_data.over_under[1]}}</div>
+            <div class='spread_bet'ng-class="ic.highlight[5]" ng-click="ic.saveData($index,'over_under',1,bet_data.over_under[0],bet_data.over_under[1],5)">Over {{bet_data.over_under[0]}}{{bet_data.over_under[1]}}</div>
+            <div class='confirm_button' ng-click="ic.sendBetData()">Confirm</div>
         </div>
     </div>
 </div>

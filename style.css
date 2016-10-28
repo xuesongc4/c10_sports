@@ -107,13 +107,8 @@ body{
 }
 .bet{
     border: solid 2px black;
-    height: 100px;
+    height: 370px;
     background-color: whitesmoke;
-}
-
-.selected{
-    border: 2px black solid;
-    border-radius: 60px;
 }
 
 .game_date{
@@ -138,4 +133,30 @@ body{
 
 .confirm-mdl, .cancel-mdl {
     margin: 10px;
+}
+.spread_bet{
+    width: 40%;
+    background-color: lightblue;
+    font-size: 25px;
+    margin: 15px 35px;
+    display: inline-block;
+    text-align: center;
+    border: 5px solid deepskyblue;
+    border-radius: 10px;
+}
+
+.confirm_button{
+    width: 90%;
+    background-color: lightcoral;
+    font-size: 50px;
+    margin: auto;
+    margin-top: 20px;
+    text-align: center;
+    border: 5px solid darkred;
+    border-radius: 10px;
+}
+
+.selected{
+    border: 5px red solid;
+    background-color: lightcoral;
 }
