@@ -9,12 +9,10 @@
 
 require_once('mysql_connect.php');
 
-date_default_timezone_set('America/New_York');
-
-
+date_default_timezone_set('UTC');
 
 //variables coming in
-$user_id = 1;
+$user_id = 2;
 $game_number = 4;
 $bet_amount = 100;
 
@@ -92,14 +90,10 @@ if(mysqli_num_rows($game_odds_result)) {
 }
 print('<br>');
 
-//$bet_query1 = "INSERT INTO `bets`(`user_id`, `amount`, `bet_type_id`, `game_id`, `side`, `line`, `odds`) VALUES ('1', '100', '1', '3', '1', '-7.5', '-101')";
-//$bet_query2 = "INSERT INTO `bets`(`user_id`, `amount`, `bet_type_id`, `game_id`, `side`, `line`, `odds`) VALUES ('2', '100', '1', '3', '0', '-7.5', '-109')";
-
 $bet_query = "INSERT INTO `bets`(`user_id`, `amount`, `game_id`, `bet_type_id`, `side`, `line`, `odds`) VALUES ('$user_id', '$bet_amount', '$game_number', '$bet_type', '$side', '$bet_line', '$bet_odds')";
 $bet_result = mysqli_query($conn, $bet_query);
 //verification that bet writing worked
 print_r(mysqli_affected_rows($conn));
-
 
 //old but good example for game result
 //if(mysqli_num_rows($game_result)) {
@@ -108,7 +102,4 @@ print_r(mysqli_affected_rows($conn));
 //    }
 //    print_r($games);
 //}
-
-
-
 ?>

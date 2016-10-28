@@ -7,7 +7,7 @@ session_start();
 * Time: 5:15 PM
 */
 
-date_default_timezone_set('America/New_York');
+date_default_timezone_set('UTC');
 
 
 $output = $_POST;
