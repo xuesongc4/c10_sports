@@ -38,6 +38,7 @@ app.controller('controller', function (myFactory) {
     this.menu_toggle = true;
     this.gotData = false;
 
+    this.highlightDate=[false,'selected_date',false];
     this.highlight = [];
     this.sendData = {};
     this.displayData = {};
@@ -47,6 +48,8 @@ app.controller('controller', function (myFactory) {
         console.log('confirming!');
         $('#confirm_modal').modal('show');
     };
+
+    this.highlightDate
 
     this.sendBetData = function () {
         self.highlight = [];
@@ -81,8 +84,22 @@ app.controller('controller', function (myFactory) {
         self.displayData[index].bet_toggle = !self.displayData[index].bet_toggle;
     };
 
-    this.getGameData = function (game) {
-        self.sendData.date = game;
+    this.getGameData = function (date,league) {
+        self.sendData.date = date;
+
+        if(date=='previous'){
+            this.highlightDate=['selected_date',false,false];
+        }
+        else if (date=='current'){
+            this.highlightDate=[false,'selected_date',false];
+        }
+        else if(date=='future'){
+            this.highlightDate=[false,false,'selected_date'];
+        }
+
+        if(league) {
+            self.sendData.league = league;
+        }
         console.log('the data I am sending the server is: ', self.sendData);
 
         myFactory.getData()
