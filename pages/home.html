@@ -20,7 +20,7 @@
 </div>
 <div class="sched_landing">
     <div ng-repeat='bet_data in ic.displayData'>
-        <div class='game' ng-click="bet_data.bet_toggle=!bet_data.bet_toggle">
+        <div class='game' ng-click="ic.betToggle($index)">
             <span class="game_date">{{bet_data.date}}</span>
             <div class='teams_playing_div'>
                 <span class="teams_playing">{{bet_data.away_long}}</span>

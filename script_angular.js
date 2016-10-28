@@ -3,26 +3,26 @@
  */
 var app = angular.module('app', ['ngRoute']);
 
-app.factory("myFactory", function($http, $q){
+app.factory("myFactory", function ($http, $q) {
     var data = {};
-        data.getData=function(){
-            var q = $q.defer();
-            $http({
-                url: 'dummy_data.php',
-                headers: {'Content-Type': 'application/x-www-form-urlencoded'}
-            })
-                .then(function (response) {
-                    data.bet_data = response.data;
-                    console.log("response in my factory: ",data);
-                    q.resolve(data.bet_data);
-                }, function () {
-                    console.log('error in getting data');
-                    q.reject('error in getting data')
-                });
-            return q.promise
-        };
+    data.getData = function () {
+        var q = $q.defer();
+        $http({
+            url: 'dummy_data.php',
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+        })
+            .then(function (response) {
+                data.bet_data = response.data;
+                console.log("response in my factory: ", data);
+                q.resolve(data.bet_data);
+            }, function () {
+                console.log('error in getting data');
+                q.reject('error in getting data')
+            });
+        return q.promise
+    };
 
-    data.sendData = function (betData){
+    data.sendData = function (betData) {
         return $http({
             headers: {'Content-Type': 'application/x-www-form-urlencoded'},
             method: 'post',
@@ -38,54 +38,64 @@ app.controller('controller', function (myFactory) {
     this.menu_toggle = true;
     this.gotData = false;
 
-    this.highlight=[];
-    this.sendData={};
-    this.displayData={};
-    this.saveBetData={};
+    this.highlight = [];
+    this.sendData = {};
+    this.displayData = {};
+    this.saveBetData = {};
 
-    this.sendBetData= function(){
-        self.highlight =[];
-        console.log('the bet data I am sending the server is: ',self.saveBetData);
+    this.sendBetData = function () {
+        self.highlight = [];
+        console.log('the bet data I am sending the server is: ', self.saveBetData);
         myFactory.sendData(self.saveBetData)
             .then(function (response) {
                 console.log('bet succesfully sent: ', response);
                 self.saveBetData = {};
             }),
-                function(response) {
+            function (response) {
                 alert('error!');
             }
     };
 
-    this.saveData = function (index,type_of_bet,side,spread,odds,select_index){
-        self.saveBetData.game_id=index;
-        self.saveBetData.side=side;
-        self.saveBetData.type_of_bet=type_of_bet;
-        self.saveBetData.spread=spread;
-        self.saveBetData.odds=odds;
+    this.saveData = function (index, type_of_bet, side, spread, odds, select_index) {
+        self.saveBetData.game_id = index;
+        self.saveBetData.side = side;
+        self.saveBetData.type_of_bet = type_of_bet;
+        self.saveBetData.spread = spread;
+        self.saveBetData.odds = odds;
         self.highlight = [];
         self.highlight[select_index] = 'selected';
     };
+    this.betToggle = function (index) {
+        self.highlight = [];
+        for (var i = 0; i < self.displayData.length; i++) {
+            if (i != index) {
+                self.displayData[i].bet_toggle = false;
+            }
+        }
+        self.displayData[index].bet_toggle = !self.displayData[index].bet_toggle;
+    };
 
-    this.getGameData = function (game){
+    this.getGameData = function (game) {
         self.sendData.date = game;
-        console.log('the data I am sending the server is: ',self.sendData);
+        console.log('the data I am sending the server is: ', self.sendData);
 
         myFactory.getData()
-            .then(function(response){
-                for(var i=0;i<response.length;i++){
-                  response[i].bet_toggle = false;
-                };
-                console.log("response with toggle information: ",response);
-                self.displayData=response;
-                self.gotData = true;
-            },
-        function(response){
-            console('error!');
-        });
+            .then(function (response) {
+                    for (var i = 0; i < response.length; i++) {
+                        response[i].bet_toggle = false;
+                    }
+                    ;
+                    console.log("response with toggle information: ", response);
+                    self.displayData = response;
+                    self.gotData = true;
+                },
+                function (response) {
+                    console('error!');
+                });
     };
 });
 
-app.config(function($routeProvider) {
+app.config(function ($routeProvider) {
     $routeProvider
         .when('/', {
             templateUrl: 'pages/home.html',
@@ -103,6 +113,6 @@ app.config(function($routeProvider) {
             templateUrl: 'pages/more_stuffs.html'
         })
         .otherwise({
-            redirectTo:'/'
+            redirectTo: '/'
         });
 });
