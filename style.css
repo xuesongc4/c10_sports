@@ -12,9 +12,7 @@ body{
 }
 .date_landing {
     background-color: lightgray;
-    height: 4%;
     text-align: center;
-    overflow: scroll;
     vertical-align: middle;
     padding: 0;
     margin: auto;
@@ -45,8 +43,8 @@ body{
     left:0px;
     position: absolute;
     background-color: white;
-    width: 40%;
-    height: 100%;
+    width: 40vw;
+    height: 100vh;
     display:inherit;
     z-index: 10;
     border-right: 3px black solid;
@@ -64,6 +62,16 @@ body{
 
 .container {
     font-size: 20px;
+    position: absolute;
+    top: 0;
+    left:0;
+}
+.container2 {
+    font-size: 20px;
+    position: absolute;
+    top: 0;
+    left:0;
+    z-index: 10;
 }
 .dates{
     display:inline-block;

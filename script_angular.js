@@ -1,7 +1,7 @@
 /**
  * Created by xueso on 10/24/2016.
  */
-var app = angular.module('degenApp', []);
+var app = angular.module('app', ['ngRoute']);
 
 app.factory("myFactory", function($http, $q){
     var data = {};
@@ -83,4 +83,26 @@ app.controller('controller', function (myFactory) {
             console('error!');
         });
     };
+});
+
+app.config(function($routeProvider) {
+    $routeProvider
+        .when('/', {
+            templateUrl: 'pages/home.html',
+        })
+        .when('/bethistory', {
+            templateUrl: 'pages/bet_history.html',
+        })
+        .when('/leaderboard', {
+            templateUrl: 'pages/leader_board.html',
+        })
+        .when('/stuffs', {
+            templateUrl: 'pages/stuffs.html',
+        })
+        .when('/morestuffs', {
+            templateUrl: 'pages/more_stuffs.html'
+        })
+        .otherwise({
+            redirectTo:'/'
+        });
 });

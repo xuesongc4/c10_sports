@@ -1,99 +1,45 @@
 <!DOCTYPE html>
-<html ng-app="degenApp">
+<html ng-app="app">
 <head>
     <meta charset="UTF-8">
+    <!-- bootstrap and fontawesome included for your enjoyment -->
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.0/css/font-awesome.css" />
+    <!-- load angular and angular route via CDN below, also include your javascript file-->
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js"></script>
-    cd..
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="http://code.angularjs.org/1.3.15/angular-route.js"></script>
     <link rel="stylesheet" type="text/css" href="style.css">
     <link href="https://fonts.googleapis.com/css?family=Concert+One|Khand|Roboto+Condensed" rel="stylesheet">
     <script src="script_angular.js"></script>
     <title>Gambling app</title>
 </head>
 <body ng-controller="controller as ic">
-
-<span class="menu_button" ng-click="ic.menu_toggle=false">=</span>
-
-<div class="container">
-    <div class="whole_menu" ng-hide="ic.menu_toggle">
-        <div class="menu">
-            <div>
-                "Account Info"
-            </div>
-            <div>
-                Bet History
-            </div>
-            <div>
-                Leader Board
-            </div>
-            <div>
-                Stuffs
-            </div>
-            <div>
-                More Stuffs
-            </div>
-        </div>
-        <div class="menu_close" ng-click="ic.menu_toggle=true"></div>
-    </div>
-    <div class="league_landing">
-        <div id='league_nfl' class="league_button" ng-click="ic.sendData.league='nfl'">NFL</div>
-        <div id='league_nba' class="league_button" ng-click="ic.sendData.league='nba'">NBA</div>
-        <div id='league_mlb' class="league_button" ng-click="ic.sendData.league='mlb'">MLB</div>
-        <div id='league_nhl' class="league_button" ng-click="ic.sendData.league='nhl'">NHL</div>
-        <div id='league_ncaaf' class="league_button" ng-click="ic.sendData.league='ncaaf'">NCAAF</div>
-        <div id='league_ncaab' class="league_button" ng-click="ic.sendData.league='ncaab'">NCAAB</div>
-    </div>
-    <div class="date_landing">
-        <span class='dates' ng-click="ic.getGameData('previous')">
-            previous games
-        </span>
-        <span class='dates' ng-click="ic.getGameData('current')">
-            current games
-        </span>
-        <span class='dates' ng-click="ic.getGameData('future')">
-            future games
-        </span>
-    </div>
-    <div class="sched_landing">
-        <div ng-repeat='bet_data in ic.displayData'>
-            <div class='game' ng-click="bet_data.bet_toggle=!bet_data.bet_toggle">
-                <span class="game_date">{{bet_data.date}}</span>
-                <div class='teams_playing_div'>
-                    <span class="teams_playing">{{bet_data.away_long}}</span>
-                    <span class="teams_playing">{{bet_data.home_long}}</span>
+    <div class="container2">
+        <span class="menu_button" ng-click="ic.menu_toggle=false">=</span>
+        <div class="whole_menu" ng-hide="ic.menu_toggle">
+            <div class="menu">
+                <div>
+                   "Account Info"
                 </div>
-                <img class="home_img" src={{bet_data.away_pic}}>
-                <img class="away_img" src={{bet_data.home_pic}}>
-            </div>
-            <div class="bet" ng-show="bet_data.bet_toggle">
-                <span ng-class="ic.highlight[0]" ng-click="ic.saveData($index,'spread',0,bet_data.spread[0],bet_data.spread[2],0)">{{bet_data.spread[0]}}{{bet_data.spread[2]}}</span>
-                <span ng-class="ic.highlight[1]" ng-click="ic.saveData($index,'spread',1,bet_data.spread[1],bet_data.spread[3],1)">{{bet_data.spread[1]}}{{bet_data.spread[3]}}</span>
-                <span ng-class="ic.highlight[2]" ng-click="ic.saveData($index,'money_line',0,bet_data.money_line[0],bet_data.money_line[0],2)">{{bet_data.money_line[0]}}</span>
-                <span ng-class="ic.highlight[3]" ng-click="ic.saveData($index,'money_line',1,bet_data.money_line[1],bet_data.money_line[1],3)">{{bet_data.money_line[1]}}</span>
-                <span ng-class="ic.highlight[4]" ng-click="ic.saveData($index,'over_under',0,bet_data.over_under[0],bet_data.over_under[1],4)">Under {{bet_data.over_under[0]}}{{bet_data.over_under[1]}}</span>
-                <span ng-class="ic.highlight[5]" ng-click="ic.saveData($index,'over_under',1,bet_data.over_under[0],bet_data.over_under[1],5)">Over {{bet_data.over_under[0]}}{{bet_data.over_under[1]}}</span>
-                <span ng-click="ic.sendBetData()">Confirm</span>
-            </div>
-        </div>
-    </div>
-    <!-- <confirm modal> -->
-    <div class="modal fade" id="confirm_modal" role="dialog">
-        <div class="modal-dialog modal-sm">
-            <div class="modal-content">
-                <div class="modal-body">
-                    <h4 class="modal-title">Are you sure?</h4>
-                    <button type="button" class="btn btn-danger confirm-mdl" data-dismiss="modal">Confirm</button>
-                    <button type="button" class="btn btn-default cancel-mdl" data-dismiss="modal">Cancel</button>
+                <div>
+                    <a href="#/"> Bet Screen</a>
+                </div>
+                <div>
+                    <a href="#/bethistory"> Bet History</a>
+                </div>
+                <div>
+                    <a href="#/leaderboard"> Leader Board</a>
+                </div>
+                <div>
+                    <a href="#/stuffs"> Stuffs</a>
+                </div>
+                <div>
+                    <a href="#/morestuffs"> More Stuffs</a>
                 </div>
             </div>
-
+            <div class="menu_close" ng-click="ic.menu_toggle=true"></div>
         </div>
     </div>
-    <!-- </confirm modal> -->
-</div>
-
-
+<div class="container" ng-view></div>
 </body>
 </html>
