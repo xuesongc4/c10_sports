@@ -11,6 +11,7 @@ date_default_timezone_set('America/New_York');
 //create dummy game data for week 7
 
 //nfl teams
+//all IDs should start 0 not 1 because of unsigned ints start at 0
 $nfl_teams = [
     ['ID'=>0,'long_name'=>'Arizona Cardinals','abbr_name'=>'ARI','logo_src'=>'images/ARI.png'],
     ['ID'=>1,'long_name'=>'Atlanta Falcons','abbr_name'=>'ATL','logo_src'=>'images/ATL.png'],
@@ -65,7 +66,7 @@ $nfl_games_2016 = [
 
 $output = [];
 
-for($GAME_NUMBER  = 0; $GAME_NUMBER < count($nfl_games_2016); $GAME_NUMBER ++){
+for($GAME_NUMBER = 0; $GAME_NUMBER < count($nfl_games_2016); $GAME_NUMBER ++){
     $temp = [
         'away_long'=>$nfl_teams[ $nfl_games_2016[$GAME_NUMBER]['away'] ]['long_name'],
         'away_abbr'=>$nfl_teams[ $nfl_games_2016[$GAME_NUMBER]['away'] ]['abbr_name'],
@@ -81,12 +82,6 @@ for($GAME_NUMBER  = 0; $GAME_NUMBER < count($nfl_games_2016); $GAME_NUMBER ++){
     array_push($output, $temp);
 }
 
-$bet_array = [
-    ['user'=>0, 'amount'=>100, 'bet_type'=>'over_under', 'bet_first_option'=>true, ],
-    ['user'=>0]
-];
-
 $encoded_output = json_encode($output);
 print($encoded_output);
-
 ?>
