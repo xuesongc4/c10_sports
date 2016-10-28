@@ -43,6 +43,11 @@ app.controller('controller', function (myFactory) {
     this.displayData = {};
     this.saveBetData = {};
 
+    this.confirm = function(){
+        console.log('confirming!');
+        $('#confirm_modal').modal('show');
+    };
+
     this.sendBetData = function () {
         self.highlight = [];
         console.log('the bet data I am sending the server is: ', self.saveBetData);
@@ -67,6 +72,7 @@ app.controller('controller', function (myFactory) {
     };
     this.betToggle = function (index) {
         self.highlight = [];
+        self.saveBetData = {};
         for (var i = 0; i < self.displayData.length; i++) {
             if (i != index) {
                 self.displayData[i].bet_toggle = false;
@@ -99,6 +105,9 @@ app.config(function ($routeProvider) {
     $routeProvider
         .when('/', {
             templateUrl: 'pages/home.html',
+        })
+        .when('/accountinfo', {
+            templateUrl: 'pages/account_info.html',
         })
         .when('/bethistory', {
             templateUrl: 'pages/bet_history.html',
