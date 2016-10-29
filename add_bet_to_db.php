@@ -6,9 +6,7 @@
  * Time: 12:14 PM
  */
 
-
 require_once('mysql_connect.php');
-
 date_default_timezone_set('UTC');
 
 //variables coming in
