@@ -9,6 +9,9 @@
 require_once('mysql_connect.php');
 date_default_timezone_set('UTC');
 
+$games = "games";
+
+
 //variables coming in
 $user_id = 2;
 $game_number = 4;
@@ -61,7 +64,7 @@ if($type_of_bet === "spread"){
 }
 
 if ($type_of_bet !== "moneyline") {
-    $game_line_query = "SELECT `$line` FROM `games` WHERE ID = '$game_number'";
+    $game_line_query = "SELECT `$line` FROM `$games` WHERE ID = '$game_number'";            // this line contains $games variable that is dependent on the table I use
     $game_line_result = mysqli_query($conn, $game_line_query);
     $data = [];
     if (mysqli_num_rows($game_line_result)) {

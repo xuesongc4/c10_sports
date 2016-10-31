@@ -1,5 +1,7 @@
 <?php
 
+//make function to format the incoming bet
+
 //function check_the_winnings_of_bet(bet_number){
 //// console.log('ima check the winnings');
 //    $.ajax({
