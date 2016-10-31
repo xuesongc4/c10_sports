@@ -7,13 +7,12 @@ body{
 }
 .league_landing{
     width:80%;
-    height: 7%;
-    margin-left: 10%
+    height: 50px;
+    margin:0 0 3% 10%;
 }
 .date_landing {
-    height: 3%;
+    height: 50px;
     text-align: center;
-    padding: 0;
     margin: auto;
     width: 80%;
 }
@@ -38,6 +37,7 @@ body{
     position: absolute;
     background-color: white;
     width: 40vw;
+    max-width: 400px;
     height: 100vh;
     display:inherit;
     z-index: 10;
@@ -49,7 +49,7 @@ body{
     right:0px;
     position: fixed;
     height: 100%;
-    width: 60%;
+    width: 100%;
     z-index: 5;
     background-color: rgba(0,0,0,.5);
 }
@@ -70,17 +70,17 @@ body{
     display:inline-block;
     border: solid 2px black;
     height: 100%;
-    width: 32.7%;
-    font-size: 3vw;
-    line-height: 40px;
+    width: 32%;
+    font-size: 30px;
+    line-height: 45px;
     background-color: lightgrey;
 }
 
 .league_button{
     display: inline-block;
     font-family: 'Khand', sans-serif;
-    font-size: 4vw;
-    margin: 3.3%;
+    font-size: 3vw;
+    margin-left: 3.5%;
 }
 .home_img {
     height: 35px;
@@ -103,6 +103,7 @@ body{
     border: solid 2px black;
     height: 370px;
     background-color: whitesmoke;
+    text-align: center;
 }
 
 .game_date{
@@ -139,13 +140,12 @@ body{
 
 .confirm_button{
     width: 80%;
-    background-color: lightcoral;
+    background-color: lightblue;
     font-size: 50px;
-    margin: auto;
-    margin-top: 20px;
     text-align: center;
-    border: 5px solid darkred;
+    border: 5px solid deepskyblue;
     border-radius: 10px;
+    margin: 20px auto;
 }
 
 .selected{
@@ -156,4 +156,26 @@ body{
 .selected_date{
     background-color: white;
     border-bottom: 2px white solid;
+}
+
+.menu_optionu, a{
+    display: block;
+    color: black;
+    font-size: 40px;
+    margin: 10px;
+}
+.menu_optionu, a:hover{
+    text-decoration:none;
+    color:black;
+    background-color: rgba(0,0,0,.5);
+}
+.confirm_button_fake{
+    width: 80%;
+    background-color: lightblue;
+    opacity: .5;
+    font-size: 50px;
+    text-align: center;
+    border: 5px solid deepskyblue;
+    border-radius: 10px;
+    margin: 20px auto;
 }

@@ -5,7 +5,7 @@
     <div id='league_mlb' class="league_button" ng-click="ic.getGameData('current','mlb')">MLB</div>
     <div id='league_nhl' class="league_button" ng-click="ic.getGameData('current','nhl')">NHL</div>
     <div id='league_ncaaf' class="league_button" ng-click="ic.getGameData('current','ncaaf')">NCAAF</div>
-    <div id='league_ncaab' class="league_button" ng-click="ic.getGameData('current','ncaab')'">NCAAB</div>
+    <div id='league_ncaab' class="league_button" ng-click="ic.getGameData('current','ncaab')">NCAAB</div>
 </div>
 <div class="date_landing">
         <div class='dates' ng-class='ic.highlightDate[0]' ng-click="ic.getGameData('previous')">
@@ -36,21 +36,27 @@
             <div class='spread_bet'ng-class="ic.highlight[3]" ng-click="ic.saveData($index,'money_line',1,bet_data.money_line[1],bet_data.money_line[1],3)">{{bet_data.money_line[1]}}</div>
             <div class='spread_bet'ng-class="ic.highlight[4]" ng-click="ic.saveData($index,'over_under',0,bet_data.over_under[0],bet_data.over_under[1],4)">Under {{bet_data.over_under[0]}}{{bet_data.over_under[1]}}</div>
             <div class='spread_bet'ng-class="ic.highlight[5]" ng-click="ic.saveData($index,'over_under',1,bet_data.over_under[0],bet_data.over_under[1],5)">Over {{bet_data.over_under[0]}}{{bet_data.over_under[1]}}</div>
-            <div class='confirm_button' ng-click="ic.sendBetData()">Make Bet</div>
+            <button ng-show="ic.bet_button_toggle" type="button" class="confirm_button" data-toggle="modal" data-target="#myModal">Make Bet</button>
+            <div ng-hide="ic.bet_button_toggle" class="confirm_button_fake">Make Bet</div>
         </div>
     </div>
 </div>
-<!-- <confirm modal> -->
-<div class="modal fade" id="confirm_modal" role="dialog">
-    <div class="modal-dialog modal-sm">
-        <div class="modal-content">
-            <div class="modal-body">
-                <h4 class="modal-title">Are you sure?</h4>
-                <button type="button" class="btn btn-danger confirm-mdl" data-dismiss="modal">Confirm</button>
-                <button type="button" class="btn btn-default cancel-mdl" data-dismiss="modal">Cancel</button>
-            </div>
-        </div>
 
+
+    <!-- Modal -->
+    <div class="modal fade" id="myModal" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-body">
+                   <h2>Please confirm your bet: </h2>
+                    <h3>{{ic.saveBetData.side}}{{ic.saveBetData.spread}}{{ic.saveBetData.type_of_bet}}</h3>
+                    <button type="button" class="btn btn-success" data-dismiss="modal" ng-click="ic.sendBetData()">Confirm</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                </div>
+            </div>
+
+        </div>
     </div>
-</div>
-<!-- </confirm modal> -->
+

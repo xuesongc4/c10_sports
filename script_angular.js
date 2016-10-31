@@ -37,6 +37,7 @@ app.controller('controller', function (myFactory) {
     var self = this;
     this.menu_toggle = true;
     this.gotData = false;
+    this.bet_button_toggle=false;
 
     this.highlightDate=[false,'selected_date',false];
     this.highlight = [];
@@ -44,20 +45,17 @@ app.controller('controller', function (myFactory) {
     this.displayData = {};
     this.saveBetData = {};
 
-    this.confirm = function(){
-        console.log('confirming!');
-        $('#confirm_modal').modal('show');
-    };
-
-    this.highlightDate
-
     this.sendBetData = function () {
+        self.bet_button_toggle=false;
         self.highlight = [];
         console.log('the bet data I am sending the server is: ', self.saveBetData);
         myFactory.sendData(self.saveBetData)
             .then(function (response) {
                 console.log('bet succesfully sent: ', response);
                 self.saveBetData = {};
+                for (var i = 0; i < self.displayData.length; i++) {
+                    self.displayData[i].bet_toggle = false;
+                }
             }),
             function (response) {
                 alert('error!');
@@ -72,8 +70,10 @@ app.controller('controller', function (myFactory) {
         self.saveBetData.odds = odds;
         self.highlight = [];
         self.highlight[select_index] = 'selected';
+        self.bet_button_toggle = true;
     };
     this.betToggle = function (index) {
+        self.bet_button_toggle=false;
         self.highlight = [];
         self.saveBetData = {};
         for (var i = 0; i < self.displayData.length; i++) {
