@@ -8,12 +8,14 @@ app.factory("myFactory", function ($http, $q) {
     data.getData = function () {
         var q = $q.defer();
         $http({
-            url: 'dummy_data.php',
-            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+            url: 'retrieve_game_data.php',
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+            method: 'post',
+            dataType: 'json'
         })
             .then(function (response) {
-                data.bet_data = response.data;
-                console.log("response in my factory: ", data);
+                data.bet_data = response;
+                console.log("response in my factory: ", response);
                 q.resolve(data.bet_data);
             }, function () {
                 console.log('error in getting data');
