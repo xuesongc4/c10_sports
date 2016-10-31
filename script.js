@@ -34,7 +34,6 @@ function get_games(date_data,league_data) {
         url: "retrieve_game_data.php",
         success: function (response) {
             console.log(response);
-            console.log(response[0]);
 
             for(var i=0;i<response.length;i++){
                 var game = $('<div>').addClass('game').on('click', function (){
