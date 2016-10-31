@@ -5,7 +5,7 @@
  * Date: 10/24/2016
  * Time: 6:39 PM
  */
-date_default_timezone_set('America/New_York');
+date_default_timezone_set('UTC');
 //print_r($_POST);
 
 $json_encoded = json_encode($_POST);
