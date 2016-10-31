@@ -10,12 +10,11 @@ app.factory("myFactory", function ($http, $q) {
         $http({
             url: 'retrieve_game_data.php',
             headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-            method: 'post',
-            dataType: 'json'
+            method: 'post'
         })
             .then(function (response) {
-                data.bet_data = response;
-                console.log("response in my factory: ", response);
+                data.bet_data = response.data;
+                console.log("response in my factory: ", data);
                 q.resolve(data.bet_data);
             }, function () {
                 console.log('error in getting data');
@@ -40,6 +39,7 @@ app.controller('controller', function (myFactory) {
     this.menu_toggle = true;
     this.gotData = false;
     this.bet_button_toggle=false;
+    this.highlight_confirm = false;
 
     this.highlightDate=[false,'selected_date',false];
     this.highlight = [];
@@ -64,11 +64,11 @@ app.controller('controller', function (myFactory) {
             }
     };
 
-    this.saveData = function (index, type_of_bet, side, spread, odds, select_index) {
+    this.saveData = function (index, type_of_bet, side, line, odds, select_index) {
         self.saveBetData.game_id = index;
         self.saveBetData.side = side;
         self.saveBetData.type_of_bet = type_of_bet;
-        self.saveBetData.spread = spread;
+        self.saveBetData.line = line;
         self.saveBetData.odds = odds;
         self.highlight = [];
         self.highlight[select_index] = 'selected';

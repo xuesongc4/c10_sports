@@ -129,28 +129,30 @@ body{
 }
 .spread_bet{
     width: 35%;
-    background-color: lightblue;
+    background-color: white;
     font-size: 25px;
     margin: 15px 35px;
     display: inline-block;
     text-align: center;
     border: 5px solid deepskyblue;
     border-radius: 10px;
+    color: deepskyblue;
 }
 
 .confirm_button{
     width: 80%;
-    background-color: lightblue;
     font-size: 50px;
     text-align: center;
     border: 5px solid deepskyblue;
     border-radius: 10px;
     margin: 20px auto;
+    color: deepskyblue;
+    background-color:white;
 }
 
 .selected{
-    border: 5px red solid;
-    background-color: lightcoral;
+    background-color: lightblue;
+    color: white;
 }
 
 .selected_date{
@@ -171,11 +173,12 @@ body{
 }
 .confirm_button_fake{
     width: 80%;
-    background-color: lightblue;
-    opacity: .5;
     font-size: 50px;
     text-align: center;
     border: 5px solid deepskyblue;
     border-radius: 10px;
     margin: 20px auto;
+    color: deepskyblue;
+    background-color:white;
+    opacity: .3;
 }
