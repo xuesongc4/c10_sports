@@ -1,50 +1,47 @@
 *{
     font-family: 'Roboto Condensed', sans-serif;
 }
-
+body{
+    margin:0;
+    font-size:0;
+}
 .league_landing{
-    width:100%;
-    height: 10%;
-    margin-left: 10%
+    width:80%;
+    height: 50px;
+    margin:0 0 3% 10%;
 }
 .date_landing {
-    background-color: lightgray;
-    height: 4%;
+    height: 50px;
     text-align: center;
-    overflow: scroll;
-    vertical-align: middle;
-    padding: 0;
     margin: auto;
     width: 80%;
 }
 .sched_landing{
-    background-color: lightgrey;
     width:80%;
     height: 80%;
-    position: center;
     margin:auto;
-}
-
-.container{
-    height:100vh;
-    width: 100vw;
+    margin-top:-2px;
 }
 
 .menu_button{
     border: solid 2px black;
+    font-size: 30px;
+    z-index: 5;
 }
-.whole_menu{
-    display: none;
-}
+/*.whole_menu{*/
+    /*display: none;*/
+/*}*/
 .menu{
     top:0px;
     left:0px;
     position: absolute;
-    width: 9%;
-    height: 46%;
+    background-color: white;
+    width: 40vw;
+    max-width: 400px;
+    height: 100vh;
     display:inherit;
-    background-color: lightgray;
     z-index: 10;
+    border-right: 3px black solid;
 }
 
 .menu_close{
@@ -52,38 +49,45 @@
     right:0px;
     position: fixed;
     height: 100%;
-    width: 60%;
+    width: 100%;
     z-index: 5;
-}
-body{
-    margin:0;
-    font-size:0;
-}
-.container{
-    font-size:20px;
+    background-color: rgba(0,0,0,.5);
 }
 
+.container {
+    font-size: 20px;
+    height:95vh;
+    width: 100vw;
+    max-width: 92vw;
+}
+.container2 {
+    font-size: 20px;
+    top: 0;
+    left:0;
+    z-index: 10;
+}
 .dates{
     display:inline-block;
     border: solid 2px black;
     height: 100%;
-    width: 18%;
-    line-height:100%;
+    width: 32%;
+    font-size: 30px;
+    line-height: 45px;
+    background-color: lightgrey;
 }
 
 .league_button{
     display: inline-block;
     font-family: 'Khand', sans-serif;
-    font-size:38px;
-    padding:8px;
+    font-size: 3vw;
+    margin-left: 3.5%;
 }
-.home_img, .away_img {
-    display: inline-block;
-    height: 55px;
-    position: relative;
-    left: 50%;
-    transform: translateX(-186%);
-    margin: 0 4%;
+.home_img {
+    height: 35px;
+}
+
+.away_img {
+    height: 35px;
 }
 /*.away_img{*/
     /*display: inline-block;*/
@@ -97,30 +101,23 @@ body{
 }
 .bet{
     border: solid 2px black;
-    height: 100px;
-    display:none;
+    height: 370px;
     background-color: whitesmoke;
-}
-
-.selected{
-    border: 2px black solid;
-    border-radius: 60px;
+    text-align: center;
 }
 
 .game_date{
     background-color: white;
     display:block;
-    text-align: center;
-    font-size: 107%;
+    text-align: right;
     font-family: 'Concert One', cursive;
 }
 .teams_playing{
-    margin:4%;
-    position:relative;
+    font-size: 30px;
 }
 
 .teams_playing_div {
-    text-align: center;
+    text-align: left;
 }
 
 .modal-header, .modal-body {
@@ -129,4 +126,59 @@ body{
 
 .confirm-mdl, .cancel-mdl {
     margin: 10px;
+}
+.spread_bet{
+    width: 35%;
+    background-color: white;
+    font-size: 25px;
+    margin: 15px 35px;
+    display: inline-block;
+    text-align: center;
+    border: 5px solid deepskyblue;
+    border-radius: 10px;
+    color: deepskyblue;
+}
+
+.confirm_button{
+    width: 80%;
+    font-size: 50px;
+    text-align: center;
+    border: 5px solid deepskyblue;
+    border-radius: 10px;
+    margin: 20px auto;
+    color: deepskyblue;
+    background-color:white;
+}
+
+.selected{
+    background-color: lightblue;
+    color: white;
+}
+
+.selected_date{
+    background-color: white;
+    border-bottom: 2px white solid;
+}
+
+.menu_optionu, a{
+    display: block;
+    color: black;
+    font-size: 40px;
+    margin: 10px;
+}
+.menu_optionu, a:hover{
+    text-decoration:none;
+    color:black;
+    background-color: rgba(0,0,0,.5);
+}
+.confirm_button_fake{
+    width: 80%;
+    font-size: 50px;
+    text-align: center;
+    border: 5px solid deepskyblue;
+    border-radius: 10px;
+    margin: 20px auto;
+    color: deepskyblue;
+    background-color:white;
+    opacity: .3;
 }
