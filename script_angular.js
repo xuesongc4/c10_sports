@@ -5,6 +5,43 @@ var app = angular.module('app', ['ngRoute']);
 
 app.factory("myFactory", function ($http, $q) {
     var data = {};
+
+    data.getBetHistoryData = function (){
+        var q = $q.defer();
+        $http({
+            url: 'retrieve_bet_history.php',
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+            method: 'post'
+        })
+            .then(function (response) {
+                data.retrieve_bet_history = response.data;
+                console.log("response in my factory: ", data);
+                q.resolve(data.retrieve_bet_history);
+            }, function () {
+                console.log('error in getting data');
+                q.reject('error in getting data')
+            });
+        return q.promise
+    };
+
+    data.getLeaderData = function (){
+        var q = $q.defer();
+        $http({
+            url: 'retrieve_leaderboard_data.php',
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+            method: 'post'
+        })
+            .then(function (response) {
+                data.leaderboard_data = response.data;
+                console.log("response in my factory: ", data);
+                q.resolve(data.leaderboard_data);
+            }, function () {
+                console.log('error in getting data');
+                q.reject('error in getting data')
+            });
+        return q.promise
+    };
+
     data.getData = function () {
         var q = $q.defer();
         $http({
@@ -143,4 +180,36 @@ app.config(function ($routeProvider) {
         .otherwise({
             redirectTo: '/'
         });
+});
+
+app.controller('leaderboard', function (myFactory) {
+    var self = this;
+    this.leaderboard_data = null;
+    this.get_leaderboard_data = function(){
+        myFactory.getLeaderData()
+            .then(function (response) {
+                    self.leaderboard_data=response;
+                console.log(self.leaderboard_data);
+                },
+                function (response) {
+                    console('error!');
+                });
+    }
+    this.get_leaderboard_data();
+});
+
+app.controller('bethistory', function (myFactory) {
+    var self = this;
+    this.bet_history = null;
+    this.get_bet_history = function(){
+        myFactory.getBetHistoryData()
+            .then(function (response) {
+                    self.bet_history=response;
+                    console.log(self.bet_history);
+                },
+                function (response) {
+                    console('error!');
+                });
+    }
+    this.get_bet_history();
 });

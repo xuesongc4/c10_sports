@@ -1,1 +1,6 @@
-<h1>----------------------------------BET HISTORY!!!!--------------</h1>
+<h1>---------------BET HISTORY!!!!--------------</h1>
+<div ng-controller="bethistory as bh">
+    <div ng-repeat="hist_data in bh.bet_history">
+        <div class = 'game'>{{hist_data.date}} {{hist_data.away}} vs {{hist_data.home}} bet on{{hist_data.side}} {{hist_data.type}} {{hist_data.odds}}</div>
+    </div>
+</div>
