@@ -1,6 +1,6 @@
 <h1>-----------------------LEADER BOARD!!!!-----------------</h1>
 <div ng-controller="leaderboard as lb">
     <div ng-repeat="board_data in lb.leaderboard_data | orderBy: 'money': true">
-        <div class = 'game'>{{board_data.sn}}    ${{board_data.money}}</div>
+        <div class = 'game'> {{board_data.sn}}    ${{board_data.money}}</div>
     </div>
 </div>
