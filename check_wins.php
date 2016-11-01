@@ -51,7 +51,8 @@ function check_wins($game, $final_score, $wager, $bet_type, $bet_first_side, $od
     } else {          //else bet is on money line
         $win_amount = check_money_line_win($bet_first_side, $wager, $odds, $final_score);
     }
-    console . log('win_amount: ', $win_amount);
+//    console . log('win_amount: ', $win_amount);
+    print("win amount: "+$win_amount);
 }
 
 function check_over_under_win($bet_over , $wager, $odds, $line, $final_score){
