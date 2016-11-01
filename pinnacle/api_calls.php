@@ -62,7 +62,7 @@ function odds_call($sportId, $leagueId) {
 			$gameList[$gameIds[$event_id]]['game_time'] = $starts;
 			$team_h = $fixtureEvents[$i]->home;
 			$neutral = false;
-			if (preg_match($team_h, '/\(n\)/')) {
+			if (preg_match('/\(n\)/', $team_h)) {
 				$team_h = substr($team_h, 0, -3);
 				$neutral = true;
 			}

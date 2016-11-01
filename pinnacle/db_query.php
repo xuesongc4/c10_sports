@@ -1,5 +1,6 @@
 <?php 
 require('api_calls.php');
+date_default_timezone_set('UTC');
 
 function make_query($spordId, $leagueId) {
 	// data from api
@@ -10,7 +11,7 @@ function make_query($spordId, $leagueId) {
 	$connection = mysqli_connect(DB_HOST, DB_USER, DB_PASS, DB_NAME);
 
 	// query database for all games within the past 24 hours and upcoming games
-	date_default_timezone_set('UTC');
+
 	$date_object = date_create();
 	$yesterday_timestamp = date_timestamp_get($date_object) - 86400;
 	date_timestamp_set($date_object, $yesterday_timestamp);
