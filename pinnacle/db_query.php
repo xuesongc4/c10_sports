@@ -133,10 +133,6 @@ function make_query($spordId, $leagueId) {
 			$home_result = mysqli_query($connection, $home_id_query);
 			$row = mysqli_fetch_assoc($home_result);
 			$home_id = $row['ID'];
-			$away_id_query = "SELECT * FROM teams WHERE full_name = '{$api_game['team_a']}'";
-			$away_result = mysqli_query($connection, $away_id_query);
-			$row = mysqli_fetch_assoc($away_result);
-			$away_id = $row['ID'];
 			// echo "home id: " . $home_id;
 			// echo "<br>";
 			// echo "away id: " . $away_id;
@@ -157,6 +153,11 @@ function make_query($spordId, $leagueId) {
 			if (!$gametimeFound) {
 				// echo "not found";
 				// echo "<br>";
+				$away_id_query = "SELECT * FROM teams WHERE full_name = '{$api_game['team_a']}'";
+				$away_result = mysqli_query($connection, $away_id_query);
+				$row = mysqli_fetch_assoc($away_result);
+				$away_id = $row['ID'];
+				
 
 				/*
 			    adds new game if game not found
