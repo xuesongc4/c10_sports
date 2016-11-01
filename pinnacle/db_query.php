@@ -161,8 +161,8 @@ function make_query($spordId, $leagueId) {
 				/*
 			    adds new game if game not found
 				*/
-				$properties = 'API_game_id, league_id, team_h_id, team_a_id, game_time, home_spread, spread_odds_h, spread_odds_a, moneyline_odds_h, moneyline_odds_a, overunder_points, overunder_odds_o, overunder_odds_u';
-				$values = "{$api_game['API_game_id']}, {$leagueId}, {$home_id}, {$away_id}, ";
+				$properties = 'API_game_id, league_id, team_h_id, team_a_id, final_score_h, final_score_a, game_time, home_spread, spread_odds_h, spread_odds_a, moneyline_odds_h, moneyline_odds_a, overunder_points, overunder_odds_o, overunder_odds_u';
+				$values = "{$api_game['API_game_id']}, {$leagueId}, {$home_id}, {$away_id}, -1, -1, ";
 
 				if (isset($api_game['game_time'])) {
 					$values .= "'{$api_game['game_time']}', ";
