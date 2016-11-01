@@ -1,10 +1,49 @@
 /**
  * Created by xueso on 10/24/2016.
  */
+
+
 var app = angular.module('app', ['ngRoute']);
 
 app.factory("myFactory", function ($http, $q) {
     var data = {};
+
+    data.getBetHistoryData = function (){
+        var q = $q.defer();
+        $http({
+            url: 'retrieve_bet_history.php',
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+            method: 'post'
+        })
+            .then(function (response) {
+                data.retrieve_bet_history = response.data;
+                console.log("response in my factory: ", data);
+                q.resolve(data.retrieve_bet_history);
+            }, function () {
+                console.log('error in getting data');
+                q.reject('error in getting data')
+            });
+        return q.promise
+    };
+
+    data.getLeaderData = function (){
+        var q = $q.defer();
+        $http({
+            url: 'retrieve_leaderboard_data.php',
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+            method: 'post'
+        })
+            .then(function (response) {
+                data.leaderboard_data = response.data;
+                console.log("response in my factory: ", data);
+                q.resolve(data.leaderboard_data);
+            }, function () {
+                console.log('error in getting data');
+                q.reject('error in getting data')
+            });
+        return q.promise
+    };
+
     data.getData = function () {
         var q = $q.defer();
         $http({
@@ -27,7 +66,7 @@ app.factory("myFactory", function ($http, $q) {
         return $http({
             headers: {'Content-Type': 'application/x-www-form-urlencoded'},
             method: 'post',
-            url: 'make_bet.php',
+            url: 'add_bet_to_db.php',
             data: $.param(betData)
         })
     };
@@ -35,21 +74,23 @@ app.factory("myFactory", function ($http, $q) {
 });
 
 app.controller('controller', function (myFactory) {
+
     var self = this;
     this.menu_toggle = true;
     this.gotData = false;
     this.bet_button_toggle=false;
-    this.highlight_confirm = false;
 
     this.highlightDate=[false,'selected_date',false];
     this.highlight = [];
     this.sendData = {};
     this.displayData = {};
     this.saveBetData = {};
+    this.bet_index_mem=100;
 
     this.sendBetData = function () {
         self.bet_button_toggle=false;
         self.highlight = [];
+        self.bet_index_mem=100;
         console.log('the bet data I am sending the server is: ', self.saveBetData);
         myFactory.sendData(self.saveBetData)
             .then(function (response) {
@@ -64,18 +105,30 @@ app.controller('controller', function (myFactory) {
             }
     };
 
-    this.saveData = function (index, type_of_bet, side, line, odds, select_index) {
-        self.saveBetData.game_id = index;
-        self.saveBetData.side = side;
-        self.saveBetData.type_of_bet = type_of_bet;
-        self.saveBetData.line = line;
-        self.saveBetData.odds = odds;
-        self.highlight = [];
-        self.highlight[select_index] = 'selected';
-        self.bet_button_toggle = true;
+    this.saveData = function (bet_index,index, type_of_bet, side, line, odds, select_index,side_name,line2) {
+        if(self.bet_index_mem==bet_index){
+            self.highlight=[];
+            self.saveBetData={};
+            self.bet_index_mem=100;
+        }
+
+        else{
+            self.bet_index_mem=bet_index;
+            self.saveBetData.game_id = index;
+            self.saveBetData.side = side;
+            self.saveBetData.type_of_bet = type_of_bet;
+            self.saveBetData.line = line;
+            self.saveBetData.line2 = line2;
+            self.saveBetData.odds = odds;
+            self.saveBetData.side_name = side_name;
+            self.highlight = [];
+            self.highlight[select_index] = 'selected';
+            self.bet_button_toggle = true;
+        }
     };
     this.betToggle = function (index) {
         self.bet_button_toggle=false;
+        self.bet_index_mem=100;
         self.highlight = [];
         self.saveBetData = {};
         for (var i = 0; i < self.displayData.length; i++) {
@@ -143,4 +196,36 @@ app.config(function ($routeProvider) {
         .otherwise({
             redirectTo: '/'
         });
+});
+
+app.controller('leaderboard', function (myFactory) {
+    var self = this;
+    this.leaderboard_data = null;
+    this.get_leaderboard_data = function(){
+        myFactory.getLeaderData()
+            .then(function (response) {
+                    self.leaderboard_data=response;
+                console.log(self.leaderboard_data);
+                },
+                function (response) {
+                    console('error!');
+                });
+    }
+    this.get_leaderboard_data();
+});
+
+app.controller('bethistory', function (myFactory) {
+    var self = this;
+    this.bet_history = null;
+    this.get_bet_history = function(){
+        myFactory.getBetHistoryData()
+            .then(function (response) {
+                    self.bet_history=response;
+                    console.log(self.bet_history);
+                },
+                function (response) {
+                    console('error!');
+                });
+    }
+    this.get_bet_history();
 });
