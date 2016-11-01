@@ -11,10 +11,11 @@ function make_query($spordId, $leagueId) {
 
 	// query database for all games within the past 24 hours and upcoming games
 	date_default_timezone_set('UTC');
-	$date_object = date_create();
-	$yesterday_timestamp = date_timestamp_get($date_object) - 86400;
-	date_timestamp_set($date_object, $yesterday_timestamp);
-	$yesterday_date = date_format($date_object, 'Y-m-d H:i:s');
+	// $date_object = date_create();
+	// $yesterday_timestamp = date_timestamp_get($date_object) - 86400;
+	// date_timestamp_set($date_object, $yesterday_timestamp);
+	// $yesterday_date = date_format($date_object, 'Y-m-d H:i:s');
+	$yesterday_date = date('Y-m-d H:i:s', time() - 86400);
 	$select_query = "SELECT * FROM games WHERE game_time > '$yesterday_date' AND league_id = $leagueId";
 	// different query for baseball to include starting pitchers
 	if ($spordId === 3) {
@@ -158,7 +159,6 @@ function make_query($spordId, $leagueId) {
 				$row = mysqli_fetch_assoc($away_result);
 				$away_id = $row['ID'];
 				
-
 				/*
 			    adds new game if game not found
 				*/
@@ -194,6 +194,8 @@ function make_query($spordId, $leagueId) {
 	  }
 	}
 }
+
+// $today_date = date('m-d', time();
 
 make_query(15,889);
 // make_query(4,487);
