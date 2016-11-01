@@ -106,7 +106,8 @@ function check_over_under_win($bet_under , $wager, $odds, $line, $final_score_a,
     }
     return $win_amount;
 }
-
+//calculates the total amount returned from a won bet
+//example: odds of -350 mean that you would have to bet 350 in order to win 100, and odds of +350 would mean you could bet 100 to win 350.
 function calculate_win_total($bet_amount, $odds) {
     $win = null;
     if ($odds < 0) {
@@ -115,8 +116,13 @@ function calculate_win_total($bet_amount, $odds) {
     } else {
         $win = $odds / 100 * $bet_amount;
     }
+    $win = round_down($win);
     return $bet_amount + $win;
 }
-
-
-
+//function to round down to the nearest hundredth
+function round_down($number){
+    $number *= 100;
+    $number = floor($number);
+    $number /= 100;
+    return $number;
+}
