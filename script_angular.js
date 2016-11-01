@@ -105,7 +105,7 @@ app.controller('controller', function (myFactory) {
             }
     };
 
-    this.saveData = function (bet_index,index, type_of_bet, side, line, odds, select_index,side_name) {
+    this.saveData = function (bet_index,index, type_of_bet, side, line, odds, select_index,side_name,line2) {
         if(self.bet_index_mem==bet_index){
             self.highlight=[];
             self.saveBetData={};
@@ -118,6 +118,7 @@ app.controller('controller', function (myFactory) {
             self.saveBetData.side = side;
             self.saveBetData.type_of_bet = type_of_bet;
             self.saveBetData.line = line;
+            self.saveBetData.line2 = line2;
             self.saveBetData.odds = odds;
             self.saveBetData.side_name = side_name;
             self.highlight = [];
