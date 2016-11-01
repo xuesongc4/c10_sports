@@ -128,6 +128,7 @@ app.controller('controller', function (myFactory) {
     };
     this.betToggle = function (index) {
         self.bet_button_toggle=false;
+        self.bet_index_mem=100;
         self.highlight = [];
         self.saveBetData = {};
         for (var i = 0; i < self.displayData.length; i++) {

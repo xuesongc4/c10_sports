@@ -18,9 +18,9 @@ body{
 }
 .sched_landing{
     width:80%;
-    height: 80%;
     margin:auto;
     margin-top:-2px;
+    margin-bottom:400px;
 }
 
 .menu_button{
