@@ -27,8 +27,9 @@ app.factory("myFactory", function ($http, $q) {
         return $http({
             headers: {'Content-Type': 'application/x-www-form-urlencoded'},
             method: 'post',
-            url: 'make_bet.php',
-            data: $.param(betData)
+            // url: 'make_bet.php',
+            url: 'add_bet_to_db.php',
+            data: $.param(betData)              // here is where i want to change the data
         })
     };
     return data;
