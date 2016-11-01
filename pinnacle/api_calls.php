@@ -16,11 +16,15 @@ function odds_call($sportId, $leagueId) {
 	$gameIds = [];
 
 	$oddsDecoded = json_decode($oddsFeed);
-	$oddsEvents = $oddsDecoded->leagues[0]->events;
-
+	if (isset($oddsDecoded->leagues)) {
+		$oddsEvents = $oddsDecoded->leagues[0]->events;
+	}
+		
 	$fixturesDecoded = json_decode($fixturesFeed);
-	// note this one is league without an 's' unlike the one above;
-	$fixtureEvents = $fixturesDecoded->league[0]->events;
+	if (isset($fixturesDecoded->league)) {
+		// note this one is league without an 's' unlike the one above;
+		$fixtureEvents = $fixturesDecoded->league[0]->events;
+	}
 
 	for ($i=0; $i<count($oddsEvents); $i++) {
 		$game = [];
@@ -54,9 +58,19 @@ function odds_call($sportId, $leagueId) {
 		$event_id = $fixtureEvents[$i]->id;
 		if(isset($gameIds[$event_id])){
 			$starts = preg_replace("([TZ])", " ", $fixtureEvents[$i]->starts);
+			$starts = substr($starts, 0,-1);
 			$gameList[$gameIds[$event_id]]['game_time'] = $starts;
-			$gameList[$gameIds[$event_id]]['team_h'] = $fixtureEvents[$i]->home;
+			$team_h = $fixtureEvents[$i]->home;
+			$neutral = false;
+			if (preg_match('/\(n\)/', $team_h)) {
+				$team_h = substr($team_h, 0, -3);
+				$neutral = true;
+			}
+			$gameList[$gameIds[$event_id]]['team_h'] = $team_h;
 			$gameList[$gameIds[$event_id]]['team_a'] = $fixtureEvents[$i]->away;
+			if ($neutral) {
+				// do something about neutral condition
+			}
 		}
 	}
 
@@ -64,8 +78,8 @@ function odds_call($sportId, $leagueId) {
 		for ($i=0; $i<count($fixtureEvents); $i++) {
 			$event_id = $fixtureEvents[$i]->id;
 			if(isset($gameIds[$event_id])){
-				$gameList[$gameIds[$event_id]]['homePitcher'] =  $fixtureEvents[$i]->homePitcher;
-				$gameList[$gameIds[$event_id]]['awayPitcher'] =  $fixtureEvents[$i]->awayPitcher;
+				$gameList[$gameIds[$event_id]]['pitching_h'] =  $fixtureEvents[$i]->homePitcher;
+				$gameList[$gameIds[$event_id]]['pitching_a'] =  $fixtureEvents[$i]->awayPitcher;
 			}
 		}
 	}

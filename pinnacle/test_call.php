@@ -13,12 +13,16 @@
 // MLB: 246
 
 // hockey: 19
-// NHL: 5445
+// NHL: 1456
+// NHL Regular Time: 1461
+// NHL OT Included: 1460
+// NHL OT Included Alternates: 5445
+
 
 require('curl_call_setup.php');
 
 //This fetches the initial feed from the Pinnacle Sports API
-$feedUrl = 'https://api.pinnacle.com/v2/leagues?sportid=15';
+$feedUrl = 'https://api.pinnacle.com/v2/leagues?sportid=19';
 
 // // NFL
 // $feedUrl = 'https://api.pinnacle.com/v1/odds?sportid=15&leagueids=889';
@@ -31,14 +35,14 @@ $feedUrl = 'https://api.pinnacle.com/v2/leagues?sportid=15';
 // $feedUrl = 'https://api.pinnacle.com/v1/fixtures/settled?sportid=4&leagueids=487';
 
 // // MLB
-$feedUrl = 'https://api.pinnacle.com/v1/odds?sportid=3&leagueids=246';
+// $feedUrl = 'https://api.pinnacle.com/v1/odds?sportid=3&leagueids=246';
 // $feedUrl = 'https://api.pinnacle.com/v1/fixtures?sportid=3&leagueids=246';
 // $feedUrl = 'https://api.pinnacle.com/v1/fixtures/settled?sportid=3&leagueids=246';
 
 // // NHL
-// $feedUrl = 'https://api.pinnacle.com/v1/odds?sportid=19&leagueids=5445';
-// $feedUrl = 'https://api.pinnacle.com/v1/fixtures?sportid=19&leagueids=5445';
-// $feedUrl = 'https://api.pinnacle.com/v1/fixtures/settled?sportid=19&leagueids=5445';
+$feedUrl = 'https://api.pinnacle.com/v1/odds?sportid=19&leagueids=1460';
+// $feedUrl = 'https://api.pinnacle.com/v1/fixtures?sportid=19&leagueids=1460';
+// $feedUrl = 'https://api.pinnacle.com/v1/fixtures/settled?sportid=19&leagueids=1460';
 
 // // CFB
 // $feedUrl = 'https://api.pinnacle.com/v1/odds?sportid=15&leagueids=880';
