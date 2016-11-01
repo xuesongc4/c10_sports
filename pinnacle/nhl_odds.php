@@ -1,4 +1,8 @@
 <?php
 require('odds_call.php');
-odds_call(19,5445);
+$stuff = odds_call(19,1460);
+
+echo "<pre>";
+print_r($stuff);
+echo "</pre>";
  ?>
