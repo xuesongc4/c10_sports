@@ -11,10 +11,6 @@ function make_query($spordId, $leagueId) {
 
 	// query database for all games within the past 24 hours and upcoming games
 	date_default_timezone_set('UTC');
-	// $date_object = date_create();
-	// $yesterday_timestamp = date_timestamp_get($date_object) - 86400;
-	// date_timestamp_set($date_object, $yesterday_timestamp);
-	// $yesterday_date = date_format($date_object, 'Y-m-d H:i:s');
 	$yesterday_date = date('Y-m-d H:i:s', time() - 86400);
 	$select_query = "SELECT * FROM games WHERE game_time > '$yesterday_date' AND league_id = $leagueId";
 	// different query for baseball to include starting pitchers
@@ -64,9 +60,6 @@ function make_query($spordId, $leagueId) {
   	checks if property data has changed and updates if so
 	*/
 	function propertyCheck($connection, $db_game, $api_game, $prop) {
-		// global $connection;
-		// print_r($connection);
-		// echo "<br>";
 		if (!isset($api_game[$prop])) {
 			$api_game[$prop] = 0;
 		}
@@ -128,32 +121,22 @@ function make_query($spordId, $leagueId) {
 			}
 		}
 		if (!$gameIdFound) {
-			// echo "Game id not found";
-			// echo "<br>";
 			$home_id_query = "SELECT * FROM teams WHERE full_name = '{$api_game['team_h']}'";
 			$home_result = mysqli_query($connection, $home_id_query);
 			$row = mysqli_fetch_assoc($home_result);
 			$home_id = $row['ID'];
-			// echo "home id: " . $home_id;
-			// echo "<br>";
-			// echo "away id: " . $away_id;
-			// echo "<br>";
-
 			$gametimeFound = false;
+
 			/*
 		    inner for loop that if this new game Id already matches a game already in database (different game ids can refer to the same game)
 			*/
 			foreach($db_gametimes as $game) {
 				if ($game['team_h_id'] == $home_id && $game['game_time'] == $api_game['game_time']) {
-					// echo "Game found: " . $api_game['API_game_id'];
-					// echo "<br>";
 					$gametimeFound = true;
 					break;
 				}
 			}
 			if (!$gametimeFound) {
-				// echo "not found";
-				// echo "<br>";
 				$away_id_query = "SELECT * FROM teams WHERE full_name = '{$api_game['team_a']}'";
 				$away_result = mysqli_query($connection, $away_id_query);
 				$row = mysqli_fetch_assoc($away_result);
@@ -179,7 +162,6 @@ function make_query($spordId, $leagueId) {
 				concatenateValues($values, $api_game, 'overunder_odds_o');
 				concatenateValues($values, $api_game, 'overunder_odds_u');
 				$values = substr($values, 0, -2);
-				// $insert_query = 'INSERT INTO games ' . '(' . $properties . ')' . ' VALUES ' . '(' . $values . ')'; 
 				$insert_query = "INSERT INTO games ({$properties}) VALUES ({$values})";
 				mysqli_query($connection, $insert_query);
 				echo $insert_query;
@@ -197,7 +179,7 @@ function make_query($spordId, $leagueId) {
 
 // $today_date = date('m-d', time();
 
-make_query(15,889);
+// make_query(15,889);
 // make_query(4,487);
-// make_query(3,246);
+make_query(3,246);
  ?>
