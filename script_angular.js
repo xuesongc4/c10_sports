@@ -44,9 +44,10 @@ app.factory("myFactory", function ($http, $q) {
         return q.promise
     };
 
-    data.getData = function () {
+    data.getData = function (data_to_send) {
         var q = $q.defer();
         $http({
+            data:data_to_send,
             url: 'retrieve_game_data.php',
             headers: {'Content-Type': 'application/x-www-form-urlencoded'},
             method: 'post'
@@ -81,6 +82,7 @@ app.controller('controller', function (myFactory) {
     this.bet_button_toggle=false;
 
     this.highlightDate=[false,'selected_date',false];
+    this.show_circle_bet=[false,true,true];
     this.highlight = [];
     this.sendData = {};
     this.displayData = {};
@@ -157,7 +159,7 @@ app.controller('controller', function (myFactory) {
         }
         console.log('the data I am sending the server is: ', self.sendData);
 
-        myFactory.getData()
+        myFactory.getData(self.sendData)
             .then(function (response) {
                     for (var i = 0; i < response.length; i++) {
                         response[i].bet_toggle = false;

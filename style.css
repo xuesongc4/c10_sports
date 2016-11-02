@@ -12,21 +12,26 @@ body{
 }
 .date_landing {
     height: 50px;
+    margin:0 0 0 10%;
     text-align: center;
-    margin: auto;
     width: 80%;
+    max-width:875px;
 }
 .sched_landing{
+    font-size: 20px;
+    margin:0 0 10% 10%;
     width:80%;
-    margin:auto;
     margin-top:-2px;
-    margin-bottom:400px;
+    max-width:875px;
 }
 
 .menu_button{
     margin: 10px;
     font-size: 30px;
     z-index: 5;
+}
+.menu_button:hover{
+    cursor: pointer;
 }
 .menu{
     transition: all linear 0.5s;
@@ -53,7 +58,6 @@ body{
 }
 
 .container {
-    font-size: 20px;
     height:95vh;
     width: 100vw;
     max-width: 92vw;
@@ -72,13 +76,20 @@ body{
     font-size: 30px;
     line-height: 45px;
     background-color: lightgrey;
+    margin-right:-2px;
 }
-
+.dates:hover{
+    cursor: pointer;
+}
 .league_button{
     display: inline-block;
     font-family: 'Khand', sans-serif;
-    font-size: 3vw;
+    font-size: 2.8vw;
     margin-left: 3.5%;
+}
+.league_button:hover{
+    cursor: pointer;
+    color: deepskyblue;
 }
 .home_img {
     height: 35px;
@@ -93,9 +104,16 @@ body{
     /*height: 100px;*/
 /*}*/
 .game{
+    font-size: 20px;
     border: solid 2px black;
+    border-bottom: solid 1px black;
     padding: 2%;
     background-color: white;
+    position:relative;
+}
+
+.game:hover{
+    cursor: pointer;
 }
 .bet{
     border: solid 2px black;
@@ -135,7 +153,7 @@ body{
     display: inline-block;
     text-align: center;
     border: 3px solid deepskyblue;
-    border-radius: 10px;
+    border-radius: 7px;
     color: deepskyblue;
 }
 
@@ -157,7 +175,6 @@ body{
 
 .selected_date{
     background-color: white;
-    border-bottom: 2px white solid;
 }
 
 .menu_option{
@@ -165,6 +182,7 @@ body{
     display: block;
     padding: 20px;
 }
+
 .menu_option, a{
     color: black;
     font-size: 40px;
@@ -202,4 +220,26 @@ a:hover{
 .account_info:hover{
     opacity: .7;
     background-color: deepskyblue;
+}
+.bet_made_lander{
+    position: absolute;
+    right: 5px;
+    bottom: 5px;
+}
+
+.bet_made{
+    border: 2px solid deepskyblue;
+    border-radius: 100%;
+    color: deepskyblue;
+    font-weight: bold;
+    display: inline-block;
+    height: 25px;
+    width: 25px;
+    line-height: 23px;
+    font-size: 10px;
+    text-align: center;
+}
+
+.faq{
+    font-size: 20px;
 }
