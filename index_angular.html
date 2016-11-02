@@ -17,27 +17,15 @@
 </head>
 <body ng-controller="controller as ic">
     <div class="container2">
-            <span class="menu_button" ng-click="ic.menu_toggle=false">=</span>
+            <img src="images/List.png" class="menu_button" ng-click="ic.menu_toggle=false">&nbsp</img>
         <div class="whole_menu" ng-hide="ic.menu_toggle">
             <div class="menu">
-                <div class="menu_option">
-                    <a href="#/accountinfo" ng-click="ic.menu_toggle=true"> "Account Info"</a>
-                </div>
-                <div class="menu_option">
-                    <a href="#/" ng-click="ic.menu_toggle=true"> Bet Screen</a>
-                </div>
-                <div class="menu_option">
-                    <a href="#/bethistory" ng-click="ic.menu_toggle=true"> Bet History</a>
-                </div>
-                <div class="menu_option">
-                    <a href="#/leaderboard" ng-click="ic.menu_toggle=true"> Leader Board</a>
-                </div>
-                <div class="menu_option">
-                    <a href="#/stuffs" ng-click="ic.menu_toggle=true"> Stuffs</a>
-                </div>
-                <div class="menu_option">
-                    <a href="#/morestuffs" ng-click="ic.menu_toggle=true"> More Stuffs</a>
-                </div>
+                <a class="menu_option account_info" href="#/accountinfo" ng-click="ic.menu_toggle=true"><img src="images/User.png">&nbsp</img> JoeBab<br>I have: $127.90</a>
+                <a class="menu_option" href="#/" ng-click="ic.menu_toggle=true"><img src="images/Football.png">&nbsp</img> Game Screen</a>
+                <a class="menu_option" href="#/bethistory" ng-click="ic.menu_toggle=true"><img src="images/GraphBar.png">&nbsp</img> Bet History</a>
+                <a class="menu_option" href="#/leaderboard" ng-click="ic.menu_toggle=true"><img src="images/Trophy.png">&nbsp</img> Leader Board</a>
+                <a class="menu_option" href="#/stuffs" ng-click="ic.menu_toggle=true"><img src="images/Question.png">&nbsp</img> Stuffs</a>
+                <a class="menu_option" href="#/morestuffs" ng-click="ic.menu_toggle=true"><img src="images/Question.png">&nbsp</img> FAQ</a>
             </div>
             <div class="menu_close" ng-click="ic.menu_toggle=true"></div>
         </div>
