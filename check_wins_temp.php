@@ -1,26 +1,35 @@
 <?php
-require_once('mysql_connect.php');
+//require_once('mysql_connect.php');      //necessary when testing it on its own
 date_default_timezone_set('UTC');
 //make function to format the incoming bet
 
-//make query to db to see unresolved bets
-$temp_bets_query = "SELECT b.ID, b.user_id, b.amount, bt.bet_name AS bet_type, b.side, b.line, b.odds, g.final_score_a, g.final_score_h FROM `bets` AS b JOIN `games` AS g ON g.ID = b.game_id JOIN `bet_types` AS bt ON bt.ID = b.bet_type_id WHERE settled = '0'";
-$result = mysqli_query($conn, $temp_bets_query);
+//in order to be effective i need an input of game_id to cut down on the games to look at
+// the file db_query has a portion that checks if games are completed, after this point it should call this file to
+//check_for_wins_on_settled_games(140);       //necessary when testing it on its own
 
-$data = [];
-if(mysqli_num_rows($result)){
-    while($row = mysqli_fetch_assoc($result)){
-//        $data[] = $row['final_score_h'];
-        $data[] = check_wins($row['final_score_a'], $row['final_score_h'], $row['amount'], $row['bet_type'], $row['side'], $row['odds'], $row['line']);
+function check_for_wins_on_settled_games($game_id)
+{
+//    global $conn;                       //necessary when testing it on its own
+    global $connection;
+    //make query to db to see unresolved bets
+    $temp_bets_query = "SELECT b.ID, b.user_id, b.amount, bt.bet_name AS bet_type, b.side, b.line, b.odds, g.final_score_a, g.final_score_h FROM `bets` AS b JOIN `games` AS g ON g.ID = b.game_id JOIN `bet_types` AS bt ON bt.ID = b.bet_type_id WHERE settled = '0' AND game_id = '$game_id'";
+//    $result = mysqli_query($conn, $temp_bets_query);                    //necessary when testing it on its own
+    $result = mysqli_query($connection, $temp_bets_query);
+
+    $data = [];
+    if (mysqli_num_rows($result)) {
+        while ($row = mysqli_fetch_assoc($result)) {
+            $data[] = check_for_a_win($row['final_score_a'], $row['final_score_h'], $row['amount'], $row['bet_type'], $row['side'], $row['odds'], $row['line']);
+        }
     }
+//    print_r($data);       //working for when the page is all by itself
+    return $data;
 }
-print_r($data);
-
 
 //will return the amount of money won on the bet
 //final score rendered as an array with first score representing away score and second the home team's score
 //bet_first_side is a boolean value to determine if the player bet the first option in the bet type (i.e. bet away team in spread or money line and over in an over/under bet
-function check_wins($final_score_a, $final_score_h, $wager, $bet_type, $bet_side, $odds, $line){
+function check_for_a_win($final_score_a, $final_score_h, $wager, $bet_type, $bet_side, $odds, $line){
     $win_amount = null;
 
     if ($bet_type === 'spread') {       //bet is on the spread
