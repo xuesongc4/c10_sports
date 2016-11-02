@@ -28,10 +28,8 @@ body{
     font-size: 30px;
     z-index: 5;
 }
-/*.whole_menu{*/
-    /*display: none;*/
-/*}*/
 .menu{
+    transition: all linear 0.5s;
     top:0px;
     left:0px;
     position: absolute;
@@ -104,6 +102,8 @@ body{
     height: 370px;
     background-color: whitesmoke;
     text-align: center;
+    transition: all linear 0.3s;
+    overflow:hidden;
 }
 
 .game_date{
@@ -182,4 +182,10 @@ body{
     background-color:white;
     opacity: .3;
 }
+* {
+    outline: none;
+}
 
+.ng-hide {
+    height: 0;
+}

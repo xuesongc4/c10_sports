@@ -3,7 +3,7 @@
  */
 
 
-var app = angular.module('app', ['ngRoute']);
+var app = angular.module('app', ['ngRoute','ngAnimate']);
 
 app.factory("myFactory", function ($http, $q) {
     var data = {};
