@@ -30,7 +30,6 @@ function get_games(date_data,league_data) {
             date: date_data,
             league: league_data
         },
-        // url: "dummy_data.php",
         url: "retrieve_game_data.php",
         success: function (response) {
             console.log(response);
@@ -110,7 +109,7 @@ function send_data(highlighter) {
     $.ajax({
         dataType: 'json',
         data: this.bet_data,
-        url: "make_bet.php",
+        url: "add_bet_to_db.php",
         success: function (response) {
             console.log('bet data being sent is: ',bet_data);
             console.log("success?", response);

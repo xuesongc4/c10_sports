@@ -1,5 +1,6 @@
 <?php 
 require('api_calls.php');
+require('../check_wins_temp.php');
 date_default_timezone_set('UTC');
 
 function make_query($spordId, $leagueId) {
@@ -40,6 +41,10 @@ function make_query($spordId, $leagueId) {
 			if ($row['final_score_h'] != $settled_game['final_score_h']) {
 				$update_query = "UPDATE games SET final_score_h = {$settled_game['final_score_h']}, final_score_a = {$settled_game['final_score_a']} WHERE API_game_id = {$settled_game['API_game_id']}";
 				mysqli_query($connection, $update_query);
+
+                //(Kyle) insert my query to check wins
+                echo check_for_wins_on_settled_games($settled_game['API_game_id']);
+
 				echo $update_query;
 				echo "<br>";
 			}

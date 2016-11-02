@@ -21,22 +21,22 @@
         <div class="whole_menu" ng-hide="ic.menu_toggle">
             <div class="menu">
                 <div class="menu_option">
-                    <a href="#/accountinfo"> "Account Info"</a>
+                    <a href="#/accountinfo" ng-click="ic.menu_toggle=true"> "Account Info"</a>
                 </div>
                 <div class="menu_option">
-                    <a href="#/"> Bet Screen</a>
+                    <a href="#/" ng-click="ic.menu_toggle=true"> Bet Screen</a>
                 </div>
                 <div class="menu_option">
-                    <a href="#/bethistory"> Bet History</a>
+                    <a href="#/bethistory" ng-click="ic.menu_toggle=true"> Bet History</a>
                 </div>
                 <div class="menu_option">
-                    <a href="#/leaderboard"> Leader Board</a>
+                    <a href="#/leaderboard" ng-click="ic.menu_toggle=true"> Leader Board</a>
                 </div>
                 <div class="menu_option">
-                    <a href="#/stuffs"> Stuffs</a>
+                    <a href="#/stuffs" ng-click="ic.menu_toggle=true"> Stuffs</a>
                 </div>
                 <div class="menu_option">
-                    <a href="#/morestuffs"> More Stuffs</a>
+                    <a href="#/morestuffs" ng-click="ic.menu_toggle=true"> More Stuffs</a>
                 </div>
             </div>
             <div class="menu_close" ng-click="ic.menu_toggle=true"></div>

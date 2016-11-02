@@ -1,4 +1,22 @@
 <?php
+require_once('mysql_connect.php');
+date_default_timezone_set('UTC');
+//make function to format the incoming bet
+
+//make query to db to see unresolved bets
+$temp_bets_query = "SELECT b.ID, b.user_id, b.amount, b.bet_type_id, b.side, b.line, b.odds, g.final_score_a, g.final_score_h FROM `bets` AS b JOIN `games` AS g ON g.ID = b.game_id WHERE settled = '0'";
+$result = mysqli_query($conn, $temp_bets_query);
+
+$data = [];
+if(mysqli_num_rows($result)){
+    while($rows = mysqli_fetch_assoc($result)){
+        $data[] = $rows;
+    }
+}
+
+//for each row in the unresolved bets determine the winning amount
+
+
 
 //function check_the_winnings_of_bet(bet_number){
 //// console.log('ima check the winnings');
@@ -33,7 +51,8 @@ function check_wins($game, $final_score, $wager, $bet_type, $bet_first_side, $od
     } else {          //else bet is on money line
         $win_amount = check_money_line_win($bet_first_side, $wager, $odds, $final_score);
     }
-    console . log('win_amount: ', $win_amount);
+//    console . log('win_amount: ', $win_amount);
+    print("win amount: "+$win_amount);
 }
 
 function check_over_under_win($bet_over , $wager, $odds, $line, $final_score){
