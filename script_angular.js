@@ -161,8 +161,7 @@ app.controller('controller', function (myFactory) {
             .then(function (response) {
                     for (var i = 0; i < response.length; i++) {
                         response[i].bet_toggle = false;
-                    }
-                    ;
+                    };
                     console.log("response with toggle information: ", response);
                     self.displayData = response;
                     self.gotData = true;
