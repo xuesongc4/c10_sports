@@ -1,11 +1,11 @@
 
 <div class="league_landing">
-    <div id='league_nfl' class="league_button" ng-click="ic.getGameData('current','nfl')">NFL</div>
-    <div id='league_nba' class="league_button" ng-click="ic.getGameData('current','nba')">NBA</div>
-    <div id='league_mlb' class="league_button" ng-click="ic.getGameData('current','mlb')">MLB</div>
-    <div id='league_nhl' class="league_button" ng-click="ic.getGameData('current','nhl')">NHL</div>
-    <div id='league_ncaaf' class="league_button" ng-click="ic.getGameData('current','ncaaf')">NCAAF</div>
-    <div id='league_ncaab' class="league_button" ng-click="ic.getGameData('current','ncaab')">NCAAB</div>
+    <div id='league_nfl' class="league_button" ng-click="ic.getGameData('current','NFL')">NFL</div>
+    <div id='league_nba' class="league_button" ng-click="ic.getGameData('current','NBA')">NBA</div>
+    <div id='league_mlb' class="league_button" ng-click="ic.getGameData('current','MLB')">MLB</div>
+    <div id='league_nhl' class="league_button" ng-click="ic.getGameData('current','NHL')">NHL</div>
+    <div id='league_ncaaf' class="league_button" ng-click="ic.getGameData('current','NCAAF')">NCAAF</div>
+    <div id='league_ncaab' class="league_button" ng-click="ic.getGameData('current','NCAAB')">NCAAB</div>
 </div>
 <div class="date_landing">
         <div class='dates' ng-class='ic.highlightDate[0]' ng-click="ic.getGameData('previous')">
@@ -26,6 +26,11 @@
                 <div class="teams_playing"><img class="home_img" src={{bet_data.logo_src_a}}> {{bet_data.full_name_a}} </div>
                 <div class="teams_playing"><img class="away_img" src={{bet_data.logo_src_h}}> {{bet_data.full_name_h}} </div>
             </div>
+            <span class="bet_made_lander">
+                <div class="bet_made" ng-show="ic.show_circle_bet[0]">S</div>
+                <div class="bet_made" ng-show="ic.show_circle_bet[1]">ML</div>
+                <div class="bet_made" ng-show="ic.show_circle_bet[2]">O/U</div>
+            </span>
         </div>
 
         <div class="bet" ng-show="bet_data.bet_toggle">
@@ -36,7 +41,7 @@
             <button class='spread_bet'ng-class="ic.highlight[4]" ng-click="ic.saveData(4,bet_data.game_id,'3',0,bet_data.overunder_points,bet_data.overunder_odds_o,4,'OVER',bet_data.overunder_points)">OVER  {{bet_data.overunder_points}} (<span ng-if="bet_data.overunder_odds_o>0">+</span>{{bet_data.overunder_odds_o}})</button>
             <button class='spread_bet'ng-class="ic.highlight[5]" ng-click="ic.saveData(5,bet_data.game_id,'3',1,bet_data.overunder_points,bet_data.overunder_odds_u,5,'UNDER',bet_data.overunder_points)">UNDER {{bet_data.overunder_points}} (<span ng-if="bet_data.overunder_odds_u>0">+</span>{{bet_data.overunder_odds_u}})</button>
             <button ng-show="ic.saveBetData.game_id>0" type="button" class="confirm_button" data-toggle="modal" data-target="#myModal">Make Bet</button>
-            <button ng-hide="ic.saveBetData.game_id>0" class="confirm_button_fake">Make Bet</button>
+            <div ng-hide="ic.saveBetData.game_id>0" class="confirm_button_fake">Make Bet</div>
         </div>
     </div>
 </div>
