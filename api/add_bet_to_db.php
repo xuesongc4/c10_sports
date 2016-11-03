@@ -94,6 +94,7 @@ $insert_bet_result = mysqli_query($conn, $insert_bet_query);
 //verification that bet writing worked
 $data = [];
 if(mysqli_affected_rows($conn)){
+
     $data['success'] = true;
     $data['bet_placed'] = $type_of_bet;
 }else{
