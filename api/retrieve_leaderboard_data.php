@@ -1,5 +1,7 @@
 <?php
+require('find_users_funds.php');
 
+///start herrrreeeee
 $output = [
     ['sn' => 'dood1', 'money' =>1000],
     ['sn' => 'dood2','money' =>1200],

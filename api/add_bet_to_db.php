@@ -7,6 +7,7 @@
  */
 
 require_once('mysql_connect.php');
+//require('mysql_connect.php');
 date_default_timezone_set('UTC');
 
 //variables coming in
@@ -93,8 +94,9 @@ $insert_bet_result = mysqli_query($connection, $insert_bet_query);
 $data = [];
 
 if(mysqli_affected_rows($connection)){
-    $transaction_query = "INSERT INTO `transactions`(`user_id`, `transaction`, `time`) VALUES ('1', '-100', NOW())";
-    $transaction_results = mysqli_query($conn, $transaction_query);
+//    $transaction_query = "INSERT INTO `transactions`(`user_id`, `transaction`, `time`) VALUES ('1', '-100', NOW())";
+    $transaction_query = "INSERT INTO `transactions`(`user_id`, `transaction`, `time`) VALUES ('1', {-1 * $bet_amount}, NOW())";
+    $transaction_results = mysqli_query($connection, $transaction_query);
 
     //verification that bet writing and transaction worked
     if(mysqli_affected_rows($connection)){
