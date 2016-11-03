@@ -80,9 +80,8 @@ app.controller('controller', function (myFactory) {
     this.menu_toggle = true;
     this.gotData = false;
     this.bet_button_toggle=false;
-
     this.highlightDate=[false,'selected_date',false];
-    this.show_circle_bet=[false,true,true];
+    this.show_circle_bet=[true,true,true];
     this.highlight = [];
     this.sendData = {};
     this.displayData = {};
@@ -142,9 +141,28 @@ app.controller('controller', function (myFactory) {
     };
 
     this.getGameData = function (date,league) {
-        self.sendData.date = date;
+        self.sendData.game_block = date;
         $('.loader').removeClass('hide');
         $('.loader_background').removeClass('hide');
+//--------------------DATE GETTER----------------------------------------------------
+        var date = new Date();
+        var tomorrow_milli = new Date().getTime()+86400000;
+        var dateNext = new Date(tomorrow_milli);
+        var utcMonth2 = dateNext.getUTCMonth()+1;
+        var utcDate2 = dateNext.getUTCDate();
+        var utcYear2 = dateNext.getUTCFullYear();
+        var utcMonth1 = date.getUTCMonth()+1;
+        var utcDate1 = date.getUTCDate();
+        var utcYear1 = date.getUTCFullYear();
+        var utcMyDatePrev=utcYear1+"-"+utcMonth1+"-"+utcDate1;
+        var utcMyDateNext=utcYear2+"-"+utcMonth2+"-"+utcDate2;
+        var utcMidnights = {
+            startDay:utcMyDatePrev+" "+"00:07:00",
+            endDay:utcMyDateNext+" "+"00:07:00"
+            // --------------------------------------------------------------------
+        }
+        self.sendData.start_end = utcMidnights;
+        console.log('sending including start / end dates: ',self.sendData);
         if(date=='previous'){
             this.highlightDate=['selected_date',false,false];
         }
