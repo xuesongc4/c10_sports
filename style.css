@@ -291,3 +291,8 @@ a:hover{
 .title{
     text-align: center;
 }
+
+.sel{
+    font-weight: bold;
+    color: deepskyblue;
+}
