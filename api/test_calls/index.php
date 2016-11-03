@@ -1,6 +1,6 @@
 <a href="test_call.php">Test</a>
 <br><br>
-<a href="db_query.php">DB QUERY</a>
+<a href="../db_query.php">DB QUERY</a>
 <br><br>
 <a href="nfl_odds.php">NFL</a>
 <br><br>

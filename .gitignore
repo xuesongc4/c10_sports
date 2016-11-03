@@ -1,2 +1,2 @@
-mysql_connect.php
-pinnacle/constants.php
+api/mysql_connect.php
+api/constants.php

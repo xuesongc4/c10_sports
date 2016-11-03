@@ -11,7 +11,7 @@ app.factory("myFactory", function ($http, $q) {
     data.getBetHistoryData = function (){
         var q = $q.defer();
         $http({
-            url: 'retrieve_bet_history.php',
+            url: 'api/retrieve_bet_history.php',
             headers: {'Content-Type': 'application/x-www-form-urlencoded'},
             method: 'post'
         })
@@ -29,7 +29,7 @@ app.factory("myFactory", function ($http, $q) {
     data.getLeaderData = function (){
         var q = $q.defer();
         $http({
-            url: 'retrieve_leaderboard_data.php',
+            url: 'api/retrieve_leaderboard_data.php',
             headers: {'Content-Type': 'application/x-www-form-urlencoded'},
             method: 'post'
         })
@@ -48,7 +48,7 @@ app.factory("myFactory", function ($http, $q) {
         var q = $q.defer();
         $http({
             data: $.param(data_to_send),
-            url: 'retrieve_game_data.php',
+            url: 'api/retrieve_game_data.php',
             headers: {'Content-Type': 'application/x-www-form-urlencoded'},
             method: 'post'
         })
@@ -67,7 +67,7 @@ app.factory("myFactory", function ($http, $q) {
         return $http({
             headers: {'Content-Type': 'application/x-www-form-urlencoded'},
             method: 'post',
-            url: 'add_bet_to_db.php',
+            url: 'api/add_bet_to_db.php',
             data: $.param(betData)
         })
     };
