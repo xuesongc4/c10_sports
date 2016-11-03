@@ -3,13 +3,49 @@ require('api_calls.php');
 require('check_wins_temp.php');
 date_default_timezone_set('UTC');
 
-function make_query($spordId, $leagueId) {
+/*
+	checks if property data has changed and updates if so
+*/
+function propertyCheck($connection, $db_game, $api_game, $prop) {
+	if (!isset($api_game[$prop])) {
+		$api_game[$prop] = 0;
+	}
+	if ($db_game[$prop] != $api_game[$prop]) {
+		$update_query = "UPDATE ";
+		if ($prop === 'pitching_h' || $prop === 'pitching_a') {
+			$update_query .= "pitching_matchups SET {$prop} = '{$api_game[$prop]}' ";
+		} else if ($prop === 'game_time') {
+			// if property is 'game_time' set property as a string
+			$update_query .= "games SET game_time = '{$api_game['game_time']}' ";
+		} else {
+			// all other properties set as a number
+			$update_query .= "games SET {$prop} = {$api_game[$prop]} ";
+		}
+		$update_query .= "WHERE `API_game_id` = {$db_game['API_game_id']}";
+		echo $update_query;
+		echo "<br>";
+		mysqli_query($connection, $update_query);
+	}
+}
+
+/*
+  concatenates a string containing values to be used in an insert query for new games
+*/
+function concatenateValues(&$values, $api_game, $prop) {
+	if (isset($api_game[$prop])) {
+		$values .= "{$api_game[$prop]}, ";
+	} else {
+		$values .= '0, ';
+	}
+}
+
+function make_query($connection, $spordId, $leagueId) {
 	// data from api
 	$api_settled = finished_games_call($spordId, $leagueId);
 	$api_upcoming = odds_call($spordId, $leagueId);
 
 	// connect to database
-	$connection = mysqli_connect(DB_HOST, DB_USER, DB_PASS, DB_NAME);
+	// $connection = mysqli_connect(DB_HOST, DB_USER, DB_PASS, DB_NAME);
 
 	// query database for all games within the past 24 hours and upcoming games
 	date_default_timezone_set('UTC');
@@ -45,8 +81,8 @@ function make_query($spordId, $leagueId) {
 
 				echo $update_query;
 				echo "<br>";
-                //runs a query to check wins in the bet table and prints the settled bets
-                print_r(check_for_wins_on_settled_games($settled_game['API_game_id']));
+        //runs a query to check wins in the bet table and prints the settled bets
+        print_r(check_for_wins_on_settled_games($connection, $settled_game['API_game_id']));
 			}
 		}
 	}
@@ -60,42 +96,6 @@ function make_query($spordId, $leagueId) {
 		$game['team_h_id'] = $db_game['team_h_id'];
 		$game['game_time'] = $db_game['game_time'];
 		$db_gametimes[] = $game;
-	}
-
-	/*
-  	checks if property data has changed and updates if so
-	*/
-	function propertyCheck($connection, $db_game, $api_game, $prop) {
-		if (!isset($api_game[$prop])) {
-			$api_game[$prop] = 0;
-		}
-		if ($db_game[$prop] != $api_game[$prop]) {
-			$update_query = "UPDATE ";
-			if ($prop === 'pitching_h' || $prop === 'pitching_a') {
-				$update_query .= "pitching_matchups SET {$prop} = '{$api_game[$prop]}' ";
-			} else if ($prop === 'game_time') {
-				// if property is 'game_time' set property as a string
-				$update_query .= "games SET game_time = '{$api_game['game_time']}' ";
-			} else {
-				// all other properties set as a number
-				$update_query .= "games SET {$prop} = {$api_game[$prop]} ";
-			}
-			$update_query .= "WHERE `API_game_id` = {$db_game['API_game_id']}";
-			echo $update_query;
-			echo "<br>";
-			mysqli_query($connection, $update_query);
-		}
-	}
-
-	/*
-	  concatenates a string containing values to be used in an insert query for new games
-	*/
-	function concatenateValues(&$values, $api_game, $prop) {
-		if (isset($api_game[$prop])) {
-			$values .= "{$api_game[$prop]}, ";
-		} else {
-			$values .= '0, ';
-		}
 	}
 
 	/*
@@ -184,10 +184,18 @@ function make_query($spordId, $leagueId) {
 }
 
 
-// $today_date = date('m-d', time();
+$today_date = date('m-d', time());
 
-// make_query(15,889);
- make_query(4,487);
-//make_query(3,246);
+if ($today_date > '09-01' || $today_date < '02-10') {
+	// make_query($connection, 15, 889);
+}
+
+if ($today_date > '10-25' || $today_date < '06-25') {
+	// make_query($connection, 4, 487);
+}
+
+if ($today_date > '03-21' && $today_date < '11-05') {
+	// make_query($connection, 3, 246);
+}
 
  ?>
