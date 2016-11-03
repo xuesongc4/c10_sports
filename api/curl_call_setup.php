@@ -1,5 +1,5 @@
 <?php 
-require('constants.php');
+require('mysql_connect.php');
 // Set your credentials here, format = clientid:password from your account.
 $credentials = base64_encode(API_CLIENT_ID . ':' . API_PASS);
 // Build the header, the content-type can also be application/json if needed

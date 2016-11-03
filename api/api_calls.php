@@ -18,12 +18,16 @@ function odds_call($sportId, $leagueId) {
 	$oddsDecoded = json_decode($oddsFeed);
 	if (isset($oddsDecoded->leagues)) {
 		$oddsEvents = $oddsDecoded->leagues[0]->events;
+	} else {
+		$oddsEvents = [];
 	}
 		
 	$fixturesDecoded = json_decode($fixturesFeed);
 	if (isset($fixturesDecoded->league)) {
 		// note this one is league without an 's' unlike the one above;
 		$fixtureEvents = $fixturesDecoded->league[0]->events;
+	} else {
+		$fixtureEvents = [];
 	}
 
 	for ($i=0; $i<count($oddsEvents); $i++) {

@@ -73,15 +73,15 @@ if($type_of_bet === 1){
 //    $verify_query = "SELECT '$lookup_odds' FROM `games` WHERE ID = '$game_id'";
 //}
 //$data = [];
-//$verify_result = mysqli_query($conn, $verify_query);
+//$verify_result = mysqli_query($connection, $verify_query);
 //if(mysqli_num_rows($verify_result)){
 //    while($row = mysqli_fetch_assoc($verify_result)){
 //        $data[] = $row;
 //    }
 //    $bet_query = "INSERT INTO `bets`(`user_id`, `amount`, `game_id`, `bet_type_id`, `side`, `line`, `odds`) VALUES ('$user_id', '$bet_amount', '$game_id', '$bet_type', '$side', '$line', '$odds')";
-//    $bet_result = mysqli_query($conn, $bet_query);
+//    $bet_result = mysqli_query($connection, $bet_query);
 //    //verification that bet writing worked
-//    print_r(mysqli_affected_rows($conn));
+//    print_r(mysqli_affected_rows($connection));
 //}else{
 //    $data['error'][] = "data has been updated. Try again later";
 //    $encoded_data = json_encode($data);
@@ -89,11 +89,11 @@ if($type_of_bet === 1){
 //}
 
 $insert_bet_query = "INSERT INTO `bets`(`user_id`, `amount`, `game_id`, `bet_type_id`, `side`, `line`, `odds`) VALUES ('$user_id', '$bet_amount', '$game_id', '$type_of_bet', '$side', '$line', '$odds')";
-$insert_bet_result = mysqli_query($conn, $insert_bet_query);
+$insert_bet_result = mysqli_query($connection, $insert_bet_query);
 
 //verification that bet writing worked
 $data = [];
-if(mysqli_affected_rows($conn)){
+if(mysqli_affected_rows($connection)){
     $data['success'] = true;
     $data['bet_placed'] = $type_of_bet;
 }else{

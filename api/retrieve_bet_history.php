@@ -6,7 +6,7 @@ $user_id = '1';
 $bet_history_query = "SELECT amount, settled, bet_type_id, game_id, side, line, odds FROM `bets` WHERE user_id = '$user_id'";
 
 //full data attempt
-$result = mysqli_query($conn, $bet_history_query);
+$result = mysqli_query($connection, $bet_history_query);
 if(mysqli_num_rows($result)){
     while($row = mysqli_fetch_assoc($result)) {
         $data[] = $row;
