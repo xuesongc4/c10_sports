@@ -17,14 +17,18 @@ function check_for_wins_on_settled_games($API_game_id)
     $connection = mysqli_connect(DB_HOST, DB_USER, DB_PASS, DB_NAME);
     //make query to db to see unresolved bets
 //    $temp_bets_query = "SELECT b.ID, b.user_id, b.amount, bt.bet_name AS bet_type, b.side, b.line, b.odds, g.final_score_a, g.final_score_h FROM `bets` AS b JOIN `games` AS g ON g.ID = b.game_id JOIN `bet_types` AS bt ON bt.ID = b.bet_type_id WHERE settled = '0' AND game_id = '$game_id'";
-    $temp_bets_query = "SELECT b.ID, b.user_id, b.amount, bt.bet_name AS bet_type, b.side, b.line, b.odds, g.final_score_a, g.final_score_h FROM `bets` AS b JOIN `games` AS g ON g.ID = b.game_id JOIN `bet_types` AS bt ON bt.ID = b.bet_type_id WHERE b.settled = '0' AND g.API_game_id = '$API_game_id'";
+    $bets_query = "SELECT b.ID, b.user_id, b.amount, bt.bet_name AS bet_type, b.side, b.line, b.odds, g.final_score_a, g.final_score_h FROM `bets` AS b JOIN `games` AS g ON g.ID = b.game_id JOIN `bet_types` AS bt ON bt.ID = b.bet_type_id WHERE b.settled = '0' AND g.API_game_id = '$API_game_id'";
 //    $result = mysqli_query($conn, $temp_bets_query);                    //necessary when testing it on its own
-    $result = mysqli_query($connection, $temp_bets_query);
+    $bets_result = mysqli_query($connection, $bets_query);
 
     $data = [];
-    if (mysqli_num_rows($result)) {
-        while ($row = mysqli_fetch_assoc($result)) {
-            $data[] = check_for_a_win($row['final_score_a'], $row['final_score_h'], $row['amount'], $row['bet_type'], $row['side'], $row['odds'], $row['line']);
+    if (mysqli_num_rows($bets_result)) {
+        while ($row = mysqli_fetch_assoc($bets_result)) {
+            $win_amount = check_for_a_win($row['final_score_a'], $row['final_score_h'], $row['amount'], $row['bet_type'], $row['side'], $row['odds'], $row['line']);
+            if($win_amount > 0){
+                $data[] = $win_amount;
+            }
+//            $data[] = check_for_a_win($row['final_score_a'], $row['final_score_h'], $row['amount'], $row['bet_type'], $row['side'], $row['odds'], $row['line']);
         }
     }
 //    print_r($data);       //working for when the page is all by itself
@@ -44,7 +48,6 @@ function check_for_a_win($final_score_a, $final_score_h, $wager, $bet_type, $bet
     } else {          //else bet is on over/under
         $win_amount = check_over_under_win($bet_side, $wager, $odds, $line, $final_score_a, $final_score_h);
     }
-//    console . log('win_amount: ', $win_amount);
 //    print("win amount: " + $win_amount + "<br><br>");
     return $win_amount;
 }
