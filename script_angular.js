@@ -11,7 +11,7 @@ app.factory("myFactory", function ($http, $q) {
     data.getBetHistoryData = function (){
         var q = $q.defer();
         $http({
-            url: 'retrieve_bet_history.php',
+            url: 'api/retrieve_bet_history.php',
             headers: {'Content-Type': 'application/x-www-form-urlencoded'},
             method: 'post'
         })
@@ -22,6 +22,7 @@ app.factory("myFactory", function ($http, $q) {
             }, function () {
                 console.log('error in getting data');
                 q.reject('error in getting data')
+                q.reject('error in getting data')
             });
         return q.promise
     };
@@ -29,7 +30,7 @@ app.factory("myFactory", function ($http, $q) {
     data.getLeaderData = function (){
         var q = $q.defer();
         $http({
-            url: 'retrieve_leaderboard_data.php',
+            url: 'api/retrieve_leaderboard_data.php',
             headers: {'Content-Type': 'application/x-www-form-urlencoded'},
             method: 'post'
         })
@@ -48,7 +49,7 @@ app.factory("myFactory", function ($http, $q) {
         var q = $q.defer();
         $http({
             data: $.param(data_to_send),
-            url: 'retrieve_game_data.php',
+            url: 'api/retrieve_game_data.php',
             headers: {'Content-Type': 'application/x-www-form-urlencoded'},
             method: 'post'
         })
@@ -67,7 +68,7 @@ app.factory("myFactory", function ($http, $q) {
         return $http({
             headers: {'Content-Type': 'application/x-www-form-urlencoded'},
             method: 'post',
-            url: 'add_bet_to_db.php',
+            url: 'api/add_bet_to_db.php',
             data: $.param(betData)
         })
     };
@@ -75,7 +76,6 @@ app.factory("myFactory", function ($http, $q) {
 });
 
 app.controller('controller', function (myFactory) {
-
     var self = this;
     this.menu_toggle = true;
     this.gotData = false;
@@ -143,7 +143,8 @@ app.controller('controller', function (myFactory) {
 
     this.getGameData = function (date,league) {
         self.sendData.date = date;
-
+        $('.loader').removeClass('hide');
+        $('.loader_background').removeClass('hide');
         if(date=='previous'){
             this.highlightDate=['selected_date',false,false];
         }
@@ -167,9 +168,13 @@ app.controller('controller', function (myFactory) {
                     console.log("response with toggle information: ", response);
                     self.displayData = response;
                     self.gotData = true;
+                    $('.loader').addClass('hide');
+                    $('.loader_background').addClass('hide');
                 },
                 function (response) {
                     console('error!');
+                    $('.loader').addClass('hide');
+                    $('.loader_background').addClass('hide');
                 });
     };
 });
@@ -188,11 +193,11 @@ app.config(function ($routeProvider) {
         .when('/leaderboard', {
             templateUrl: 'pages/leader_board.html',
         })
-        .when('/stuffs', {
-            templateUrl: 'pages/stuffs.html',
+        .when('/aboutus', {
+            templateUrl: 'pages/aboutus.html',
         })
-        .when('/morestuffs', {
-            templateUrl: 'pages/more_stuffs.html'
+        .when('/faq', {
+            templateUrl: 'pages/faq.html'
         })
         .otherwise({
             redirectTo: '/'
@@ -203,13 +208,19 @@ app.controller('leaderboard', function (myFactory) {
     var self = this;
     this.leaderboard_data = null;
     this.get_leaderboard_data = function(){
+        $('.loader').removeClass('hide');
+        $('.loader_background').removeClass('hide');
         myFactory.getLeaderData()
             .then(function (response) {
                     self.leaderboard_data=response;
                 console.log(self.leaderboard_data);
+                    $('.loader').addClass('hide');
+                    $('.loader_background').addClass('hide');
                 },
                 function (response) {
                     console('error!');
+                    $('.loader').addClass('hide');
+                    $('.loader_background').addClass('hide');
                 });
     }
     this.get_leaderboard_data();
@@ -219,12 +230,18 @@ app.controller('bethistory', function (myFactory) {
     var self = this;
     this.bet_history = null;
     this.get_bet_history = function(){
+        $('.loader').removeClass('hide');
+        $('.loader_background').removeClass('hide');
         myFactory.getBetHistoryData()
             .then(function (response) {
+                $('.loader').addClass('hide');
+                    $('.loader_background').addClass('hide');
                     self.bet_history=response;
                     console.log(self.bet_history);
                 },
                 function (response) {
+                    $('.loader').addClass('hide');
+                    $('.loader_background').addClass('hide');
                     console('error!');
                 });
     }

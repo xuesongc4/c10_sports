@@ -1,4 +1,5 @@
-
+<div class="loader hide"></div>
+<div class="loader_background hide"></div>
 <div class="league_landing">
     <div id='league_nfl' class="league_button" ng-click="ic.getGameData('current','NFL')">NFL</div>
     <div id='league_nba' class="league_button" ng-click="ic.getGameData('current','NBA')">NBA</div>
@@ -34,13 +35,13 @@
         </div>
 
         <div class="bet" ng-show="bet_data.bet_toggle">
-            <button class='spread_bet'ng-class="ic.highlight[0]" ng-click="ic.saveData(0,bet_data.game_id,'1',0,bet_data.home_spread,bet_data.spread_odds_a,0,bet_data.abbr_name_a,bet_data.home_spread*-1)">{{bet_data.abbr_name_a}} <span ng-if="bet_data.home_spread*-1>0">+</span>{{bet_data.home_spread*-1}} ({{bet_data.spread_odds_a}})</button>
-            <button class='spread_bet'ng-class="ic.highlight[1]" ng-click="ic.saveData(1,bet_data.game_id,'1',1,bet_data.home_spread,bet_data.spread_odds_h,1,bet_data.abbr_name_h,bet_data.home_spread)">{{bet_data.abbr_name_h}} <span ng-if="bet_data.home_spread>0">+</span>{{bet_data.home_spread}} ({{bet_data.spread_odds_h}})</button>
-            <button class='spread_bet'ng-class="ic.highlight[2]" ng-click="ic.saveData(2,bet_data.game_id,'2',0,bet_data.moneyline_odds_a,bet_data.moneyline_odds_a,2,bet_data.abbr_name_a,bet_data.moneyline_odds_a)">{{bet_data.abbr_name_a}} ML (<span ng-if="bet_data.moneyline_odds_a>0">+</span>{{bet_data.moneyline_odds_a}})</button>
-            <button class='spread_bet'ng-class="ic.highlight[3]" ng-click="ic.saveData(3,bet_data.game_id,'2',1,bet_data.moneyline_odds_h,bet_data.moneyline_odds_h,3,bet_data.abbr_name_h,bet_data.moneyline_odds_h)">{{bet_data.abbr_name_h}} ML (<span ng-if="bet_data.moneyline_odds_h>0">+</span>{{bet_data.moneyline_odds_h}})</button>
-            <button class='spread_bet'ng-class="ic.highlight[4]" ng-click="ic.saveData(4,bet_data.game_id,'3',0,bet_data.overunder_points,bet_data.overunder_odds_o,4,'OVER',bet_data.overunder_points)">OVER  {{bet_data.overunder_points}} (<span ng-if="bet_data.overunder_odds_o>0">+</span>{{bet_data.overunder_odds_o}})</button>
-            <button class='spread_bet'ng-class="ic.highlight[5]" ng-click="ic.saveData(5,bet_data.game_id,'3',1,bet_data.overunder_points,bet_data.overunder_odds_u,5,'UNDER',bet_data.overunder_points)">UNDER {{bet_data.overunder_points}} (<span ng-if="bet_data.overunder_odds_u>0">+</span>{{bet_data.overunder_odds_u}})</button>
-            <button ng-show="ic.saveBetData.game_id>0" type="button" class="confirm_button" data-toggle="modal" data-target="#myModal">Make Bet</button>
+            <button class='spread_bet 'ng-class="ic.highlight[0]" ng-click="ic.saveData(0,bet_data.game_id,'1',0,bet_data.home_spread,bet_data.spread_odds_a,0,bet_data.abbr_name_a,bet_data.home_spread*-1)">{{bet_data.abbr_name_a}} <span ng-if="bet_data.home_spread*-1>0">+</span>{{bet_data.home_spread*-1}} ({{bet_data.spread_odds_a}})</button>
+            <button class='spread_bet 'ng-class="ic.highlight[1]" ng-click="ic.saveData(1,bet_data.game_id,'1',1,bet_data.home_spread,bet_data.spread_odds_h,1,bet_data.abbr_name_h,bet_data.home_spread)">{{bet_data.abbr_name_h}} <span ng-if="bet_data.home_spread>0">+</span>{{bet_data.home_spread}} ({{bet_data.spread_odds_h}})</button>
+            <button class='spread_bet 'ng-class="ic.highlight[2]" ng-click="ic.saveData(2,bet_data.game_id,'2',0,bet_data.moneyline_odds_a,bet_data.moneyline_odds_a,2,bet_data.abbr_name_a,bet_data.moneyline_odds_a)">{{bet_data.abbr_name_a}} ML (<span ng-if="bet_data.moneyline_odds_a>0">+</span>{{bet_data.moneyline_odds_a}})</button>
+            <button class='spread_bet 'ng-class="ic.highlight[3]" ng-click="ic.saveData(3,bet_data.game_id,'2',1,bet_data.moneyline_odds_h,bet_data.moneyline_odds_h,3,bet_data.abbr_name_h,bet_data.moneyline_odds_h)">{{bet_data.abbr_name_h}} ML (<span ng-if="bet_data.moneyline_odds_h>0">+</span>{{bet_data.moneyline_odds_h}})</button>
+            <button class='spread_bet 'ng-class="ic.highlight[4]" ng-click="ic.saveData(4,bet_data.game_id,'3',0,bet_data.overunder_points,bet_data.overunder_odds_o,4,'OVER',bet_data.overunder_points)">OVER  {{bet_data.overunder_points}} (<span ng-if="bet_data.overunder_odds_o>0">+</span>{{bet_data.overunder_odds_o}})</button>
+            <button class='spread_bet 'ng-class="ic.highlight[5]" ng-click="ic.saveData(5,bet_data.game_id,'3',1,bet_data.overunder_points,bet_data.overunder_odds_u,5,'UNDER',bet_data.overunder_points)">UNDER {{bet_data.overunder_points}} (<span ng-if="bet_data.overunder_odds_u>0">+</span>{{bet_data.overunder_odds_u}})</button>
+            <button ng-show="ic.saveBetData.game_id>0" type="button" class=" confirm_button" data-toggle="modal" data-target="#myModal">Make Bet</button>
             <div ng-hide="ic.saveBetData.game_id>0" class="confirm_button_fake">Make Bet</div>
         </div>
     </div>
@@ -53,16 +54,16 @@
             <!-- Modal content-->
             <div class="modal-content">
                 <div class="modal-body">
-                   <h2>Please confirm your bet: </h2>
-                    <div>
+                    <br>
+                    <div class="modal_color">
                         <span>{{ic.saveBetData.side_name}}</span>
                         <span ng-if="ic.saveBetData.type_of_bet=='2'">ML</span>
                         <span ng-if="ic.saveBetData.type_of_bet=='1'||ic.saveBetData.type_of_bet=='3'"><span ng-if="ic.saveBetData.line2>0 && ic.saveBetData.type_of_bet=='1'">+</span>{{ic.saveBetData.line2}}</span>
                         <span>(<span ng-if="ic.saveBetData.odds>0">+</span>{{ic.saveBetData.odds}})</span>
                     </div>
                     <br>
-                    <button type="button" class="btn btn-success" data-dismiss="modal" ng-click="ic.sendBetData()">Confirm</button>
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                    <button type="button" class="spread_bet " data-dismiss="modal" ng-click="ic.sendBetData()">Confirm Bet</button>
+                    <button type="button" class="spread_bet " data-dismiss="modal">Cancel</button>
                 </div>
             </div>
 

@@ -40,7 +40,7 @@ $feedUrl = 'https://api.pinnacle.com/v2/leagues?sportid=19';
 // $feedUrl = 'https://api.pinnacle.com/v1/fixtures/settled?sportid=3&leagueids=246';
 
 // // NHL
-$feedUrl = 'https://api.pinnacle.com/v1/odds?sportid=19&leagueids=1460';
+// $feedUrl = 'https://api.pinnacle.com/v1/odds?sportid=19&leagueids=1460';
 // $feedUrl = 'https://api.pinnacle.com/v1/fixtures?sportid=19&leagueids=1460';
 // $feedUrl = 'https://api.pinnacle.com/v1/fixtures/settled?sportid=19&leagueids=1460';
 

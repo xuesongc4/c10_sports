@@ -1,6 +1,6 @@
 <?php 
 require('api_calls.php');
-require('../check_wins_temp.php');
+require('check_wins_temp.php');
 date_default_timezone_set('UTC');
 
 function make_query($spordId, $leagueId) {
