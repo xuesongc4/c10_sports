@@ -92,58 +92,13 @@ $insert_bet_query = "INSERT INTO `bets`(`user_id`, `amount`, `game_id`, `bet_typ
 $insert_bet_result = mysqli_query($conn, $insert_bet_query);
 
 //verification that bet writing worked
-print_r(mysqli_affected_rows($conn));
-
-//old but good example for game result
-//$data = [];
-//if(mysqli_num_rows($insert_bet_result)) {
-//    while($row = mysqli_fetch_assoc($insert_bet_result)){
-//        $data[] = $row;
-//    }
-//    print_r($data);
-//}
-
-
-//
-//if ($type_of_bet !== "moneyline") {
-//    $game_line_query = "SELECT `$line` FROM `games` WHERE ID = '$game_id'";
-//    $game_line_result = mysqli_query($conn, $game_line_query);
-//    $data = [];
-//    if (mysqli_num_rows($game_line_result)) {
-//        while ($row = mysqli_fetch_assoc($game_line_result)) {
-//            $data[] = $row;
-//        }
-//        $bet_line = $data[0];
-//        print_r($bet_line);
-//        $bet_line = $data[0][$line];
-//    }
-//}else{
-//    $bet_line = null;
-//}
-//$game_odds_query = "SELECT `$odds` FROM `games` WHERE ID = '$game_id'";
-//$game_odds_result = mysqli_query($conn, $game_odds_query);
-//$data = [];
-//if(mysqli_num_rows($game_odds_result)) {
-//    while($row = mysqli_fetch_assoc($game_odds_result)){
-//        $data[] = $row;
-//    }
-//    $bet_odds = $data[0];
-//    print_r($bet_odds);
-//    $bet_odds = $data[0][$odds];
-//}
-//print('<br>');
-
-//$bet_query = "INSERT INTO `bets`(`user_id`, `amount`, `game_id`, `bet_type_id`, `side`, `line`, `odds`) VALUES ('$user_id', '$bet_amount', '$game_number', '$bet_type', '$side', '$bet_line', '$bet_odds')";
-//$bet_query = "INSERT INTO `bets`(`user_id`, `amount`, `game_id`, `bet_type_id`, `side`, `line`, `odds`) VALUES ('$user_id', '$bet_amount', '$game_id', '$bet_type', '$side', '$line', '$odds')";
-//$bet_result = mysqli_query($conn, $bet_query);
-////verification that bet writing worked
-//print_r(mysqli_affected_rows($conn));
-
-//old but good example for game result
-//if(mysqli_num_rows($game_result)) {
-//    while($row = mysqli_fetch_assoc($game_result)){
-//        $games[] = $row;
-//    }
-//    print_r($games);
-//}
+$data = [];
+if(mysqli_affected_rows($conn)){
+    $data['success'] = true;
+    $data['bet_placed'] = $type_of_bet;
+}else{
+    $data['success'] = false;
+}
+$data = json_encode($data);
+print($data);
 ?>

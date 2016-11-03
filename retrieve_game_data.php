@@ -1,10 +1,26 @@
 <?php
 require_once('mysql_connect.php');
 date_default_timezone_set('UTC');
+//$league = 'NFL';
+
+//print(json_encode($_POST));     //for testing purposes
+
+//collect league from index
+$league = $_POST['league'];  //may not need to upper
+//lookup the league in league table
+$league_query = "SELECT ID FROM `leagues` WHERE league = '$league'";
+$result = mysqli_query($conn, $league_query);
+//print_r($result);             //for testing
+if(mysqli_num_rows($result)){
+    while($row = mysqli_fetch_assoc($result)) {
+        $league_id = $row['ID'];
+    }
+}
+
 //create empty array (of object)
 $data = [];
 //$league_id = $_POST[$league_id];
-$league_id = 889;
+//$league_id = 889;
 //$league_id = 487;
 
 //full data attempt

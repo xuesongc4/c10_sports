@@ -1,4 +1,17 @@
 <?php
+require_once('mysql_connect.php');
+date_default_timezone_set('UTC');
+
+$user_id = '1';
+$bet_history_query = "SELECT amount, settled, bet_type_id, game_id, side, line, odds FROM `bets` WHERE user_id = '$user_id'";
+
+//full data attempt
+$result = mysqli_query($conn, $bet_history_query);
+if(mysqli_num_rows($result)){
+    while($row = mysqli_fetch_assoc($result)) {
+        $data[] = $row;
+    }
+}
 
 $output = [
     ['gameid' => '123', 'date' =>'2016-10-28 00:25:00','type'=>'moneyline', 'side'=>1,'home'=>'ten','away'=>'jax', 'odds' =>'-110'],
@@ -9,6 +22,12 @@ $output = [
 
 ];
 
-$encoded_output = json_encode($output);
-print($encoded_output);
+//$encoded_output = json_encode($output);
+//print($encoded_output);
+
+
+//json encode the data
+$json_encoded_object = json_encode($data);
+//print the json encoded object
+print($json_encoded_object);
 ?>

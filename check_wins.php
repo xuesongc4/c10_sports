@@ -1,77 +1,51 @@
 <?php
-require_once('mysql_connect.php');
+//require_once('mysql_connect.php');      //necessary when testing it on its own
 date_default_timezone_set('UTC');
+
 //make function to format the incoming bet
 
-//make query to db to see unresolved bets
-$temp_bets_query = "SELECT b.ID, b.user_id, b.amount, b.bet_type_id, b.side, b.line, b.odds, g.final_score_a, g.final_score_h FROM `bets` AS b JOIN `games` AS g ON g.ID = b.game_id WHERE settled = '0'";
-$result = mysqli_query($conn, $temp_bets_query);
+//in order to be effective i need an input of game_id to cut down on the games to look at
+// the file db_query has a portion that checks if games are completed, after this point it should call this file to
 
-$data = [];
-if(mysqli_num_rows($result)){
-    while($rows = mysqli_fetch_assoc($result)){
-        $data[] = $rows;
+//check_for_wins_on_settled_games(140);       //necessary when testing it on its own  (old for when using our game ID)
+//check_for_wins_on_settled_games(654458760);       //necessary when testing it on its own  (new for when using their game ID)
+
+function check_for_wins_on_settled_games($API_game_id)
+{
+//    global $conn;                       //necessary when testing it on its own
+//    global $connection;
+    $connection = mysqli_connect(DB_HOST, DB_USER, DB_PASS, DB_NAME);
+    //make query to db to see unresolved bets
+//    $temp_bets_query = "SELECT b.ID, b.user_id, b.amount, bt.bet_name AS bet_type, b.side, b.line, b.odds, g.final_score_a, g.final_score_h FROM `bets` AS b JOIN `games` AS g ON g.ID = b.game_id JOIN `bet_types` AS bt ON bt.ID = b.bet_type_id WHERE settled = '0' AND game_id = '$game_id'";
+    $temp_bets_query = "SELECT b.ID, b.user_id, b.amount, bt.bet_name AS bet_type, b.side, b.line, b.odds, g.final_score_a, g.final_score_h FROM `bets` AS b JOIN `games` AS g ON g.ID = b.game_id JOIN `bet_types` AS bt ON bt.ID = b.bet_type_id WHERE b.settled = '0' AND g.API_game_id = '$API_game_id'";
+//    $result = mysqli_query($conn, $temp_bets_query);                    //necessary when testing it on its own
+    $result = mysqli_query($connection, $temp_bets_query);
+
+    $data = [];
+    if (mysqli_num_rows($result)) {
+        while ($row = mysqli_fetch_assoc($result)) {
+            $data[] = check_for_a_win($row['final_score_a'], $row['final_score_h'], $row['amount'], $row['bet_type'], $row['side'], $row['odds'], $row['line']);
+        }
     }
+//    print_r($data);       //working for when the page is all by itself
+    return $data;
 }
-
-//for each row in the unresolved bets determine the winning amount
-
-
-
-//function check_the_winnings_of_bet(bet_number){
-//// console.log('ima check the winnings');
-//    $.ajax({
-//        url: 'dummy_bet_data.php',
-//        method: 'post',
-//        dataType: 'json',
-//        data: {
-//            bet_id: 0
-//        },
-//        success: function (response) {
-//            console . log('reached the server');
-//            console . log(response);
-//            //need to change game and final score
-//                console . log(check_wins('game', [40, 30], +response . wager, +response . type_of_bet, response . side, +response . odds, +response . line));
-//            },
-//        error: function (response) {
-//                console . log('FAILED to reach the server');
-//            }
-//    });
-//}
 
 //will return the amount of money won on the bet
 //final score rendered as an array with first score representing away score and second the home team's score
 //bet_first_side is a boolean value to determine if the player bet the first option in the bet type (i.e. bet away team in spread or money line and over in an over/under bet
-function check_wins($game, $final_score, $wager, $bet_type, $bet_first_side, $odds, $line){
+function check_for_a_win($final_score_a, $final_score_h, $wager, $bet_type, $bet_side, $odds, $line){
     $win_amount = null;
-    if ($bet_type === 'over_under') {
-        $win_amount = check_over_under_win($bet_first_side, $wager, $odds, $line, $final_score);
-    } else if ($bet_type === 'spread') {       //bet is on spread
-        $win_amount = check_spread_win($bet_first_side, $wager, $odds, $line, $final_score);
-    } else {          //else bet is on money line
-        $win_amount = check_money_line_win($bet_first_side, $wager, $odds, $final_score);
+
+    if ($bet_type === 'spread') {       //bet is on the spread
+        $win_amount = check_spread_win($bet_side, $wager, $odds, $line, $final_score_a, $final_score_h);
+    } else if ($bet_type === 'moneyline') {       //bet is on moneyline
+        $win_amount = check_money_line_win($bet_side, $wager, $odds, $final_score_a, $final_score_h);
+    } else {          //else bet is on over/under
+        $win_amount = check_over_under_win($bet_side, $wager, $odds, $line, $final_score_a, $final_score_h);
     }
 //    console . log('win_amount: ', $win_amount);
-    print("win amount: "+$win_amount);
-}
-
-function check_over_under_win($bet_over , $wager, $odds, $line, $final_score){
-    $total_score = $final_score[0] + $final_score[1];
-    if ($total_score > $line) { //only bets for the over win, other bets will return no money
-        if ($bet_over) { //bet for first side is true when the over is bet on
-            $win_amount = calculate_win_total($wager, $odds);
-        } else {
-            $win_amount = 0;
-        }
-    } else if ($total_score < $line) { //only bets for the under win, other bets will return no money
-        if (!$bet_over) { //bet for first side is false when the under is bet on
-            $win_amount = calculate_win_total($wager, $odds);
-        } else {
-            $win_amount = 0;
-        }
-    } else {  //a push occurs and you get your money back, one is unable to place a bet on a tie (i believe, at least in this type of bet)
-        $win_amount = $wager;
-    }
+//    print("win amount: " + $win_amount + "<br><br>");
     return $win_amount;
 }
 
@@ -79,21 +53,21 @@ function check_over_under_win($bet_over , $wager, $odds, $line, $final_score){
 1) always add line to the home side in final score
 2) find out what side we bet on
 3) compare appended final scores. side we bet on must be strictly greater than other side*/
-function check_spread_win($bet_away, $wager, $odds, $line, $final_score){
+function check_spread_win($bet_home, $wager, $odds, $line, $final_score_a, $final_score_h){
     $win_amount = null;
-    $final_score[1] += $line;
-    if ($bet_away) {  //bet is for away team
-        if ($final_score[0] > $final_score[1]) {
+    $final_score_h += $line;
+    if ($bet_home) {  //bet is for home team
+        if ($final_score_a < $final_score_h) {
             $win_amount = calculate_win_total($wager, $odds);
-        } else if ($final_score[0] < $final_score[1]) {
+        } else if ($final_score_a > $final_score_h) {
             $win_amount = 0;
         } else {
             $win_amount = $wager;
         }
     } else {      //bet is for away team
-        if ($final_score[0] < $final_score[1]) {
+        if ($final_score_a > $final_score_h) {
             $win_amount = calculate_win_total($wager, $odds);
-        } else if ($final_score[0] > $final_score[1]) {
+        } else if ($final_score_a < $final_score_h) {
             $win_amount = 0;
         } else {
             $win_amount = $wager;
@@ -105,20 +79,20 @@ function check_spread_win($bet_away, $wager, $odds, $line, $final_score){
 /* to check the spread simply compare the final score
 * if the bet is for the away team and the away team won, then calculate win, if they lose user loses and gains no money, if the teams tie then it is a push and the user gets the wager amount back
 * if the bet is for the home team and the away team won, then calculate win, if they lose user loses and gains no money, if the teams tie then it is a push and the user gets the wager amount back*/
-function check_money_line_win($bet_away, $wager, $odds, $final_score){
+function check_money_line_win($bet_home, $wager, $odds, $final_score_a, $final_score_h){
     $win_amount = null;
-    if ($bet_away) {
-        if ($final_score[0] > $final_score[1]) {        //away team wins
+    if ($bet_home) {
+        if ($final_score_a < $final_score_h) {        //home team wins
             $win_amount = calculate_win_total($wager, $odds);
-        } else if ($final_score[0] < $final_score[1]) {  //home team wins
+        } else if ($final_score_a > $final_score_h) {  //away team wins
             $win_amount = 0;
         } else {                                      //tie
             $win_amount = $wager;
         }
     } else {
-        if ($final_score[0] < $final_score[1]) {        //home team wins
+        if ($final_score_a > $final_score_h) {        //away team wins
             $win_amount = calculate_win_total($wager, $odds);
-        } else if ($final_score[0] > $final_score[1]) {  //away team wins
+        } else if ($final_score_a < $final_score_h) {  //home team wins
             $win_amount = 0;
         } else {                                      //tie
             $win_amount = $wager;
@@ -126,7 +100,28 @@ function check_money_line_win($bet_away, $wager, $odds, $final_score){
     }
     return $win_amount;
 }
-
+//checks for the win conditions of over/under bets
+function check_over_under_win($bet_under , $wager, $odds, $line, $final_score_a, $final_score_h){
+    $total_score = $final_score_a + $final_score_h;
+    if ($total_score > $line) { //only bets for the over win, other bets will return no money
+        if (!$bet_under) { //bet for over is true when not betting on the under
+            $win_amount = calculate_win_total($wager, $odds);
+        } else {
+            $win_amount = 0;
+        }
+    } else if ($total_score < $line) { //only bets for the under win, other bets will return no money
+        if ($bet_under) {
+            $win_amount = calculate_win_total($wager, $odds);
+        } else {
+            $win_amount = 0;
+        }
+    } else {  //a push occurs and you get your money back, one is unable to place a bet on a tie (i believe, at least in this type of bet)
+        $win_amount = $wager;
+    }
+    return $win_amount;
+}
+//calculates the total amount returned from a won bet
+//example: odds of -350 mean that you would have to bet 350 in order to win 100, and odds of +350 would mean you could bet 100 to win 350.
 function calculate_win_total($bet_amount, $odds) {
     $win = null;
     if ($odds < 0) {
@@ -135,19 +130,13 @@ function calculate_win_total($bet_amount, $odds) {
     } else {
         $win = $odds / 100 * $bet_amount;
     }
+    $win = round_down($win);
     return $bet_amount + $win;
 }
-
-//        //check_wins($game, $final_score, $amount, $bet_type, $bet_first_side, $odds, $line)
-//        check_wins(1, [8,40], 100, 'over_under', true, -110, 47);
-//        check_wins(1, [8,40], 100, 'over_under', false, -110, 47);
-
-//        //check_wins($game, $final_score, $amount, $bet_type, $bet_first_side, $odds, $line)
-//        check_wins(1, [100,3], 100, 'spread', true, -110, -10); //expect lose
-//        check_wins(1, [60,70], 100, 'spread', false, -110, -10);
-
-//        //check_wins($game, $final_score, $amount, $bet_type, $bet_first_side, $odds, $line)
-// check_wins(1, [100,3], 100, 'money_line', true, 450); // no line in money line because it is already incorporated//expect win
-// check_wins(1, [85,70], 100, 'money_line', true, -300);
-
-?>
+//function to round down to the nearest hundredth
+function round_down($number){
+    $number *= 100;
+    $number = floor($number);
+    $number /= 100;
+    return $number;
+}
