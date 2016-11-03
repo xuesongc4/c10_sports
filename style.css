@@ -90,6 +90,7 @@ body{
 }
 .league_button:hover{
     cursor: pointer;
+    font-weight: bold;
     color: deepskyblue;
 }
 .home_img {
@@ -295,4 +296,11 @@ a:hover{
 .sel{
     font-weight: bold;
     color: deepskyblue;
+}
+.sel2{
+    color: black;
+}
+.sel3{
+    color: black;
+    font-weight: bold;
 }
