@@ -22,12 +22,12 @@ $output = [
 
 ];
 
-//$encoded_output = json_encode($output);
-//print($encoded_output);
+$encoded_output = json_encode($output);
+print($encoded_output);
 
 
 //json encode the data
-$json_encoded_object = json_encode($data);
+//$json_encoded_object = json_encode($data);
 //print the json encoded object
-print($json_encoded_object);
+//print($json_encoded_object);
 ?>
