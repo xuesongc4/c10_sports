@@ -62,6 +62,8 @@ function check_for_wins_on_settled_games($API_game_id)
             //check to ensure this bet was settled
             if(mysqli_affected_rows($connection)){
                 $temp_arr = create_temp_successful_bet_array($bet['user_id'], $bet['bet_id'], $bet['win_amount'], 'true');
+            }else{
+                $temp_arr = create_temp_successful_bet_array($bet['user_id'], $bet['bet_id'], $bet['win_amount'], 'false');
             }
         }
         $bet_transactions[] = $temp_arr;
