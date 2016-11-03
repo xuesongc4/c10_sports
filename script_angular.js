@@ -47,7 +47,7 @@ app.factory("myFactory", function ($http, $q) {
     data.getData = function (data_to_send) {
         var q = $q.defer();
         $http({
-            data:data_to_send,
+            data: $.param(data_to_send),
             url: 'retrieve_game_data.php',
             headers: {'Content-Type': 'application/x-www-form-urlencoded'},
             method: 'post'

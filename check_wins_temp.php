@@ -1,18 +1,23 @@
 <?php
 //require_once('mysql_connect.php');      //necessary when testing it on its own
 date_default_timezone_set('UTC');
+
 //make function to format the incoming bet
 
 //in order to be effective i need an input of game_id to cut down on the games to look at
 // the file db_query has a portion that checks if games are completed, after this point it should call this file to
-//check_for_wins_on_settled_games(140);       //necessary when testing it on its own
 
-function check_for_wins_on_settled_games($game_id)
+//check_for_wins_on_settled_games(140);       //necessary when testing it on its own  (old for when using our game ID)
+//check_for_wins_on_settled_games(654458760);       //necessary when testing it on its own  (new for when using their game ID)
+
+function check_for_wins_on_settled_games($API_game_id)
 {
 //    global $conn;                       //necessary when testing it on its own
-    global $connection;
+//    global $connection;
+    $connection = mysqli_connect(DB_HOST, DB_USER, DB_PASS, DB_NAME);
     //make query to db to see unresolved bets
-    $temp_bets_query = "SELECT b.ID, b.user_id, b.amount, bt.bet_name AS bet_type, b.side, b.line, b.odds, g.final_score_a, g.final_score_h FROM `bets` AS b JOIN `games` AS g ON g.ID = b.game_id JOIN `bet_types` AS bt ON bt.ID = b.bet_type_id WHERE settled = '0' AND game_id = '$game_id'";
+//    $temp_bets_query = "SELECT b.ID, b.user_id, b.amount, bt.bet_name AS bet_type, b.side, b.line, b.odds, g.final_score_a, g.final_score_h FROM `bets` AS b JOIN `games` AS g ON g.ID = b.game_id JOIN `bet_types` AS bt ON bt.ID = b.bet_type_id WHERE settled = '0' AND game_id = '$game_id'";
+    $temp_bets_query = "SELECT b.ID, b.user_id, b.amount, bt.bet_name AS bet_type, b.side, b.line, b.odds, g.final_score_a, g.final_score_h FROM `bets` AS b JOIN `games` AS g ON g.ID = b.game_id JOIN `bet_types` AS bt ON bt.ID = b.bet_type_id WHERE b.settled = '0' AND g.API_game_id = '$API_game_id'";
 //    $result = mysqli_query($conn, $temp_bets_query);                    //necessary when testing it on its own
     $result = mysqli_query($connection, $temp_bets_query);
 

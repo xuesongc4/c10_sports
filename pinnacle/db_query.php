@@ -36,17 +36,17 @@ function make_query($spordId, $leagueId) {
 	foreach($api_settled as $settled_game) {
 		$select_query = "SELECT final_score_h, final_score_a FROM games WHERE API_game_id = {$settled_game['API_game_id']}";
 		$select_result = mysqli_query($connection, $select_query);
+//        echo "world";
 		if (mysqli_num_rows($select_result) > 0) {
 			$row = mysqli_fetch_assoc($select_result);
 			if ($row['final_score_h'] != $settled_game['final_score_h']) {
 				$update_query = "UPDATE games SET final_score_h = {$settled_game['final_score_h']}, final_score_a = {$settled_game['final_score_a']} WHERE API_game_id = {$settled_game['API_game_id']}";
 				mysqli_query($connection, $update_query);
 
-                //(Kyle) insert my query to check wins
-                echo check_for_wins_on_settled_games($settled_game['API_game_id']);
-
 				echo $update_query;
 				echo "<br>";
+                //runs a query to check wins in the bet table and prints the settled bets
+                print_r(check_for_wins_on_settled_games($settled_game['API_game_id']));
 			}
 		}
 	}
@@ -183,9 +183,11 @@ function make_query($spordId, $leagueId) {
 	}
 }
 
+
 // $today_date = date('m-d', time();
 
 // make_query(15,889);
-// make_query(4,487);
-make_query(3,246);
+ make_query(4,487);
+//make_query(3,246);
+
  ?>
