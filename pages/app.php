@@ -20,7 +20,7 @@
 </head>
 <body ng-controller="controller as ic">
 <div class="container2">
-    <img src="images/List.png" class="menu_button" ng-click="ic.menu_toggle=false; ic.addUsersFunds">&nbsp</img>
+    <img src="images/List.png" class="menu_button" ng-click="ic.menu_toggle=false; ic.addUsersFunds()">&nbsp</img>
     <div class="league_button_bold"><img class = 'logo' src="images/ibet.jpg"></div>
     <div class="whole_menu" ng-hide="ic.menu_toggle" ng-cloak>
         <div class="menu">
