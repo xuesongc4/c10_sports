@@ -1,7 +1,7 @@
 <?php
 //require_once('mysql_connect.php');      //necessary when testing it on its own
 date_default_timezone_set('UTC');
-require('constants.php');
+
 //make function to format the incoming bet
 
 //in order to be effective i need an input of game_id to cut down on the games to look at
@@ -10,11 +10,11 @@ require('constants.php');
 //check_for_wins_on_settled_games(140);       //necessary when testing it on its own  (old for when using our game ID)
 //check_for_wins_on_settled_games(654458760);       //necessary when testing it on its own  (new for when using their game ID)
 
-function check_for_wins_on_settled_games($API_game_id)
+function check_for_wins_on_settled_games($connection, $API_game_id)
 {
 //    global $conn;                       //necessary when testing it on its own
 //    global $connection;
-    $connection = mysqli_connect(DB_HOST, DB_USER, DB_PASS, DB_NAME);
+    // $connection = mysqli_connect(DB_HOST, DB_USER, DB_PASS, DB_NAME);
     //make query to db to see unresolved bets
     $bets_query = "SELECT b.ID, b.user_id, b.amount, bt.bet_name AS bet_type, b.side, b.line, b.odds, g.final_score_a, g.final_score_h FROM `bets` AS b JOIN `games` AS g ON g.ID = b.game_id JOIN `bet_types` AS bt ON bt.ID = b.bet_type_id WHERE b.settled = '0' AND g.API_game_id = '$API_game_id'";
     $bets_result = mysqli_query($connection, $bets_query);
@@ -28,6 +28,8 @@ function check_for_wins_on_settled_games($API_game_id)
             $temp_arr['bet_id'] = $row['ID'];
             //store user_id associated with the bet placed
             $temp_arr['user_id'] = $row['user_id'];
+            //store wager associated with the bet placed
+            $temp_arr['wager'] = $row['amount'];
             //calculate the win amount for the specific bet and store in temp array
             $temp_arr['win_amount'] = check_for_a_win($row['final_score_a'], $row['final_score_h'], $row['amount'], $row['bet_type'], $row['side'], $row['odds'], $row['line']);
             //push the temp array to the data array
@@ -41,11 +43,17 @@ function check_for_wins_on_settled_games($API_game_id)
         if($bet['win_amount'] > 0){
             //if the win_amount is greater than 0 a transaction is required to show the user won money. So we need to write a transaction query
             $transaction_query = "INSERT INTO `transactions`(`user_id`, `transaction`, `time`) VALUES ('$bet[user_id]', '$bet[win_amount]', NOW())";
-            $transaction_result = mysqli($connection, $transaction_query);
+            $transaction_result = mysqli_query($connection, $transaction_query);
             //if transaction was written, update the bets table to reflect that the
             if(mysqli_affected_rows($connection)){
-                $update_bets_query = "UPDATE `bets` SET `settled`= '1' WHERE ID = '$bet[bet_id]'";
-                $update_bets_result = make_query($connection, $update_bets_query);
+                if($bet['win_amount'] === $bet['wager']) {
+                    //win amount is the same as the wager, so there is a tie/push (settled value 2)
+                    $update_bets_query = "UPDATE `bets` SET `settled`= '2' WHERE ID = '$bet[bet_id]'";
+                }else {
+                    //win_amount is above 0, and will be above the wager, and hence a true win (settled value 3)
+                    $update_bets_query = "UPDATE `bets` SET `settled`= '3' WHERE ID = '$bet[bet_id]'";
+                }
+                $update_bets_result = mysqli_query($connection, $update_bets_query);
                 //check to ensure this bet was settled
                 if(mysqli_affected_rows($connection)){
                     $temp_arr = create_temp_successful_bet_array($bet['user_id'], $bet['bet_id'], $bet['win_amount'], 'true');
@@ -56,9 +64,9 @@ function check_for_wins_on_settled_games($API_game_id)
                 $temp_arr = create_temp_successful_bet_array($bet['user_id'], $bet['bet_id'], $bet['win_amount'], 'false');
             }
         }else{
-            //if the win_amount is less than 0 (theoretically equal to 0), no transaction is required. So we don't need to write a transaction query, but I still need to update the bets table to show bet is settled
+            //if the win_amount is less than 0 (theoretically equal to 0), no transaction is required. So we don't need to write a transaction query, but I still need to update the bets table to show bet is settled with a loss (settled value 1)
             $update_bets_query = "UPDATE `bets` SET `settled`= '1' WHERE ID = '$bet[bet_id]'";
-            $update_bets_result = make_query($connection, $update_bets_query);
+            $update_bets_result = mysqli_query($connection, $update_bets_query);
             //check to ensure this bet was settled
             if(mysqli_affected_rows($connection)){
                 $temp_arr = create_temp_successful_bet_array($bet['user_id'], $bet['bet_id'], $bet['win_amount'], 'true');
@@ -193,5 +201,5 @@ function create_temp_successful_bet_array($user_id, $bet_id, $win_amount, $succe
     }else{
         $temp_arr['success'] = 'false';
     }
-
+    return $temp_arr;
 }

@@ -1,17 +1,13 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Kyle
- * Date: 10/26/2016
- * Time: 12:14 PM
- */
-
+session_start();
 require_once('mysql_connect.php');
+
+//require('mysql_connect.php');
 date_default_timezone_set('UTC');
 
 //variables coming in
 //static variables for now
-$user_id = 1;
+//$user_id = 1;
 //$game_number = 4;
 $bet_amount = 100;
 
@@ -23,6 +19,7 @@ $bet_amount = 100;
 //$first_side = false;
 
 //dynamic variables
+$user_id = $_SESSION['ID'];
 $game_id = $_POST['game_id'];
 $line = $_POST['line'];
 $odds = $_POST['odds'];
@@ -73,27 +70,26 @@ if($type_of_bet === 1){
 //    $verify_query = "SELECT '$lookup_odds' FROM `games` WHERE ID = '$game_id'";
 //}
 //$data = [];
-//$verify_result = mysqli_query($conn, $verify_query);
+//$verify_result = mysqli_query($connection, $verify_query);
 //if(mysqli_num_rows($verify_result)){
 //    while($row = mysqli_fetch_assoc($verify_result)){
 //        $data[] = $row;
 //    }
 //    $bet_query = "INSERT INTO `bets`(`user_id`, `amount`, `game_id`, `bet_type_id`, `side`, `line`, `odds`) VALUES ('$user_id', '$bet_amount', '$game_id', '$bet_type', '$side', '$line', '$odds')";
-//    $bet_result = mysqli_query($conn, $bet_query);
+//    $bet_result = mysqli_query($connection, $bet_query);
 //    //verification that bet writing worked
-//    print_r(mysqli_affected_rows($conn));
+//    print_r(mysqli_affected_rows($connection));
 //}else{
 //    $data['error'][] = "data has been updated. Try again later";
 //    $encoded_data = json_encode($data);
 //    print($data);
 //}
-$success = false;
 $insert_bet_query = "INSERT INTO `bets`(`user_id`, `amount`, `game_id`, `bet_type_id`, `side`, `line`, `odds`) VALUES ('$user_id', '$bet_amount', '$game_id', '$type_of_bet', '$side', '$line', '$odds')";
 $insert_bet_result = mysqli_query($connection, $insert_bet_query);
 
-
+$transaction = $bet_amount * -1;
 if(mysqli_affected_rows($connection)){
-    $transaction_query = "INSERT INTO `transactions`(`user_id`, `transaction`, `time`) VALUES ('1', '-100', NOW())";
+    $transaction_query = "INSERT INTO `transactions`(`user_id`, `transaction`, `time`) VALUES ('$user_id', '$transaction', NOW())";
     $transaction_results = mysqli_query($connection, $transaction_query);
 
     //verification that bet writing and transaction worked
