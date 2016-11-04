@@ -25,8 +25,8 @@ if (isset($_POST['login'])) {
 	}
 
 	if ($username === $db_username && $password === $db_password) {
-		$_SESSION['username'] = $db_username;
 		$_SESSION['ID'] = $db_id;
+		$_SESSION['username'] = $db_username;
 	}
 	header('Location: ../index.php');
 }
