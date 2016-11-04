@@ -1,8 +1,10 @@
 <?php
+session_start();
 require_once('mysql_connect.php');
 date_default_timezone_set('UTC');
 
-$user_id = '1';
+$user_id = $_SESSION['ID'];
+//$user_id = '1';           //for testing only
 $bet_history_query = "SELECT amount, settled, bet_type_id, game_id, side, line, odds FROM `bets` WHERE user_id = '$user_id'";
 
 //full data attempt
