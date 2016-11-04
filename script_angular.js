@@ -87,6 +87,7 @@ app.controller('controller', function (myFactory) {
     this.displayData = {};
     this.saveBetData = {};
     this.bet_index_mem=100;
+    this.league_highlight=[0,0,0,0,0,0];
 
     this.sendBetData = function () {
         self.bet_button_toggle=false;
@@ -141,6 +142,28 @@ app.controller('controller', function (myFactory) {
     };
 
     this.getGameData = function (date,league) {
+        switch (league) {
+            case 'NFL':
+                self.league_highlight = ['sel',0,0,0,0,0];
+                break;
+            case 'NBA':
+                self.league_highlight = [0,'sel',0,0,0,0];
+                break;
+            case 'MLB':
+                self.league_highlight = [0,0,'sel',0,0,0];
+                break;
+            case 'NHL':
+                self.league_highlight = [0,0,0,'sel',0,0];
+                break;
+            case 'NCAAF':
+                self.league_highlight = [0,0,0,0,'sel',0];
+                break;
+            case 'NCAAB':
+                self.league_highlight = [0,0,0,0,0,'sel'];
+                break;
+        }
+
+
         self.sendData.game_block = date;
         $('.loader').removeClass('hide');
         $('.loader_background').removeClass('hide');
@@ -176,12 +199,26 @@ app.controller('controller', function (myFactory) {
         if(league) {
             self.sendData.league = league;
         }
-        console.log('the data I am sending the server is: ', self.sendData);
-
+   //     console.log('the data I am sending the server is: ', self.sendData);
+   // var offset = new Date().getTimezoneOffset();
         myFactory.getData(self.sendData)
             .then(function (response) {
                     for (var i = 0; i < response.length; i++) {
                         response[i].bet_toggle = false;
+                        var date = new Date(response[i].game_time+' UTC');
+                        var temp_date=date.toString().slice(0,15);
+                        var temp_time=date.toString().slice(16,21);
+                        var time_check = temp_time.slice(0,2);
+                        var time_check2 = temp_time.slice(3,5);
+                        console.log('time check: '+time_check)
+                        if(time_check >= 12) {
+                            temp_time = time_check - 12 + ':' + time_check2 + ' PM';
+                        }
+                        else{
+                            temp_time = time_check -0 +':' + time_check2 +' AM';
+                        }
+                        response[i].game_time = temp_time;
+                        response[i].game_date = temp_date;
                     };
                     console.log("response with toggle information: ", response);
                     self.displayData = response;
