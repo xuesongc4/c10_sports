@@ -119,7 +119,7 @@ app.controller('controller', function (myFactory) {
                 alert('error!');
             }
     };
-    self.addUserFunds();
+    self.addUsersFunds();
 
 
     this.sendBetData = function () {
