@@ -111,13 +111,15 @@ app.controller('controller', function (myFactory) {
         console.log('adding user funds');
         myFactory.findUsersFunds()
             .then(function (response) {
-                self.user_funds = {};
+                self.user_funds = response;
                 console.log("myfunds reponse: ",response);
+
                 }),
                  function (response) {
                 alert('error!');
             }
     };
+    self.addUserFunds();
 
 
     this.sendBetData = function () {
@@ -207,7 +209,7 @@ app.controller('controller', function (myFactory) {
         }
 
         self.sendData.game_block = date;
-//--------------------DATE GETTER----------------------------------------------------
+//--------------------DATE GETTER needs to be converted to normal time not utc----------------------------------------------------
         var date = new Date();
         var tomorrow_milli = new Date().getTime()+86400000;
         var dateNext = new Date(tomorrow_milli);
@@ -232,8 +234,8 @@ app.controller('controller', function (myFactory) {
         var utcMyDatePrev=utcYear1+"-"+utcMonth1+"-"+utcDate1;
         var utcMyDateNext=utcYear2+"-"+utcMonth2+"-"+utcDate2;
         var utcMidnights = {
-            startDay:utcMyDatePrev+" "+"00:00:00",
-            endDay:utcMyDateNext+" "+"00:00:00"
+            startDay:utcMyDatePrev+" "+"07:00:00",
+            endDay:utcMyDateNext+" "+"07:00:00"
             // --------------------------------------------------------------------
         }
         self.sendData.start_end = utcMidnights;
