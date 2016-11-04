@@ -15,13 +15,30 @@ JOIN `teams` AS a ON g.team_a_id = a.ID
 JOIN `bet_types`AS bt ON bt.ID = b.bet_type_id
 WHERE b.user_id = '$user_id'";
 //full data attempt
-$data = [];
 $result = mysqli_query($connection, $bet_history_query);
+$data = [];
 if(mysqli_num_rows($result)){
     while($row = mysqli_fetch_assoc($result)) {
         $data[] = $row;
     }
 }
+
+//foreach ($data AS $game){
+//    if($game['bet_name'] === 'over/under'){
+//        if($game['side'] === '1'){
+//            $game['side'] = 'over';
+//        }else{
+//            $game['side'] = 'under';
+//        }
+//    }else{
+//        if($game['side'] === '1'){
+//            $game['side'] = 'home';
+//        }else{
+//            $game['side'] = 'away';
+//        }
+//    }
+//}
+
 
 //$output = [
 //    ['gameid' => '123', 'date' =>'2016-10-28 00:25:00','type'=>'moneyline', 'side'=>1,'home'=>'ten','away'=>'jax', 'odds' =>'-110'],
@@ -34,6 +51,7 @@ if(mysqli_num_rows($result)){
 
 //$encoded_output = json_encode($output);
 //print($encoded_output);
+
 
 
 //json encode the data
