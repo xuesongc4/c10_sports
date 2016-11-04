@@ -31,6 +31,7 @@ if (!$logged_in) {
 } else {
  ?>
 
+
 <!DOCTYPE html>
 <html ng-app="app">
 <head>
@@ -54,7 +55,7 @@ if (!$logged_in) {
 <body ng-controller="controller as ic">
     <div class="container2">
             <img src="images/List.png" class="menu_button" ng-click="ic.menu_toggle=false">&nbsp</img>
-        <div class="whole_menu" ng-hide="ic.menu_toggle">
+        <div class="whole_menu" ng-hide="ic.menu_toggle" ng-cloak>
             <div class="menu">
                 <a class="menu_option account_info" href="#/accountinfo" ng-click="ic.menu_toggle=true"><img src="images/User.png">&nbsp</img> JoeBab<div class="funds">Current Funds: <span style="color:red; font-weight: bold">$127.90</span></div></a>
                 <a class="menu_option" href="#/" ng-click="ic.menu_toggle=true"><img src="images/Football.png">&nbsp</img> Game Screen</a>
