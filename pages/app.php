@@ -25,7 +25,7 @@
     <div class="whole_menu" ng-hide="ic.menu_toggle" ng-cloak>
         <div class="menu">
             <a class="menu_option account_info" href="#/accountinfo" ng-click="ic.menu_toggle=true">
-             <br><span style="margin-top: 100px"> {{ic.user_funds.username}}JoeBab</span>
+             <br><span style="margin-top: 100px; font-weight: bolder"> {{ic.user_funds.username}}JoeBab</span>
                 <div class="funds">Current Funds:${{ic.user_funds.funds}}</span></div>
             </a>
             <a class="menu_option" href="#/" ng-click="ic.menu_toggle=true" style="border-top:solid black 2px "><img
