@@ -1,6 +1,6 @@
 <?php 
 require('api_calls.php');
-require('check_wins_temp.php');
+require('check_wins.php');
 date_default_timezone_set('UTC');
 
 /*
