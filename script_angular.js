@@ -111,7 +111,7 @@ app.controller('controller', function (myFactory) {
         console.log('adding user funds');
         myFactory.findUsersFunds()
             .then(function (response) {
-                self.user_funds = {};
+                self.user_funds = response;
                 console.log("myfunds reponse: ",response);
                 }),
                  function (response) {
