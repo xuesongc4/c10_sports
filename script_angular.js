@@ -177,11 +177,23 @@ app.controller('controller', function (myFactory) {
         var utcMonth1 = date.getUTCMonth()+1;
         var utcDate1 = date.getUTCDate();
         var utcYear1 = date.getUTCFullYear();
+        if (utcMonth1 < 10) {
+            utcMonth1 = '' + '0' + utcMonth1;
+        }
+        if (utcMonth2 < 10) {
+            utcMonth2 = '' + '0' + utcMonth2;
+        }
+        if (utcDate1 < 10) {
+            utcDate1 = '' + '0' + utcDate1;
+        }
+        if (utcDate2 < 10) {
+            utcDate2 = '' + '0' + utcDate2;
+        }
         var utcMyDatePrev=utcYear1+"-"+utcMonth1+"-"+utcDate1;
         var utcMyDateNext=utcYear2+"-"+utcMonth2+"-"+utcDate2;
         var utcMidnights = {
-            startDay:utcMyDatePrev+" "+"00:07:00",
-            endDay:utcMyDateNext+" "+"00:07:00"
+            startDay:utcMyDatePrev+" "+"00:00:00",
+            endDay:utcMyDateNext+" "+"00:00:00"
             // --------------------------------------------------------------------
         }
         self.sendData.start_end = utcMidnights;
