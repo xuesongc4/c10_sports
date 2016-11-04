@@ -242,6 +242,7 @@ app.controller('controller', function (myFactory) {
         }
         var utcMyDatePrev=utcYear1+"-"+utcMonth1+"-"+utcDate1 + " " + utcHour1;
         var utcMyDateNext=utcYear2+"-"+utcMonth2+"-"+utcDate2 + " " + utcHour2;
+        console.log(utcMidnights);
         var utcMidnights = {
           startDay:utcMyDatePrev+":00:00",
           endDay:utcMyDateNext+":00:00"
