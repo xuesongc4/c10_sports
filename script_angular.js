@@ -192,8 +192,8 @@ app.controller('controller', function (myFactory) {
         var utcMyDatePrev=utcYear1+"-"+utcMonth1+"-"+utcDate1;
         var utcMyDateNext=utcYear2+"-"+utcMonth2+"-"+utcDate2;
         var utcMidnights = {
-            startDay:utcMyDatePrev+" "+"00:07:00",
-            endDay:utcMyDateNext+" "+"00:07:00"
+            startDay:utcMyDatePrev+" "+"00:00:00",
+            endDay:utcMyDateNext+" "+"00:00:00"
             // --------------------------------------------------------------------
         }
         self.sendData.start_end = utcMidnights;
