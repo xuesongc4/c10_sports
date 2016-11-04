@@ -7,8 +7,6 @@ $user = 1;  //temp while no users are defined
 
 $funds_query = "SELECT SUM(transaction) AS funds FROM `transactions` WHERE user_id = '$user'";
 $funds_results = mysqli_query($connection, $funds_query);
-
-
 $data = [];
 if(mysqli_num_rows($funds_results)){
     while ($row = mysqli_fetch_assoc($funds_results)) {
@@ -18,7 +16,5 @@ if(mysqli_num_rows($funds_results)){
 }else{
     $data['errors'][] = 'user has no transactions';
 }
-
 print_r($data);
-//print($data['funds']);
 ?>
