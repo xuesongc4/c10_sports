@@ -1,17 +1,13 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Kyle
- * Date: 10/26/2016
- * Time: 12:14 PM
- */
-
+session_start();
 require_once('mysql_connect.php');
+
+//require('mysql_connect.php');
 date_default_timezone_set('UTC');
 
 //variables coming in
 //static variables for now
-$user_id = 1;
+//$user_id = 1;
 //$game_number = 4;
 $bet_amount = 100;
 
@@ -23,6 +19,7 @@ $bet_amount = 100;
 //$first_side = false;
 
 //dynamic variables
+$user_id = $_SESSION['ID'];
 $game_id = $_POST['game_id'];
 $line = $_POST['line'];
 $odds = $_POST['odds'];
@@ -87,18 +84,27 @@ if($type_of_bet === 1){
 //    $encoded_data = json_encode($data);
 //    print($data);
 //}
-
 $insert_bet_query = "INSERT INTO `bets`(`user_id`, `amount`, `game_id`, `bet_type_id`, `side`, `line`, `odds`) VALUES ('$user_id', '$bet_amount', '$game_id', '$type_of_bet', '$side', '$line', '$odds')";
 $insert_bet_result = mysqli_query($connection, $insert_bet_query);
 
-//verification that bet writing worked
-$data = [];
+$transaction = $bet_amount * -1;
 if(mysqli_affected_rows($connection)){
-    $data['success'] = true;
-    $data['bet_placed'] = $type_of_bet;
+    $transaction_query = "INSERT INTO `transactions`(`user_id`, `transaction`, `time`) VALUES ('$user_id', '$transaction', NOW())";
+    $transaction_results = mysqli_query($connection, $transaction_query);
+
+    //verification that bet writing and transaction worked
+    if(mysqli_affected_rows($connection)){
+        $data['success'] = true;
+        $data['bet_placed'] = $type_of_bet;
+    }else{
+        $data['success'] = false;
+        $data['errors'][] = 'transaction failed';
+    }
 }else{
     $data['success'] = false;
+    $data['errors'][] = 'bet failed';
 }
+
 $data = json_encode($data);
 print($data);
 ?>

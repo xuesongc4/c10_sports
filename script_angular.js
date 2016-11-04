@@ -23,9 +23,9 @@ app.factory("myFactory", function ($http, $q) {
                 q.reject('error in getting data')
                 q.reject('error in getting data')
             });
-        return q.promise
+        return q.promise;
         };
-    };
+
     data.getBetHistoryData = function (){
         var q = $q.defer();
         $http({
@@ -109,13 +109,12 @@ app.controller('controller', function (myFactory) {
     this.user_funds={};
 
     this.addUsersFunds = function(){
-        myFactory.sendData()
+        myFactory.findUsersFunds()
             .then(function (response) {
                 self.user_funds = {};
-
-                }
-            }),
-            function (response) {
+                console.log("myfunds reponse: ",response);
+                }),
+                 function (response) {
                 alert('error!');
             }
     };
