@@ -20,14 +20,15 @@
 </head>
 <body ng-controller="controller as ic">
 <div class="container2">
-    <img src="images/List.png" class="menu_button" ng-click="ic.menu_toggle=false; ic.addUsersFunds">&nbsp</img>
+    <img src="images/List.png" class="menu_button" ng-click="ic.menu_toggle=false; ic.addUsersFunds()">&nbsp</img>
+    <div class="league_button_bold"><img class = 'logo' src="images/ibet.jpg"></div>
     <div class="whole_menu" ng-hide="ic.menu_toggle" ng-cloak>
         <div class="menu">
-            <a class="menu_option account_info" href="#/accountinfo" ng-click="ic.menu_toggle=true"><img
-                    src="images/User.png"></img> {{ic.user_funds.username}}
-                <div class="funds">Current Funds: <span style="color:red; font-weight: bold">${{ic.user_funds.funds}}</span></div>
+            <a class="menu_option account_info" href="#/accountinfo" ng-click="ic.menu_toggle=true">
+             <br><span style="margin-top: 100px; font-weight: bolder"> {{ic.user_funds.username}}JoeBab</span>
+                <div class="funds">Current Funds:${{ic.user_funds.funds}}</span></div>
             </a>
-            <a class="menu_option" href="#/" ng-click="ic.menu_toggle=true"><img
+            <a class="menu_option" href="#/" ng-click="ic.menu_toggle=true" style="border-top:solid black 2px "><img
                     src="images/Football.png"></img> Game Screen</a>
             <a class="menu_option" href="#/bethistory" ng-click="ic.menu_toggle=true"><img
                     src="images/GraphBar.png"></img> Bet History</a>
@@ -37,7 +38,7 @@
                     src="images/Question.png"></img> FAQ</a>
             <a class="menu_option" href="#/aboutus" ng-click="ic.menu_toggle=true"><img src="images/Question.png"></img>
                 About us</a>
-            <a class="menu_option" href="api/logout.php" ng-click="ic.menu_toggle=true"><img src="images/Exit.png"></img> Logout</a>
+            <a class="menu_option_logout" href="api/logout.php" ng-click="ic.menu_toggle=true"><img src="images/Exit.png"></img> Logout</a>
         </div>
         <div class="menu_close" ng-click="ic.menu_toggle=true"></div>
     </div>
