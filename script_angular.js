@@ -10,17 +10,16 @@ app.factory("myFactory", function ($http, $q) {
     data.findUsersFunds = function(){
         var q = $q.defer();
         $http({
-            url: 'api/find_users_fund.php',
+            url: 'api/find_users_funds.php',
             headers: {'Content-Type': 'application/x-www-form-urlencoded'},
             method: 'post'
         })
             .then(function (response) {
                 data.find_users_funds = response.data;
-                console.log("response in my factory: ", data);
+                console.log("funds data in my factory: ", data);
                 q.resolve(data.find_users_funds);
             }, function () {
                 console.log('error in getting data');
-                q.reject('error in getting data')
                 q.reject('error in getting data')
             });
         return q.promise;
@@ -109,6 +108,7 @@ app.controller('controller', function (myFactory) {
     this.user_funds={};
 
     this.addUsersFunds = function(){
+        console.log('adding user funds');
         myFactory.findUsersFunds()
             .then(function (response) {
                 self.user_funds = {};
