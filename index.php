@@ -1,3 +1,37 @@
+<?php 
+session_start();
+$logged_in = false;
+if (isset($_SESSION['username'])) {
+    $logged_in = true;
+}
+if (!$logged_in) {
+    // html page for not being logged in
+   ?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <form action="api/login.php" method="post">
+        <input type="text" name="username">
+        <br>
+        <input type="password" name="password">
+        <br>
+        <button name="login">Login</button>
+    </form>
+    <script>
+        localStorage.removeItem('bet_user_id');
+    </script>
+</body>
+</html>
+<?php 
+    // html page for being logged in
+} else {
+ ?>
+
+
 <!DOCTYPE html>
 <html ng-app="app">
 <head>
@@ -13,6 +47,9 @@
     <link rel="stylesheet" type="text/css" href="style.css">
     <link href="https://fonts.googleapis.com/css?family=Concert+One|Khand|Roboto+Condensed" rel="stylesheet">
     <script src="script_angular.js"></script>
+    <script>
+        localStorage.setItem('bet_user_id', "<?php echo $_SESSION['ID']; ?>");
+    </script>
     <title>Gambling app</title>
 </head>
 <body ng-controller="controller as ic">
@@ -34,3 +71,7 @@
 </div>
 </body>
 </html>
+
+<?php 
+}
+ ?>
