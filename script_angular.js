@@ -7,6 +7,23 @@ var app = angular.module('app', ['ngRoute','ngAnimate']);
 
 app.factory("myFactory", function ($http, $q) {
     var data = {};
+    data.findUsersFunds = function(){
+        var q = $q.defer();
+        $http({
+            url: 'api/find_users_funds.php',
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+            method: 'post'
+        })
+            .then(function (response) {
+                data.find_users_funds = response.data;
+                console.log("funds data in my factory: ", data);
+                q.resolve(data.find_users_funds);
+            }, function () {
+                console.log('error in getting data');
+                q.reject('error in getting data')
+            });
+        return q.promise;
+        };
 
     data.getBetHistoryData = function (){
         var q = $q.defer();
@@ -88,6 +105,22 @@ app.controller('controller', function (myFactory) {
     this.saveBetData = {};
     this.bet_index_mem=100;
     this.league_highlight=[0,0,0,0,0,0];
+    this.user_funds={};
+
+    this.addUsersFunds = function(){
+        console.log('adding user funds');
+        myFactory.findUsersFunds()
+            .then(function (response) {
+                self.user_funds = response;
+                console.log("myfunds reponse: ",response);
+
+                }),
+                 function (response) {
+                alert('error!');
+            }
+    };
+    self.addUsersFunds();
+
 
     this.sendBetData = function () {
         self.bet_button_toggle=false;
@@ -142,6 +175,18 @@ app.controller('controller', function (myFactory) {
     };
 
     this.getGameData = function (date,league) {
+        $('.loader').removeClass('hide');
+        $('.loader_background').removeClass('hide');
+        if(date=='previous'){
+            this.highlightDate=['selected_date',false,false];
+        }
+        else if (date=='current'){
+            this.highlightDate=[false,'selected_date',false];
+        }
+        else if(date=='future'){
+            this.highlightDate=[false,false,'selected_date'];
+        }
+
         switch (league) {
             case 'NFL':
                 self.league_highlight = ['sel',0,0,0,0,0];
@@ -163,11 +208,8 @@ app.controller('controller', function (myFactory) {
                 break;
         }
 
-
         self.sendData.game_block = date;
-        $('.loader').removeClass('hide');
-        $('.loader_background').removeClass('hide');
-//--------------------DATE GETTER----------------------------------------------------
+//--------------------DATE GETTER needs to be converted to normal time not utc----------------------------------------------------
         var date = new Date();
         date.setHours(0);
         var tomorrow_milli = date.getTime()+86400000;
@@ -203,19 +245,9 @@ app.controller('controller', function (myFactory) {
         var utcMidnights = {
           startDay:utcMyDatePrev+":00:00",
           endDay:utcMyDateNext+":00:00"
-          // --------------------------------------------------------------------
         }
         self.sendData.start_end = utcMidnights;
         console.log('sending including start / end dates: ',self.sendData);
-        if(date=='previous'){
-            this.highlightDate=['selected_date',false,false];
-        }
-        else if (date=='current'){
-            this.highlightDate=[false,'selected_date',false];
-        }
-        else if(date=='future'){
-            this.highlightDate=[false,false,'selected_date'];
-        }
 
         if(league) {
             self.sendData.league = league;
@@ -231,7 +263,6 @@ app.controller('controller', function (myFactory) {
                         var temp_time=date.toString().slice(16,21);
                         var time_check = temp_time.slice(0,2);
                         var time_check2 = temp_time.slice(3,5);
-                        console.log('time check: '+time_check)
                         if(time_check >= 12) {
                             temp_time = time_check - 12 + ':' + time_check2 + ' PM';
                         }
@@ -253,6 +284,7 @@ app.controller('controller', function (myFactory) {
                     $('.loader_background').addClass('hide');
                 });
     };
+    self.getGameData('current','NFL');
 });
 
 app.config(function ($routeProvider) {
