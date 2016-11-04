@@ -90,14 +90,15 @@ body{
 }
 .league_button:hover{
     cursor: pointer;
+    font-weight: bold;
     color: deepskyblue;
 }
 .home_img {
-    height: 35px;
+    height: 40px;
 }
 
 .away_img {
-    height: 35px;
+    height: 40px;
 }
 /*.away_img{*/
     /*display: inline-block;*/
@@ -295,4 +296,11 @@ a:hover{
 .sel{
     font-weight: bold;
     color: deepskyblue;
+}
+.sel2{
+    color: black;
+}
+.sel3{
+    color: black;
+    font-weight: bold;
 }
