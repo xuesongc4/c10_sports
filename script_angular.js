@@ -108,7 +108,6 @@ app.controller('controller', function (myFactory) {
     this.user_funds={};
 
     this.addUsersFunds = function(){
-        console.log('adding user funds');
         myFactory.findUsersFunds()
             .then(function (response) {
                 self.user_funds = response;
@@ -119,7 +118,8 @@ app.controller('controller', function (myFactory) {
                 alert('error!');
             }
     };
-    self.addUsersFunds();
+    this.addUsersFunds();
+
 
 
     this.sendBetData = function () {
@@ -223,28 +223,29 @@ app.controller('controller', function (myFactory) {
         var utcYear1 = date.getUTCFullYear();
         var utcHour1 = date.getUTCHours();
         if (utcMonth1 < 10) {
-          utcMonth1 = '' + '0' + utcMonth1;
+            utcMonth1 = '' + '0' + utcMonth1;
         }
         if (utcMonth2 < 10) {
-          utcMonth2 = '' + '0' + utcMonth2;
+            utcMonth2 = '' + '0' + utcMonth2;
         }
         if (utcDate1 < 10) {
-          utcDate1 = '' + '0' + utcDate1;
+            utcDate1 = '' + '0' + utcDate1;
         }
         if (utcDate2 < 10) {
-          utcDate2 = '' + '0' + utcDate2;
+            utcDate2 = '' + '0' + utcDate2;
         }
         if (utcHour1 < 10) {
-          utcHour1 = '' + '0' + utcHour1;
+            utcDate1 = '' + '0' + utcHour1;
         }
         if (utcHour2 < 10) {
-          utcHour2 = '' + '0' + utcHour2;
+            utcDate2 = '' + '0' + utcHour2;
         }
         var utcMyDatePrev=utcYear1+"-"+utcMonth1+"-"+utcDate1 + " " + utcHour1;
         var utcMyDateNext=utcYear2+"-"+utcMonth2+"-"+utcDate2 + " " + utcHour2;
         var utcMidnights = {
-          startDay:utcMyDatePrev+":00:00",
-          endDay:utcMyDateNext+":00:00"
+            startDay:utcMyDatePrev+":00:00",
+            endDay:utcMyDateNext+":00:00"
+            // --------------------------------------------------------------------
         }
         self.sendData.start_end = utcMidnights;
         console.log('sending including start / end dates: ',self.sendData);
@@ -355,3 +356,17 @@ app.controller('bethistory', function (myFactory) {
     }
     this.get_bet_history();
 });
+//
+// if($game['bet_name'] === 'over/under'){
+//     if($game['side'] === '1'){
+//         $game['side'] = 'over';
+//     }else{
+//         $game['side'] = 'under';
+//     }
+// }else{
+//     if($game['side'] === '1'){
+//         $game['side'] = 'home';
+//     }else{
+//         $game['side'] = 'away';
+//     }
+// }

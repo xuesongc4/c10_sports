@@ -115,7 +115,17 @@ body{
     vertical-align: bottom;
 }
 .logo_menu{
-    height: 50px;
+    height: 35px;
+    width: 35px;
+    color: deepskyblue;
+    background-color: black;
+    border-radius: 100%;
+    font-size: 15px;
+    display: inline-block;
+    text-align: center;
+    line-height: 35px;
+    vertical-align: bottom;
+    margin-bottom:10px;
 }
 .home_img {
     height: 40px;
