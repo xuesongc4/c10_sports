@@ -118,7 +118,11 @@ app.controller('controller', function (myFactory) {
                 alert('error!');
             }
     };
+<<<<<<< HEAD
     this.addUsersFunds();
+=======
+    self.addUsersFunds();
+>>>>>>> dev
 
 
     this.sendBetData = function () {
