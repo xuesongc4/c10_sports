@@ -41,7 +41,7 @@ function concatenateValues(&$values, $api_game, $prop) {
 
 function make_query($connection, $spordId, $leagueId) {
 	// data from api
-	$api_settled = finished_games_call($spordId, $leagueId);            //important and necessary
+	$api_settled = finished_games_call($spordId, $leagueId);            //important and necessary   //comment out when running kyle's code below
 
 //    //this is stuff Kyle wrote to test the checking of bets after they are settled
 //    //start kyle's test code
@@ -49,7 +49,8 @@ function make_query($connection, $spordId, $leagueId) {
 //    $game = [];
 //    $game['API_game_id'] = 657667126;
 //    $game['final_score_h'] = 104;
-//    $game['final_score_a'] = 127;
+//    $game['final_score_a'] = 127;       //true score
+////    $game['final_score_a'] = 225 - 104;       //fake score to test over/under push
 //    $gameList[] = $game;
 //    $api_settled = $gameList;
 //    //end kyle's test code
