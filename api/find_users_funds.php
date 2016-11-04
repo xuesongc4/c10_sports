@@ -12,7 +12,8 @@ $funds_results = mysqli_query($connection, $funds_query);
 $data = [];
 if(mysqli_num_rows($funds_results)){
     while ($row = mysqli_fetch_assoc($funds_results)) {
-        $data['funds'] = $row['funds'];
+        //round the funds data
+        $data['funds'] = round($row['funds'], 2, PHP_ROUND_HALF_UP);
     }
 }else{
     $data['errors'][] = 'user has no transactions';
