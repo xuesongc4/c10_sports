@@ -10,24 +10,19 @@ if (isset($_POST['login'])) {
 	$password = stripslashes($password);
 
 	$username = mysqli_real_escape_string($connection, $username);
-	$password = mysqli_real_escape_string($connection, $password);
+	$encrypted_password = sha1($password);
 
-	$find_user_query = "SELECT * FROM users WHERE username ='{$username}'";
+	$find_user_query = "SELECT ID FROM users WHERE username ='{$username}' AND password='{$encrypted_password}'";
 	$find_user_result = mysqli_query($connection, $find_user_query);
 	if (!$find_user_query) {
 		die("QUERY FAIlED " . mysqli_error($connection));
 	}
-
-	while ($row = mysqli_fetch_assoc($find_user_result)) {
-		$db_id = $row['ID'];
-		$db_username = $row['username'];
-		$db_password = $row['password'];
+	if(mysqli_num_rows($find_user_result)>0){
+		$row = mysqli_fetch_assoc($find_user_result);
+		$_SESSION['ID'] = $row['ID'];
+		$_SESSION['username'] = $username;
 	}
-
-	if ($username === $db_username && $password === $db_password) {
-		$_SESSION['ID'] = $db_id;
-		$_SESSION['username'] = $db_username;
-	}
+	
 	header('Location: ../index.php');
 }
  ?>
