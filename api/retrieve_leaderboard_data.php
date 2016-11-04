@@ -1,7 +1,4 @@
 <?php
-//require('find_users_funds.php');
-
-//start herrrreeeee
 date_default_timezone_set('UTC');
 require('constants.php');
 $connection = mysqli_connect(DB_HOST, DB_USER, DB_PASS, DB_NAME);
@@ -17,8 +14,6 @@ $data = [];
 if(mysqli_num_rows($leaderboard_results)){
     while ($row = mysqli_fetch_assoc($leaderboard_results)) {
         $data[] = $row;
-//        $data['user'] = $row['user'];
-//        $data['money'] = $row['money'];
     }
 }else{
     $data['errors'][] = 'no leaderboard data available';
@@ -27,10 +22,6 @@ if(mysqli_num_rows($leaderboard_results)){
 $encoded_output = json_encode($data);
 print($encoded_output);
 
-//print_r($data);
-//print($data['funds']);
-//
-//
 //***************** old ***********************
 //
 //$output = [
@@ -45,5 +36,3 @@ print($encoded_output);
 //$encoded_output = json_encode($output);
 //print($encoded_output);
 ?>
-
-
