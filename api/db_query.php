@@ -41,8 +41,22 @@ function concatenateValues(&$values, $api_game, $prop) {
 
 function make_query($connection, $spordId, $leagueId) {
 	// data from api
-	$api_settled = finished_games_call($spordId, $leagueId);
+	$api_settled = finished_games_call($spordId, $leagueId);            //important and necessary   //comment out when running kyle's code below
+
+//    //this is stuff Kyle wrote to test the checking of bets after they are settled
+//    //start kyle's test code
+//    $gameList = [];
+//    $game = [];
+//    $game['API_game_id'] = 657667126;
+//    $game['final_score_h'] = 104;
+//    $game['final_score_a'] = 127;       //true score
+////    $game['final_score_a'] = 225 - 104;       //fake score to test over/under push
+//    $gameList[] = $game;
+//    $api_settled = $gameList;
+//    //end kyle's test code
+
 	$api_upcoming = odds_call($spordId, $leagueId);
+
 
 	// connect to database
 	// $connection = mysqli_connect(DB_HOST, DB_USER, DB_PASS, DB_NAME);
@@ -81,8 +95,10 @@ function make_query($connection, $spordId, $leagueId) {
 
 				echo $update_query;
 				echo "<br>";
-        //runs a query to check wins in the bet table and prints the settled bets
-        print_r(check_for_wins_on_settled_games($connection, $settled_game['API_game_id']));
+                //runs a query to check wins in the bet table and prints the settled bets
+                echo "<pre>";
+                print_r(check_for_wins_on_settled_games($connection, $settled_game['API_game_id']));
+                echo "</pre><br>";
 			}
 		}
 	}
@@ -191,7 +207,7 @@ if ($today_date > '09-01' || $today_date < '02-10') {
 }
 
 if ($today_date > '10-25' || $today_date < '06-25') {
-	// make_query($connection, 4, 487);
+	 make_query($connection, 4, 487);
 }
 
 if ($today_date > '03-21' && $today_date < '11-05') {
