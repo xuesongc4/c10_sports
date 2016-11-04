@@ -36,7 +36,7 @@
                 Leader Board</a>
             <a class="menu_option" href="#/faq" ng-click="ic.menu_toggle=true"><img
                     src="images/Question.png"></img> FAQ</a>
-            <a class="menu_option" href="#/aboutus" ng-click="ic.menu_toggle=true"><img src="images/Question.png"></img>
+            <a class="menu_option" href="#/aboutus" ng-click="ic.menu_toggle=true"><img class="logo_menu" src="images/ibet.jpg"></img>
                 About us</a>
             <a class="menu_option_logout" href="api/logout.php" ng-click="ic.menu_toggle=true"><img src="images/Exit.png"></img> Logout</a>
         </div>
