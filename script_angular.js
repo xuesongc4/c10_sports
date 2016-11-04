@@ -235,14 +235,13 @@ app.controller('controller', function (myFactory) {
             utcDate2 = '' + '0' + utcDate2;
         }
         if (utcHour1 < 10) {
-            utcDate1 = '' + '0' + utcHour1;
+            utcHour1 = '' + '0' + utcHour1;
         }
         if (utcHour2 < 10) {
-            utcDate2 = '' + '0' + utcHour2;
+            utcHour2 = '' + '0' + utcHour2;
         }
         var utcMyDatePrev=utcYear1+"-"+utcMonth1+"-"+utcDate1 + " " + utcHour1;
         var utcMyDateNext=utcYear2+"-"+utcMonth2+"-"+utcDate2 + " " + utcHour2;
-        console.log(utcMidnights);
         var utcMidnights = {
             startDay:utcMyDatePrev+":00:00",
             endDay:utcMyDateNext+":00:00"
