@@ -20,11 +20,11 @@
 </head>
 <body ng-controller="controller as ic">
 <div class="container2">
-    <img src="images/List.png" class="menu_button" ng-click="ic.menu_toggle=false">&nbsp</img>
+    <img src="images/List.png" class="menu_button" ng-click="ic.menu_toggle=false; ic.addUsersFunds()">&nbsp</img>
     <div class="league_button_bold"><img class = 'logo' src="images/ibet.jpg"></div>
     <div class="whole_menu" ng-hide="ic.menu_toggle" ng-cloak>
         <div class="menu">
-            <a class="menu_option account_info" href="#/accountinfo" ng-click="ic.menu_toggle=true">
+            <a class="menu_option account_info" href="#/accountinfo" ng-click="ic.menu_toggle=true" ng-cloak>
              <br><span style="margin-top: 100px; font-weight: bolder"> {{ic.user_funds.username}}</span>
                 <div class="funds">Current Funds:${{ic.user_funds.funds}}</span></div>
             </a>

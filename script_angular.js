@@ -108,7 +108,6 @@ app.controller('controller', function (myFactory) {
     this.user_funds={};
 
     this.addUsersFunds = function(){
-        console.log('adding user funds');
         myFactory.findUsersFunds()
             .then(function (response) {
                 self.user_funds = response;
@@ -119,7 +118,7 @@ app.controller('controller', function (myFactory) {
                 alert('error!');
             }
     };
-    self.addUserFunds();
+    this.addUsersFunds();
 
 
     this.sendBetData = function () {
@@ -347,3 +346,17 @@ app.controller('bethistory', function (myFactory) {
     }
     this.get_bet_history();
 });
+//
+// if($game['bet_name'] === 'over/under'){
+//     if($game['side'] === '1'){
+//         $game['side'] = 'over';
+//     }else{
+//         $game['side'] = 'under';
+//     }
+// }else{
+//     if($game['side'] === '1'){
+//         $game['side'] = 'home';
+//     }else{
+//         $game['side'] = 'away';
+//     }
+// }
