@@ -21,7 +21,7 @@ body{
     font-size: 20px;
     margin:0 0 10% 10%;
     width:80%;
-    margin-top:-2px;
+    margin-top:-4px;
     max-width:875px;
     position: relative;
 }
@@ -46,6 +46,7 @@ body{
     display:inherit;
     z-index: 10;
     border-right: 3px black solid;
+    background-color: white;
 }
 
 .menu_close{
@@ -71,28 +72,46 @@ body{
 }
 .dates{
     display:inline-block;
-    border: solid 2px black;
+    border: solid 4px black;
     height: 100%;
     width: 32%;
     font-size: 30px;
-    line-height: 45px;
-    background-color: lightgrey;
-    margin-right:-2px;
+    line-height: 40px;
+    background-color: white;
+    color: black;
+    margin-right: -4px;
 }
 .dates:hover{
     cursor: pointer;
 }
 .league_button{
-    display: inline-block;
-    font-family: 'Khand', sans-serif;
-    font-size: 2.8vw;
-    margin-left: 3.5%;
-}
+     display: inline-block;
+     font-family: 'Khand', sans-serif;
+     font-size: 2.8vw;
+     margin-left: 3.5%;
+ }
 .league_button:hover{
     cursor: pointer;
     font-weight: bold;
     color: deepskyblue;
 }
+
+.league_button_bold{
+    font-size: 20px;
+    display: inline-block;
+    font-family: 'Khand', sans-serif;
+    font-size: 3.2vw;
+    font-weight: bold;
+    margin-left: 3.5%;
+}
+.logo{
+    height: 75px;
+    position: fixed;
+    top: 15px;
+    right:15px;
+    vertical-align: bottom;
+}
+
 .home_img {
     height: 40px;
 }
@@ -107,8 +126,8 @@ body{
 /*}*/
 .game{
     font-size: 20px;
-    border: solid 2px black;
-    border-bottom: solid 1px black;
+    border: solid 4px black;
+    border-bottom: solid 2px black;
     padding: 2%;
     background-color: white;
     position:relative;
@@ -120,7 +139,7 @@ body{
 .bet{
     border: solid 2px black;
     height: 370px;
-    background-color: whitesmoke;
+    background-color: lightgrey;
     text-align: center;
     transition: all linear 0.3s;
     overflow:hidden;
@@ -145,7 +164,7 @@ body{
     font-size: 4vw;
 }
 .modal-body{
-    border: 2px solid deepskyblue;
+    border: 5px solid deepskyblue;
     border-radius: 0;
 }
 .confirm-mdl, .cancel-mdl {
@@ -177,16 +196,33 @@ body{
 .selected{
     background-color: deepskyblue;
     color: white;
+    font-weight: bold;
 }
 
 .selected_date{
-    background-color: white;
+    background-color: black;
+    color: deepskyblue;
+    font-weight: bold;
 }
 
 .menu_option{
     border-bottom: solid black 2px;
     display: block;
     padding: 20px;
+    background-color: white;
+}
+.menu_option_logout{
+    border-bottom: solid black 2px;
+    display: block;
+    padding: 20px;
+    background: black;
+    color: white;
+}
+.menu_option_logout:hover{
+    border-bottom: solid black 2px;
+    display: block;
+    padding: 20px;
+    color: deepskyblue;
 }
 
 .menu_option, a{
@@ -194,11 +230,11 @@ body{
     font-size: 40px;
 }
 a:hover{
-    color:black;
+    color:deepskyblue;
     text-decoration:none;
 }
 .menu_option:hover{
-    background-color:lightgrey;
+    background-color:black;
 }
 
 .confirm_button_fake{
@@ -220,12 +256,20 @@ a:hover{
     height: 0;
 }
 .account_info{
-    background-color: deepskyblue;
+    margin: auto;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    width:330px;
+    height:330px;
+    text-align: center;
+    background-color: black;
+    color:deepskyblue;
+    border-radius: 100%;
+    border:black solid 20px;
 }
 
 .account_info:hover{
-    opacity: .7;
-    background-color: deepskyblue;
+   border: deepskyblue 20px solid;
 }
 .bet_made_lander{
     position: absolute;
@@ -263,14 +307,28 @@ a:hover{
     position: absolute;
     top: 30vh;
     left: 45%;
-    border: 16px solid lightgrey; /* Light grey */
-    border-top: 16px solid deepskyblue; /* Blue */
+    border-radius: 50%;
+    width: 120px;
+    height: 120px;
+    z-index: 6;
+    background-color: black;
+    color: deepskyblue;
+    font-size: 30px;
+    text-align: center;
+    line-height: 120px;
+}
+.loader_spinner {
+    position: absolute;
+    left: 0;
+    border: 13px solid white; /* Light grey */
+    border-top: 13px solid deepskyblue; /* Blue */
     border-radius: 50%;
     width: 120px;
     height: 120px;
     animation: spin 1s linear infinite;
     z-index: 6;
 }
+
 .loader2{
     position: absolute;
     border: 10px solid lightgrey; /* Light grey */
@@ -336,7 +394,7 @@ video{
     margin: auto;
     font-size: 85px;
     z-index: 5;
-    color: white;
+    color: deepskyblue;
     height: 265px;
     width: 265px;
     line-height: 265px;
@@ -358,11 +416,11 @@ video{
     margin-bottom: 50px;
     position: absolute;
     top: 0px;
-    left: 48px;
+    left: 32px;
     display: none;
 }
 .loader2{
-    border: 35px solid lightgrey;
+    border: 35px solid white;
     border-top-color:deepskyblue;
     animation: spins 1s linear infinite;
     z-index: 6;
@@ -374,11 +432,11 @@ video{
 
 }
 .form{
-    position:relative;
-    margin: auto;
-    width: 40%;
+    position:absolute;
+    top:15%;
+    left:22%;
+    width: 400px;
     z-index: 1;
-    margin-top: 300px;
 }
 .user{
     line-height: 75px;
@@ -409,6 +467,7 @@ video{
 }
 .user_login:hover{
     cursor: pointer;
+    color: deepskyblue;
 }
 ::-webkit-input-placeholder {
     color: black;
