@@ -21,7 +21,6 @@
 <body ng-controller="controller as ic">
 <div class="container2">
     <img src="images/List.png" class="menu_button" ng-click="ic.menu_toggle=false; ic.addUsersFunds()">&nbsp</img>
-    <div class="league_button_bold"><img class = 'logo' src="images/ibet.jpg"></div>
     <div class="whole_menu" ng-hide="ic.menu_toggle" ng-cloak>
         <div class="menu">
             <a class="menu_option account_info" href="#/accountinfo" ng-click="ic.menu_toggle=true" ng-cloak>
@@ -36,7 +35,7 @@
                 Leader Board</a>
             <a class="menu_option" href="#/faq" ng-click="ic.menu_toggle=true"><img
                     src="images/Question.png"></img> FAQ</a>
-            <a class="menu_option" href="#/aboutus" ng-click="ic.menu_toggle=true"><img class="logo_menu" src="images/ibet.jpg"></img>
+            <a class="menu_option" href="#/aboutus" ng-click="ic.menu_toggle=true"><div class="logo_menu">iBet</div>
                 About us</a>
             <a class="menu_option_logout" href="api/logout.php" ng-click="ic.menu_toggle=true"><img src="images/Exit.png"></img> Logout</a>
         </div>
