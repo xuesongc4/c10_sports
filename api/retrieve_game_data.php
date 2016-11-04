@@ -3,6 +3,9 @@ require_once('mysql_connect.php');
 date_default_timezone_set('UTC');
 
 //print(json_encode($_POST));     //for testing purposes
+$time_frame = $_POST['game_block'];
+$start_day = $_POST['start_end']['startDay'];
+$end_day = $_POST['start_end']['endDay'];
 //collect league from index
 $league = $_POST['league'];  //may not need to upper
 //lookup the league in league table

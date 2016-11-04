@@ -1,4 +1,5 @@
 <?php
+session_start();
 //require_once('mysql_connect.php');      //necessary when testing it on its own
 date_default_timezone_set('UTC');
 

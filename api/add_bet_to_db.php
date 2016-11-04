@@ -1,18 +1,13 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Kyle
- * Date: 10/26/2016
- * Time: 12:14 PM
- */
-
+session_start();
 require_once('mysql_connect.php');
+
 //require('mysql_connect.php');
 date_default_timezone_set('UTC');
 
 //variables coming in
 //static variables for now
-$user_id = 1;
+//$user_id = 1;
 //$game_number = 4;
 $bet_amount = 100;
 
@@ -24,6 +19,7 @@ $bet_amount = 100;
 //$first_side = false;
 
 //dynamic variables
+$user_id = $_SESSION['ID'];
 $game_id = $_POST['game_id'];
 $line = $_POST['line'];
 $odds = $_POST['odds'];
@@ -93,7 +89,7 @@ $insert_bet_result = mysqli_query($connection, $insert_bet_query);
 
 $transaction = $bet_amount * -1;
 if(mysqli_affected_rows($connection)){
-    $transaction_query = "INSERT INTO `transactions`(`user_id`, `transaction`, `time`) VALUES ('1', '$transaction', NOW())";
+    $transaction_query = "INSERT INTO `transactions`(`user_id`, `transaction`, `time`) VALUES ('$user_id', '$transaction', NOW())";
     $transaction_results = mysqli_query($connection, $transaction_query);
 
     //verification that bet writing and transaction worked
