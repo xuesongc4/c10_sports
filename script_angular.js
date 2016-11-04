@@ -7,6 +7,24 @@ var app = angular.module('app', ['ngRoute','ngAnimate']);
 
 app.factory("myFactory", function ($http, $q) {
     var data = {};
+    data.findUsersFunds = function(){
+        var q = $q.defer();
+        $http({
+            url: 'api/find_users_fund.php',
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+            method: 'post'
+        })
+            .then(function (response) {
+                data.find_users_funds = response.data;
+                console.log("response in my factory: ", data);
+                q.resolve(data.find_users_funds);
+            }, function () {
+                console.log('error in getting data');
+                q.reject('error in getting data')
+                q.reject('error in getting data')
+            });
+        return q.promise;
+        };
 
     data.getBetHistoryData = function (){
         var q = $q.defer();
@@ -88,6 +106,19 @@ app.controller('controller', function (myFactory) {
     this.saveBetData = {};
     this.bet_index_mem=100;
     this.league_highlight=[0,0,0,0,0,0];
+    this.user_funds={};
+
+    this.addUsersFunds = function(){
+        myFactory.findUsersFunds()
+            .then(function (response) {
+                self.user_funds = {};
+                console.log("myfunds reponse: ",response);
+                }),
+                 function (response) {
+                alert('error!');
+            }
+    };
+
 
     this.sendBetData = function () {
         self.bet_button_toggle=false;
@@ -142,6 +173,18 @@ app.controller('controller', function (myFactory) {
     };
 
     this.getGameData = function (date,league) {
+        $('.loader').removeClass('hide');
+        $('.loader_background').removeClass('hide');
+        if(date=='previous'){
+            this.highlightDate=['selected_date',false,false];
+        }
+        else if (date=='current'){
+            this.highlightDate=[false,'selected_date',false];
+        }
+        else if(date=='future'){
+            this.highlightDate=[false,false,'selected_date'];
+        }
+
         switch (league) {
             case 'NFL':
                 self.league_highlight = ['sel',0,0,0,0,0];
@@ -163,10 +206,7 @@ app.controller('controller', function (myFactory) {
                 break;
         }
 
-
         self.sendData.game_block = date;
-        $('.loader').removeClass('hide');
-        $('.loader_background').removeClass('hide');
 //--------------------DATE GETTER----------------------------------------------------
         var date = new Date();
         var tomorrow_milli = new Date().getTime()+86400000;
@@ -198,15 +238,6 @@ app.controller('controller', function (myFactory) {
         }
         self.sendData.start_end = utcMidnights;
         console.log('sending including start / end dates: ',self.sendData);
-        if(date=='previous'){
-            this.highlightDate=['selected_date',false,false];
-        }
-        else if (date=='current'){
-            this.highlightDate=[false,'selected_date',false];
-        }
-        else if(date=='future'){
-            this.highlightDate=[false,false,'selected_date'];
-        }
 
         if(league) {
             self.sendData.league = league;
@@ -222,7 +253,6 @@ app.controller('controller', function (myFactory) {
                         var temp_time=date.toString().slice(16,21);
                         var time_check = temp_time.slice(0,2);
                         var time_check2 = temp_time.slice(3,5);
-                        console.log('time check: '+time_check)
                         if(time_check >= 12) {
                             temp_time = time_check - 12 + ':' + time_check2 + ' PM';
                         }
@@ -244,6 +274,7 @@ app.controller('controller', function (myFactory) {
                     $('.loader_background').addClass('hide');
                 });
     };
+    self.getGameData('current','NFL');
 });
 
 app.config(function ($routeProvider) {
