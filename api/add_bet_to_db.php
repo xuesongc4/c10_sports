@@ -89,15 +89,15 @@ if($type_of_bet === 1){
 //}
 $success = false;
 $insert_bet_query = "INSERT INTO `bets`(`user_id`, `amount`, `game_id`, `bet_type_id`, `side`, `line`, `odds`) VALUES ('$user_id', '$bet_amount', '$game_id', '$type_of_bet', '$side', '$line', '$odds')";
-$insert_bet_result = mysqli_query($conn, $insert_bet_query);
+$insert_bet_result = mysqli_query($connection, $insert_bet_query);
 
 
-if(mysqli_affected_rows($conn)){
+if(mysqli_affected_rows($connection)){
     $transaction_query = "INSERT INTO `transactions`(`user_id`, `transaction`, `time`) VALUES ('1', '-100', NOW())";
-    $transaction_results = mysqli_query($conn, $transaction_query);
+    $transaction_results = mysqli_query($connection, $transaction_query);
 
     //verification that bet writing and transaction worked
-    if(mysqli_affected_rows($conn)){
+    if(mysqli_affected_rows($connection)){
         $data['success'] = true;
         $data['bet_placed'] = $type_of_bet;
     }else{
