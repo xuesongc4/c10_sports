@@ -274,10 +274,18 @@ app.controller('controller', function (myFactory) {
                         response[i].game_date = temp_date;
                     };
                     console.log("response with toggle information: ", response);
+
                     self.displayData = response;
                     self.gotData = true;
                     $('.loader').addClass('hide');
                     $('.loader_background').addClass('hide');
+                    if(response.length==0){
+                        self.displayDataLength=true;
+                    }
+                    else{
+                        self.displayDataLength=false;
+                    }
+                    console.log('display data length',self.displayDataLength)
                 },
                 function (response) {
                     console('error!');
