@@ -20,6 +20,7 @@
         </div>
 </div>
 <div class="sched_landing">
+    <div class="no_games_warning" ng-show="ic.displayDataLength"><h1>No games available...</h1></div>
     <div ng-repeat='bet_data in ic.displayData'>
         <div class='game' ng-click="ic.betToggle($index)">
             <div class="game_date">
