@@ -508,3 +508,8 @@ video{
     margin-top: 50px;
     text-align: center;
 }
+
+.final_score{
+    font-weight: bold;
+    float: right;
+}
