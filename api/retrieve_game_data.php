@@ -22,7 +22,7 @@ if(mysqli_num_rows($result)){
 $data = [];
 
 //static game query clauses
-$game_query_select_clause = "SELECT g.ID AS game_id, a.full_name AS full_name_a, a.abbr_name AS abbr_name_a, a.logo_src AS logo_src_a, h.full_name AS full_name_h, h.abbr_name AS abbr_name_h, h.logo_src AS logo_src_h, g.home_spread, g.spread_odds_a, g.spread_odds_h, g.moneyline_odds_a, g.moneyline_odds_h, g.overunder_points, g.overunder_odds_o, g.overunder_odds_u, g.game_time ";
+$game_query_select_clause = "SELECT g.ID AS game_id, a.full_name AS full_name_a, a.abbr_name AS abbr_name_a, a.logo_src AS logo_src_a, h.full_name AS full_name_h, h.abbr_name AS abbr_name_h, h.logo_src AS logo_src_h, g.home_spread, g.spread_odds_a, g.spread_odds_h, g.moneyline_odds_a, g.moneyline_odds_h, g.overunder_points, g.overunder_odds_o, g.overunder_odds_u, g.game_time, g.final_score_a, g.final_score_h ";
 $game_query_from_clause = "FROM `games` AS g ";
 $game_query_join_clause = "JOIN `teams` AS h ON g.team_h_id = h.ID JOIN `teams` AS a ON g.team_a_id = a.ID ";
 
