@@ -84,12 +84,14 @@ if($type_of_bet === 1){
 //    $encoded_data = json_encode($data);
 //    print($data);
 //}
-$insert_bet_query = "INSERT INTO `bets`(`user_id`, `amount`, `game_id`, `bet_type_id`, `side`, `line`, `odds`) VALUES ('$user_id', '$bet_amount', '$game_id', '$type_of_bet', '$side', '$line', '$odds')";
+$curr_time = time();
+$formatted_time = date('Y-m-d H:i:s', $curr_time);
+$insert_bet_query = "INSERT INTO `bets`(`user_id`, `amount`, `game_id`, `bet_type_id`, `side`, `line`, `odds`, `time_placed`) VALUES ('$user_id', '$bet_amount', '$game_id', '$type_of_bet', '$side', '$line', '$odds', '$formatted_time')";
 $insert_bet_result = mysqli_query($connection, $insert_bet_query);
 
 $transaction = $bet_amount * -1;
 if(mysqli_affected_rows($connection)){
-    $transaction_query = "INSERT INTO `transactions`(`user_id`, `transaction`, `time`) VALUES ('$user_id', '$transaction', NOW())";
+    $transaction_query = "INSERT INTO `transactions`(`user_id`, `transaction`, `time`) VALUES ('$user_id', '$transaction', '$formatted_time')";
     $transaction_results = mysqli_query($connection, $transaction_query);
 
     //verification that bet writing and transaction worked
