@@ -513,3 +513,7 @@ video{
     font-weight: bold;
     float: right;
 }
+.final_display{
+    font-weight: bold;
+    float: left;
+}

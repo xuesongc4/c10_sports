@@ -24,6 +24,7 @@
     <div ng-repeat='bet_data in ic.displayData'>
         <div class='game' ng-click="ic.betToggle($index)">
             <div class="game_date">
+                <span ng-if="bet_data.final_score_a>-1" class="final_display">Final</span>
                 <span class = 'sel2'>
                     {{bet_data.game_date}}</span>
                 <span class = 'sel3'>
