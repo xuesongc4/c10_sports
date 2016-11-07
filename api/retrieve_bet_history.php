@@ -6,14 +6,15 @@ date_default_timezone_set('UTC');
 $user_id = $_SESSION['ID'];
 //$user_id = '1';           //for testing only
 //$bet_history_query = "SELECT amount, settled, bet_type_id, game_id, side, line, odds FROM `bets` WHERE user_id = '$user_id'";
-$bet_history_query = "SELECT b.amount, bs.bet_status, a.full_name AS away_team, a.logo_src AS away_logo, h.full_name AS home_team, h.logo_src AS home_logo, g.game_time, bt.bet_name, b.side, b.odds
+$bet_history_query = "SELECT b.amount, bs.bet_status, a.full_name AS away_team, a.logo_src AS away_logo, h.full_name AS home_team, h.logo_src AS home_logo, g.game_time, g.final_score_a, g.final_score_h, bt.bet_name, b.side, b.odds, b.time_placed
 FROM `bets` AS b
 JOIN `games` AS g ON g.ID = b.game_id
 JOIN `bet_status` AS bs ON bs.ID = b.settled
 JOIN `teams` AS h ON g.team_h_id = h.ID
 JOIN `teams` AS a ON g.team_a_id = a.ID
 JOIN `bet_types`AS bt ON bt.ID = b.bet_type_id
-WHERE b.user_id = '$user_id'";
+WHERE b.user_id = '$user_id'
+ORDER BY b.time_placed DESC";
 //full data attempt
 $result = mysqli_query($connection, $bet_history_query);
 $data = [];

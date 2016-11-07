@@ -84,25 +84,53 @@ if($type_of_bet === 1){
 //    $encoded_data = json_encode($data);
 //    print($data);
 //}
-$insert_bet_query = "INSERT INTO `bets`(`user_id`, `amount`, `game_id`, `bet_type_id`, `side`, `line`, `odds`) VALUES ('$user_id', '$bet_amount', '$game_id', '$type_of_bet', '$side', '$line', '$odds')";
-$insert_bet_result = mysqli_query($connection, $insert_bet_query);
+//$curr_time = time();
+//$curr_time = date('Y-m-d H:i:s', $curr_time);
+$curr_time = date('Y-m-d H:i:s', time());
 
-$transaction = $bet_amount * -1;
-if(mysqli_affected_rows($connection)){
-    $transaction_query = "INSERT INTO `transactions`(`user_id`, `transaction`, `time`) VALUES ('$user_id', '$transaction', NOW())";
-    $transaction_results = mysqli_query($connection, $transaction_query);
+//idea to limit the adding of bets to in progress and completed games:
+//add select query prior to writing insert
+//compare formatted current to start time of game
+//if the game is after the start time bet should fail and we should return an error
 
-    //verification that bet writing and transaction worked
+//should create empty array for data variable
+$data = [];
+
+
+$game_time_query = "SELECT game_time FROM `games` WHERE ID = '$game_id'";
+$game_time_results = mysqli_query($connection, $game_time_query);
+
+if(mysqli_num_rows($game_time_results)){
+    while($row = mysqli_fetch_assoc($game_time_results)) {
+        $game_time = $row['game_time'];
+    }
+}
+
+if($curr_time < $game_time){
+    //game can still be bet on
+    $insert_bet_query = "INSERT INTO `bets`(`user_id`, `amount`, `game_id`, `bet_type_id`, `side`, `line`, `odds`, `time_placed`) VALUES ('$user_id', '$bet_amount', '$game_id', '$type_of_bet', '$side', '$line', '$odds', '$curr_time')";
+    $insert_bet_result = mysqli_query($connection, $insert_bet_query);
+
+    $transaction = $bet_amount * -1;
     if(mysqli_affected_rows($connection)){
-        $data['success'] = true;
-        $data['bet_placed'] = $type_of_bet;
+        $transaction_query = "INSERT INTO `transactions`(`user_id`, `transaction`, `time`) VALUES ('$user_id', '$transaction', '$curr_time')";
+        $transaction_results = mysqli_query($connection, $transaction_query);
+
+        //verification that bet writing and transaction worked
+        if(mysqli_affected_rows($connection)){
+            $data['success'] = true;
+            $data['bet_placed'] = $type_of_bet;
+        }else{
+            $data['success'] = false;
+            $data['errors'][] = 'transaction failed';
+        }
     }else{
         $data['success'] = false;
-        $data['errors'][] = 'transaction failed';
+        $data['errors'][] = 'bet failed';
     }
 }else{
     $data['success'] = false;
-    $data['errors'][] = 'bet failed';
+    $data['errors'][] = 'it is too late to place this bet';
 }
 
 $data = json_encode($data);

@@ -86,7 +86,7 @@ function make_query($connection, $spordId, $leagueId) {
 	foreach($api_settled as $settled_game) {
 		$select_query = "SELECT final_score_h, final_score_a FROM games WHERE API_game_id = {$settled_game['API_game_id']}";
 		$select_result = mysqli_query($connection, $select_query);
-//        echo "world";
+
 		if (mysqli_num_rows($select_result) > 0) {
 			$row = mysqli_fetch_assoc($select_result);
 			if ($row['final_score_h'] != $settled_game['final_score_h']) {
