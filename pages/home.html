@@ -20,7 +20,7 @@
         </div>
 </div>
 <div class="sched_landing">
-    <div class="no_games_warning" ng-show="ic.displayDataLength"><h1>No games available...</h1></div>
+    <div class="no_games_warning" ng-hide="ic.displayDataLength"><h1>No games available</h1></div>
     <div ng-repeat='bet_data in ic.displayData'>
         <div class='game' ng-click="ic.betToggle($index)">
             <div class="game_date">
@@ -31,8 +31,8 @@
                 </span>
             </div>
             <div class='teams_playing_div'>
-                <div class="teams_playing"><img class="home_img" src={{bet_data.logo_src_a}}> {{bet_data.full_name_a}} <span class="game_odds">{{bet_data.overunder_points}}</span> </div>
-                <div class="teams_playing"><img class="away_img" src={{bet_data.logo_src_h}}> {{bet_data.full_name_h}} <span class="game_odds"><span ng-if="bet_data.home_spread>0">+</span>{{bet_data.home_spread}}</span></div>
+                <div class="teams_playing"><img class="home_img" ng-src="{{bet_data.logo_src_a}}"> {{bet_data.full_name_a}} <span ng-if="bet_data.final_score_a==-1" class="game_odds">{{bet_data.overunder_points}}</span> <span ng-if="bet_data.final_score_a>-1" class="final_score">{{bet_data.final_score_a}}</span> </div>
+                <div class="teams_playing"><img class="away_img" ng-src="{{bet_data.logo_src_h}}"> {{bet_data.full_name_h}} <span ng-if="bet_data.final_score_h==-1" class="game_odds"><span ng-if="bet_data.home_spread>0 && bet_data.final_score_h==-1">+</span>{{bet_data.home_spread}}</span> <span ng-if="bet_data.final_score_h>-1" class="final_score">{{bet_data.final_score_h}}</span></div>
             </div>
             <div class="bet_made_lander">
                 <div class="bet_made" ng-show="ic.show_circle_bet[0]">S</div>

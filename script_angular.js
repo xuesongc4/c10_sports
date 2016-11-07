@@ -102,10 +102,12 @@ app.controller('controller', function (myFactory) {
     this.highlight = [];
     this.sendData = {};
     this.displayData = {};
+    this.displayDateLength=false;
     this.saveBetData = {};
     this.bet_index_mem=100;
     this.league_highlight=[0,0,0,0,0,0];
     this.user_funds={};
+
 
     this.addUsersFunds = function(){
         myFactory.findUsersFunds()
@@ -280,10 +282,10 @@ app.controller('controller', function (myFactory) {
                     $('.loader').addClass('hide');
                     $('.loader_background').addClass('hide');
                     if(response.length==0){
-                        self.displayDataLength=true;
+                        self.displayDataLength=false;
                     }
                     else{
-                        self.displayDataLength=false;
+                        self.displayDataLength=true;
                     }
                     console.log('display data length',self.displayDataLength)
                 },
