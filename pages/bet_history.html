@@ -5,7 +5,7 @@
     <div class="loader_background hide"></div>
     <div ng-repeat="hist_data in bh.bet_history">
         <div class = 'game'>
-            <div>{{hist_data.game_time}} <img class='home_img' src="{{hist_data.away_logo}}">{{hist_data.away_team}} vs <img class='home_img' src="{{hist_data.home_logo}}">{{hist_data.home_team}} bet on {{hist_data.side}} {{hist_data.bet_name}} odds: {{hist_data.odds}}</div>
+            <div>{{hist_data.game_time}} <img class='home_img' ng-src="{{hist_data.away_logo}}">{{hist_data.away_team}} vs <img class='home_img' ng-src="{{hist_data.home_logo}}">{{hist_data.home_team}} bet on {{hist_data.side}} {{hist_data.bet_name}} odds: {{hist_data.odds}}</div>
             <div>Result: {{hist_data.bet_status}}</div>
         </div>
     </div>

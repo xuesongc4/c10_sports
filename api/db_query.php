@@ -200,18 +200,18 @@ function make_query($connection, $spordId, $leagueId) {
 }
 
 
-$today_date = date('m-d', time());
+// $today_date = date('m-d', time());
 
-if ($today_date > '09-01' || $today_date < '02-10') {
-	// make_query($connection, 15, 889);
-}
+// if ($today_date > '09-01' || $today_date < '02-10') {
+// 	// make_query($connection, 15, 889);
+// }
 
-if ($today_date > '10-25' || $today_date < '06-25') {
-	 make_query($connection, 4, 487);
-}
+// if ($today_date > '10-25' || $today_date < '06-25') {
+// 	 make_query($connection, 4, 487);
+// }
 
-if ($today_date > '03-21' && $today_date < '11-05') {
-	// make_query($connection, 3, 246);
-}
+// if ($today_date > '03-21' && $today_date < '11-05') {
+// 	// make_query($connection, 3, 246);
+// }
 
  ?>
