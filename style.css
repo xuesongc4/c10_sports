@@ -16,6 +16,7 @@ body{
     text-align: center;
     width: 80%;
     max-width:775px;
+    min-width: 500px;
 }
 .sched_landing{
     font-size: 20px;
@@ -23,6 +24,7 @@ body{
     width:80%;
     margin-top:-4px;
     max-width:775px;
+    min-width: 500px;
     position: relative;
     border: 4px solid black;
     box-sizing: border-box;
@@ -44,6 +46,7 @@ body{
     background-color: white;
     width: 40vw;
     max-width: 400px;
+    min-width: 330px;
     height: 100vh;
     z-index: 10;
     border-right: 3px black solid;
@@ -76,7 +79,7 @@ body{
     border: solid 4px black;
     height: 100%;
     width: 32%;
-    font-size: 30px;
+    font-size: 1.5vw;
     line-height: 40px;
     background-color: white;
     color: black;
@@ -89,7 +92,7 @@ body{
      display: inline-block;
      font-family: 'Khand', sans-serif;
      font-size: 2.6vw;
-     margin-left: 3%;
+     margin-left: 40px;
  }
 .league_button:hover{
     cursor: pointer;
@@ -235,27 +238,27 @@ body{
 .menu_option{
     border-bottom: solid black 2px;
     display: block;
-    padding: 20px;
+    padding: 2vh;
     background-color: white;
 }
+
 .menu_option_logout{
     border-bottom: solid black 2px;
     display: block;
-    padding: 20px;
+    padding: 2vh;
     background: black;
     color: white;
     margin-top: -6px;
 }
 .menu_option_logout:hover{
     border-bottom: solid black 2px;
-    display: block;
-    padding: 20px;
+    padding: 2vh;
     color: deepskyblue;
 }
 
 .menu_option, a{
     color: black;
-    font-size: 40px;
+    font-size: 3vh;
 }
 a:hover{
     color:deepskyblue;
@@ -287,8 +290,8 @@ a:hover{
     margin: auto;
     margin-top: 15px;
     margin-bottom: 15px;
-    width:330px;
-    height:330px;
+    width:35vh;
+    height:35vh;
     text-align: center;
     background-color: black;
     color:deepskyblue;
@@ -381,7 +384,7 @@ a:hover{
 }
 
 .funds{
-    font-size: 30px;
+    font-size: 3vh;
 }
 .title{
     text-align: center;
