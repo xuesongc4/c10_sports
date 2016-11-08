@@ -7,11 +7,11 @@ $time_frame = $_POST['game_block'];
 $start_day = $_POST['start_end']['startDay'];
 $end_day = $_POST['start_end']['endDay'];
 //collect league from index
-$league = $_POST['league'];  //may not need to upper
+$league = $_POST['league'];
 //lookup the league in league table
 $league_query = "SELECT ID FROM `leagues` WHERE league = '$league'";
 $result = mysqli_query($connection, $league_query);
-//print_r($result);             //for testing
+
 if(mysqli_num_rows($result)){
     while($row = mysqli_fetch_assoc($result)) {
         $league_id = $row['ID'];
@@ -45,11 +45,29 @@ $game_query = $game_query_select_clause . $game_query_from_clause . $game_query_
 //query the db
 $result = mysqli_query($connection, $game_query);
 
+$bets_placed = ['bets_placed'=>['spread'=>'false','moneyline'=>'false','over_under'=>'false']];
+
 if(mysqli_num_rows($result)){
     while($row = mysqli_fetch_assoc($result)) {
-        $data[] = $row;
+        $data[] = array_merge($row, $bets_placed);
     }
 }
+
+//run query for each game in data to see if there are bets of each type
+//foreach ()
+
+
+//$bets_placed_query = "SELECT bt.bet_name, COUNT(bt.bet_name) AS quantity FROM `bets` AS b
+//JOIN users AS u ON u.ID = user_id
+//JOIN bet_types AS bt ON bt.ID = b.bet_type_id
+//JOIN games AS g ON g.ID = b.game_id
+//WHERE u.ID = '$user_id' AND g.ID = '$game_id'
+//GROUP BY bt.bet_name";
+//$bets_placed_results = mysqli_query($connection, $bets_placed_query);
+
+//for testing
+//print_r($data);
+
 //json encode the data
 $json_encoded_object = json_encode($data);
 //print the json encoded object
