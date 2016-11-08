@@ -153,11 +153,14 @@ body{
 }
 .bet{
     border: solid 2px black;
-    height: 370px;
     background-color: lightgrey;
     text-align: center;
-    transition: all linear 0.4s;
+    transition: all linear 0.15s;
     overflow:hidden;
+    height: 375px;
+}
+.started{
+    height: 240px;
 }
 
 .game_date{
@@ -196,6 +199,14 @@ body{
     border: 3px solid deepskyblue;
     border-radius: 0;
     color: deepskyblue;
+}
+
+.spread_bet_fake{
+    opacity: .5;
+    pointer-events: none;
+}
+.spread_bet_fake:hover{
+    cursor: default;
 }
 
 .confirm_button{
