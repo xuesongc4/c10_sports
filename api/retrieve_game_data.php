@@ -28,11 +28,11 @@ $game_query_join_clause = "JOIN `teams` AS h ON g.team_h_id = h.ID JOIN `teams` 
 
 //conditional to determine dynamic query clauses based on time_frame
 if($time_frame === 'current'){
-    $game_query_where_clause = "WHERE g.league_id = '$league_id' AND '$start_day' <= g.game_time AND g.game_time <= '$end_day' ";
+    $game_query_where_clause = "WHERE g.league_id = '$league_id' AND '$start_day' <= g.game_time AND g.game_time < '$end_day' ";
     $game_query_order_clause = "ORDER BY g.game_time ASC ";
     $game_query_limit_clause = "";
 }else if($time_frame === 'future'){
-    $game_query_where_clause = "WHERE g.league_id = '$league_id' AND g.game_time > '$end_day' ";
+    $game_query_where_clause = "WHERE g.league_id = '$league_id' AND g.game_time >= '$end_day' ";
     $game_query_order_clause = "ORDER BY g.game_time ASC ";
     $game_query_limit_clause = "";
 }else {
