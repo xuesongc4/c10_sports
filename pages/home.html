@@ -37,9 +37,9 @@
                 <div class="teams_playing"><img class="away_img" ng-src="{{bet_data.logo_src_h}}"> {{bet_data.full_name_h}} <span ng-if="bet_data.final_score_h==-1" class="game_odds"><span ng-if="bet_data.home_spread>0 && bet_data.final_score_h==-1">+</span>{{bet_data.home_spread}}</span> <span ng-if="bet_data.final_score_h>-1" class="final_score">{{bet_data.final_score_h}}</span></div>
             </div>
             <div class="bet_made_lander">
-                <div class="bet_made" ng-show="ic.show_circle_bet[0]">S</div>
-                <div class="bet_made" ng-show="ic.show_circle_bet[1]">ML</div>
-                <div class="bet_made" ng-show="ic.show_circle_bet[2]">O/U</div>
+                <div class="bet_made" ng-if="bet_data.bets_placed.spread=='true'">S</div>
+                <div class="bet_made" ng-if="bet_data.bets_placed.moneyline=='true'">ML</div>
+                <div class="bet_made" ng-if="bet_data.bets_placed['over/under']=='true'">O/U</div>
             </div>
         </div>
 

@@ -314,6 +314,7 @@ a:hover{
 .bet_made_lander{
     float: right;
     vertical-align: bottom;
+    height: 30px;
 }
 
 .bet_made{
