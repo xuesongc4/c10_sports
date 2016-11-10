@@ -26,7 +26,7 @@
              <br><span style="margin-top: 100px; font-weight: bolder"> {{ic.user_funds.username}}</span>
                 <div class="funds">Total Funds:${{ic.user_funds.funds}}</span></div>
             </a>
-            <a class="menu_option_top" href="#/" ng-click="ic.menu_toggle=true"><img
+            <a class="menu_option_top" href="#/" ng-click="ic.menu_toggle=true; ic.getGameData('current','NFL')"><img
                     src="images/Football.png"></img> Game Screen</a>
             <a class="menu_option" href="#/bethistory" ng-click="ic.menu_toggle=true"><img
                     src="images/GraphBar.png"></img> Bet History</a>
