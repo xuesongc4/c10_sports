@@ -71,60 +71,38 @@ if(mysqli_num_rows($result)){
 
 //run query to see if games were bet on
 
-//query altogether - early experiment
-//$bet_query = "SELECT bt.bet_name, b.game_id, COUNT(b.ID) AS bet_qty
-//      FROM `bets` AS b
-//      JOIN `bet_types` AS bt ON b.bet_type_id = bt.ID
-//      JOIN games as g ON b.game_id = g.ID
-//      WHERE b.user_id = '$user_id'
-//      GROUP by g.ID, b.bet_type_id
-//      ORDER BY g.ID, b.bet_type_id";
-//$bet_results = mysqli_query($connection, $bet_query);
-
-//seperated query clauses for bet
+//separated query clauses for bet
 $bet_query_select_clause = "SELECT bt.bet_name, b.game_id, COUNT(b.ID) AS bet_qty ";
 $bet_query_from_clause = "FROM `bets` AS b ";
 $bet_query_join_clause = "JOIN `bet_types` AS bt ON b.bet_type_id = bt.ID JOIN games as g ON b.game_id = g.ID ";
 $bet_query_where_clause = $game_query_where_clause . "AND b.user_id = '$user_id' ";
 $bet_query_group_clause = "GROUP by g.ID, b.bet_type_id ";
 $bet_query_order_clause = "ORDER BY g.ID, b.bet_type_id";
-////concatenate query clauses together
+//concatenate query clauses together
 $bet_query = $bet_query_select_clause . $bet_query_from_clause . $bet_query_join_clause . $bet_query_where_clause . $bet_query_group_clause . $bet_query_order_clause;
-//print($bet_query);
 $bet_results = mysqli_query($connection, $bet_query);
 
 $games_bet = [];
 if(mysqli_num_rows($bet_results)){
     //if there are any results see if there are any of the appropriate keys in the result
-//    print('we got a result');
-//    $games = [];           //maybe dan's
-    $old_game_id = null;             //dan's code
-    $this_game = null;               //dan's code
-    while($row = mysqli_fetch_assoc($bet_results)){              //dan's code
-//        $games[] = $row;
-        if($old_game_id != $row['game_id']){           //dan's code
-            $games_bet[$row['game_id']] = $this_game;          //dan's code
-            $this_game = [             //dan's code
+    $old_game_id = null;
+    $this_game = null;
+    while($row = mysqli_fetch_assoc($bet_results)){
+        if($old_game_id != $row['game_id']){
+            $games_bet[$row['game_id']] = $this_game;
+            $this_game = [
 //                'game_id'=> $row['game_id'],
-                'spread'=>0,     //dan's code
-                'moneyline'=>0,     //dan's code
-                'over/under'=>0     //dan's code
+                'spread'=>0,
+                'moneyline'=>0,
+                'over/under'=>0
             ];
-            $old_game_id = $row['game_id'];                //dan's code
+            $old_game_id = $row['game_id'];
         }
-        $this_game[$row['bet_name']] = $row['bet_qty'];     //dan's code
-//        $this_game['game_id'] = $row['game_id'];              //my line
+        $this_game[$row['bet_name']] = $row['bet_qty'];
         $games_bet[$row['game_id']] = $this_game;
     }
-//    array_shift($games);     //dan's code
-//    print('<pre>');
-//    print('<br>');
-//    print_r($games_bet);
-//    print('</pre>');
 }
-
-//get help from dan looking through this
-//**************************************************************************
+//place the bets_placed into the data for each game
 for($i = 0; $i < count($data); $i++) {
     $index = $data[$i]['game_id'];
     if(array_key_exists($index, $games_bet)){
@@ -132,31 +110,8 @@ for($i = 0; $i < count($data); $i++) {
     }
 }
 
-
-//$curr_index = 0;
-//$key_arr = [];
-//foreach ($games_bet as $gb){
-//    for($index = $curr_index; $index < count($data); $index++){
-//        print(key($gb));
-////        $key_arr[] = key($gb);
-////        if($data[$index]['game_id'] === key($gb)){
-//////            $key_arr[] = key($games_bet);
-////            $curr_index = $index;
-////            $data[$index]['bets_placed'] = $gb;
-////            break;
-////        }
-//    }
-//}
-
-
 //////for testing
 //print('<pre>');
-//print_r($data);
-//print('</pre>');
-//
-//print('<pre>');
-////print_r($key_arr);
-////print('<br>');
 //print_r($data);
 //print('<br>');
 //print_r($games);
