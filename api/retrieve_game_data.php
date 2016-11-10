@@ -16,6 +16,7 @@ date_default_timezone_set('UTC');
 //$league = 'NFL';
 
 //print(json_encode($_POST));     //for testing purposes
+
 $time_frame = $_POST['game_block'];
 $start_day = $_POST['start_end']['startDay'];
 $end_day = $_POST['start_end']['endDay'];
@@ -23,6 +24,7 @@ $end_day = $_POST['start_end']['endDay'];
 $league = $_POST['league'];
 //gather user id
 $user_id = $_SESSION['ID'];
+
 //lookup the league in league table
 $league_query = "SELECT ID FROM `leagues` WHERE league = '$league'";
 $result = mysqli_query($connection, $league_query);
@@ -108,13 +110,29 @@ for($i = 0; $i < count($data); $i++) {
     if(array_key_exists($index, $games_bet)){
         $data[$i]['bets_placed'] = $games_bet[$index];
     }
+    //convert values to true or false
+    if($data[$i]['bets_placed']['spread']){
+        $data[$i]['bets_placed']['spread'] = 'true';
+    }else{
+        $data[$i]['bets_placed']['spread'] = 'false';
+    }
+    if($data[$i]['bets_placed']['moneyline']){
+        $data[$i]['bets_placed']['moneyline'] = 'true';
+    }else{
+        $data[$i]['bets_placed']['moneyline'] = 'false';
+    }
+    if($data[$i]['bets_placed']['over/under']){
+        $data[$i]['bets_placed']['over/under'] = 'true';
+    }else{
+        $data[$i]['bets_placed']['over/under'] = 'false';
+    }
 }
 
 //////for testing
 //print('<pre>');
 //print_r($data);
 //print('<br>');
-//print_r($games);
+////print_r($games);
 //print('</pre>');
 
 //json encode the data
