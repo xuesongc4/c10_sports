@@ -6,17 +6,19 @@ require_once('mysql_connect.php');
 date_default_timezone_set('UTC');
 
 //variables coming in
-//static variables for now
-//$user_id = 1;
-//$game_number = 4;
-$bet_amount = 100;
-
+////static variables for testing
+//$user_id = 2;
+//$game_id = 193;
+//$bet_amount = 100;
+//
 //$type_of_bet = 'spread';            //bet_type = 1
-//$type_of_bet = 'moneyline';       //bet_type = 2
-//$type_of_bet = 'over/under';      //bet_type = 3
-
-//$first_side = true;
-//$first_side = false;
+////$type_of_bet = 'moneyline';       //bet_type = 2
+////$type_of_bet = 'over/under';      //bet_type = 3
+//
+//$side = true;
+////$side = false;
+//$line = 100;
+//$odds = -107;
 
 //dynamic variables
 $user_id = $_SESSION['ID'];
@@ -119,6 +121,17 @@ if($curr_time < $game_time){
         //verification that bet writing and transaction worked
         if(mysqli_affected_rows($connection)){
             $data['success'] = true;
+
+            $bet_query_select_clause = "SELECT bt.bet_name, COUNT(b.ID) AS bet_qty ";
+            $bet_query_from_clause = "FROM `bets` AS b ";
+            $bet_query_join_clause = "JOIN `bet_types` AS bt ON b.bet_type_id = bt.ID ";
+            $bet_query_where_clause = "WHERE b.game_id = '$game_id' AND b.user_id = '$user_id' ";
+
+            //concatenate query clauses together
+            $bet_query = $bet_query_select_clause . $bet_query_from_clause . $bet_query_join_clause . $bet_query_where_clause;
+//            print ($bet_query);
+            $bet_results = mysqli_query($connection, $bet_query);
+
             $data['bet_placed'] = $type_of_bet;
         }else{
             $data['success'] = false;

@@ -27,10 +27,10 @@ $user_id = $_SESSION['ID'];
 
 //lookup the league in league table
 $league_query = "SELECT ID FROM `leagues` WHERE league = '$league'";
-$result = mysqli_query($connection, $league_query);
+$league_result = mysqli_query($connection, $league_query);
 
-if(mysqli_num_rows($result)){
-    while($row = mysqli_fetch_assoc($result)) {
+if(mysqli_num_rows($league_result)){
+    while($row = mysqli_fetch_assoc($league_result)) {
         $league_id = $row['ID'];
     }
 }
@@ -64,7 +64,7 @@ $game_result = mysqli_query($connection, $game_query);
 
 $bets_placed = ['bets_placed'=>['spread'=>'0','moneyline'=>'0','over/under'=>'0']];
 
-if(mysqli_num_rows($result)){
+if(mysqli_num_rows($game_result)){
     while($row = mysqli_fetch_assoc($game_result)) {
         $data[] = array_merge($row, $bets_placed);
 //        $data[] = $row;
