@@ -127,9 +127,10 @@ if($curr_time < $game_time){
             $bet_query_from_clause = "FROM `bets` AS b ";
             $bet_query_join_clause = "JOIN `bet_types` AS bt ON b.bet_type_id = bt.ID ";
             $bet_query_where_clause = "WHERE b.game_id = '$game_id' AND b.user_id = '$user_id' ";
+            $bet_query_group_clause = "GROUP BY bt.bet_name ";
 
             //concatenate query clauses together
-            $bet_query = $bet_query_select_clause . $bet_query_from_clause . $bet_query_join_clause . $bet_query_where_clause;
+            $bet_query = $bet_query_select_clause . $bet_query_from_clause . $bet_query_join_clause . $bet_query_where_clause . $bet_query_group_clause;
             $bet_results = mysqli_query($connection, $bet_query);
             if(mysqli_num_rows($bet_results)){
                 //this should be able to be simplified
