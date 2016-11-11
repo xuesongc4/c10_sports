@@ -98,7 +98,7 @@ app.controller('controller', function (myFactory) {
     this.gotData = false;
     this.bet_button_toggle=false;
     this.highlightDate=[false,'selected_date',false];
-    this.show_circle_bet=[true,true,true];
+    this.show_circle_bet=[false,false,false];
     this.highlight = [];
     this.sendData = {};
     this.displayData = {};
