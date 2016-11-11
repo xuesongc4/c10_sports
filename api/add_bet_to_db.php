@@ -9,7 +9,7 @@ date_default_timezone_set('UTC');
 ////static variables for testing
 //$user_id = 2;
 //$game_id = 193;
-//$bet_amount = 100;
+
 //
 //$type_of_bet = 'spread';            //bet_type = 1
 ////$type_of_bet = 'moneyline';       //bet_type = 2
@@ -19,6 +19,7 @@ date_default_timezone_set('UTC');
 ////$side = false;
 //$line = 100;
 //$odds = -107;
+$bet_amount = 100;      //necessary when testing and not
 
 //dynamic variables
 $user_id = $_SESSION['ID'];
@@ -129,10 +130,45 @@ if($curr_time < $game_time){
 
             //concatenate query clauses together
             $bet_query = $bet_query_select_clause . $bet_query_from_clause . $bet_query_join_clause . $bet_query_where_clause;
-//            print ($bet_query);
             $bet_results = mysqli_query($connection, $bet_query);
+            if(mysqli_num_rows($bet_results)){
+                //this should be able to be simplified
+                //if there are any results see if there are any of the appropriate keys in the result
+//                $old_game_id = null;
 
-            $data['bet_placed'] = $type_of_bet;
+                $data['bets_placed'] = [
+                    'spread'=>0,
+                    'moneyline'=>0,
+                    'over/under'=>0
+                ];
+                while($row = mysqli_fetch_assoc($bet_results)){
+//                    $temp_data = $row;
+                    $data['bets_placed'][$row['bet_name']] = $row['bet_qty'];
+                }
+//                print_r($temp_data);
+//                    $games_bet[$row['game_id']] = $this_game;
+            }
+            //place the bets_placed into the data for the game
+
+            //convert values to true or false
+            if($data['bets_placed']['spread'] > 0){
+                $data['bets_placed']['spread'] = 'true';
+            }else{
+                $data['bets_placed']['spread'] = 'false';
+            }
+            if($data['bets_placed']['moneyline'] > 0){
+                $data['bets_placed']['moneyline'] = 'true';
+            }else{
+                $data['bets_placed']['moneyline'] = 'false';
+            }
+            if($data['bets_placed']['over/under'] > 0){
+                $data['bets_placed']['over/under'] = 'true';
+            }else{
+                $data['bets_placed']['over/under'] = 'false';
+            }
+
+
+//            $data['bet_placed'] = $type_of_bet;
         }else{
             $data['success'] = false;
             $data['errors'][] = 'transaction failed';
