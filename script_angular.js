@@ -98,11 +98,11 @@ app.controller('controller', function (myFactory) {
     this.gotData = false;
     this.bet_button_toggle=false;
     this.highlightDate=[false,'selected_date',false];
-    this.show_circle_bet=[true,true,true];
+    this.show_circle_bet=[false,false,false];
     this.highlight = [];
     this.sendData = {};
     this.displayData = {};
-    this.displayDateLength=false;
+    this.displayDataLength=true;
     this.saveBetData = {};
     this.bet_index_mem=100;
     this.league_highlight=[0,0,0,0,0,0];
@@ -261,11 +261,23 @@ app.controller('controller', function (myFactory) {
             .then(function (response) {
                     for (var i = 0; i < response.length; i++) {
                         response[i].bet_toggle = false;
+
+                        if(response[i].final_score_a == -1) {
+                            response[i].start_not_started = 'not_started';
+                            response[i].spread_fake = 0;
+
+                        }
+                        else if(response[i].final_score_a > -1){
+                            response[i].start_not_started = 'started';
+                            response[i].spread_fake = 1;
+                        }
+
                         var date = new Date(response[i].game_time+' UTC');
                         var temp_date=date.toString().slice(0,15);
                         var temp_time=date.toString().slice(16,21);
                         var time_check = temp_time.slice(0,2);
                         var time_check2 = temp_time.slice(3,5);
+
                         if(time_check >= 12) {
                             temp_time = time_check - 12 + ':' + time_check2 + ' PM';
                         }
@@ -275,7 +287,7 @@ app.controller('controller', function (myFactory) {
                         response[i].game_time = temp_time;
                         response[i].game_date = temp_date;
                     };
-                    console.log("response with toggle information: ", response);
+                    console.log("response with toggle information and started or not information: ", response);
 
                     self.displayData = response;
                     self.gotData = true;
