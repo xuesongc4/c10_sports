@@ -128,29 +128,20 @@ if($curr_time < $game_time){
             $bet_query_join_clause = "JOIN `bet_types` AS bt ON b.bet_type_id = bt.ID ";
             $bet_query_where_clause = "WHERE b.game_id = '$game_id' AND b.user_id = '$user_id' ";
             $bet_query_group_clause = "GROUP BY bt.bet_name ";
-
             //concatenate query clauses together
             $bet_query = $bet_query_select_clause . $bet_query_from_clause . $bet_query_join_clause . $bet_query_where_clause . $bet_query_group_clause;
             $bet_results = mysqli_query($connection, $bet_query);
             if(mysqli_num_rows($bet_results)){
-                //this should be able to be simplified
                 //if there are any results see if there are any of the appropriate keys in the result
-//                $old_game_id = null;
-
                 $data['bets_placed'] = [
                     'spread'=>0,
                     'moneyline'=>0,
                     'over/under'=>0
                 ];
                 while($row = mysqli_fetch_assoc($bet_results)){
-//                    $temp_data = $row;
                     $data['bets_placed'][$row['bet_name']] = $row['bet_qty'];
                 }
-//                print_r($temp_data);
-//                    $games_bet[$row['game_id']] = $this_game;
             }
-            //place the bets_placed into the data for the game
-
             //convert values to true or false
             if($data['bets_placed']['spread'] > 0){
                 $data['bets_placed']['spread'] = 'true';
@@ -167,18 +158,18 @@ if($curr_time < $game_time){
             }else{
                 $data['bets_placed']['over/under'] = 'false';
             }
-
-
-//            $data['bet_placed'] = $type_of_bet;
         }else{
+            //insert transaction query did not go through
             $data['success'] = false;
             $data['errors'][] = 'transaction failed';
         }
     }else{
+        //insert bet query did not go through
         $data['success'] = false;
         $data['errors'][] = 'bet failed';
     }
 }else{
+    //game can't be bet on due to being to late
     $data['success'] = false;
     $data['errors'][] = 'it is too late to place this bet';
 }
