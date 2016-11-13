@@ -27,10 +27,10 @@ $user_id = $_SESSION['ID'];
 
 //lookup the league in league table
 $league_query = "SELECT ID FROM `leagues` WHERE league = '$league'";
-$result = mysqli_query($connection, $league_query);
+$league_result = mysqli_query($connection, $league_query);
 
-if(mysqli_num_rows($result)){
-    while($row = mysqli_fetch_assoc($result)) {
+if(mysqli_num_rows($league_result)){
+    while($row = mysqli_fetch_assoc($league_result)) {
         $league_id = $row['ID'];
     }
 }
@@ -60,12 +60,12 @@ if($time_frame === 'current'){
 //compile query clause
 $game_query = $game_query_select_clause . $game_query_from_clause . $game_query_join_clause . $game_query_where_clause . $game_query_order_clause . $game_query_limit_clause;
 //query the db
-$game_result = mysqli_query($connection, $game_query);
+$game_results = mysqli_query($connection, $game_query);
 
 $bets_placed = ['bets_placed'=>['spread'=>'0','moneyline'=>'0','over/under'=>'0']];
 
-if(mysqli_num_rows($result)){
-    while($row = mysqli_fetch_assoc($game_result)) {
+if(mysqli_num_rows($game_results)){
+    while($row = mysqli_fetch_assoc($game_results)) {
         $data[] = array_merge($row, $bets_placed);
 //        $data[] = $row;
     }
