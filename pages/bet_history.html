@@ -1,12 +1,12 @@
 <div ng-controller="bethistory as bh">
     <div class="date_landing bet_history">
-        <div class="dates selected_date">
+        <div class="dates_history selected_date">
             Bet History
         </div>
-        <div class="dates">
+        <div class="dates_history">
             Total wins: {{bh.win_total}}
         </div>
-        <div class="dates">
+        <div class="dates_history">
             Total Losses: {{bh.loss_total}}
         </div>
     </div>
@@ -14,7 +14,7 @@
     <div class="loader_background hide"></div>
     <div class='sched_landing'>
         <div ng-repeat="hist_data in bh.bet_history">
-            <div class='game'>
+            <div class='game_history'>
                 <div class="game_date">
                     <span class="sel2">
                         {{hist_data.game_time}}
