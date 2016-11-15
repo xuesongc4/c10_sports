@@ -467,7 +467,7 @@ video{
     border-radius: 100%;
     margin-top: -375px;
     margin-left:35px;
-    display: intial;
+    display: none;
 }
 .loader2{
     border: 35px solid white;

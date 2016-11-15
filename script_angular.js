@@ -360,12 +360,35 @@ app.controller('leaderboard', function (myFactory) {
 app.controller('bethistory', function (myFactory) {
     var self = this;
     this.bet_history = null;
+    this.win_total = 0;
+    this.loss_total = 0;
     this.get_bet_history = function(){
         $('.loader').removeClass('hide');
         $('.loader_background').removeClass('hide');
         myFactory.getBetHistoryData()
             .then(function (response) {
                     for (var i = 0; i < response.length; i++) {
+                        var date = new Date(response[i].game_time+' UTC');
+                        var temp_date=date.toString().slice(0,15);
+                        var temp_time=date.toString().slice(16,21);
+                        var time_check = temp_time.slice(0,2);
+                        var time_check2 = temp_time.slice(3,5);
+
+                        if(time_check >= 12) {
+                            temp_time = time_check - 12 + ':' + time_check2 + ' PM';
+                        }
+                        else{
+                            temp_time = time_check -0 +':' + time_check2 +' AM';
+                        }
+                        response[i].game_time = temp_time;
+                        response[i].game_date = temp_date;
+
+                        if(response[i].bet_status==="Win"){
+                            self.win_total++;
+                        }
+                        else if(response[i].bet_status==="Loss"){
+                            self.loss_total++;
+                        }
                         if(response[i].bet_name === 'over/under'){
                             if(response[i].side === '1'){
                                 response[i].side = 'over';
