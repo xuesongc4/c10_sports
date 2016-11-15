@@ -20,5 +20,9 @@ if(mysqli_num_rows($funds_results)){
 }else{
     $data['errors'][] = 'user has no transactions';
 }
-print_r($data);
+
+//json encode the data
+$json_encoded_object = json_encode($data);
+//print the json encoded object
+print($json_encoded_object);
 ?>

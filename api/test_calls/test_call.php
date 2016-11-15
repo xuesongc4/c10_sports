@@ -19,7 +19,7 @@
 // NHL OT Included Alternates: 5445
 
 
-require('curl_call_setup.php');
+require('../curl_call_setup.php');
 
 //This fetches the initial feed from the Pinnacle Sports API
 $feedUrl = 'https://api.pinnacle.com/v2/leagues?sportid=19';

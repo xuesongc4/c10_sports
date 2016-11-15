@@ -6,24 +6,34 @@ body{
     font-size:0;
 }
 .league_landing{
-    width:80%;
     height: 50px;
-    margin:0 0 3% 10%;
+    margin:auto;
+    margin-bottom: 3%;
+    text-align: center;
+    width: 80%;
+    max-width:900px;
+    min-width: 550px;
 }
 .date_landing {
     height: 50px;
-    margin:0 0 0 10%;
+    margin:auto;
     text-align: center;
     width: 80%;
-    max-width:875px;
+    max-width:900px;
+    min-width: 550px;
 }
 .sched_landing{
     font-size: 20px;
-    margin:0 0 10% 10%;
+    margin:auto;
+    margin-top: 10%;
     width:80%;
-    margin-top:-2px;
-    max-width:875px;
+    margin-top:-4px;
+    max-width:900px;
+    min-width: 550px;
     position: relative;
+    border: 4px solid black;
+    box-sizing: border-box;
+    min-height: 150px;
 }
 
 .menu_button{
@@ -35,17 +45,16 @@ body{
     cursor: pointer;
 }
 .menu{
-    transition: all linear 0.5s;
     top:0px;
     left:0px;
-    position: absolute;
+    position: fixed;
     background-color: white;
     width: 40vw;
-    max-width: 400px;
+    max-width: 450px;
     height: 100vh;
-    display:inherit;
     z-index: 10;
     border-right: 3px black solid;
+    background-color: white;
 }
 
 .menu_close{
@@ -71,27 +80,58 @@ body{
 }
 .dates{
     display:inline-block;
-    border: solid 2px black;
+    border: solid 4px black;
     height: 100%;
     width: 32%;
-    font-size: 30px;
-    line-height: 45px;
-    background-color: lightgrey;
-    margin-right:-2px;
+    font-size: 25px;
+    line-height: 40px;
+    background-color: white;
+    color: black;
+    margin-right: -4px;
 }
 .dates:hover{
     cursor: pointer;
 }
 .league_button{
-    display: inline-block;
-    font-family: 'Khand', sans-serif;
-    font-size: 2.8vw;
-    margin-left: 3.5%;
-}
+     display: inline-block;
+     font-family: 'Khand', sans-serif;
+     font-size: 2.6vw;
+    margin-left: 25px;
+    margin-right: 25px;
+ }
 .league_button:hover{
     cursor: pointer;
     font-weight: bold;
     color: deepskyblue;
+}
+
+.league_button_bold{
+    font-size: 20px;
+    display: inline-block;
+    font-family: 'Khand', sans-serif;
+    font-size: 3.2vw;
+    font-weight: bold;
+    margin-left: 3.5%;
+}
+.logo{
+    height: 75px;
+    position: fixed;
+    top: 15px;
+    right:15px;
+    vertical-align: bottom;
+}
+.logo_menu{
+    height: 35px;
+    width: 35px;
+    color: deepskyblue;
+    background-color: black;
+    border-radius: 100%;
+    font-size: 15px;
+    display: inline-block;
+    text-align: center;
+    line-height: 35px;
+    vertical-align: bottom;
+    margin-bottom:10px;
 }
 .home_img {
     height: 40px;
@@ -107,11 +147,12 @@ body{
 /*}*/
 .game{
     font-size: 20px;
-    border: solid 2px black;
-    border-bottom: solid 1px black;
+    border: solid 1px black;
+    border-bottom: solid 2px black;
     padding: 2%;
     background-color: white;
     position:relative;
+    overflow: auto;
 }
 
 .game:hover{
@@ -119,11 +160,14 @@ body{
 }
 .bet{
     border: solid 2px black;
-    height: 370px;
-    background-color: whitesmoke;
+    background-color: lightgrey;
     text-align: center;
-    transition: all linear 0.3s;
+    transition: all linear 0.15s;
     overflow:hidden;
+    height: 375px;
+}
+.started{
+    height: 240px;
 }
 
 .game_date{
@@ -131,6 +175,7 @@ body{
     display:block;
     text-align: right;
     font-family: 'Concert One', cursive;
+    margin-bottom: 10px;
 }
 .teams_playing{
     font-size: 30px;
@@ -145,7 +190,7 @@ body{
     font-size: 4vw;
 }
 .modal-body{
-    border: 2px solid deepskyblue;
+    border: 5px solid deepskyblue;
     border-radius: 0;
 }
 .confirm-mdl, .cancel-mdl {
@@ -163,6 +208,14 @@ body{
     color: deepskyblue;
 }
 
+.spread_bet_fake{
+    opacity: .5;
+    pointer-events: none;
+}
+.spread_bet_fake:hover{
+    cursor: default;
+}
+
 .confirm_button{
     width: 80%;
     font-size: 50px;
@@ -177,28 +230,58 @@ body{
 .selected{
     background-color: deepskyblue;
     color: white;
+    font-weight: bold;
 }
 
 .selected_date{
-    background-color: white;
+    background-color: black;
+    color: deepskyblue;
+    font-weight: bold;
 }
 
 .menu_option{
     border-bottom: solid black 2px;
     display: block;
-    padding: 20px;
+    padding: 2.5vh;
+    background-color: white;
+}
+.menu_option_top{
+    border-bottom: solid black 2px;
+    border-top:solid white 1px;
+    display: block;
+    padding: 2.5vh;
+    background-color: white;
+}
+
+.menu_option_logout{
+    border-top: solid white 2px;
+    border-bottom: solid black 2px;
+    display: block;
+    padding: 2.5vh;
+    background: black;
+    color: white;
+    margin-top: -6px;
+}
+.menu_option_logout:hover{
+    border-bottom: solid black 2px;
+    padding: 2.5vh;
+    color: deepskyblue;
 }
 
 .menu_option, a{
     color: black;
-    font-size: 40px;
+    font-size: 3vh;
 }
 a:hover{
-    color:black;
+    color:deepskyblue;
     text-decoration:none;
 }
 .menu_option:hover{
-    background-color:lightgrey;
+     background-color:black;
+ }
+
+.menu_option_top:hover{
+    background-color:black;
 }
 
 .confirm_button_fake{
@@ -220,17 +303,18 @@ a:hover{
     height: 0;
 }
 .account_info{
-    background-color: deepskyblue;
+    margin: auto;
+    padding-bottom: 10vh;
+    width:100%;
+    background-color: black;
+    color:deepskyblue;
+    border-bottom: white 2px solid;
 }
 
-.account_info:hover{
-    opacity: .7;
-    background-color: deepskyblue;
-}
 .bet_made_lander{
-    position: absolute;
-    right: 5px;
-    bottom: 5px;
+    float: right;
+    vertical-align: bottom;
+    height: 30px;
 }
 
 .bet_made{
@@ -263,14 +347,28 @@ a:hover{
     position: absolute;
     top: 30vh;
     left: 45%;
-    border: 16px solid lightgrey; /* Light grey */
-    border-top: 16px solid deepskyblue; /* Blue */
+    border-radius: 50%;
+    width: 120px;
+    height: 120px;
+    z-index: 6;
+    background-color: black;
+    color: deepskyblue;
+    font-size: 30px;
+    text-align: center;
+    line-height: 120px;
+}
+.loader_spinner {
+    position: absolute;
+    left: 0;
+    border: 13px solid white; /* Light grey */
+    border-top: 13px solid deepskyblue; /* Blue */
     border-radius: 50%;
     width: 120px;
     height: 120px;
     animation: spin 1s linear infinite;
     z-index: 6;
 }
+
 .loader2{
     position: absolute;
     border: 10px solid lightgrey; /* Light grey */
@@ -296,7 +394,7 @@ a:hover{
 }
 
 .funds{
-    font-size: 30px;
+    font-size: 3vh;
 }
 .title{
     text-align: center;
@@ -336,12 +434,12 @@ video{
     margin: auto;
     font-size: 85px;
     z-index: 5;
-    color: white;
-    height: 265px;
-    width: 265px;
-    line-height: 265px;
+    color: deepskyblue;
+    height: 255px;
+    width: 255px;
+    line-height: 255px;
     background-color: black;
-    opacity: .8;
+    opacity: .9;
     text-align: center;
     border-radius: 100%;
     margin-bottom: 50px;
@@ -351,18 +449,18 @@ video{
     margin: auto;
     font-size: 85px;
     z-index: 0;
-    height: 265px;
-    width: 265px;
-    line-height: 265px;
+    height: 258px;
+    width: 258px;
+    line-height: 258px;
     border-radius: 100%;
     margin-bottom: 50px;
     position: absolute;
-    top: 0px;
-    left: 48px;
+    top: -1px;
+    left: 36px;
     display: none;
 }
 .loader2{
-    border: 35px solid lightgrey;
+    border: 35px solid white;
     border-top-color:deepskyblue;
     animation: spins 1s linear infinite;
     z-index: 6;
@@ -374,11 +472,11 @@ video{
 
 }
 .form{
-    position:relative;
-    margin: auto;
-    width: 40%;
+    position:absolute;
+    top:12%;
+    left:33%;
+    width: 400px;
     z-index: 1;
-    margin-top: 300px;
 }
 .user{
     line-height: 75px;
@@ -387,7 +485,7 @@ video{
 .input{
     margin-top: 10px;
     background-color: rgba(255,255,255,.5);
-    height: 75px;
+    height: 70px;
     width: 100%;
     border: black 4px solid;
     color: black;
@@ -398,18 +496,48 @@ video{
 .user_login{
     text-align: center;
     width: 101%;
-    line-height: 75px;
+    line-height: 70px;
     font-size: 50px;
     margin: auto;
     color:white;
     background-color: black;
-    opacity: .8;
+    opacity: .9;
     border: black 4px solid;
     margin-top: 15px;
 }
 .user_login:hover{
     cursor: pointer;
+    color: deepskyblue;
 }
 ::-webkit-input-placeholder {
     color: black;
+}
+
+.game_odds{
+    font-weight: bold;
+    float: right;
+}
+
+.animate2{
+    transition:all .5s;
+    overflow: hidden;
+}
+.animate2.ng-hide {
+    left: -100%;
+    height: 100%;
+}
+
+.no_games_warning{
+    margin: auto;
+    margin-top: 50px;
+    text-align: center;
+}
+
+.final_score{
+    font-weight: bold;
+    float: right;
+}
+.final_display{
+    font-weight: bold;
+    float: left;
 }
