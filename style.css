@@ -26,6 +26,7 @@ body{
     font-size: 20px;
     margin:auto;
     margin-top: 10%;
+    margin-bottom: 10%;
     width:80%;
     margin-top:-4px;
     max-width:900px;
@@ -33,7 +34,7 @@ body{
     position: relative;
     border: 4px solid black;
     box-sizing: border-box;
-    min-height: 150px;
+    min-height: 100px;
 }
 
 .menu_button{
@@ -80,7 +81,7 @@ body{
     left:0;
     z-index: 10;
 }
-.dates{
+.dates, .dates_history{
     display:inline-block;
     border: solid 4px black;
     height: 100%;
@@ -94,6 +95,7 @@ body{
 .dates:hover{
     cursor: pointer;
 }
+
 .league_button{
      display: inline-block;
      font-family: 'Khand', sans-serif;
@@ -147,7 +149,7 @@ body{
     /*float: right;*/
     /*height: 100px;*/
 /*}*/
-.game{
+.game, .game_history{
     font-size: 20px;
     border: solid 1px black;
     border-bottom: solid 2px black;
@@ -401,6 +403,15 @@ a:hover{
 }
 .title{
     text-align: center;
+    margin: auto;
+    font-family: 'Khand', sans-serif;
+    border: solid 4px black;
+    width: 32%;
+    font-size: 25px;
+    line-height: 40px;
+    color: deepskyblue;
+    background-color: black;
+    font-weight: bold;
 }
 
 .sel{
@@ -456,10 +467,8 @@ video{
     width: 258px;
     line-height: 258px;
     border-radius: 100%;
-    margin-bottom: 50px;
-    position: absolute;
-    top: -1px;
-    left: 36px;
+    margin-top: -375px;
+    margin-left:35px;
     display: none;
 }
 .loader2{
@@ -475,12 +484,19 @@ video{
 
 }
 .form{
-    position:absolute;
-    top:12%;
-    left:33%;
+    margin:auto;
+    margin-top:10vh;
     width: 400px;
     z-index: 1;
 }
+@media screen and (min-height: 1100px) {
+    .form{
+        margin:auto;
+        margin-top:20vh;
+    }
+}
+
+
 .user{
     line-height: 75px;
     font-size: 75px;
@@ -634,4 +650,8 @@ video{
         margin-left: 15px;
         margin-right: 15px;
     }
+}
+
+.bet_history{
+    margin-top: 5%;
 }
