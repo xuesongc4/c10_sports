@@ -344,7 +344,7 @@ app.controller('leaderboard', function (myFactory) {
         myFactory.getLeaderData()
             .then(function (response) {
                     self.leaderboard_data=response;
-                console.log(self.leaderboard_data);
+                console.log('leader board data: ',self.leaderboard_data);
                     $('.loader').addClass('hide');
                     $('.loader_background').addClass('hide');
                 },
@@ -365,6 +365,21 @@ app.controller('bethistory', function (myFactory) {
         $('.loader_background').removeClass('hide');
         myFactory.getBetHistoryData()
             .then(function (response) {
+                    for (var i = 0; i < response.length; i++) {
+                        if(response[i].bet_name === 'over/under'){
+                            if(response[i].side === '1'){
+                                response[i].side = 'over';
+                            }else{
+                                response[i].side = 'under';
+                            }
+                        }else{
+                            if(response[i].side === '1'){
+                                response[i].side = response[i].home_team;
+                            }else{
+                                response[i].side = response[i].away_team;
+                            }
+                        }
+                    }
                 $('.loader').addClass('hide');
                     $('.loader_background').addClass('hide');
                     self.bet_history=response;
@@ -378,17 +393,4 @@ app.controller('bethistory', function (myFactory) {
     }
     this.get_bet_history();
 });
-//
-// if($game['bet_name'] === 'over/under'){
-//     if($game['side'] === '1'){
-//         $game['side'] = 'over';
-//     }else{
-//         $game['side'] = 'under';
-//     }
-// }else{
-//     if($game['side'] === '1'){
-//         $game['side'] = 'home';
-//     }else{
-//         $game['side'] = 'away';
-//     }
-// }
+

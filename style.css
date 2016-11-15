@@ -401,6 +401,15 @@ a:hover{
 }
 .title{
     text-align: center;
+    margin: auto;
+    font-family: 'Khand', sans-serif;
+    border: solid 4px black;
+    width: 32%;
+    font-size: 25px;
+    line-height: 40px;
+    color: deepskyblue;
+    background-color: black;
+    font-weight: bold;
 }
 
 .sel{
@@ -456,11 +465,9 @@ video{
     width: 258px;
     line-height: 258px;
     border-radius: 100%;
-    margin-bottom: 50px;
-    position: absolute;
-    top: -1px;
-    left: 36px;
-    display: none;
+    margin-top: -375px;
+    margin-left:35px;
+    display: intial;
 }
 .loader2{
     border: 35px solid white;
@@ -475,12 +482,19 @@ video{
 
 }
 .form{
-    position:absolute;
-    top:12%;
-    left:33%;
+    margin:auto;
+    margin-top:10vh;
     width: 400px;
     z-index: 1;
 }
+@media screen and (min-height: 1100px) {
+    .form{
+        margin:auto;
+        margin-top:20vh;
+    }
+}
+
+
 .user{
     line-height: 75px;
     font-size: 75px;
@@ -634,4 +648,8 @@ video{
         margin-left: 15px;
         margin-right: 15px;
     }
+}
+
+.bet_history{
+    margin-top: 5%;
 }
