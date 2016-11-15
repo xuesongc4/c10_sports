@@ -44,13 +44,15 @@ body{
 .menu_button:hover{
     cursor: pointer;
 }
+
 .menu{
     top:0px;
     left:0px;
     position: fixed;
     background-color: white;
     width: 40vw;
-    max-width: 450px;
+    min-width: 315px;
+    max-width: 350px;
     height: 100vh;
     z-index: 10;
     border-right: 3px black solid;
@@ -272,6 +274,14 @@ body{
     color: black;
     font-size: 3vh;
 }
+
+.account_info{
+    padding-bottom: 10vh;
+    width:100%;
+    background-color: black;
+    color:deepskyblue;
+    border-bottom: white 2px solid;
+}
 a:hover{
     color:deepskyblue;
     text-decoration:none;
@@ -302,14 +312,7 @@ a:hover{
 .ng-hide {
     height: 0;
 }
-.account_info{
-    margin: auto;
-    padding-bottom: 10vh;
-    width:100%;
-    background-color: black;
-    color:deepskyblue;
-    border-bottom: white 2px solid;
-}
+
 
 .bet_made_lander{
     float: right;
@@ -540,4 +543,95 @@ video{
 .final_display{
     font-weight: bold;
     float: left;
+}
+
+@media screen and (min-height: 1200px) {
+
+    .funds{
+        font-size: 2vh;
+    }
+    .menu_option{
+        padding: 1vh;
+    }
+    .menu_option_top{
+        padding: 1vh;
+    }
+    .menu_option_logout{
+        padding: 1vh;
+    }
+    .menu_option_logout:hover{
+        padding:1vh;
+    }
+    .menu_option, a{
+        font-size: 2vh;
+    }
+    .account_info{
+        padding-bottom: 5vh;
+    }
+}
+@media screen and (max-height: 820px) {
+    .funds{
+        font-size: 20px;
+    }
+    .menu_option{
+        padding: 10px;
+    }
+    .menu_option_top{
+        padding: 10px;
+    }
+    .menu_option_logout{
+        padding: 10px;
+    }
+    .menu_option_logout:hover{
+        padding:10px;
+    }
+    .menu_option, a{
+        font-size: 20px;
+    }
+    .account_info{
+        padding-bottom: 10px;
+    }
+    .menu{
+        width: 40vw;
+        min-width: 200px;
+        max-width: 200px;
+    }
+}
+
+@media screen and (max-height: 450px) {
+    .menu{
+      overflow: scroll;
+    }
+}
+
+@media screen and (max-width: 1500px) {
+    .league_button{
+        font-size: 3.25vw;
+        margin-left: 25px;
+        margin-right: 25px;
+    }
+}
+
+@media screen and (max-width: 1000px) {
+    .league_button{
+        font-size: 4vw;
+        margin-left: 15px;
+        margin-right: 15px;
+    }
+}
+
+@media screen and (max-width: 700px) {
+    .league_button{
+        font-size: 5vw;
+        margin-left: 15px;
+        margin-right: 15px;
+    }
+}
+
+@media screen and (max-width: 550px) {
+    .league_button{
+        font-size: 6.5vw;
+        margin-left: 15px;
+        margin-right: 15px;
+    }
 }
