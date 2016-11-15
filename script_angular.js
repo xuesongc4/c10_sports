@@ -107,6 +107,7 @@ app.controller('controller', function (myFactory) {
     this.bet_index_mem=100;
     this.league_highlight=[0,0,0,0,0,0];
     this.user_funds={};
+    this.index = null;
 
 
     this.addUsersFunds = function(){
@@ -133,6 +134,10 @@ app.controller('controller', function (myFactory) {
             .then(function (response) {
                 console.log('bet succesfully sent: ', response);
                 self.saveBetData = {};
+                self.displayData[self.index].bets_placed.moneyline = response.data.bets_placed.moneyline;
+                self.displayData[self.index].bets_placed.spread = response.data.bets_placed.spread;
+                self.displayData[self.index].bets_placed['over/under'] = response.data.bets_placed['over/under'];
+                self.index=null;
                 for (var i = 0; i < self.displayData.length; i++) {
                     self.displayData[i].bet_toggle = false;
                 }
@@ -142,7 +147,7 @@ app.controller('controller', function (myFactory) {
             }
     };
 
-    this.saveData = function (bet_index,index, type_of_bet, side, line, odds, select_index,side_name,line2) {
+    this.saveData = function (bet_index,id, type_of_bet, side, line, odds, select_index,side_name,line2,index) {
         if(self.bet_index_mem==bet_index){
             self.highlight=[];
             self.saveBetData={};
@@ -151,7 +156,7 @@ app.controller('controller', function (myFactory) {
 
         else{
             self.bet_index_mem=bet_index;
-            self.saveBetData.game_id = index;
+            self.saveBetData.game_id = id;
             self.saveBetData.side = side;
             self.saveBetData.type_of_bet = type_of_bet;
             self.saveBetData.line = line;
@@ -161,6 +166,8 @@ app.controller('controller', function (myFactory) {
             self.highlight = [];
             self.highlight[select_index] = 'selected';
             self.bet_button_toggle = true;
+            self.index = index;
+            console.log('index of bet is' + self.index);
         }
     };
     this.betToggle = function (index) {
