@@ -1,8 +1,16 @@
-<div class="title"><h1>Leaderboard</h1></div>
 <div ng-controller="leaderboard as lb">
+    <div class="date_landing bet_history">
+        <div class="dates_history selected_date">
+            Leaderboard
+        </div>
+    </div>
     <div class="loader hide">iBet<span class="loader_spinner"></span></div>
     <div class="loader_background hide"></div>
-    <div ng-repeat="board_data in lb.leaderboard_data | orderBy: 'money': true">
-        <div class = 'game'> {{board_data.sn}}    ${{board_data.money}}</div>
+    <div class='sched_landing'>
+        <div ng-repeat="board_data in lb.leaderboard_data | orderBy: 'money': true">
+            <div class='game_history'>
+               <span class = 'sel3'>{{board_data.sn}}</span> <span class="sel3" style="float: right"> ${{board_data.money}}</span>
+            </div>
+        </div>
     </div>
 </div>
