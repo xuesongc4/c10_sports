@@ -23,13 +23,15 @@
                        {{hist_data.game_date}}
                     </span>
                 </div>
-                <div class = "sel3">Result: {{hist_data.bet_status}}</div>
+                <div class="sel3">Result: {{hist_data.bet_status}}</div>
                 <div><img class='home_img' ng-src="{{hist_data.away_logo}}">{{hist_data.away_team}} <span
                         ng-if="bet_data.final_score_a>-1" class="final_score">{{bet_data.final_score_a}}</span></div>
                 <div><img class='home_img' ng-src="{{hist_data.home_logo}}">{{hist_data.home_team}} <span
                         ng-if="hist_data.final_score_h>-1" class="final_score">{{bet_data.final_score_h}}</span></div>
-                <div>Bet ${{hist_data.amount}} on: {{hist_data.side}} {{hist_data.bet_name}} (<span
-                        ng-if="hist_data.odds>0">+</span>{{hist_data.odds}})
+                <div>Bet ${{hist_data.amount}} on: {{hist_data.side}} <span ng-if="hist_data.bet_name!='moneyline'"><span
+                        ng-if="hist_data.bet_name=='spread'&&hist_data.line>0">+</span>{{hist_data.line}}</span>
+                    <span ng-if="hist_data.bet_name=='moneyline'">to win</span> (<span
+                            ng-if="hist_data.odds>0">+</span>{{hist_data.odds}})
                 </div>
             </div>
         </div>
