@@ -1,12 +1,39 @@
-
-<div class="title"><h1>Bet History</h1></div>
 <div ng-controller="bethistory as bh">
+    <div class="date_landing bet_history">
+        <div class="dates_history selected_date">
+            Bet History
+        </div>
+        <div class="dates_history">
+            Total wins: {{bh.win_total}}
+        </div>
+        <div class="dates_history">
+            Total Losses: {{bh.loss_total}}
+        </div>
+    </div>
     <div class="loader hide">iBet<span class="loader_spinner"></span></div>
     <div class="loader_background hide"></div>
-    <div ng-repeat="hist_data in bh.bet_history">
-        <div class = 'game'>
-            <div>{{hist_data.game_time}} <img class='home_img' ng-src="{{hist_data.away_logo}}">{{hist_data.away_team}} vs <img class='home_img' ng-src="{{hist_data.home_logo}}">{{hist_data.home_team}} bet on {{hist_data.side}} {{hist_data.bet_name}} odds: {{hist_data.odds}}</div>
-            <div>Result: {{hist_data.bet_status}}</div>
+    <div class='sched_landing'>
+        <div ng-repeat="hist_data in bh.bet_history">
+            <div class='game_history'>
+                <div class="game_date">
+                    <span class="sel2">
+                        {{hist_data.game_time}}
+                    </span>
+                    <span class="sel3">
+                       {{hist_data.game_date}}
+                    </span>
+                </div>
+                <div class="sel3">Result: {{hist_data.bet_status}}</div>
+                <div><img class='home_img' ng-src="{{hist_data.away_logo}}">{{hist_data.away_team}} <span
+                        ng-if="bet_data.final_score_a>-1" class="final_score">{{bet_data.final_score_a}}</span></div>
+                <div><img class='home_img' ng-src="{{hist_data.home_logo}}">{{hist_data.home_team}} <span
+                        ng-if="hist_data.final_score_h>-1" class="final_score">{{bet_data.final_score_h}}</span></div>
+                <div>Bet ${{hist_data.amount}} on: {{hist_data.side}} <span ng-if="hist_data.bet_name!='moneyline'"><span
+                        ng-if="hist_data.bet_name=='spread'&&hist_data.line>0">+</span>{{hist_data.line}}</span>
+                    <span ng-if="hist_data.bet_name=='moneyline'">to win</span> (<span
+                            ng-if="hist_data.odds>0">+</span>{{hist_data.odds}})
+                </div>
+            </div>
         </div>
     </div>
 </div>

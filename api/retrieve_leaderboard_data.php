@@ -3,7 +3,7 @@ date_default_timezone_set('UTC');
 require('constants.php');
 $connection = mysqli_connect(DB_HOST, DB_USER, DB_PASS, DB_NAME);
 
-//$user = 1;  //temp while no users are defined
+//$user = 1;  //temp while no users are defined             //i think this line can be removed
 
 //currently username is saved as 'sn' to accomodate Jason's angular naming conventions
 $leaderboard_query = "SELECT u.username AS sn, ROUND(SUM(t.transaction),2) AS money FROM `transactions` AS t JOIN `users` AS u ON u.ID = t.user_id GROUP BY t.user_id ORDER BY money DESC LIMIT 10";
@@ -18,6 +18,11 @@ if(mysqli_num_rows($leaderboard_results)){
 }else{
     $data['errors'][] = 'no leaderboard data available';
 }
+
+//for testing
+//print('<pre>');
+//print_r($data);
+//print('</pre>');
 
 $encoded_output = json_encode($data);
 print($encoded_output);

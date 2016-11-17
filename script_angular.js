@@ -98,7 +98,7 @@ app.controller('controller', function (myFactory) {
     this.gotData = false;
     this.bet_button_toggle=false;
     this.highlightDate=[false,'selected_date',false];
-    this.show_circle_bet=[true,true,true];
+    this.show_circle_bet=[false,false,false];
     this.highlight = [];
     this.sendData = {};
     this.displayData = {};
@@ -107,6 +107,7 @@ app.controller('controller', function (myFactory) {
     this.bet_index_mem=100;
     this.league_highlight=[0,0,0,0,0,0];
     this.user_funds={};
+    this.index = null;
 
 
     this.addUsersFunds = function(){
@@ -133,6 +134,10 @@ app.controller('controller', function (myFactory) {
             .then(function (response) {
                 console.log('bet succesfully sent: ', response);
                 self.saveBetData = {};
+                self.displayData[self.index].bets_placed.moneyline = response.data.bets_placed.moneyline;
+                self.displayData[self.index].bets_placed.spread = response.data.bets_placed.spread;
+                self.displayData[self.index].bets_placed['over/under'] = response.data.bets_placed['over/under'];
+                self.index=null;
                 for (var i = 0; i < self.displayData.length; i++) {
                     self.displayData[i].bet_toggle = false;
                 }
@@ -142,7 +147,7 @@ app.controller('controller', function (myFactory) {
             }
     };
 
-    this.saveData = function (bet_index,index, type_of_bet, side, line, odds, select_index,side_name,line2) {
+    this.saveData = function (bet_index,id, type_of_bet, side, line, odds, select_index,side_name,line2,index) {
         if(self.bet_index_mem==bet_index){
             self.highlight=[];
             self.saveBetData={};
@@ -151,7 +156,7 @@ app.controller('controller', function (myFactory) {
 
         else{
             self.bet_index_mem=bet_index;
-            self.saveBetData.game_id = index;
+            self.saveBetData.game_id = id;
             self.saveBetData.side = side;
             self.saveBetData.type_of_bet = type_of_bet;
             self.saveBetData.line = line;
@@ -161,6 +166,8 @@ app.controller('controller', function (myFactory) {
             self.highlight = [];
             self.highlight[select_index] = 'selected';
             self.bet_button_toggle = true;
+            self.index = index;
+            console.log('index of bet is' + self.index);
         }
     };
     this.betToggle = function (index) {
@@ -344,7 +351,7 @@ app.controller('leaderboard', function (myFactory) {
         myFactory.getLeaderData()
             .then(function (response) {
                     self.leaderboard_data=response;
-                console.log(self.leaderboard_data);
+                console.log('leader board data: ',self.leaderboard_data);
                     $('.loader').addClass('hide');
                     $('.loader_background').addClass('hide');
                 },
@@ -360,11 +367,49 @@ app.controller('leaderboard', function (myFactory) {
 app.controller('bethistory', function (myFactory) {
     var self = this;
     this.bet_history = null;
+    this.win_total = 0;
+    this.loss_total = 0;
     this.get_bet_history = function(){
         $('.loader').removeClass('hide');
         $('.loader_background').removeClass('hide');
         myFactory.getBetHistoryData()
             .then(function (response) {
+                    for (var i = 0; i < response.length; i++) {
+                        var date = new Date(response[i].game_time+' UTC');
+                        var temp_date=date.toString().slice(0,15);
+                        var temp_time=date.toString().slice(16,21);
+                        var time_check = temp_time.slice(0,2);
+                        var time_check2 = temp_time.slice(3,5);
+
+                        if(time_check >= 12) {
+                            temp_time = time_check - 12 + ':' + time_check2 + ' PM';
+                        }
+                        else{
+                            temp_time = time_check -0 +':' + time_check2 +' AM';
+                        }
+                        response[i].game_time = temp_time;
+                        response[i].game_date = temp_date;
+
+                        if(response[i].bet_status==="Win"){
+                            self.win_total++;
+                        }
+                        else if(response[i].bet_status==="Loss"){
+                            self.loss_total++;
+                        }
+                        if(response[i].bet_name === 'over/under'){
+                            if(response[i].side === '1'){
+                                response[i].side = 'over';
+                            }else{
+                                response[i].side = 'under';
+                            }
+                        }else{
+                            if(response[i].side === '1'){
+                                response[i].side = response[i].home_team;
+                            }else{
+                                response[i].side = response[i].away_team;
+                            }
+                        }
+                    }
                 $('.loader').addClass('hide');
                     $('.loader_background').addClass('hide');
                     self.bet_history=response;
@@ -378,17 +423,4 @@ app.controller('bethistory', function (myFactory) {
     }
     this.get_bet_history();
 });
-//
-// if($game['bet_name'] === 'over/under'){
-//     if($game['side'] === '1'){
-//         $game['side'] = 'over';
-//     }else{
-//         $game['side'] = 'under';
-//     }
-// }else{
-//     if($game['side'] === '1'){
-//         $game['side'] = 'home';
-//     }else{
-//         $game['side'] = 'away';
-//     }
-// }
+
