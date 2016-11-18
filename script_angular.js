@@ -318,7 +318,7 @@ app.controller('controller', function (myFactory) {
     setTimeout(function(){
         $('.loader').addClass('hide');
         $('.loader_background').addClass('hide');
-    },5000);
+    },2500);
 });
 
 app.config(function ($routeProvider) {
@@ -430,30 +430,6 @@ app.controller('bethistory', function (myFactory) {
                 var win_counter=0;
                 var temp_value=0;
 
-
-                // --------------------data for graph----------------------
-                    for(var j=response.length-1; j>=0; j--){
-                        if(response[j].bet_status === 'Loss' || response[j].bet_status === 'Win') {
-                            game_counter++;
-                            if (response[j].bet_status === 'Win'){
-                                win_counter++;
-                            }
-                            temp_value+=response[j].amount*response[j].odds;
-                            temp_data_money = {
-                                bet: game_counter,
-                                value: temp_value,
-                            }
-                            temp_data_ratio = {
-                                bet: game_counter,
-                                value: Math.round((win_counter/(game_counter||1))*1000)/1000
-                            }
-                            self.graph_data_money.push(temp_data_money);
-                            self.graph_data_ratio.push(temp_data_ratio);
-                        }
-                    }
-                    console.log('graph money data is: ', self.graph_data_money);
-                    console.log('graph ratio data is: ', self.graph_data_ratio);
-               //----------------------------------------------------------------------
                     for (var i = 0; i < response.length; i++) {
 
                         var date = new Date(response[i].game_time+' UTC');
@@ -471,10 +447,10 @@ app.controller('bethistory', function (myFactory) {
                         response[i].game_time = temp_time;
                         response[i].game_date = temp_date;
 
-                        if(response[i].bet_status==="Win"){
+                        if(response[i].bet_status==="Won"){
                             self.win_total++;
                         }
-                        else if(response[i].bet_status==="Loss"){
+                        else if(response[i].bet_status==="Lost"){
                             self.loss_total++;
                         }
                         if(response[i].bet_name === 'over/under'){
@@ -490,7 +466,47 @@ app.controller('bethistory', function (myFactory) {
                                 response[i].side = response[i].away_team;
                             }
                         }
+                        if(response[i].side===response[i].away_team){
+                            response[i].line=response[i].line*-1;
+                        }
+
+                        if(response[i].bet_status==='Lost'){
+                            response[i].win_amount=response[i].win_amount*-1;
+                            response[i].amount2=Math.abs(response[i].amount);
+                        }
+                        if(response[i].bet_status==='Won'){
+                            response[i].profit=Math.round((response[i].win_amount-response[i].amount)*100)/100;
+                        }
                     }
+
+                    // --------------------data for graph----------------------
+                    for(var j=response.length-1; j>=0; j--){
+                        if(response[j].bet_status === 'Lost' || response[j].bet_status === 'Won') {
+                            game_counter++;
+                            if (response[j].bet_status === 'Won'){
+                                win_counter++;
+                            }
+                            if(response[j].bet_status === 'Lost') {
+                                temp_value -= response[j].amount;
+                            }
+                            else if(response[j].bet_status === 'Won') {
+                                temp_value += response[j].win_amount-response[j].amount;
+                            }
+                            temp_data_money = {
+                                bet: game_counter,
+                                value: Math.round(temp_value*100)/100,
+                            }
+                            temp_data_ratio = {
+                                bet: game_counter,
+                                value: Math.round((win_counter/(game_counter||1))*1000)/1000
+                            }
+                            self.graph_data_money.push(temp_data_money);
+                            self.graph_data_ratio.push(temp_data_ratio);
+                        }
+                    }
+                    console.log('graph money data is: ', self.graph_data_money);
+                    console.log('graph ratio data is: ', self.graph_data_ratio);
+                    //----------------------------------------------------------------------
                     self.get_ratio();
                     self.bet_history=response;
                     console.log(self.bet_history);
