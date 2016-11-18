@@ -7,7 +7,10 @@ date_default_timezone_set('UTC');
 $user_id = $_SESSION['ID'];
 //$user_id = '1';           //for testing only
 
-$bet_history_query = "SELECT b.amount, b.settled AS bet_status_id, bs.bet_status, a.full_name AS away_team, a.logo_src AS away_logo, h.full_name AS home_team, h.logo_src AS home_logo, g.game_time, g.final_score_a, g.final_score_h, b.bet_type_id, bt.bet_name, b.side, b.line, b.odds, b.time_placed
+$bet_history_query = "SELECT b.amount, b.settled AS bet_status_id, bs.bet_status, 
+  a.full_name AS away_team, a.logo_src AS away_logo, g.final_score_a,  
+  h.full_name AS home_team, h.logo_src AS home_logo, g.final_score_h,  
+  g.game_time, b.bet_type_id, bt.bet_name, b.side, b.line, b.odds, b.time_placed
 FROM `bets` AS b
 JOIN `games` AS g ON g.ID = b.game_id
 JOIN `bet_status` AS bs ON bs.ID = b.settled
