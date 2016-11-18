@@ -1,21 +1,25 @@
 <div ng-controller="bethistory as bh">
     <div class="league_landing">
-        <div class="league_button" data-toggle="modal" data-target="#myModal">
+        <div class="league_button_history">
             <img src="images/GraphBar.png"></img> Bet History
-            <br>
-            <span class="league_button" data-toggle="modal" data-target="#myModal" style="font-size: 20px">
-                Total Funds:${{ic.user_funds.funds}}
-            </span>
+        </div>
+        <br>
+        <div class="league_button_history league_button_history_small2">
+             Total Funds:${{ic.user_funds.funds}}
+        </div>
+        <div class="league_button_history league_button_history_small" data-toggle="modal" data-target="#myModal" data-toggle="modal" data-target="#myModal" >
+            Click here for graphs
         </div>
     </div>
     <div class="date_landing bet_history">
-        <div class="dates selected_date" data-toggle="modal" data-target="#myModal">
-            Win/Loss {{bh.win_ratio}} <span style="font-size: 10px">click for graph</span>
+        <div class="dates_history selected_date">
+            Win/Loss {{bh.win_ratio}}
         </div>
-        <div class="dates" data-toggle="modal" data-target="#myModal">
+
+        <div class="dates_history" data-toggle="modal" data-target="#myModal">
             Total Wins: {{bh.win_total}}
         </div>
-        <div class="dates" data-toggle="modal" data-target="#myModal">
+        <div class="dates_history" data-toggle="modal" data-target="#myModal">
             Total Losses: {{bh.loss_total}}
         </div>
     </div>
@@ -55,11 +59,12 @@
                         <div>
                             Profit vs Bets
                         </div>
-                        <div id="moneygraph" style="height: 250px; width: 400px"></div>
+                        <div id="moneygraph" style="height: 250px; width: 450px"></div>
+                    <br>
                         <div>
                             Win/Loss vs Bets
                         </div>
-                        <div id="ratiograph" style="height: 250px; width: 400px"></div>
+                        <div id="ratiograph" style="height: 250px; width: 450px"></div>
                     <br>
                     <button type="button" class="spread_bet " data-dismiss="modal">Close</button>
                 </div>

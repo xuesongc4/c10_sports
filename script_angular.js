@@ -390,16 +390,22 @@ app.controller('bethistory', function (myFactory) {
         new Morris.Line({
             element: 'moneygraph',
             data:  self.graph_data_money,
+            xLabels: "bet",
             xkey: 'bet',
             ykeys: ['value'],
-            labels: ['Dollars']
+            labels: ['Dollars'],
+            parseTime:false,
+            resize: true
         });
         new Morris.Line({
             element: 'ratiograph',
-            data: self.graph_data_ratio,
+            data:  self.graph_data_ratio,
+            xLabels: "bet",
             xkey: 'bet',
             ykeys: ['value'],
-            labels: ['Win/Loss']
+            labels: ['Win/Loss Ratio'],
+            parseTime:false,
+            resize: true
         });
     }
 
@@ -412,29 +418,31 @@ app.controller('bethistory', function (myFactory) {
                 var temp_data_ratio={};
                 var game_counter=0;
                 var win_counter=0;
+                var temp_value=0;
 
 
                 // --------------------data for graph----------------------
                     for(var j=response.length-1; j>=0; j--){
                         if(response[j].bet_status === 'Loss' || response[j].bet_status === 'Win') {
                             game_counter++;
-                            if (response[j].bet_status === 'win'){
+                            if (response[j].bet_status === 'Win'){
                                 win_counter++;
                             }
+                            temp_value+=response[j].amount*response[j].odds;
                             temp_data_money = {
                                 bet: game_counter,
-                                value: response[j].amount*response[j].odds,
+                                value: temp_value,
                             }
                             temp_data_ratio = {
                                 bet: game_counter,
-                                value: (win_counter/(game_counter||1))
+                                value: Math.round((win_counter/(game_counter||1))*1000)/1000
                             }
                             self.graph_data_money.push(temp_data_money);
                             self.graph_data_ratio.push(temp_data_ratio);
                         }
                     }
-                    console.log('graph data is: ', self.graph_data_money);
-                    console.log('graph data is: ', self.graph_data_ratio);
+                    console.log('graph money data is: ', self.graph_data_money);
+                    console.log('graph ratio data is: ', self.graph_data_ratio);
                //----------------------------------------------------------------------
                     for (var i = 0; i < response.length; i++) {
 

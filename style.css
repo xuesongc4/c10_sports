@@ -96,7 +96,7 @@ body{
     cursor: pointer;
 }
 
-.league_button{
+.league_button, .league_button_history{
      display: inline-block;
      font-family: 'Khand', sans-serif;
      font-size: 2.6vw;
@@ -241,6 +241,7 @@ body{
     background-color: black;
     color: deepskyblue;
     font-weight: bold;
+    vertical-align: top;
 }
 
 .menu_option{
@@ -565,6 +566,16 @@ video{
     float: left;
 }
 
+.league_button_history_small, .league_button_history_small2{
+    font-size: 20px;
+    margin-top: 10px;
+}
+.league_button_history_small:hover{
+    color: deepskyblue;
+    font-weight: bold;
+    cursor: pointer;
+}
+
 @media screen and (min-height: 1200px) {
 
     .funds{
@@ -625,35 +636,52 @@ video{
 }
 
 @media screen and (max-width: 1500px) {
-    .league_button{
+    .league_button, .league_button_history{
         font-size: 3.25vw;
         margin-left: 25px;
         margin-right: 25px;
     }
+    .league_button_history_small, .league_button_history_small2{
+        font-size: 20px;
+        margin-top: 10px;
+    }
 }
 
 @media screen and (max-width: 1000px) {
-    .league_button{
+    .league_button, .league_button_history{
         font-size: 4vw;
         margin-left: 15px;
         margin-right: 15px;
     }
+    .league_button_history_small, .league_button_history_small2{
+        font-size: 20px;
+        margin-top: 5px;
+    }
 }
 
 @media screen and (max-width: 700px) {
-    .league_button{
+    .league_button, .league_button_history{
         font-size: 5vw;
         margin-left: 15px;
         margin-right: 15px;
     }
+    .league_button_history_small, .league_button_history_small2{
+        font-size: 15px;
+        margin-top: 0px;
+    }
 }
 
 @media screen and (max-width: 550px) {
-    .league_button{
+    .league_button, .league_button_history{
         font-size: 6.5vw;
         margin-left: 15px;
         margin-right: 15px;
     }
+    .league_button_history_small, .league_button_history_small2{
+        font-size: 15px;
+        margin-top: 0px;
+    }
+
 }
 
 .bet_history{
