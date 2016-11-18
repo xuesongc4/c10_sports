@@ -125,17 +125,16 @@ body{
     vertical-align: bottom;
 }
 .logo_menu{
-    height: 35px;
-    width: 35px;
+    height: 32px;
+    width: 32px;
     color: deepskyblue;
     background-color: black;
     border-radius: 100%;
-    font-size: 15px;
+    font-size: 13px;
     display: inline-block;
     text-align: center;
-    line-height: 35px;
-    vertical-align: bottom;
-    margin-bottom:10px;
+    line-height: 32px;
+    vertical-align: middle;
 }
 .home_img {
     height: 40px;
@@ -429,6 +428,10 @@ a:hover{
 .sel3{
     color: black;
     font-weight: bold;
+}
+.sel4{
+    color: black;
+    float: left;
 }
 video{
     margin: 0;
