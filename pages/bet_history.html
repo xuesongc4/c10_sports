@@ -7,7 +7,7 @@
         <div class="league_button_history league_button_history_small2">
              Total Funds:${{ic.user_funds.funds}}
         </div>
-        <div class="league_button_history league_button_history_small" data-toggle="modal" data-target="#myModal" data-toggle="modal" data-target="#myModal" >
+        <div ng-click="bh.create_graph()" class="league_button_history league_button_history_small" data-toggle="modal" data-target="#myModal" data-toggle="modal" data-target="#myModal" >
             Click here for graphs
         </div>
     </div>
@@ -56,17 +56,21 @@
             <!-- Modal content-->
             <div class="modal-content">
                 <div class="modal-body modal_color_history">
+                    <div class="graph_landing">
                         <div>
                             Profit vs Bets
                         </div>
-                        <div id="moneygraph" style="height: 250px; width: 450px"></div>
+                        <div id="moneygraph"></div>
+                    </div>
                     <br>
+                    <div class="graph_landing">
                         <div>
                             Win/Loss vs Bets
                         </div>
-                        <div id="ratiograph" style="height: 250px; width: 450px"></div>
+                        <div id="ratiograph"></div>
+                    </div>
                     <br>
-                    <button type="button" class="spread_bet " data-dismiss="modal">Close</button>
+                    <button type="button" class="spread_bet graph_button" data-dismiss="modal">Close</button>
                 </div>
             </div>
         </div>

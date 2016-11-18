@@ -315,6 +315,10 @@ app.controller('controller', function (myFactory) {
                 });
     };
     self.getGameData('current','NFL');
+    setTimeout(function(){
+        $('.loader').addClass('hide');
+        $('.loader_background').addClass('hide');
+    },5000);
 });
 
 app.config(function ($routeProvider) {
@@ -373,6 +377,7 @@ app.controller('bethistory', function (myFactory) {
     this.total_games = null;
     this.graph_data_money=[];
     this.graph_data_ratio=[];
+    this.graph_flag=true;
 
     this.get_ratio = function(){
         self.total_games=self.win_total+self.loss_total;
@@ -386,27 +391,32 @@ app.controller('bethistory', function (myFactory) {
         }
     }
 
-    this.create_graph = function(){
-        new Morris.Line({
-            element: 'moneygraph',
-            data:  self.graph_data_money,
-            xLabels: "bet",
-            xkey: 'bet',
-            ykeys: ['value'],
-            labels: ['Dollars'],
-            parseTime:false,
-            resize: true
-        });
-        new Morris.Line({
-            element: 'ratiograph',
-            data:  self.graph_data_ratio,
-            xLabels: "bet",
-            xkey: 'bet',
-            ykeys: ['value'],
-            labels: ['Win/Loss Ratio'],
-            parseTime:false,
-            resize: true
-        });
+    this.create_graph = function() {
+        if (self.graph_flag === true) {
+            setTimeout(function () {
+                self.graph_flag=false;
+                new Morris.Line({
+                    element: 'moneygraph',
+                    data: self.graph_data_money,
+                    xLabels: "bet",
+                    xkey: 'bet',
+                    ykeys: ['value'],
+                    labels: ['Dollars'],
+                    parseTime: false,
+                    resize: true
+                });
+                new Morris.Line({
+                    element: 'ratiograph',
+                    data: self.graph_data_ratio,
+                    xLabels: "bet",
+                    xkey: 'bet',
+                    ykeys: ['value'],
+                    labels: ['Win/Loss Ratio'],
+                    parseTime: false,
+                    resize: true
+                });
+            }, 500);
+        }
     }
 
     this.get_bet_history = function(){
@@ -482,12 +492,10 @@ app.controller('bethistory', function (myFactory) {
                         }
                     }
                     self.get_ratio();
-                    self.create_graph();
-
-                $('.loader').addClass('hide');
-                    $('.loader_background').addClass('hide');
                     self.bet_history=response;
                     console.log(self.bet_history);
+                    $('.loader').addClass('hide');
+                    $('.loader_background').addClass('hide');
                 },
                 function (response) {
                     $('.loader').addClass('hide');
