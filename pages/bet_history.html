@@ -1,12 +1,21 @@
 <div ng-controller="bethistory as bh">
+    <div class="league_landing">
+        <div class="league_button" data-toggle="modal" data-target="#myModal">
+            <img src="images/GraphBar.png"></img> Bet History
+            <br>
+            <span class="league_button" data-toggle="modal" data-target="#myModal" style="font-size: 20px">
+                Total Funds:${{ic.user_funds.funds}}
+            </span>
+        </div>
+    </div>
     <div class="date_landing bet_history">
-        <div class="dates_history selected_date">
-            Bet History
+        <div class="dates selected_date" data-toggle="modal" data-target="#myModal">
+            Win/Loss {{bh.win_ratio}} <span style="font-size: 10px">click for graph</span>
         </div>
-        <div class="dates_history">
-            Total wins: {{bh.win_total}}
+        <div class="dates" data-toggle="modal" data-target="#myModal">
+            Total Wins: {{bh.win_total}}
         </div>
-        <div class="dates_history">
+        <div class="dates" data-toggle="modal" data-target="#myModal">
             Total Losses: {{bh.loss_total}}
         </div>
     </div>
@@ -25,13 +34,34 @@
                 </div>
                 <div class="sel3">Result: {{hist_data.bet_status}}</div>
                 <div><img class='home_img' ng-src="{{hist_data.away_logo}}">{{hist_data.away_team}} <span
-                        ng-if="bet_data.final_score_a>-1" class="final_score">{{bet_data.final_score_a}}</span></div>
+                        ng-if="hist_data.final_score_a>-1" class="final_score">{{hist_data.final_score_a}}</span></div>
                 <div><img class='home_img' ng-src="{{hist_data.home_logo}}">{{hist_data.home_team}} <span
-                        ng-if="hist_data.final_score_h>-1" class="final_score">{{bet_data.final_score_h}}</span></div>
+                        ng-if="hist_data.final_score_h>-1" class="final_score">{{hist_data.final_score_h}}</span></div>
                 <div>Bet ${{hist_data.amount}} on: {{hist_data.side}} <span ng-if="hist_data.bet_name!='moneyline'"><span
                         ng-if="hist_data.bet_name=='spread'&&hist_data.line>0">+</span>{{hist_data.line}}</span>
                     <span ng-if="hist_data.bet_name=='moneyline'">to win</span> (<span
                             ng-if="hist_data.odds>0">+</span>{{hist_data.odds}})
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--Modal-->
+    <div class="modal fade" id="myModal" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-body modal_color_history">
+                        <div>
+                            Profit vs Bets
+                        </div>
+                        <div id="moneygraph" style="height: 250px; width: 400px"></div>
+                        <div>
+                            Win/Loss vs Bets
+                        </div>
+                        <div id="ratiograph" style="height: 250px; width: 400px"></div>
+                    <br>
+                    <button type="button" class="spread_bet " data-dismiss="modal">Close</button>
                 </div>
             </div>
         </div>

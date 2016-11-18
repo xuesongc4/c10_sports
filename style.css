@@ -397,6 +397,10 @@ a:hover{
 .modal_color{
     color: deepskyblue;
 }
+.modal_color_history{
+    color: deepskyblue;
+    font-size: 15px;
+}
 
 .funds{
     font-size: 3vh;
@@ -467,8 +471,8 @@ video{
     width: 258px;
     line-height: 258px;
     border-radius: 100%;
-    margin-top: -375px;
-    margin-left:35px;
+    margin-top: -376px;
+    margin-left:36px;
     display: none;
 }
 .loader2{
@@ -654,4 +658,7 @@ video{
 
 .bet_history{
     margin-top: 5%;
+}
+#moneygraph, #ratiograph{
+    margin: auto;
 }

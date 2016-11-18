@@ -367,14 +367,77 @@ app.controller('leaderboard', function (myFactory) {
 app.controller('bethistory', function (myFactory) {
     var self = this;
     this.bet_history = null;
+    this.win_ratio = '.000';
     this.win_total = 0;
     this.loss_total = 0;
+    this.total_games = null;
+    this.graph_data_money=[];
+    this.graph_data_ratio=[];
+
+    this.get_ratio = function(){
+        self.total_games=self.win_total+self.loss_total;
+        if(self.win_total===0){
+            self.win_ratio='.000';
+        }
+        else{
+            win_ratio_temp=Math.round((self.win_total/self.total_games*1000))/1000;
+            win_ratio_temp=win_ratio_temp.toString();
+            self.win_ratio=win_ratio_temp.slice(1,5);
+        }
+    }
+
+    this.create_graph = function(){
+        new Morris.Line({
+            element: 'moneygraph',
+            data:  self.graph_data_money,
+            xkey: 'bet',
+            ykeys: ['value'],
+            labels: ['Dollars']
+        });
+        new Morris.Line({
+            element: 'ratiograph',
+            data: self.graph_data_ratio,
+            xkey: 'bet',
+            ykeys: ['value'],
+            labels: ['Win/Loss']
+        });
+    }
+
     this.get_bet_history = function(){
         $('.loader').removeClass('hide');
         $('.loader_background').removeClass('hide');
         myFactory.getBetHistoryData()
             .then(function (response) {
+                var temp_data_money={};
+                var temp_data_ratio={};
+                var game_counter=0;
+                var win_counter=0;
+
+
+                // --------------------data for graph----------------------
+                    for(var j=response.length-1; j>=0; j--){
+                        if(response[j].bet_status === 'Loss' || response[j].bet_status === 'Win') {
+                            game_counter++;
+                            if (response[j].bet_status === 'win'){
+                                win_counter++;
+                            }
+                            temp_data_money = {
+                                bet: game_counter,
+                                value: response[j].amount*response[j].odds,
+                            }
+                            temp_data_ratio = {
+                                bet: game_counter,
+                                value: (win_counter/(game_counter||1))
+                            }
+                            self.graph_data_money.push(temp_data_money);
+                            self.graph_data_ratio.push(temp_data_ratio);
+                        }
+                    }
+                    console.log('graph data is: ', self.graph_data_money);
+                    console.log('graph data is: ', self.graph_data_ratio);
+               //----------------------------------------------------------------------
                     for (var i = 0; i < response.length; i++) {
+
                         var date = new Date(response[i].game_time+' UTC');
                         var temp_date=date.toString().slice(0,15);
                         var temp_time=date.toString().slice(16,21);
@@ -410,6 +473,9 @@ app.controller('bethistory', function (myFactory) {
                             }
                         }
                     }
+                    self.get_ratio();
+                    self.create_graph();
+
                 $('.loader').addClass('hide');
                     $('.loader_background').addClass('hide');
                     self.bet_history=response;
