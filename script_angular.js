@@ -315,6 +315,10 @@ app.controller('controller', function (myFactory) {
                 });
     };
     self.getGameData('current','NFL');
+    setTimeout(function(){
+        $('.loader').addClass('hide');
+        $('.loader_background').addClass('hide');
+    },2500);
 });
 
 app.config(function ($routeProvider) {
@@ -367,14 +371,67 @@ app.controller('leaderboard', function (myFactory) {
 app.controller('bethistory', function (myFactory) {
     var self = this;
     this.bet_history = null;
+    this.win_ratio = '.000';
     this.win_total = 0;
     this.loss_total = 0;
+    this.total_games = null;
+    this.graph_data_money=[];
+    this.graph_data_ratio=[];
+    this.graph_flag=true;
+
+    this.get_ratio = function(){
+        self.total_games=self.win_total+self.loss_total;
+        if(self.win_total===0){
+            self.win_ratio='.000';
+        }
+        else{
+            win_ratio_temp=Math.round((self.win_total/self.total_games*1000))/1000;
+            win_ratio_temp=win_ratio_temp.toString();
+            self.win_ratio=win_ratio_temp.slice(1,5);
+        }
+    }
+
+    this.create_graph = function() {
+        if (self.graph_flag === true) {
+            setTimeout(function () {
+                self.graph_flag=false;
+                new Morris.Line({
+                    element: 'moneygraph',
+                    data: self.graph_data_money,
+                    xLabels: "bet",
+                    xkey: 'bet',
+                    ykeys: ['value'],
+                    labels: ['Dollars'],
+                    parseTime: false,
+                    resize: true
+                });
+                new Morris.Line({
+                    element: 'ratiograph',
+                    data: self.graph_data_ratio,
+                    xLabels: "bet",
+                    xkey: 'bet',
+                    ykeys: ['value'],
+                    labels: ['Win/Loss Ratio'],
+                    parseTime: false,
+                    resize: true
+                });
+            }, 500);
+        }
+    }
+
     this.get_bet_history = function(){
         $('.loader').removeClass('hide');
         $('.loader_background').removeClass('hide');
         myFactory.getBetHistoryData()
             .then(function (response) {
+                var temp_data_money={};
+                var temp_data_ratio={};
+                var game_counter=0;
+                var win_counter=0;
+                var temp_value=0;
+
                     for (var i = 0; i < response.length; i++) {
+
                         var date = new Date(response[i].game_time+' UTC');
                         var temp_date=date.toString().slice(0,15);
                         var temp_time=date.toString().slice(16,21);
@@ -390,10 +447,10 @@ app.controller('bethistory', function (myFactory) {
                         response[i].game_time = temp_time;
                         response[i].game_date = temp_date;
 
-                        if(response[i].bet_status==="Win"){
+                        if(response[i].bet_status==="Won"){
                             self.win_total++;
                         }
-                        else if(response[i].bet_status==="Loss"){
+                        else if(response[i].bet_status==="Lost"){
                             self.loss_total++;
                         }
                         if(response[i].bet_name === 'over/under'){
@@ -409,11 +466,51 @@ app.controller('bethistory', function (myFactory) {
                                 response[i].side = response[i].away_team;
                             }
                         }
+                        if(response[i].side===response[i].away_team){
+                            response[i].line=response[i].line*-1;
+                        }
+
+                        if(response[i].bet_status==='Lost'){
+                            response[i].amount2=Math.abs(response[i].amount);
+                        }
+                        if(response[i].bet_status==='Won'){
+                            response[i].profit=Math.round((response[i].win_amount-response[i].amount)*100)/100;
+                        }
                     }
-                $('.loader').addClass('hide');
-                    $('.loader_background').addClass('hide');
+
+                    // --------------------data for graph----------------------
+                    for(var j=response.length-1; j>=0; j--){
+                        if(response[j].bet_status === 'Lost' || response[j].bet_status === 'Won') {
+                            game_counter++;
+                            if (response[j].bet_status === 'Won'){
+                                win_counter++;
+                            }
+                            if(response[j].bet_status === 'Lost') {
+                                temp_value -= response[j].amount;
+                            }
+                            else if(response[j].bet_status === 'Won') {
+                                temp_value += response[j].win_amount-response[j].amount;
+                            }
+                            temp_data_money = {
+                                bet: game_counter,
+                                value: Math.round(temp_value*100)/100,
+                            }
+                            temp_data_ratio = {
+                                bet: game_counter,
+                                value: Math.round((win_counter/(game_counter||1))*1000)/1000
+                            }
+                            self.graph_data_money.push(temp_data_money);
+                            self.graph_data_ratio.push(temp_data_ratio);
+                        }
+                    }
+                    console.log('graph money data is: ', self.graph_data_money);
+                    console.log('graph ratio data is: ', self.graph_data_ratio);
+                    //----------------------------------------------------------------------
+                    self.get_ratio();
                     self.bet_history=response;
                     console.log(self.bet_history);
+                    $('.loader').addClass('hide');
+                    $('.loader_background').addClass('hide');
                 },
                 function (response) {
                     $('.loader').addClass('hide');

@@ -1,10 +1,23 @@
 <div ng-controller="bethistory as bh">
+    <div class="league_landing">
+        <div class="league_button_history">
+            <img src="images/GraphBar.png"></img> Bet History
+        </div>
+        <br>
+        <div class="league_button_history league_button_history_small2">
+             Total Funds:${{ic.user_funds.funds}}
+        </div>
+        <div ng-click="bh.create_graph()" class="league_button_history league_button_history_small" data-toggle="modal" data-target="#myModal" data-toggle="modal" data-target="#myModal" >
+            Click here for graphs
+        </div>
+    </div>
     <div class="date_landing bet_history">
         <div class="dates_history selected_date">
-            Bet History
+            Win/Loss {{bh.win_ratio}}
         </div>
+
         <div class="dates_history">
-            Total wins: {{bh.win_total}}
+            Total Wins: {{bh.win_total}}
         </div>
         <div class="dates_history">
             Total Losses: {{bh.loss_total}}
@@ -23,15 +36,61 @@
                        {{hist_data.game_date}}
                     </span>
                 </div>
-                <div class="sel3">Result: {{hist_data.bet_status}}</div>
-                <div><img class='home_img' ng-src="{{hist_data.away_logo}}">{{hist_data.away_team}} <span
-                        ng-if="bet_data.final_score_a>-1" class="final_score">{{bet_data.final_score_a}}</span></div>
-                <div><img class='home_img' ng-src="{{hist_data.home_logo}}">{{hist_data.home_team}} <span
-                        ng-if="hist_data.final_score_h>-1" class="final_score">{{bet_data.final_score_h}}</span></div>
-                <div>Bet ${{hist_data.amount}} on: {{hist_data.side}} <span ng-if="hist_data.bet_name!='moneyline'"><span
-                        ng-if="hist_data.bet_name=='spread'&&hist_data.line>0">+</span>{{hist_data.line}}</span>
-                    <span ng-if="hist_data.bet_name=='moneyline'">to win</span> (<span
-                            ng-if="hist_data.odds>0">+</span>{{hist_data.odds}})
+                <div class="sel3">
+                    Result: {{hist_data.bet_status}} <span ng-if="hist_data.win_amount===0">(-${{hist_data.amount2}})
+                </span>
+                    <span ng-if="hist_data.win_amount">(+${{hist_data.profit}})
+                    </span>
+                </div>
+                <div>
+                    <img class='home_img' ng-src="{{hist_data.away_logo}}">
+                    {{hist_data.away_team}}
+                    <span ng-if="hist_data.final_score_a>-1" class="final_score">
+                        {{hist_data.final_score_a}}
+                    </span>
+                </div>
+                <div>
+                    <img class='home_img' ng-src="{{hist_data.home_logo}}">
+                    {{hist_data.home_team}}
+                    <span ng-if="hist_data.final_score_h>-1" class="final_score">
+                        {{hist_data.final_score_h}}
+                    </span>
+                </div>
+                <div>
+                    Bet ${{hist_data.amount}} on: {{hist_data.side}}
+                    <span ng-if="hist_data.bet_name!='moneyline'">
+                        <span ng-if="hist_data.bet_name=='spread'&&hist_data.line>0">+</span>{{hist_data.line}}
+                    </span>
+                    <span ng-if="hist_data.bet_name=='moneyline'">
+                        to win
+                    </span> (
+                    <span ng-if="hist_data.odds>0">+</span>{{hist_data.odds}})
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--Modal-->
+    <div class="modal fade" id="myModal" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-body modal_color_history">
+                    <div class="graph_landing">
+                        <div>
+                            Profit vs Bets
+                        </div>
+                        <div id="moneygraph"></div>
+                    </div>
+                    <br>
+                    <div class="graph_landing">
+                        <div>
+                            Win/Loss vs Bets
+                        </div>
+                        <div id="ratiograph"></div>
+                    </div>
+                    <br>
+                    <button type="button" class="spread_bet graph_button" data-dismiss="modal">Close</button>
                 </div>
             </div>
         </div>
