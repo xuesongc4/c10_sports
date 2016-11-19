@@ -2,7 +2,6 @@
 require_once('mysql_connect.php');      //necessary when testing it on its own
 date_default_timezone_set('UTC');
 
-
 //make function to format the incoming bet
 
 //in order to be effective i need an input of game_id to cut down on the games to look at
@@ -151,17 +150,23 @@ function check_money_line_win($bet_home, $wager, $odds, $final_score_a, $final_s
     }
     return $win_amount;
 }
+
+//maybe needs to be reverted to be focused around the under bet instead. Not sure how the games are added into db anymore
+
+
 //checks for the win conditions of over/under bets
-function check_over_under_win($bet_under , $wager, $odds, $line, $final_score_a, $final_score_h){
+//an over bet is side 1, and and under bet is side 0 when written to db,
+// so bet_over is true when it is side is 1 or bet is the over, and bet_over is false or 0 when side is 0 or is the under
+function check_over_under_win($bet_over, $wager, $odds, $line, $final_score_a, $final_score_h){
     $total_score = $final_score_a + $final_score_h;
     if ($total_score > $line) { //only bets for the over win, other bets will return no money
-        if (!$bet_under) { //bet for over is true when not betting on the under
+        if ($bet_over) { //bet for over is true when not betting on the under
             $win_amount = calculate_win_total($wager, $odds);
         } else {
             $win_amount = 0;
         }
     } else if ($total_score < $line) { //only bets for the under win, other bets will return no money
-        if ($bet_under) {
+        if (!$bet_over) {
             $win_amount = calculate_win_total($wager, $odds);
         } else {
             $win_amount = 0;

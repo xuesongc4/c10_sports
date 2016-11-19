@@ -1,8 +1,6 @@
 <?php
 session_start();
 require_once('mysql_connect.php');
-
-//require('mysql_connect.php');
 date_default_timezone_set('UTC');
 
 //variables coming in
@@ -28,10 +26,6 @@ $line = $_POST['line'];
 $odds = $_POST['odds'];
 $side = $_POST['side'];
 $type_of_bet = $_POST['type_of_bet'];
-
-
-////very temporary
-//$type_of_bet = 1;
 
 
 ////variables to be stored for next query
@@ -87,18 +81,12 @@ if($type_of_bet === 1){
 //    $encoded_data = json_encode($data);
 //    print($data);
 //}
-//$curr_time = time();
-//$curr_time = date('Y-m-d H:i:s', $curr_time);
-$curr_time = date('Y-m-d H:i:s', time());
 
-//idea to limit the adding of bets to in progress and completed games:
-//add select query prior to writing insert
-//compare formatted current to start time of game
-//if the game is after the start time bet should fail and we should return an error
+//current time collected to prevent the insertion of bets on games already in progress or completed
+$curr_time = date('Y-m-d H:i:s', time());
 
 //should create empty array for data variable
 $data = [];
-
 
 $game_time_query = "SELECT game_time FROM `games` WHERE ID = '$game_id'";
 $game_time_results = mysqli_query($connection, $game_time_query);
