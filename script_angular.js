@@ -471,7 +471,7 @@ app.controller('bethistory', function (myFactory) {
                         }
 
                         if(response[i].bet_status==='Lost'){
-                            response[i].win_amount=response[i].win_amount*-1;
+                            response[i].win_amount=response[i].win_amount;
                             response[i].amount2=Math.abs(response[i].amount);
                         }
                         if(response[i].bet_status==='Won'){
