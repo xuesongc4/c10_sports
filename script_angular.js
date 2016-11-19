@@ -388,6 +388,9 @@ app.controller('bethistory', function (myFactory) {
         if(self.win_total===0){
             self.win_ratio='.000';
         }
+        else if(self.win_total/self.loss_total==Infinity){
+            self.win_ratio='1.00';
+        }
         else{
             win_ratio_temp=Math.round((self.win_total/self.total_games*1000))/1000;
             win_ratio_temp=win_ratio_temp.toString();
