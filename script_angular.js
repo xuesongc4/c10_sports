@@ -53,7 +53,7 @@ app.factory("myFactory", function ($http, $q) {
         })
             .then(function (response) {
                 data.leaderboard_data = response.data;
-                console.log("response in my factory: ", data);
+                console.log("response in my factory for leader board: ", data);
                 q.resolve(data.leaderboard_data);
             }, function () {
                 console.log('error in getting data');
@@ -113,6 +113,7 @@ app.controller('controller', function (myFactory) {
     this.addUsersFunds = function(){
         myFactory.findUsersFunds()
             .then(function (response) {
+                response.funds_abs=Math.abs(response.funds);
                 self.user_funds = response;
                 console.log("myfunds reponse: ",response);
 
@@ -354,6 +355,9 @@ app.controller('leaderboard', function (myFactory) {
         $('.loader_background').removeClass('hide');
         myFactory.getLeaderData()
             .then(function (response) {
+                for(i=0;i<response.length;i++) {
+                    response[i].money_abs = Math.abs(response[i].money);
+                }
                     self.leaderboard_data=response;
                 console.log('leader board data: ',self.leaderboard_data);
                     $('.loader').addClass('hide');
