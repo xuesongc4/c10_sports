@@ -480,17 +480,16 @@ app.controller('bethistory', function (myFactory) {
 
                     // --------------------data for graph----------------------
                     for(var j=response.length-1; j>=0; j--){
-                        if(response[j].bet_status === 'Lost' || response[j].bet_status === 'Won') {
+                        if(response[j].bet_status == 'Won'|| response[j].bet_status =='Lost') {
                             game_counter++;
                             if (response[j].bet_status === 'Won'){
+                                temp_value += (response[j].win_amount-response[j].amount);
                                 win_counter++;
                             }
-                            if(response[j].bet_status === 'Lost') {
+                            else{
                                 temp_value -= response[j].amount;
                             }
-                            else if(response[j].bet_status === 'Won') {
-                                temp_value += response[j].win_amount-response[j].amount;
-                            }
+
                             temp_data_money = {
                                 bet: game_counter,
                                 value: Math.round(temp_value*100)/100,
