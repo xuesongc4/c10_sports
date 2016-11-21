@@ -287,7 +287,12 @@ app.controller('controller', function (myFactory) {
                         var time_check2 = temp_time.slice(3,5);
 
                         if(time_check >= 12) {
-                            temp_time = time_check - 12 + ':' + time_check2 + ' PM';
+                            if(time_check == 12){
+                                temp_time = time_check + ':' + time_check2 + ' PM';
+                            }
+                            else {
+                                temp_time = time_check - 12 + ':' + time_check2 + ' PM';
+                            }
                         }
                         else{
                             temp_time = time_check -0 +':' + time_check2 +' AM';
