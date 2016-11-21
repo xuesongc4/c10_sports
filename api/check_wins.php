@@ -88,9 +88,9 @@ function check_for_wins_on_settled_games($connection, $API_game_id)
 function check_for_a_win($final_score_a, $final_score_h, $wager, $bet_type, $bet_side, $odds, $line){
     $win_amount = null;
 
-    if ($bet_type === 'spread') {       //bet is on the spread
+    if ($bet_type === '1') {       //bet is on the spread
         $win_amount = check_spread_win($bet_side, $wager, $odds, $line, $final_score_a, $final_score_h);
-    } else if ($bet_type === 'moneyline') {       //bet is on moneyline
+    } else if ($bet_type === '2') {       //bet is on moneyline
         $win_amount = check_money_line_win($bet_side, $wager, $odds, $final_score_a, $final_score_h);
     } else {          //else bet is on over/under
         $win_amount = check_over_under_win($bet_side, $wager, $odds, $line, $final_score_a, $final_score_h);

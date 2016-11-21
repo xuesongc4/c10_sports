@@ -2,7 +2,7 @@
 require_once('mysql_connect.php');      //necessary when testing it on its own
 date_default_timezone_set('UTC');
 
-//testing       lions, vikings sun nov 6 2016
+/*//testing       lions, vikings sun nov 6 2016
 $LionsToWin = check_for_a_win(22, 16, 100, 'moneyline', 0, 217, 217);
 print($LionsToWin);
 print('<br>');
@@ -19,14 +19,28 @@ print($under_bet);
 print('<br>');
 
 //testing       ravens at cowboys over 45
-$under_bet = check_for_a_win(17, 27, 100, 'over/under', 1, -105, 45);
-print($under_bet);
+$over_bet = check_for_a_win(17, 27, 100, 'over/under', 1, -105, 45);
+print($over_bet);
 print('<br>');
 
 //testing       ravens at cowboys under 45
 $under_bet = check_for_a_win(17, 27, 100, 'over/under', 0, -105, 45);
 print($under_bet);
+print('<br>');*/
+
+//function check_for_a_win($final_score_a, $final_score_h, $wager, $bet_type, $bet_side, $odds, $line)
+//testing       heat at wizards  -5   bet on heat
+$heat_bet = check_for_a_win(114, 111, 100, 'spread', 0, -108, -5);
+//$heat_bet = check_for_a_win(114, 111, 100, 1, 0, -108, -4.5);
+print($heat_bet);
 print('<br>');
+
+//testing       heat at wizards  -5   bet on wizards
+//$wizards_bet = check_for_a_win(114, 111, 100, 1, 1, -108, -5);
+$wizards_bet = check_for_a_win(114, 111, 100, 'spread', 1, -108, -4.5);
+print($wizards_bet);
+print('<br>');
+
 
 //make function to format the incoming bet
 
