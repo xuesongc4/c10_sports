@@ -9,7 +9,15 @@
     <div class='sched_landing'>
         <div ng-repeat="board_data in lb.leaderboard_data | orderBy: 'money': true">
             <div class='game_history'>
-              <span class="sel4">{{$index+1+'.'}}</span> <span class = 'sel3'>{{board_data.sn}}</span> <span class="sel2" style="float: right"> ${{board_data.money}}</span>
+              <span class="sel4">
+                  {{$index+1+'.'}}
+              </span>
+                <span class = 'sel3'>
+                    {{board_data.sn}}
+                </span>
+                <span class="sel2" style="float: right">
+                    <span ng-if="board_data.money < 0 ">-</span>${{board_data.money_abs}}
+                </span>
             </div>
         </div>
     </div>
