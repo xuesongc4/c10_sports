@@ -18,6 +18,15 @@ $under_bet = check_for_a_win(41, 23, 100, 'over/under', 0, 100, 53);
 print($under_bet);
 print('<br>');
 
+//testing       ravens at cowboys over 45
+$under_bet = check_for_a_win(17, 27, 100, 'over/under', 1, -105, 45);
+print($under_bet);
+print('<br>');
+
+//testing       ravens at cowboys under 45
+$under_bet = check_for_a_win(17, 27, 100, 'over/under', 0, -105, 45);
+print($under_bet);
+print('<br>');
 
 //make function to format the incoming bet
 
