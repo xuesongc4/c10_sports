@@ -5,7 +5,7 @@
         </div>
         <br>
         <div class="league_button_history league_button_history_small2">
-             Total Funds:${{ic.user_funds.funds}}
+            Total Funds: <span ng-if="ic.user_funds.funds < 0">-</span>${{ic.user_funds.funds_abs}}</span>
         </div>
         <div ng-click="bh.create_graph()" class="league_button_history league_button_history_small" data-toggle="modal" data-target="#myModal" data-toggle="modal" data-target="#myModal" >
             Click here for graphs
