@@ -53,7 +53,7 @@ app.factory("myFactory", function ($http, $q) {
         })
             .then(function (response) {
                 data.leaderboard_data = response.data;
-                console.log("response in my factory: ", data);
+                console.log("response in my factory for leader board: ", data);
                 q.resolve(data.leaderboard_data);
             }, function () {
                 console.log('error in getting data');
@@ -113,6 +113,7 @@ app.controller('controller', function (myFactory) {
     this.addUsersFunds = function(){
         myFactory.findUsersFunds()
             .then(function (response) {
+                response.funds_abs=Math.abs(response.funds);
                 self.user_funds = response;
                 console.log("myfunds reponse: ",response);
 
@@ -354,6 +355,9 @@ app.controller('leaderboard', function (myFactory) {
         $('.loader_background').removeClass('hide');
         myFactory.getLeaderData()
             .then(function (response) {
+                for(i=0;i<response.length;i++) {
+                    response[i].money_abs = Math.abs(response[i].money);
+                }
                     self.leaderboard_data=response;
                 console.log('leader board data: ',self.leaderboard_data);
                     $('.loader').addClass('hide');
@@ -383,6 +387,9 @@ app.controller('bethistory', function (myFactory) {
         self.total_games=self.win_total+self.loss_total;
         if(self.win_total===0){
             self.win_ratio='.000';
+        }
+        else if(self.win_total/self.loss_total==Infinity){
+            self.win_ratio='1.00';
         }
         else{
             win_ratio_temp=Math.round((self.win_total/self.total_games*1000))/1000;
@@ -480,17 +487,16 @@ app.controller('bethistory', function (myFactory) {
 
                     // --------------------data for graph----------------------
                     for(var j=response.length-1; j>=0; j--){
-                        if(response[j].bet_status === 'Lost' || response[j].bet_status === 'Won') {
+                        if(response[j].bet_status == 'Won'|| response[j].bet_status =='Lost') {
                             game_counter++;
                             if (response[j].bet_status === 'Won'){
+                                temp_value += (response[j].win_amount-response[j].amount);
                                 win_counter++;
                             }
-                            if(response[j].bet_status === 'Lost') {
+                            else{
                                 temp_value -= response[j].amount;
                             }
-                            else if(response[j].bet_status === 'Won') {
-                                temp_value += response[j].win_amount-response[j].amount;
-                            }
+
                             temp_data_money = {
                                 bet: game_counter,
                                 value: Math.round(temp_value*100)/100,

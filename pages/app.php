@@ -2,6 +2,7 @@
 <html ng-app="app">
 <head>
     <meta charset="UTF-8">
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/datejs/1.0/date.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -28,7 +29,7 @@
         <div ng-cloak class="menu animate2" ng-hide="ic.menu_toggle">
             <a class="menu_option account_info" href="#/accountinfo" ng-click="ic.menu_toggle=true">
              <br><span style="margin-top: 100px; font-weight: bolder"> {{ic.user_funds.username}}</span>
-                <div class="funds">Total Funds:${{ic.user_funds.funds}}</span></div>
+                <div class="funds">Total Funds: <span ng-if="ic.user_funds.funds < 0">-</span>${{ic.user_funds.funds_abs}}</span></div>
             </a>
             <a class="menu_option_top" href="#/" ng-click="ic.menu_toggle=true; ic.getGameData('current','NFL')"><img
                     src="images/Football.png"></img> Game Screen</a>
