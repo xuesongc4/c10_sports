@@ -34,11 +34,10 @@ app.factory("myFactory", function ($http, $q) {
         })
             .then(function (response) {
                 data.retrieve_bet_history = response.data;
-                console.log("response in my factory: ", data);
+                console.log("response in my factory for bet history: ", data);
                 q.resolve(data.retrieve_bet_history);
             }, function () {
                 console.log('error in getting data');
-                q.reject('error in getting data')
                 q.reject('error in getting data')
             });
         return q.promise
@@ -72,7 +71,7 @@ app.factory("myFactory", function ($http, $q) {
         })
             .then(function (response) {
                 data.bet_data = response.data;
-                console.log("response in my factory: ", data);
+                console.log("response in my factory for data: ", data);
                 q.resolve(data.bet_data);
             }, function () {
                 console.log('error in getting data');
@@ -286,11 +285,14 @@ app.controller('controller', function (myFactory) {
                         var time_check = temp_time.slice(0,2);
                         var time_check2 = temp_time.slice(3,5);
 
-                        if(time_check >= 12) {
+                        if(time_check == 12) {
+                            temp_time = time_check + ':' + time_check2 + ' PM';
+                        }
+                        else if(time_check > 12) {
                             temp_time = time_check - 12 + ':' + time_check2 + ' PM';
                         }
                         else{
-                            temp_time = time_check -0 +':' + time_check2 +' AM';
+                            temp_time = time_check +':' + time_check2 +' AM';
                         }
                         response[i].game_time = temp_time;
                         response[i].game_date = temp_date;

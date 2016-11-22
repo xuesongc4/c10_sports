@@ -659,6 +659,12 @@ video{
         font-size: 20px;
         margin-top: 5px;
     }
+    .spread_bet{
+        font-size: 20px;
+    }
+    .bet{
+        height: 325px;
+    }
 }
 
 @media screen and (max-width: 700px) {
@@ -683,7 +689,6 @@ video{
         font-size: 15px;
         margin-top: 0px;
     }
-
 }
 
 .bet_history{
