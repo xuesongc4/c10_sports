@@ -290,7 +290,7 @@ app.controller('controller', function (myFactory) {
                                 temp_time = time_check - 12 + ':' + time_check2 + ' PM';
                         }
                         else if(time_check === 12) {
-                            temp_time = time_check - 12 + ':' + time_check2 + ' PM';
+                            temp_time = time_check + ':' + time_check2 + ' PM';
                         }
                         else{
                             temp_time = time_check +':' + time_check2 +' AM';
