@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/datejs/1.0/date.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css"/>
@@ -16,7 +17,6 @@
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.css">
     <script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js"></script>
-    <script type="text/javascript" src="date.js"></script>
 
     <script>
         localStorage.setItem('bet_user_id', "<?php echo $_SESSION['ID']; ?>");
@@ -31,7 +31,7 @@
              <br><span style="margin-top: 100px; font-weight: bolder"> {{ic.user_funds.username}}</span>
                 <div class="funds">Total Funds: <span ng-if="ic.user_funds.funds < 0">-</span>${{ic.user_funds.funds_abs}}</span></div>
             </a>
-            <a class="menu_option_top" href="#/" ng-click="ic.menu_toggle=true; ic.getGameData()"><img
+            <a class="menu_option_top" href="#/" ng-click="ic.menu_toggle=true; ic.getGameData('current','NFL')"><img
                     src="images/Football.png"></img> Game Screen</a>
             <a class="menu_option" href="#/bethistory" ng-click="ic.menu_toggle=true"><img
                     src="images/GraphBar.png"></img> Bet History</a>
