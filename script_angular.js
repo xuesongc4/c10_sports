@@ -281,7 +281,7 @@ app.controller('controller', function (myFactory) {
                             response[i].spread_fake = 1;
                         }
 
-                        var date = new Date(response[i].game_time+' UTC');
+                        var date = new Date(response[i].game_time * 1000);
                         var temp_date=date.toString().slice(0,15);
                         var temp_time=date.toString().slice(16,21);
                         var time_check = temp_time.slice(0,2);
@@ -443,7 +443,7 @@ app.controller('bethistory', function (myFactory) {
 
                     for (var i = 0; i < response.length; i++) {
 
-                        var date = new Date(response[i].game_time+' UTC');
+                        var date = new Date(response[i].game_time * 1000);
                         var temp_date=date.toString().slice(0,15);
                         var temp_time=date.toString().slice(16,21);
                         var time_check = temp_time.slice(0,2);

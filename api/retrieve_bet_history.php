@@ -5,7 +5,7 @@ require_once('check_wins.php');
 date_default_timezone_set('UTC');
 
 $user_id = $_SESSION['ID'];
-//$user_id = '1';           //for testing only
+//$user_id = '2';           //for testing only
 
 $bet_history_query = "SELECT b.amount, b.settled AS bet_status_id, bs.bet_status, 
   a.full_name AS away_team, a.logo_src AS away_logo, g.final_score_a,  
@@ -27,6 +27,7 @@ if(mysqli_num_rows($result)){
         if($row['bet_status_id'] > 0){
             $row['win_amount'] = check_for_a_win($row['final_score_a'], $row['final_score_h'], $row['amount'], $row['bet_type_id'], $row['side'], $row['odds'], $row['line']);
         }
+        $row['game_time'] = strtotime($row['game_time']);
         $data[] = $row;
     }
 }
