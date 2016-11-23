@@ -217,7 +217,9 @@ app.controller('controller', function (myFactory) {
                 break;
         }
 
-        self.sendData.game_block = date;
+        if(date){
+            self.sendData.game_block = date;
+        }
 //--------------------DATE GETTER needs to be converted to normal time not utc----------------------------------------------------
         var date = new Date();
         date.setHours(0);
