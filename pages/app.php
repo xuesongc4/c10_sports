@@ -21,7 +21,7 @@
     <script>
         localStorage.setItem('bet_user_id', "<?php echo $_SESSION['ID']; ?>");
     </script>
-    <title>Gambling app</title>
+    <title>iBet</title>
 </head>
 <body ng-controller="controller as ic">
 <div class="container2">
