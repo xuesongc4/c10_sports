@@ -157,6 +157,16 @@ body{
     overflow: auto;
 }
 
+.faq{
+    text-align: left;
+    font-size: 20px;
+    border: solid 1px black;
+    border-bottom: solid 2px black;
+    padding: 2%;
+    background-color: white;
+    overflow: auto;
+}
+
 .game:hover{
     cursor: pointer;
 }
