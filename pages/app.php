@@ -31,7 +31,7 @@
              <br><span style="margin-top: 100px; font-weight: bolder"> {{ic.user_funds.username}}</span>
                 <div class="funds">Total Funds: <span ng-if="ic.user_funds.funds < 0">-</span>${{ic.user_funds.funds_abs}}</span></div>
             </a>
-            <a class="menu_option_top" href="#/" ng-click="ic.menu_toggle=true; ic.getGameData('current','NFL')"><img
+            <a class="menu_option_top" href="#/" ng-click="ic.menu_toggle=true; ic.getGameData()"><img
                     src="images/Football.png"></img> Game Screen</a>
             <a class="menu_option" href="#/bethistory" ng-click="ic.menu_toggle=true"><img
                     src="images/GraphBar.png"></img> Bet History</a>
