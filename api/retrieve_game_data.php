@@ -66,6 +66,7 @@ $bets_placed = ['bets_placed'=>['spread'=>'0','moneyline'=>'0','over/under'=>'0'
 
 if(mysqli_num_rows($game_results)){
     while($row = mysqli_fetch_assoc($game_results)) {
+        $row['game_time'] = strtotime($row['game_time']);
         $data[] = array_merge($row, $bets_placed);
 //        $data[] = $row;
     }
