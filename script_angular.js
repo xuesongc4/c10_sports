@@ -296,8 +296,8 @@ app.controller('controller', function (myFactory) {
                         else{
                             temp_time = parseInt(time_check) + ':' + time_check2 +' AM';      //NEED TO ACCOUNT FOR THE CASE WHEN HOUR IS LESS THAN 10, THEN WE SHOULD NOT HAVE THE LEADING 0
                         }
-                        response[i].game_time = temp_time;
-                        response[i].game_date = temp_date;
+                         response[i].game_time = temp_time;
+                         response[i].game_date = temp_date;
                     };
                     console.log("response with toggle information and started or not information: ", response);
 
