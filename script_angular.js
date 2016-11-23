@@ -217,7 +217,9 @@ app.controller('controller', function (myFactory) {
                 break;
         }
 
-        self.sendData.game_block = date;
+        if(date){
+            self.sendData.game_block = date;
+        }
 //--------------------DATE GETTER needs to be converted to normal time not utc----------------------------------------------------
         var date = new Date();
         date.setHours(0);
@@ -292,7 +294,7 @@ app.controller('controller', function (myFactory) {
                             temp_time = time_check - 12 + ':' + time_check2 + ' PM';
                         }
                         else{
-                            temp_time = time_check +':' + time_check2 +' AM';
+                            temp_time = parseInt(time_check) + ':' + time_check2 +' AM';      //NEED TO ACCOUNT FOR THE CASE WHEN HOUR IS LESS THAN 10, THEN WE SHOULD NOT HAVE THE LEADING 0
                         }
                         response[i].game_time = temp_time;
                         response[i].game_date = temp_date;

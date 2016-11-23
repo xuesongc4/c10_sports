@@ -1,6 +1,46 @@
 <?php
-//require_once('mysql_connect.php');      //necessary when testing it on its own
+require_once('mysql_connect.php');      //necessary when testing it on its own
 date_default_timezone_set('UTC');
+
+/*//testing       lions, vikings sun nov 6 2016
+$LionsToWin = check_for_a_win(22, 16, 100, 'moneyline', 0, 217, 217);
+print($LionsToWin);
+print('<br>');
+
+//testing       knicks v cavs under 43.5
+//function check_for_a_win($final_score_a, $final_score_h, $wager, $bet_type, $bet_side, $odds, $line)
+$under_bet = check_for_a_win(88, 117, 100, 'over/under', 0, 100, 43.5);
+print($under_bet);
+print('<br>');
+
+//testing       saints at 49ers under 53
+$under_bet = check_for_a_win(41, 23, 100, 'over/under', 0, 100, 53);
+print($under_bet);
+print('<br>');
+
+//testing       ravens at cowboys over 45
+$over_bet = check_for_a_win(17, 27, 100, 'over/under', 1, -105, 45);
+print($over_bet);
+print('<br>');
+
+//testing       ravens at cowboys under 45
+$under_bet = check_for_a_win(17, 27, 100, 'over/under', 0, -105, 45);
+print($under_bet);
+print('<br>');*/
+
+//function check_for_a_win($final_score_a, $final_score_h, $wager, $bet_type, $bet_side, $odds, $line)
+//testing       heat at wizards  -5   bet on heat
+$heat_bet = check_for_a_win(114, 111, 100, 'spread', 0, -108, -5);
+//$heat_bet = check_for_a_win(114, 111, 100, 1, 0, -108, -4.5);
+print($heat_bet);
+print('<br>');
+
+//testing       heat at wizards  -5   bet on wizards
+//$wizards_bet = check_for_a_win(114, 111, 100, 1, 1, -108, -5);
+$wizards_bet = check_for_a_win(114, 111, 100, 'spread', 1, -108, -4.5);
+print($wizards_bet);
+print('<br>');
+
 
 //make function to format the incoming bet
 
@@ -151,16 +191,18 @@ function check_money_line_win($bet_home, $wager, $odds, $final_score_a, $final_s
     return $win_amount;
 }
 //checks for the win conditions of over/under bets
-function check_over_under_win($bet_under , $wager, $odds, $line, $final_score_a, $final_score_h){
+//an over bet is side 1, and and under bet is side 0 when written to db,
+// so bet_over is true when it is side is 1 or bet is the over, and bet_over is false or 0 when side is 0 or is the under
+function check_over_under_win($bet_over, $wager, $odds, $line, $final_score_a, $final_score_h){
     $total_score = $final_score_a + $final_score_h;
     if ($total_score > $line) { //only bets for the over win, other bets will return no money
-        if (!$bet_under) { //bet for over is true when not betting on the under
+        if ($bet_over) { //bet for over is true when not betting on the under
             $win_amount = calculate_win_total($wager, $odds);
         } else {
             $win_amount = 0;
         }
     } else if ($total_score < $line) { //only bets for the under win, other bets will return no money
-        if ($bet_under) {
+        if (!$bet_over) {
             $win_amount = calculate_win_total($wager, $odds);
         } else {
             $win_amount = 0;

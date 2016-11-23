@@ -31,6 +31,12 @@ if(mysqli_num_rows($result)){
     }
 }
 
+////for testing purposes
+//print('<pre>');
+//print_r($data);
+//print('</pre>');
+
+//necessary for live version
 //json encode the data
 $json_encoded_object = json_encode($data);
 //print the json encoded object
