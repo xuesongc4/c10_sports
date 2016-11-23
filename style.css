@@ -522,16 +522,17 @@ video{
     margin-top: 10px;
     background-color: rgba(255,255,255,.5);
     height: 70px;
-    width: 100%;
+    width: 95%;
     border: black 4px solid;
     color: black;
     font-size: 50px;
     z-index: 5;
+    padding-left: 5%;
 }
 
 .user_login{
     text-align: center;
-    width: 101%;
+    width: 101.5%;
     line-height: 70px;
     font-size: 50px;
     margin: auto;
