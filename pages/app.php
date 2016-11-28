@@ -21,7 +21,7 @@
     <script>
         localStorage.setItem('bet_user_id', "<?php echo $_SESSION['ID']; ?>");
     </script>
-    <title>Gambling app</title>
+    <title>iBet</title>
 </head>
 <body ng-controller="controller as ic">
 <div class="container2">
@@ -29,7 +29,7 @@
         <div ng-cloak class="menu animate2" ng-hide="ic.menu_toggle">
             <a class="menu_option account_info" href="#/accountinfo" ng-click="ic.menu_toggle=true">
              <br><span style="margin-top: 100px; font-weight: bolder"> {{ic.user_funds.username}}</span>
-                <div class="funds">Total Funds: <span ng-if="ic.user_funds.funds < 0">-</span>${{ic.user_funds.funds_abs}}</span></div>
+                <div class="funds">Total Funds: <div style="display: inline-block"><span ng-if="ic.user_funds.funds < 0">-</span>${{ic.user_funds.funds_abs}}</div></div>
             </a>
             <a class="menu_option_top" href="#/" ng-click="ic.menu_toggle=true; ic.getGameData()"><img
                     src="images/Football.png"></img> Game Screen</a>

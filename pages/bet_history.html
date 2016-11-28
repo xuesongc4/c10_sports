@@ -37,9 +37,9 @@
                     </span>
                 </div>
                 <div class="sel3">
-                    Result: {{hist_data.bet_status}} <span ng-if="hist_data.win_amount===0">(-${{hist_data.amount2}})
+                    Result: {{hist_data.bet_status}} <span ng-if="hist_data.win_amount===0&&hist_data.bet_status!='Push'">(-${{hist_data.amount2}})
                 </span>
-                    <span ng-if="hist_data.win_amount">(+${{hist_data.profit}})
+                    <span ng-if="hist_data.win_amount&&hist_data.bet_status!='Push'">(+${{hist_data.profit}})
                     </span>
                 </div>
                 <div>

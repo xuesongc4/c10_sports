@@ -43,9 +43,10 @@ app.factory("myFactory", function ($http, $q) {
         return q.promise
     };
 
-    data.getLeaderData = function (){
+    data.getLeaderData = function (screen_name){
         var q = $q.defer();
         $http({
+            //data: $.param(screen_name),
             url: 'api/retrieve_leaderboard_data.php',
             headers: {'Content-Type': 'application/x-www-form-urlencoded'},
             method: 'post'
@@ -281,7 +282,7 @@ app.controller('controller', function (myFactory) {
                             response[i].spread_fake = 1;
                         }
 
-                        var date = new Date(response[i].game_time+' UTC');
+                        var date = new Date(response[i].game_time * 1000);
                         var temp_date=date.toString().slice(0,15);
                         var temp_time=date.toString().slice(16,21);
                         var time_check = temp_time.slice(0,2);
@@ -353,11 +354,12 @@ app.config(function ($routeProvider) {
 
 app.controller('leaderboard', function (myFactory) {
     var self = this;
+    this.screen_name=null;
     this.leaderboard_data = null;
     this.get_leaderboard_data = function(){
         $('.loader').removeClass('hide');
         $('.loader_background').removeClass('hide');
-        myFactory.getLeaderData()
+        myFactory.getLeaderData(self.screen_name)
             .then(function (response) {
                 for(i=0;i<response.length;i++) {
                     response[i].money_abs = Math.abs(response[i].money);
@@ -443,7 +445,7 @@ app.controller('bethistory', function (myFactory) {
 
                     for (var i = 0; i < response.length; i++) {
 
-                        var date = new Date(response[i].game_time+' UTC');
+                        var date = new Date(response[i].game_time * 1000);
                         var temp_date=date.toString().slice(0,15);
                         var temp_time=date.toString().slice(16,21);
                         var time_check = temp_time.slice(0,2);
