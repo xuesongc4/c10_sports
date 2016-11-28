@@ -5,7 +5,7 @@
         </div>
         <br>
 
-        <div ng-click="" class="league_button_history league_button_history_small">
+        <div ng-click="lb.screen_name=null; lb.get_leaderboard_data()" class="league_button_history league_button_history_small">
             Click here for top 10
         </div>
 
@@ -16,9 +16,9 @@
                 <div class="dates_history  selected_date">
                     Search For User:
                 </div>
-                <input class="search_input dates_input" value="{{ic.user_funds.username}}">
+                <input class="search_input dates_input" ng-model="name" value="{{ic.user_funds.username}}">
                 </input>
-                <button class="search_button"> Go!
+                <button class="search_button" ng-click="lb.screen_name=name; lb.get_leaderboard_data()"> Go!
                 </button>
             </div>
         </div>
