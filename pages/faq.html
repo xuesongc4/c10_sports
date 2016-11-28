@@ -95,3 +95,26 @@
         </ol>
     </div>
 </div>
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-body">
+                <br>
+                <div class="modal_color">
+                    <span>{{ic.saveBetData.side_name}}</span>
+                    <span ng-if="ic.saveBetData.type_of_bet=='2'">ML</span>
+                    <span ng-if="ic.saveBetData.type_of_bet=='1'||ic.saveBetData.type_of_bet=='3'"><span ng-if="ic.saveBetData.line2>0 && ic.saveBetData.type_of_bet=='1'">+</span>{{ic.saveBetData.line2}}</span>
+                    <span>(<span ng-if="ic.saveBetData.odds>0">+</span>{{ic.saveBetData.odds}})</span>
+                    <span>Wagering: $100</span>
+                </div>
+                <br>
+                <button type="button" class="spread_bet " data-dismiss="modal" ng-click="ic.sendBetData()">Confirm Bet</button>
+                <button type="button" class="spread_bet " data-dismiss="modal">Cancel</button>
+            </div>
+        </div>
+
+    </div>
+</div>
