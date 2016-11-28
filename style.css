@@ -5,6 +5,7 @@ body{
     margin:0;
     font-size:0;
 }
+
 .league_landing{
     height: 50px;
     margin:auto;
@@ -522,7 +523,7 @@ video{
     margin-top: 10px;
     background-color: rgba(255,255,255,.5);
     height: 70px;
-    width: 95%;
+    width: 94%;
     border: black 4px solid;
     color: black;
     font-size: 50px;
@@ -717,4 +718,42 @@ video{
 }
 .graph_button{
     z-index: 5;
+}
+
+.faq_link{
+    font-size: 20px;
+    color: deepskyblue;
+    padding:10px;
+    font-weight: bold;
+}
+.faq_info{
+    border: solid 2px black;
+    background-color: lightgrey;
+    text-align: left;
+}
+
+.dates_input{
+    text-align: center;
+}
+
+.search_button,.search_input {
+    display: inline-block;
+    border: solid 4px black;
+    height: 100%;
+    width: 54%;
+    font-size: 25px;
+    line-height: 40px;
+    background-color: white;
+    color: black;
+    margin-right: -4px;
+}
+.search_button {
+    width: 10%;
+    background-color: lightgrey;
+    color: deepskyblue;
+    margin-right: -4px;
+    font-weight: bolder;
+}
+.search_button:hover {
+    background-color: darkgray;
 }
