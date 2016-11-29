@@ -46,7 +46,7 @@ app.factory("myFactory", function ($http, $q) {
     data.getLeaderData = function (user_name){
         var q = $q.defer();
         $http({
-            //data: $.param(user_name),
+            data: $.param(user_name),
             url: 'api/retrieve_leaderboard_data.php',
             headers: {'Content-Type': 'application/x-www-form-urlencoded'},
             method: 'post'
@@ -354,7 +354,7 @@ app.config(function ($routeProvider) {
 
 app.controller('leaderboard', function (myFactory) {
     var self = this;
-    this.screen_name=null;
+    this.screen_name="";
     this.leaderboard_data = null;
     this.get_leaderboard_data = function(){
         $('.loader').removeClass('hide');
