@@ -43,10 +43,10 @@ app.factory("myFactory", function ($http, $q) {
         return q.promise
     };
 
-    data.getLeaderData = function (screen_name){
+    data.getLeaderData = function (username){
         var q = $q.defer();
         $http({
-            // data: $.param(screen_name),              //where do we define what the screen_name will be
+            data: $.param(username),              //where do we define what the screen_name will be
             url: 'api/retrieve_leaderboard_data.php',
             headers: {'Content-Type': 'application/x-www-form-urlencoded'},
             method: 'post'
@@ -354,12 +354,12 @@ app.config(function ($routeProvider) {
 
 app.controller('leaderboard', function (myFactory) {
     var self = this;
-    this.screen_name=null;
+    this.username = "";
     this.leaderboard_data = null;
     this.get_leaderboard_data = function(){
         $('.loader').removeClass('hide');
         $('.loader_background').removeClass('hide');
-        myFactory.getLeaderData(self.screen_name)
+        myFactory.getLeaderData(self.username)
             .then(function (response) {
                 for(i=0;i<response.length;i++) {
                     response[i].money_abs = Math.abs(response[i].money);
