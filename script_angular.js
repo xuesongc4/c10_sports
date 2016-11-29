@@ -43,10 +43,10 @@ app.factory("myFactory", function ($http, $q) {
         return q.promise
     };
 
-    data.getLeaderData = function (screen_name){
+    data.getLeaderData = function (user_name){
         var q = $q.defer();
         $http({
-            //data: $.param(screen_name),
+            //data: $.param(user_name),
             url: 'api/retrieve_leaderboard_data.php',
             headers: {'Content-Type': 'application/x-www-form-urlencoded'},
             method: 'post'
