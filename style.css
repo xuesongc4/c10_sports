@@ -428,7 +428,6 @@ a:hover{
     background-color: black;
     font-weight: bold;
 }
-
 .sel{
     font-weight: bold;
     color: deepskyblue;
@@ -437,13 +436,22 @@ a:hover{
     color: black;
 }
 .sel3{
+    text-align: left;
     color: black;
     font-weight: bold;
+    margin-left: 35%;
 }
 .sel4{
+     color: black;
+     float: left;
+ }
+.sel5{
+    text-align: left;
     color: black;
-    float: left;
+    font-weight: bold;
+    margin-left: 33.3%;
 }
+
 video{
     margin: 0;
     padding: 0;
