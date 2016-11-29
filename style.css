@@ -221,10 +221,11 @@ body{
     color: deepskyblue;
 }
 
-.spread_bet_fake{
+.spread_bet_fake, .spread_bet_fake2{
     opacity: .5;
     pointer-events: none;
 }
+
 .spread_bet_fake:hover{
     cursor: default;
 }
