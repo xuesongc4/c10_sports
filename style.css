@@ -221,10 +221,11 @@ body{
     color: deepskyblue;
 }
 
-.spread_bet_fake{
+.spread_bet_fake, .spread_bet_fake2{
     opacity: .5;
     pointer-events: none;
 }
+
 .spread_bet_fake:hover{
     cursor: default;
 }
@@ -427,7 +428,6 @@ a:hover{
     background-color: black;
     font-weight: bold;
 }
-
 .sel{
     font-weight: bold;
     color: deepskyblue;
@@ -436,13 +436,25 @@ a:hover{
     color: black;
 }
 .sel3{
+     color: black;
+     font-weight: bold;
+ }
+.sel4{
+     color: black;
+     float: left;
+ }
+.sel5{
+    text-align: left;
+    color: black;
+    font-weight: bold;
+    margin-left: 33.3%;
+}
+.sel6{
+    margin-left: 35%;
     color: black;
     font-weight: bold;
 }
-.sel4{
-    color: black;
-    float: left;
-}
+
 video{
     margin: 0;
     padding: 0;
@@ -672,9 +684,6 @@ video{
     }
     .spread_bet{
         font-size: 20px;
-    }
-    .bet{
-        height: 325px;
     }
 }
 
