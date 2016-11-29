@@ -3,6 +3,10 @@ date_default_timezone_set('UTC');
 require('constants.php');
 $connection = mysqli_connect(DB_HOST, DB_USER, DB_PASS, DB_NAME);
 
+
+
+
+
 //$user = 1;  //temp while no users are defined             //i think this line can be removed
 
 //currently username is saved as 'sn' to accomodate Jason's angular naming conventions

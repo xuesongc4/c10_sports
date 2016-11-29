@@ -46,7 +46,7 @@ app.factory("myFactory", function ($http, $q) {
     data.getLeaderData = function (screen_name){
         var q = $q.defer();
         $http({
-            //data: $.param(screen_name),
+            // data: $.param(screen_name),              //where do we define what the screen_name will be
             url: 'api/retrieve_leaderboard_data.php',
             headers: {'Content-Type': 'application/x-www-form-urlencoded'},
             method: 'post'
@@ -375,7 +375,7 @@ app.controller('leaderboard', function (myFactory) {
                     $('.loader_background').addClass('hide');
                 });
     }
-    this.get_leaderboard_data();
+    this.get_leaderboard_data();            //how are we going to pass in the screen name in to this method
 });
 
 app.controller('bethistory', function (myFactory) {
