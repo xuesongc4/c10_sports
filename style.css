@@ -674,9 +674,6 @@ video{
     .spread_bet{
         font-size: 20px;
     }
-    .bet{
-        height: 325px;
-    }
 }
 
 @media screen and (max-width: 700px) {
