@@ -5,7 +5,7 @@
         </div>
         <br>
 
-        <div ng-click="lb.username=''; name='';lb.get_leaderboard_data()" class="league_button_history league_button_history_small">
+        <div ng-click="lb.username=''; lb.name='';lb.get_leaderboard_data()" class="league_button_history league_button_history_small">
             Click here for top 10
         </div>
         <span class="error" ng-if="lb.error"><br>user not found</span>
@@ -25,7 +25,7 @@
         </div>
         <div class='sched_landing'>
             <div ng-repeat="board_data in lb.leaderboard_data" style="text-align: left">
-                <div class='game_history' ng-class="{selected:ic.user_funds.username==board_data.sn}">
+                <div class='game_history' ng-class="{selected:ic.user_funds.username==board_data.sn||lb.name==board_data.sn}">
               <span class="sel4">
                   {{board_data.place+'.'}}
               </span>
