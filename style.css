@@ -567,11 +567,6 @@ video{
      float: right;
  }
 
-.game_odds2{
-    font-weight: bold;
-    font-size: 20px;
-    float: right;
-}
 .animate2{
     transition:all .5s;
     overflow: hidden;
@@ -594,6 +589,7 @@ video{
 .final_display{
     font-weight: bold;
     float: left;
+    color: deepskyblue;
 }
 
 .league_button_history_small, .league_button_history_small2{
