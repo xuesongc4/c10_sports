@@ -43,15 +43,17 @@ app.factory("myFactory", function ($http, $q) {
         return q.promise
     };
 
-    data.getLeaderData = function (user_name){
+    data.getLeaderData = function (username){
         var q = $q.defer();
+        var sendData = $.param({username: username});
         $http({
-            //data: $.param(user_name),
+            data: sendData,
             url: 'api/retrieve_leaderboard_data.php',
             headers: {'Content-Type': 'application/x-www-form-urlencoded'},
             method: 'post'
         })
             .then(function (response) {
+                console.log('username in factory is: '+username);
                 data.leaderboard_data = response.data;
                 console.log("response in my factory for leader board: ", data);
                 q.resolve(data.leaderboard_data);
@@ -354,28 +356,46 @@ app.config(function ($routeProvider) {
 
 app.controller('leaderboard', function (myFactory) {
     var self = this;
-    this.screen_name=null;
+    this.username = '';
     this.leaderboard_data = null;
+    this.error=false;
+
+    this.enter_push = function(event){
+        if (event.keyCode==13){
+            self.username = self.name;
+            self.error=false;
+            self.get_leaderboard_data();
+        }
+    }
+
     this.get_leaderboard_data = function(){
         $('.loader').removeClass('hide');
         $('.loader_background').removeClass('hide');
-        myFactory.getLeaderData(self.screen_name)
+        myFactory.getLeaderData(self.username)
             .then(function (response) {
-                for(i=0;i<response.length;i++) {
-                    response[i].money_abs = Math.abs(response[i].money);
+                if(response.success=='false'){
+                    self.error=true;
                 }
-                    self.leaderboard_data=response;
+                else{
+                    self.error=false;
+                }
+                console.log('response is :',response);
+                console.log("searching for user:"+self.username);
+                for(i=0;i<response.leaderboard_info.length;i++) {
+                    response.leaderboard_info[i].money_abs = Math.abs(response.leaderboard_info[i].money);
+                }
+                    self.leaderboard_data=response.leaderboard_info;
                 console.log('leader board data: ',self.leaderboard_data);
                     $('.loader').addClass('hide');
                     $('.loader_background').addClass('hide');
-                },
+                 },
                 function (response) {
                     console('error!');
                     $('.loader').addClass('hide');
                     $('.loader_background').addClass('hide');
                 });
     }
-    this.get_leaderboard_data();
+    this.get_leaderboard_data();            //how are we going to pass in the screen name in to this method
 });
 
 app.controller('bethistory', function (myFactory) {
