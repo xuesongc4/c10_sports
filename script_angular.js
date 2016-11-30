@@ -110,7 +110,14 @@ app.controller('controller', function (myFactory) {
     this.league_highlight=[0,0,0,0,0,0];
     this.user_funds={};
     this.index = null;
+    this.liveTime=null;
 
+    this.startclock= function(){
+        var time = new Date();
+         self.liveTime = time.getTime();
+        setTimeout(self.startclock, 1000);
+    }
+    this.startclock();
 
     this.addUsersFunds = function(){
         myFactory.findUsersFunds()
@@ -125,8 +132,6 @@ app.controller('controller', function (myFactory) {
             }
     };
     this.addUsersFunds();
-
-
 
     this.sendBetData = function () {
         self.bet_button_toggle=false;
@@ -285,6 +290,8 @@ app.controller('controller', function (myFactory) {
                         }
 
                         var date = new Date(response[i].game_time * 1000);
+                        response[i].utc_game_time=response[i].game_time * 1000;
+                        response[i].utc_game_time=response[i].game_time * 1000;
                         var temp_date=date.toString().slice(0,15);
                         var temp_time=date.toString().slice(16,21);
                         var time_check = temp_time.slice(0,2);
