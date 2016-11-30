@@ -563,10 +563,15 @@ video{
 }
 
 .game_odds{
+     font-weight: bold;
+     float: right;
+ }
+
+.game_odds2{
     font-weight: bold;
+    font-size: 20px;
     float: right;
 }
-
 .animate2{
     transition:all .5s;
     overflow: hidden;
