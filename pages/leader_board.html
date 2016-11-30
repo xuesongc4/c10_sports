@@ -19,7 +19,7 @@
                 </div>
                 <input class="search_input dates_input" ng-model="lb.name" ng-keyup="lb.enter_push($event)">
                 </input>
-                <button class="search_button" ng-click="lb.username=lb.name; lb.get_leaderboard_data()"> Go!
+                <button class="search_button" ng-click="lb.username=lb.name; lb.get_leaderboard_data(); lb.error='true'"> Go!
                 </button>
             </div>
         </div>

@@ -358,10 +358,12 @@ app.controller('leaderboard', function (myFactory) {
     var self = this;
     this.username = '';
     this.leaderboard_data = null;
+    this.error=false;
 
     this.enter_push = function(event){
         if (event.keyCode==13){
             self.username = self.name;
+            self.error=false;
             self.get_leaderboard_data();
         }
     }
@@ -371,6 +373,12 @@ app.controller('leaderboard', function (myFactory) {
         $('.loader_background').removeClass('hide');
         myFactory.getLeaderData(self.username)
             .then(function (response) {
+                if(response.success=='false'){
+                    self.error=true;
+                }
+                else{
+                    self.error=false;
+                }
                 console.log('response is :',response);
                 console.log("searching for user:"+self.username);
                 for(i=0;i<response.leaderboard_info.length;i++) {
