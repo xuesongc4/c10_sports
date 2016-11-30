@@ -53,7 +53,7 @@ if(mysqli_num_rows($leaderboard_results)){
                 }
             }else if($user_key > count($leaderboard) - 10){
                 //if the found user is in the bottom ten
-                echo 'im in the right place for second_guy';
+               // echo 'im in the right place for second_guy';
                 for($index = count($leaderboard) - 10; $index < count($leaderboard); $index++){
                     $curr_user = [
                         'place' => $index + 1,
@@ -63,7 +63,7 @@ if(mysqli_num_rows($leaderboard_results)){
                     $data['leaderboard_info'][] = $curr_user;
                 }
             }else{
-                echo 'i should not be here';
+               // echo 'i should not be here';
                 //else the found user is outside of the top ten
                 for($index = $user_key - 4; $index <= $user_key + 6; $index++){
                     $curr_user = [
