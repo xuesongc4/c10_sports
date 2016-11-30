@@ -26,7 +26,7 @@
         <div class='game' ng-click="ic.betToggle($index)">
             <div class="game_date">
                 <span ng-if="bet_data.final_score_a>-1" class="final_display">Final</span>
-                <span ng-if="bet_data.utc_game_time < ic.liveTime && bet_data.final_score_h <0" class="final_display">Betting Action Closed</span>
+                <span ng-if="bet_data.utc_game_time < ic.liveTime && bet_data.final_score_h <0" class="final_display">Betting Closed</span>
                 <span ng-if="bet_data.home_spread==0 && bet_data.overunder_points==0" class="final_display">Odds Not Yet Available</span>
                 <span class = 'sel2'>
                     {{bet_data.game_date}}
