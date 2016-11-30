@@ -765,3 +765,8 @@ video{
 .search_button:hover {
     background-color: darkgray;
 }
+
+.error{
+    color: red;
+    font-size: 20px;
+}
