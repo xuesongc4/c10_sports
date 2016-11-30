@@ -5,6 +5,9 @@ $connection = mysqli_connect(DB_HOST, DB_USER, DB_PASS, DB_NAME);
 
 if(isset($_POST['username'])){
     $searched_user = $_POST['username'];
+    if($searched_user === ''){
+        unset($searched_user);
+    }
 }
 
 //$user = 1;  //temp while no users are defined             //i think this line can be removed
