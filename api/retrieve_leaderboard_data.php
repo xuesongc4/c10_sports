@@ -7,10 +7,6 @@ if(isset($_POST['username'])){
     $searched_user = $_POST['username'];
 }
 
-//$searched_user = "second_guy";
-//$searched_user = "bob";
-//$searched_user = "billybob";       //for testing (no such user)
-
 //$user = 1;  //temp while no users are defined             //i think this line can be removed
 
 //currently username is aliased as 'sn' to accomodate Jason's angular naming conventions
@@ -32,6 +28,7 @@ if(mysqli_num_rows($leaderboard_results)){
             if ($leaderboard[$index]['username'] === $searched_user) {
                 //if the user has been found, store the key
                 $user_key = $index;
+                $data['success'] = 'true';
                 break;
             }
         }
@@ -76,6 +73,7 @@ if(mysqli_num_rows($leaderboard_results)){
             }
         }else{
             //else the user was not found
+            $data['success'] = 'false';
             $data['errors'][] = 'user not found';
             //store the top 10 entries of the leaderboard
             for($index = 0; $index < 10; $index++){
@@ -102,6 +100,7 @@ if(mysqli_num_rows($leaderboard_results)){
 
 
 }else{
+    $data['success'] = 'false';
     $data['errors'][] = 'no leaderboard data available';
 }
 
