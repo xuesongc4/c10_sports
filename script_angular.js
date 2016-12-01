@@ -115,7 +115,6 @@ app.controller('controller', function (myFactory) {
     this.startclock= function(){
         var time = new Date();
          self.liveTime = time.getTime();
-        setTimeout(self.startclock, 1000);
     }
     this.startclock();
 
