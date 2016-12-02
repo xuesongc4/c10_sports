@@ -9,12 +9,12 @@
     <link rel="stylesheet" type="text/css" href="style.css">
 
     <script>
-        display_sign_up = function(){
+        var display_sign_up = function(){
             setTimeout(function(){
                 $('.sign_up_menu').slideToggle()},250)
             $('.login').slideToggle();
         }
-        checkUsername(username){
+        var checkUsername = function(username){
             $.ajax({
                 url: 'api/check_user.php',
                 type: "POST",
@@ -23,7 +23,7 @@
                 }
             })
                 .done(function(data) {
-                    console.log'(your user name stuff',data);
+                    console.log('your user name stuff',data);
                 })
                 .fail(function() {
                     alert("unable to reach user name database");
