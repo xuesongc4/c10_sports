@@ -350,7 +350,7 @@ app.controller('controller', function (myFactory) {
     setTimeout(function(){
         $('.loader').addClass('hide');
         $('.loader_background').addClass('hide');
-    },2500);
+    },2000);
 });
 
 app.config(function ($routeProvider) {
