@@ -25,9 +25,9 @@
     <div ng-repeat='bet_data in ic.displayData'>
         <div class='game' ng-click="ic.betToggle($index)">
             <div class="game_date">
-                <span ng-if="bet_data.final_score_a>-1" class="final_display">Final</span>
-                <span ng-if="bet_data.utc_game_time < ic.liveTime && bet_data.final_score_h <0" class="final_display">Betting Closed</span>
-                <span ng-if="bet_data.home_spread==0 && bet_data.overunder_points==0" class="final_display">Odds Not Yet Available</span>
+                <span ng-if="bet_data.final_score_a>-1" class="final_display">Final&nbsp</span>
+                <span ng-if="bet_data.utc_game_time < ic.liveTime && bet_data.final_score_h <0" class="final_display">Betting Closed&nbsp</span>
+                <span ng-if="bet_data.home_spread==0 && bet_data.overunder_points==0" class="final_display">Odds Not Available&nbsp</span>
                 <span class = 'sel2'>
                     {{bet_data.game_date}}
                 </span>
@@ -74,7 +74,7 @@
                         <span ng-if="ic.saveBetData.type_of_bet=='2'">ML</span>
                         <span ng-if="ic.saveBetData.type_of_bet=='1'||ic.saveBetData.type_of_bet=='3'"><span ng-if="ic.saveBetData.line2>0 && ic.saveBetData.type_of_bet=='1'">+</span>{{ic.saveBetData.line2}}</span>
                         <span>(<span ng-if="ic.saveBetData.odds>0">+</span>{{ic.saveBetData.odds}})</span>
-                        <span>Wagering: $100</span>
+                        <div style="font-size: 2vw">Wagering: $100 to win ${{ic.calculate_win_total(100,ic.saveBetData.odds)}}</div>
                     </div>
                     <br>
                     <button type="button" class="spread_bet " data-dismiss="modal" ng-click="ic.sendBetData()">Confirm Bet</button>

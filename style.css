@@ -262,25 +262,22 @@ body{
 }
 .menu_option_top{
     border-bottom: solid black 2px;
-    border-top:solid white 1px;
     display: block;
     padding: 2.5vh;
     background-color: white;
 }
 
 .menu_option_logout{
-    border-top: solid white 2px;
+    border-top: solid black 2px;
     border-bottom: solid black 2px;
     display: block;
     padding: 2.5vh;
-    background: black;
-    color: white;
+    background: white;
+    color: black;
     margin-top: -6px;
 }
 .menu_option_logout:hover{
-    border-bottom: solid black 2px;
-    padding: 2.5vh;
-    color: deepskyblue;
+    background-color: deepskyblue;
 }
 
 .menu_option, a{
@@ -293,18 +290,16 @@ body{
     width:100%;
     background-color: black;
     color:deepskyblue;
-    border-bottom: white 2px solid;
 }
 a:hover{
-    color:deepskyblue;
     text-decoration:none;
 }
 .menu_option:hover{
-     background-color:black;
+     background-color:deepskyblue;
  }
 
 .menu_option_top:hover{
-    background-color:black;
+    background-color:deepskyblue;
 }
 
 .confirm_button_fake{
