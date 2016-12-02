@@ -806,3 +806,9 @@ video{
 .sign_up_menu{
     display: none;
 }
+
+.user_name_taken{
+    font-size: 20px;
+    color: red;
+    display:none
+}

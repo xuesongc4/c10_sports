@@ -8,29 +8,6 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <link rel="stylesheet" type="text/css" href="style.css">
 
-    <script>
-        var display_sign_up = function(){
-            setTimeout(function(){
-                $('.sign_up_menu').slideToggle()},250)
-            $('.login').slideToggle();
-        }
-        var checkUsername = function(username){
-            $.ajax({
-                url: 'api/check_user.php',
-                type: "POST",
-                data: {
-                    username: username
-                }
-            })
-                .done(function(data) {
-                    console.log('your user name stuff',data);
-                })
-                .fail(function() {
-                    alert("unable to reach user name database");
-                });
-        }
-    </script>
-
 </head>
 <body>
 <video class="video" autoplay loop>
@@ -60,7 +37,7 @@
             </div>
         </div>
         <div class="sign_up_menu">
-            <input class="input" type="text" name="username_signup" placeholder="Username" id="username" onblur="checkUsername($('#username').val())"><br>
+            <input class="input" type="text" name="username_signup" placeholder="Username" id="username" onblur="checkUsername($('#username').val())"><span class="user_name_taken">Username Taken</span><br>
             <input class="input" type="text" name="email_signup" placeholder="Email"><br>
             <input class="input" type="password" name="password_signup" placeholder="Password"><br>
             <input class="input" type="password" name="password_signup_confirm" placeholder="Confirm Password"><br>
@@ -70,10 +47,37 @@
         </div>
     </form>
 </div>
+
 <script>
-    $('.user_login').on('click', function () {
+    $('.user_login,.guest_login').on('click', function () {
         $('.header2').css('display', 'initial');
     });
+
+    var display_sign_up = function(){
+        setTimeout(function(){
+            $('.sign_up_menu').slideToggle()},250)
+        $('.login').slideToggle();
+    }
+    var checkUsername = function(username){
+        $.ajax({
+            url: 'api/check_user.php',
+            type: "POST",
+            data: {
+                username: username
+            }
+        })
+            .done(function(data) {
+                if(data) {
+                    $('.warning').show();
+                }
+                else{
+                    $('.warning').hide();
+                }
+            })
+            .fail(function() {
+                alert("unable to reach user name database");
+            });
+    }
 </script>
 <script>
     localStorage.removeItem('bet_user_id');
