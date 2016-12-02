@@ -112,10 +112,27 @@ app.controller('controller', function (myFactory) {
     this.index = null;
     this.liveTime=null;
 
+    this.round_down = function(number){
+        number *= 100;
+        number = Math.floor(number);
+        number /= 100;
+        return number;
+    }
+    this.calculate_win_total = function(bet_amount, odds){
+        win = null;
+        if (odds < 0) {
+            odds *= -1;
+            win = 100 / odds * bet_amount;
+        } else {
+            win = odds / 100 * bet_amount;
+        }
+        win = self.round_down(win);
+        return win;
+    }
+
     this.startclock= function(){
         var time = new Date();
          self.liveTime = time.getTime();
-        setTimeout(self.startclock, 1000);
     }
     this.startclock();
 
@@ -333,7 +350,7 @@ app.controller('controller', function (myFactory) {
     setTimeout(function(){
         $('.loader').addClass('hide');
         $('.loader_background').addClass('hide');
-    },2500);
+    },2000);
 });
 
 app.config(function ($routeProvider) {
@@ -559,4 +576,3 @@ app.controller('bethistory', function (myFactory) {
     }
     this.get_bet_history();
 });
-

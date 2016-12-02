@@ -262,25 +262,22 @@ body{
 }
 .menu_option_top{
     border-bottom: solid black 2px;
-    border-top:solid white 1px;
     display: block;
     padding: 2.5vh;
     background-color: white;
 }
 
 .menu_option_logout{
-    border-top: solid white 2px;
+    border-top: solid black 2px;
     border-bottom: solid black 2px;
     display: block;
     padding: 2.5vh;
-    background: black;
-    color: white;
+    background: white;
+    color: black;
     margin-top: -6px;
 }
 .menu_option_logout:hover{
-    border-bottom: solid black 2px;
-    padding: 2.5vh;
-    color: deepskyblue;
+    background-color: deepskyblue;
 }
 
 .menu_option, a{
@@ -293,18 +290,16 @@ body{
     width:100%;
     background-color: black;
     color:deepskyblue;
-    border-bottom: white 2px solid;
 }
 a:hover{
-    color:deepskyblue;
     text-decoration:none;
 }
 .menu_option:hover{
-     background-color:black;
+     background-color:deepskyblue;
  }
 
 .menu_option_top:hover{
-    background-color:black;
+    background-color:deepskyblue;
 }
 
 .confirm_button_fake{
@@ -534,7 +529,7 @@ video{
     margin-top: 10px;
     background-color: rgba(255,255,255,.5);
     height: 70px;
-    width: 95%;
+    width: 93%;
     border: black 4px solid;
     color: black;
     font-size: 50px;
@@ -544,7 +539,7 @@ video{
 
 .user_login{
     text-align: center;
-    width: 101.5%;
+    width: 100%;
     line-height: 70px;
     font-size: 50px;
     margin: auto;
@@ -769,4 +764,45 @@ video{
 .error{
     color: red;
     font-size: 20px;
+}
+.sign_up{
+    float: right;
+    text-align: center;
+    width: 47%;
+    line-height: 35px;
+    font-size: 25px;
+    margin: auto;
+    color:white;
+    background-color: black;
+    opacity: .9;
+    border: black 5px solid;
+    margin-top: 15px;
+}
+.sign_up:hover{
+    cursor: pointer;
+    color: deepskyblue;
+}
+
+.guest_login{
+    text-align: center;
+    width: 47%;
+    line-height: 35px;
+    font-size: 25px;
+    margin: auto;
+    color:white;
+    background-color: black;
+    opacity: .9;
+    border: black 4px solid;
+    margin-top: 15px;
+}
+.guest_login:hover{
+    cursor: pointer;
+    color: deepskyblue;
+}
+.guest_signup{
+    width: 100%;
+}
+
+.sign_up_menu{
+    display: none;
 }
