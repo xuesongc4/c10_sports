@@ -12,9 +12,9 @@ if (!$check_query) {
 	$response['success'] = false;
 }
 if(mysqli_num_rows($result)>0){
-	$response['message'] = 'Username already taken';
+	$response['userFound'] = true;
 } else {
-	$response['message'] = '';
+	$response['userFound'] = false;
 }
 
 echo json_encode($response);
