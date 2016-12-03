@@ -2,7 +2,8 @@
 require_once('mysql_connect.php');      //necessary when testing it on its own
 date_default_timezone_set('UTC');
 
-//make function to format the incoming bet
+//call of function that will check all old games for accuracy
+//correct_wins_on_past_games($connection);
 
 //in order to be effective i need an input of game_id to cut down on the games to look at
 // the file db_query has a portion that checks if games are completed, after this point it should call this file to
@@ -10,11 +11,12 @@ date_default_timezone_set('UTC');
 //check_for_wins_on_settled_games(140);       //necessary when testing it on its own  (old for when using our game ID)
 //check_for_wins_on_settled_games(654458760);       //necessary when testing it on its own  (new for when using their game ID)
 
+
 function check_for_wins_on_settled_games($connection, $API_game_id)
 {
-//    global $conn;                       //necessary when testing it on its own
-//    global $connection;
+//    global $connection;       //necessary when testing it on its own
     // $connection = mysqli_connect(DB_HOST, DB_USER, DB_PASS, DB_NAME);
+
     //make query to db to see unresolved bets
     $bets_query = "SELECT b.ID, b.user_id, b.amount, b.bet_type_id AS bet_type, b.side, b.line, b.odds, g.final_score_a, g.final_score_h FROM `bets` AS b JOIN `games` AS g ON g.ID = b.game_id JOIN `bet_types` AS bt ON bt.ID = b.bet_type_id WHERE b.settled = '0' AND g.API_game_id = '$API_game_id'";
     $bets_result = mysqli_query($connection, $bets_query);
@@ -208,4 +210,154 @@ function create_temp_successful_bet_array($user_id, $bet_id, $win_amount, $succe
         $temp_arr['success'] = 'false';
     }
     return $temp_arr;
+}
+
+
+
+
+//function to recheck all old games and correct them
+function correct_wins_on_past_games($connection){
+    $bets_query = "SELECT b.ID, b.user_id, b.amount, b.bet_type_id AS bet_type, b.side, b.line, b.odds, g.final_score_a, g.final_score_h, b.settled AS bet_status FROM `bets` AS b JOIN `games` AS g ON g.ID = b.game_id JOIN `bet_types` AS bt ON bt.ID = b.bet_type_id";
+    $bets_result = mysqli_query($connection, $bets_query);
+
+    //gather all bets data
+    $bets_data = [];
+    if (mysqli_num_rows($bets_result)) {
+        while ($row = mysqli_fetch_assoc($bets_result)) {
+            //create temp array
+            $temp_arr = [];
+            //store the bet id
+            $temp_arr['bet_id'] = $row['ID'];
+            //store user_id associated with the bet placed
+            $temp_arr['user_id'] = $row['user_id'];
+            //store wager associated with the bet placed
+            $temp_arr['wager'] = $row['amount'];
+            //store the bet status associated with the bet placed
+            $temp_arr['bet_status'] = $row['bet_status'];
+            //calculate the win amount for the specific bet and store in temp array
+            $temp_arr['win_amount'] = check_for_a_win($row['final_score_a'], $row['final_score_h'], $row['amount'], $row['bet_type'], $row['side'], $row['odds'], $row['line']);
+            //push the temp array to the data array
+            $bets_data[] = $temp_arr;
+        }
+    }
+    //create a query to determine if a bet needs to be resettled
+    //recall that win amount from calculate_win_total is the win amount and the wager added together
+    $bet_transactions = [];
+    foreach ($bets_data as $bet){
+        $bet_needs_rewritten = false;
+        if($bet['win_amount'] > $bet['bet_amount']){
+            //if correct bet status is 3 (for a win)
+            //check the current bet status
+            if($bet['bet_status'] === 1){
+                //current bet status is 1 for a loss
+                $bet_needs_rewritten = true;
+                //add win amount and bet amount
+                $new_transaction_amt = $bet['win_amount'];
+            }else if($bet['bet_status'] === 2){
+                //current bet status is 2 for a push
+                $bet_needs_rewritten = true;
+                //add win amount
+                $new_transaction_amt = $bet['win_amount'] - $bet['wager'];  //because win_amount already incorporates the wager
+            }
+        }else if ($bet['win_amount'] = 0){
+            //if correct bet status is 1 (for a loss)
+            //check the current bet status
+            if($bet['bet_status'] === 2){
+                //current bet status is 2 for a push
+                $bet_needs_rewritten = true;
+                //subtract bet amount
+                $new_transaction_amt = -$bet['wager'];
+            }else if($bet['bet_status'] === 3){
+                //current bet status is 3 for a win
+                $bet_needs_rewritten = true;
+                //subtract win amount and bet amount
+                $new_transaction_amt = -$bet['win_amount'];  //because win_amount already incorporates the wager
+            }
+        }else{
+            //if correct bet status is 2 (for a push)
+            //check the current bet status
+            if($bet['bet_status'] === 1){
+                //current bet status is 1 for a loss
+                $bet_needs_rewritten = true;
+                //add bet amount
+                $new_transaction_amt = $bet['wager'];
+            }else if($bet['bet_status'] === 3){
+                //current bet status is 3 for a win
+                $bet_needs_rewritten = true;
+                //subtract win amount(just amount won without the wager included)
+                $new_transaction_amt = -($bet['win_amount'] - $bet['wager']);
+            }
+        }
+
+        if($bet_needs_rewritten){
+            //if bet needs rewritten
+            //make transaction
+//            $user_id = $bet['user_id];
+//            $transaction_amount = ;
+            $transaction_query = "INSERT INTO `transactions`(`user_id`, `transaction`, `time`) VALUES ('$bet[user_id]', '$new_transaction_amt', NOW())";
+            $transaction_result = mysqli_query($connection, $transaction_query);
+            //if the transaction is successful, rewrite the bet status
+            if(mysqli_affected_rows($connection)){
+                if($bet['win_amount'] === $bet['wager']) {
+                    //win amount is the same as the wager, so there is a tie/push (settled value 2)
+                    $update_bets_query = "UPDATE `bets` SET `settled`= '2' WHERE ID = '$bet[bet_id]'";
+                }else {
+                    //win_amount is above 0, and will be above the wager, and hence a true win (settled value 3)
+                    $update_bets_query = "UPDATE `bets` SET `settled`= '3' WHERE ID = '$bet[bet_id]'";
+                }
+            }
+
+
+        }
+
+    }
+
+
+
+    //everything after this is not necessary
+
+    //create a query to settle each bet in the bets table
+//    $bet_transactions = [];
+    foreach($bets_data as $bet){
+        $temp_arr = [];
+        if($bet['win_amount'] > 0){
+            //if the win_amount is greater than 0, then a win or a tie is the correct win scenario. If the settled value for these differs from the actual, we will need to write a transaction
+            $transaction_query = "INSERT INTO `transactions`(`user_id`, `transaction`, `time`) VALUES ('$bet[user_id]', '$bet[win_amount]', NOW())";
+            $transaction_result = mysqli_query($connection, $transaction_query);
+            //if transaction was written, update the bets table to reflect that the
+            if(mysqli_affected_rows($connection)){
+                if($bet['win_amount'] === $bet['wager']) {
+                    //win amount is the same as the wager, so there is a tie/push (settled value 2)
+                    $update_bets_query = "UPDATE `bets` SET `settled`= '2' WHERE ID = '$bet[bet_id]'";
+                }else {
+                    //win_amount is above 0, and will be above the wager, and hence a true win (settled value 3)
+                    $update_bets_query = "UPDATE `bets` SET `settled`= '3' WHERE ID = '$bet[bet_id]'";
+                }
+                $update_bets_result = mysqli_query($connection, $update_bets_query);
+                //check to ensure this bet was settled
+                if(mysqli_affected_rows($connection)){
+                    $temp_arr = create_temp_successful_bet_array($bet['user_id'], $bet['bet_id'], $bet['win_amount'], 'true');
+                }else{
+                    $temp_arr = create_temp_successful_bet_array($bet['user_id'], $bet['bet_id'], $bet['win_amount'], 'false');
+                }
+            }else{
+                $temp_arr = create_temp_successful_bet_array($bet['user_id'], $bet['bet_id'], $bet['win_amount'], 'false');
+            }
+        }else{
+            //if the win_amount is less than 0 (theoretically equal to 0), no transaction is required. So we don't need to write a transaction query, but I still need to update the bets table to show bet is settled with a loss (settled value 1)
+            $update_bets_query = "UPDATE `bets` SET `settled`= '1' WHERE ID = '$bet[bet_id]'";
+            $update_bets_result = mysqli_query($connection, $update_bets_query);
+            //check to ensure this bet was settled
+            if(mysqli_affected_rows($connection)){
+                $temp_arr = create_temp_successful_bet_array($bet['user_id'], $bet['bet_id'], $bet['win_amount'], 'true');
+            }else{
+                $temp_arr = create_temp_successful_bet_array($bet['user_id'], $bet['bet_id'], $bet['win_amount'], 'false');
+            }
+        }
+        $bet_transactions[] = $temp_arr;
+    }
+
+//    print_r($data);       //working for when the page is all by itself
+//    return $bets_data;
+    return $bet_transactions;
 }
