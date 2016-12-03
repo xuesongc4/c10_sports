@@ -506,7 +506,6 @@ video{
 @keyframes spins {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
-
 }
 .form{
     margin:auto;
@@ -537,7 +536,7 @@ video{
     padding-left: 5%;
 }
 
-.user_login{
+.user_login, .user_login2{
     text-align: center;
     width: 100%;
     line-height: 70px;
@@ -545,11 +544,18 @@ video{
     margin: auto;
     color:white;
     background-color: black;
-    opacity: .9;
+    opacity: .85;
     border: black 4px solid;
     margin-top: 15px;
 }
-.user_login:hover{
+
+  .user_login2{
+      line-height: 45px;
+      font-size: 25px;
+  }
+
+
+.user_login:hover, .user_login2:hover{
     cursor: pointer;
     color: deepskyblue;
 }
@@ -807,8 +813,35 @@ video{
     display: none;
 }
 
-.user_name_taken{
-    font-size: 20px;
+.warning,.warning2 {
+    font-size: 30px;
+    font-weight: bold;
     color: red;
-    display:none
+    display: none;
+    margin-left: 5%;
+}
+.input_signup{
+    margin-top: 10px;
+    background-color: rgba(255,255,255,.5);
+    height: 45px;
+    width: 93%;
+    border: black 4px solid;
+    color: black;
+    font-size: 25px;
+    z-index: 5;
+    padding-left: 5%;
+}
+
+.user_login_notclick{
+    text-align: center;
+    width: 100%;
+    line-height: 45px;
+    font-size: 25px;
+    margin: auto;
+    color:white;
+    background-color: black;
+    opacity: .5;
+    border: black 4px solid;
+    margin-top: 15px;
+    pointer-events: none;
 }
