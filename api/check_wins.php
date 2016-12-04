@@ -292,24 +292,25 @@ function correct_wins_on_past_games($connection){
         if($bet_needs_rewritten){
             //if bet needs rewritten
             //make transaction
-//            $user_id = $bet['user_id];
-//            $transaction_amount = ;
             $transaction_query = "INSERT INTO `transactions`(`user_id`, `transaction`, `time`) VALUES ('$bet[user_id]', '$new_transaction_amt', NOW())";
             $transaction_result = mysqli_query($connection, $transaction_query);
-            //if the transaction is successful, rewrite the bet status
+            //if the transaction is successful, update the bet status
             if(mysqli_affected_rows($connection)){
                 if($bet['win_amount'] === $bet['wager']) {
-                    //win amount is the same as the wager, so there is a tie/push (settled value 2)
+                    //win amount is the same as the wager, so the bet is a tie/push (settled value = 2)
                     $update_bets_query = "UPDATE `bets` SET `settled`= '2' WHERE ID = '$bet[bet_id]'";
-                }else {
-                    //win_amount is above 0, and will be above the wager, and hence a true win (settled value 3)
+                }else if($bet['win_amount'] > 0){
+                    //win_amount is above 0, and will be above the wager, and hence a true win (settled value = 3)
                     $update_bets_query = "UPDATE `bets` SET `settled`= '3' WHERE ID = '$bet[bet_id]'";
+                }else{
+                    //win amount amount is 0, so the bet was lost (settled value = 1)
+                    $update_bets_query = "UPDATE `bets` SET `settled`= '1' WHERE ID = '$bet[bet_id]'";
                 }
+                //update the db with the given query
+                $update_bets_result = mysqli_query($connection, $update_bets_query);
+
             }
-
-
         }
-
     }
 
 
