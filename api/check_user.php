@@ -17,5 +17,5 @@ if(mysqli_num_rows($result)>0){
 	$response['userFound'] = false;
 }
 
-echo json_encode($response);
+print json_encode($response);
  ?>
