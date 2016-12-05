@@ -44,7 +44,7 @@
             <button id="sign_up_button" class="user_login_notclick" name="signup">
                 Sign Up
             </button>
-            <button class="user_login2" name="cancel">
+            <button type='button'class="user_login2" name="cancel" onclick="display_login()">
                 Cancel
             </button>
         </div>
@@ -92,13 +92,17 @@
             check_sign_up();
         }
     }
-
+    var display_login = function(){
+        setTimeout(function(){
+            $('.login').slideToggle()},250)
+        $('.sign_up_menu').slideToggle();
+    }
 
 
     var display_sign_up = function(){
         setTimeout(function(){
             $('.sign_up_menu').slideToggle()},250)
-        $('.login').slideToggle();
+            $('.login').slideToggle();
     }
     var checkUsername = function(){
         $.ajax({
