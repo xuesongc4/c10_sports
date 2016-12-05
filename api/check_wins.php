@@ -8,9 +8,6 @@ date_default_timezone_set('UTC');
 //in order to be effective i need an input of game_id to cut down on the games to look at
 // the file db_query has a portion that checks if games are completed, after this point it should call this file to
 
-//check_for_wins_on_settled_games(140);       //necessary when testing it on its own  (old for when using our game ID)
-//check_for_wins_on_settled_games(654458760);       //necessary when testing it on its own  (new for when using their game ID)
-
 function check_for_wins_on_settled_games($connection, $API_game_id)
 {
 //    global $connection;       //necessary when testing it on its own
