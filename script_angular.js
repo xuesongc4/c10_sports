@@ -110,7 +110,31 @@ app.controller('controller', function (myFactory) {
     this.league_highlight=[0,0,0,0,0,0];
     this.user_funds={};
     this.index = null;
+    this.liveTime=null;
 
+    this.round_down = function(number){
+        number *= 100;
+        number = Math.floor(number);
+        number /= 100;
+        return number;
+    }
+    this.calculate_win_total = function(bet_amount, odds){
+        win = null;
+        if (odds < 0) {
+            odds *= -1;
+            win = 100 / odds * bet_amount;
+        } else {
+            win = odds / 100 * bet_amount;
+        }
+        win = self.round_down(win);
+        return win;
+    }
+
+    this.startclock= function(){
+        var time = new Date();
+         self.liveTime = time.getTime();
+    }
+    this.startclock();
 
     this.addUsersFunds = function(){
         myFactory.findUsersFunds()
@@ -125,8 +149,6 @@ app.controller('controller', function (myFactory) {
             }
     };
     this.addUsersFunds();
-
-
 
     this.sendBetData = function () {
         self.bet_button_toggle=false;
@@ -285,6 +307,8 @@ app.controller('controller', function (myFactory) {
                         }
 
                         var date = new Date(response[i].game_time * 1000);
+                        response[i].utc_game_time=response[i].game_time * 1000;
+                        response[i].utc_game_time=response[i].game_time * 1000;
                         var temp_date=date.toString().slice(0,15);
                         var temp_time=date.toString().slice(16,21);
                         var time_check = temp_time.slice(0,2);
@@ -326,7 +350,7 @@ app.controller('controller', function (myFactory) {
     setTimeout(function(){
         $('.loader').addClass('hide');
         $('.loader_background').addClass('hide');
-    },2500);
+    },2000);
 });
 
 app.config(function ($routeProvider) {
@@ -358,10 +382,12 @@ app.controller('leaderboard', function (myFactory) {
     var self = this;
     this.username = '';
     this.leaderboard_data = null;
+    this.error=false;
 
     this.enter_push = function(event){
         if (event.keyCode==13){
             self.username = self.name;
+            self.error=false;
             self.get_leaderboard_data();
         }
     }
@@ -371,6 +397,12 @@ app.controller('leaderboard', function (myFactory) {
         $('.loader_background').removeClass('hide');
         myFactory.getLeaderData(self.username)
             .then(function (response) {
+                if(response.success=='false'){
+                    self.error=true;
+                }
+                else{
+                    self.error=false;
+                }
                 console.log('response is :',response);
                 console.log("searching for user:"+self.username);
                 for(i=0;i<response.leaderboard_info.length;i++) {
@@ -544,4 +576,3 @@ app.controller('bethistory', function (myFactory) {
     }
     this.get_bet_history();
 });
-

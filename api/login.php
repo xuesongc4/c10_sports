@@ -1,6 +1,6 @@
 <?php 
 session_start();
-require('mysql_connect.php'); 
+require('mysql_connect.php');
 
 if (isset($_POST['login'])) {
 	$username = $_POST['username'];
@@ -24,5 +24,23 @@ if (isset($_POST['login'])) {
 	}
 	
 	header('Location: ../');
+}
+
+if (isset($_POST['guest'])){
+    $username = mysqli_real_escape_string($connection, 'guest');
+    $encrypted_password = sha1('guest');
+
+    $find_user_query = "SELECT ID FROM users WHERE username ='{$username}' AND password='{$encrypted_password}'";
+    $find_user_result = mysqli_query($connection, $find_user_query);
+    if (!$find_user_query) {
+        die("QUERY FAIlED " . mysqli_error($connection));
+    }
+    if(mysqli_num_rows($find_user_result)>0){
+        $row = mysqli_fetch_assoc($find_user_result);
+        $_SESSION['ID'] = $row['ID'];
+        $_SESSION['username'] = $username;
+    }
+
+    header('Location: ../');
 }
  ?>
