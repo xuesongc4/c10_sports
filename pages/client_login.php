@@ -94,6 +94,7 @@
     }
     var display_login = function(){
         setTimeout(function(){
+            $('.input_signup').val('')
             $('.login').slideToggle()},250)
         $('.sign_up_menu').slideToggle();
     }
