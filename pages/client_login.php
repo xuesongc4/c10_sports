@@ -39,8 +39,8 @@
         <div class="sign_up_menu">
             <input class="input_signup" type="text" name="username_signup" placeholder="Username" id="username" onblur="checkUsername()"><span class="warning">Username Taken</span><br>
             <input class="input_signup" type="text" name="email_signup" placeholder="Email"><br>
-            <input id='password'class="input_signup" type="text" name="password_signup" placeholder="Password" onblur="checkPass()"><br>
-            <input id='check_password'class="input_signup" type="text" name="password_signup_confirm" placeholder="Confirm Password" onblur="checkPass()"><span class="warning2">Passwords do not match</span><br>
+            <input id='password'class="input_signup" type="password" name="password_signup" placeholder="Password" onblur="checkPass()"><br>
+            <input id='check_password'class="input_signup" type="password" name="password_signup_confirm" placeholder="Confirm Password" onblur="checkPass()"><span class="warning2">Passwords do not match</span><br>
             <button id="sign_up_button" class="user_login_notclick" name="signup">
                 Sign Up
             </button>
