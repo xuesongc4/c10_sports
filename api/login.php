@@ -47,16 +47,16 @@ if (isset($_POST['guest'])){
 }
 
 if (isset($_POST['signup'])) {
-	$username = $_POST['username'];
-	$email = $_POST['email'];
-	$password = sha1($_POST['password']);
-	$create_user_query = "INSERT INTO users (username, email, password) VALUES ($username, $email, $password)";
+	$username = $_POST['username_signup'];
+	$email = $_POST['email_signup'];
+	$password = sha1($_POST['password_signup']);
+	$create_user_query = "INSERT INTO users (username, email, password) VALUES ('{$username}', '{$email}', '{$password}')";
 	$create_user_result = mysqli_query($connection, $create_user_query);
 	if (!$create_user_result) {
     die("QUERY FAIlED " . mysqli_error($connection));
   }
   $_SESSION['message'] = "User created!";
 
-  header('Location ../');
+  header('Location: ../');
 }
  ?>
