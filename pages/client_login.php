@@ -94,6 +94,11 @@
     }
     var display_login = function(){
         setTimeout(function(){
+            $('.input_signup').val('')
+            $('.warning2').hide();
+            $('.warning').hide();
+            newUser = false;
+            matchPass = false;
             $('.login').slideToggle()},250)
         $('.sign_up_menu').slideToggle();
     }
