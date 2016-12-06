@@ -247,6 +247,12 @@ body{
     font-weight: bold;
 }
 
+.selected2{
+    background-color: lightgrey;
+    color: white;
+    font-weight: bold;
+}
+
 .selected_date{
     background-color: black;
     color: deepskyblue;
@@ -820,6 +826,14 @@ video{
     display: none;
     margin-left: 5%;
 }
+
+.warning3 {
+    font-size: 30px;
+    font-weight: bold;
+    color: red;
+    margin-left: 5%;
+}
+
 .input_signup{
     margin-top: 10px;
     background-color: rgba(255,255,255,.5);

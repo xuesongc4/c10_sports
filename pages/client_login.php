@@ -20,6 +20,11 @@
         iBet
     </div>
     <div class="header2 loader2"></div>
+    <?php
+    if (isset($_SESSION['message'])) {
+        echo '<span class="warning3">' . $_SESSION['message'] . '</span>';
+    }
+    ?>
     <form action="api/login.php" method="post">
         <div class="login">
             <input class="input" type="text" name="username" placeholder="Username"><br>
@@ -36,6 +41,7 @@
                 </div>
             </div>
         </div>
+
         <div class="sign_up_menu">
             <input class="input_signup" type="text" name="username_signup" placeholder="Username" id="username" onblur="checkUsername()"><span class="warning">Username Taken</span><br>
             <input class="input_signup" type="text" name="email_signup" placeholder="Email"><br>
@@ -50,7 +56,6 @@
         </div>
     </form>
 </div>
-
 
 <script>
     var newUser = false;
