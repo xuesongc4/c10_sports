@@ -247,6 +247,12 @@ body{
     font-weight: bold;
 }
 
+.selected2{
+    background-color: lightgrey;
+    color: white;
+    font-weight: bold;
+}
+
 .selected_date{
     background-color: black;
     color: deepskyblue;

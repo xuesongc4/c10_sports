@@ -19,13 +19,14 @@
                 </div>
                 <input class="search_input dates_input" ng-model="lb.name" ng-keyup="lb.enter_push($event)">
                 </input>
-                <button class="search_button" ng-click="lb.username=lb.name; lb.get_leaderboard_data(); lb.error='true'"> Go!
+                <button class="search_button" ng-click="lb.username=lb.name; lb.get_leaderboard_data()"> Go!
                 </button>
             </div>
         </div>
         <div class='sched_landing'>
             <div ng-repeat="board_data in lb.leaderboard_data" style="text-align: left">
-                <div class='game_history' ng-class="{selected:ic.user_funds.username==board_data.sn||lb.name==board_data.sn}">
+                <div class='game_history' ng-class="{selected2:ic.user_funds.username==board_data.sn,
+                selected:lb.name==board_data.sn}">
               <span class="sel4">
                   {{board_data.place+'.'}}
               </span>
