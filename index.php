@@ -7,6 +7,7 @@ if (isset($_SESSION['username'])) {
 if (!$logged_in) {
     // html page for not being logged in
     require('pages/client_login.php');
+    $_SESSION['message'] = '';
 } else {
     // html page for being logged in
     require('pages/app.php');
