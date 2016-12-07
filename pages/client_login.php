@@ -43,10 +43,10 @@
         </div>
 
         <div class="sign_up_menu">
-            <input class="input_signup" type="text" name="username_signup" placeholder="Username" id="username" onblur="checkUsername()"><span class="warning">Username Taken</span><br>
+            <input class="input_signup" type="text" name="username_signup" placeholder="Username" id="username" onkeypress="checkUsername()"><span class="warning">Username Taken</span><br>
+            <input id='password'class="input_signup" type="password" name="password_signup" placeholder="Password" onkeypress="checkPass()"><br>
+            <input id='check_password'class="input_signup" type="password" name="password_signup_confirm" placeholder="Confirm Password" onkeypress="checkPass()"><span class="warning2">Passwords do not match</span><br>
             <input class="input_signup" type="text" name="email_signup" placeholder="Email"><br>
-            <input id='password'class="input_signup" type="password" name="password_signup" placeholder="Password" onblur="checkPass()"><br>
-            <input id='check_password'class="input_signup" type="password" name="password_signup_confirm" placeholder="Confirm Password" onblur="checkPass()"><span class="warning2">Passwords do not match</span><br>
             <button id="sign_up_button" class="user_login_notclick" name="signup">
                 Sign Up
             </button>
@@ -77,26 +77,31 @@
         }
     }
 
+    var passTimeout;
     var checkPass = function (){
-        var value1 = $('#password').val();
-        var value2 = $('#check_password').val();
+        clearTimeout(passTimeout);
+        passTimeout = setTimeout(function() {
+            var value1 = $('#password').val();
+            var value2 = $('#check_password').val();
 
-        if(value1=='' || value2==''){
-            matchPass = false;
-            check_sign_up();
-            return;
-        }
-        if (value1 !== value2){
-            $('.warning2').slideToggle();
-            matchPass = false;
-            check_sign_up();
-        }
-        else{
-            $('.warning2').hide();
-            matchPass = true;
-            check_sign_up();
-        }
+            if(value1=='' || value2==''){
+                matchPass = false;
+                check_sign_up();
+                return;
+            }
+            if (value1 !== value2){
+                $('.warning2').slideToggle();
+                matchPass = false;
+                check_sign_up();
+            }
+            else{
+                $('.warning2').hide();
+                matchPass = true;
+                check_sign_up();
+            }
+        },800);
     }
+    
     var display_login = function(){
         setTimeout(function(){
             $('.input_signup').val('')
@@ -114,15 +119,20 @@
             $('.sign_up_menu').slideToggle()},250)
             $('.login').slideToggle();
     }
+    
+    var ajaxTimeout;
     var checkUsername = function(){
-        $.ajax({
-            url: 'api/check_user.php',
-            type: "POST",
-            dataType: 'JSON',
-            data: {
-                username: $('#username').val()
-            }
-        })
+        clearTimeout(ajaxTimeout);
+        ajaxTimeout = setTimeout(function() {
+            console.log('sent');
+            $.ajax({
+                url: 'api/check_user.php',
+                type: "POST",
+                dataType: 'JSON',
+                data: {
+                    username: $('#username').val()
+                }
+            })
             .done(function(data) {
 
                 if(data.userFound) {
@@ -140,7 +150,8 @@
             .fail(function() {
                 alert("unable to reach user name database");
             });
-    }
+        }, 700);
+    };
 </script>
 <script>
     localStorage.removeItem('bet_user_id');
