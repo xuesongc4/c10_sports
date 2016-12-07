@@ -11,7 +11,7 @@
 </head>
 <body>
 <video class="video" autoplay loop>
-    <source src="video/blurred.mp4" type="video/mp4"/>
+    <source src="video/blurred.webm" type="video/webm">
     Your browser does not support HTML5 video.
 </video>
 <div class="login_background"></div>
