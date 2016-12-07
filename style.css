@@ -487,7 +487,7 @@ video{
     opacity: .9;
     text-align: center;
     border-radius: 100%;
-    margin-bottom: 50px;
+    margin-bottom: 20px;
     border: 35px solid rgba(0,0,0,1);
 }
 .header2{
@@ -498,7 +498,7 @@ video{
     width: 258px;
     line-height: 258px;
     border-radius: 100%;
-    margin-top: -376px;
+    margin-top: -346px;
     margin-left:36px;
     display: none;
 }

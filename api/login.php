@@ -21,6 +21,7 @@ if (isset($_POST['login'])) {
 		$row = mysqli_fetch_assoc($find_user_result);
 		$_SESSION['ID'] = $row['ID'];
 		$_SESSION['username'] = $username;
+		$_SESSION['message'] = '';
 	} else {
 		$_SESSION['message'] = 'Incorrect username or password';
 	}
