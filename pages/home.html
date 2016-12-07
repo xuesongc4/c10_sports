@@ -21,7 +21,26 @@
         </div>
 </div>
 <div class="sched_landing">
-    <div class="no_games_warning" ng-hide="ic.displayDataLength"><h1>No games available</h1></div>
+    <div class="no_games_warning" ng-hide="ic.displayDataLength">
+        <h1 ng-if="ic.current_league==='NBA'">
+            No NBA games available
+        </h1>
+        <h1 ng-if="ic.current_league==='NFL'">
+            No NFL games available
+        </h1>
+        <h1 ng-if="ic.current_league==='MLB'">
+            No MLB games available
+        </h1>
+        <h1 ng-if="ic.current_league==='NHL'">
+            Feature not availabe yet, Comeback Soon!
+        </h1>
+        <h1 ng-if="ic.current_league==='NCAAB'">
+            Feature not availabe yet, Comeback Soon!
+        </h1>
+        <h1 ng-if="ic.current_league==='NCAAF'">
+            Feature not availabe yet, Comeback Soon!
+        </h1>
+    </div>
     <div ng-repeat='bet_data in ic.displayData'>
         <div class='game' ng-click="ic.betToggle($index)">
             <div class="game_date">

@@ -11,7 +11,7 @@
 </head>
 <body>
 <video class="video" autoplay loop>
-    <source src="video/blurred.mp4" type="video/mp4"/>
+    <source src="video/blurred.webm" type="video/webm">
     Your browser does not support HTML5 video.
 </video>
 <div class="login_background"></div>
@@ -47,7 +47,7 @@
             <input id='password'class="input_signup" type="password" name="password_signup" placeholder="Password" onkeypress="checkPass()"><br>
             <input id='check_password'class="input_signup" type="password" name="password_signup_confirm" placeholder="Confirm Password" onkeypress="checkPass()"><span class="warning2">Passwords do not match</span><br>
             <input class="input_signup" type="text" name="email_signup" placeholder="Email"><br>
-            <button id="sign_up_button" class="user_login_notclick" name="signup">
+            <button id="sign_up_button" class="user_login_notclick" name="signup" onclick="show_load()">
                 Sign Up
             </button>
             <button type='button'class="user_login2" name="cancel" onclick="display_login()">
@@ -75,6 +75,10 @@
             $('#sign_up_button').removeClass();
             $('#sign_up_button').addClass('user_login_notclick');
         }
+    }
+
+    var show_load = function(){
+        $('.header2').show();
     }
 
     var passTimeout;
