@@ -111,6 +111,7 @@ app.controller('controller', function (myFactory) {
     this.user_funds={};
     this.index = null;
     this.liveTime=null;
+    this.current_league=null;
 
     this.round_down = function(number){
         number *= 100;
@@ -224,21 +225,27 @@ app.controller('controller', function (myFactory) {
         switch (league) {
             case 'NFL':
                 self.league_highlight = ['sel',0,0,0,0,0];
+                self.current_league = 'NFL';
                 break;
             case 'NBA':
                 self.league_highlight = [0,'sel',0,0,0,0];
+                self.current_league = 'NBA';
                 break;
             case 'MLB':
                 self.league_highlight = [0,0,'sel',0,0,0];
+                self.current_league = 'MLB';
                 break;
             case 'NHL':
                 self.league_highlight = [0,0,0,'sel',0,0];
+                self.current_league = 'NHL';
                 break;
             case 'NCAAF':
                 self.league_highlight = [0,0,0,0,'sel',0];
+                self.current_league = 'NCAAF';
                 break;
             case 'NCAAB':
                 self.league_highlight = [0,0,0,0,0,'sel'];
+                self.current_league = 'NCAAB';
                 break;
         }
 
