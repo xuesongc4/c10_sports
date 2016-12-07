@@ -108,7 +108,7 @@
     
     var display_login = function(){
         setTimeout(function(){
-            $('.input_signup').val('')
+            $('.input_signup').val('');
             $('.warning2').hide();
             $('.warning').hide();
             newUser = false;
@@ -119,9 +119,13 @@
 
 
     var display_sign_up = function(){
+        
         setTimeout(function(){
-            $('.sign_up_menu').slideToggle()},250)
-            $('.login').slideToggle();
+            $('.warning3').hide();
+            $('.sign_up_menu').slideToggle()
+        },250);
+        
+        $('.login').slideToggle();
     }
     
     var ajaxTimeout;
