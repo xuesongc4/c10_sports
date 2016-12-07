@@ -98,6 +98,7 @@
         }
     }
     var display_login = function(){
+        $('.warning3').show();
         setTimeout(function(){
             $('.input_signup').val('')
             $('.warning2').hide();
@@ -110,6 +111,7 @@
 
 
     var display_sign_up = function(){
+        $('.warning3').hide();
         setTimeout(function(){
             $('.sign_up_menu').slideToggle()},250)
             $('.login').slideToggle();

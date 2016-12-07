@@ -533,11 +533,11 @@ video{
 .input{
     margin-top: 10px;
     background-color: rgba(255,255,255,.5);
-    height: 70px;
+    height: 50px;
     width: 93%;
     border: black 4px solid;
     color: black;
-    font-size: 50px;
+    font-size: 35px;
     z-index: 5;
     padding-left: 5%;
 }
@@ -545,14 +545,14 @@ video{
 .user_login, .user_login2{
     text-align: center;
     width: 100%;
-    line-height: 70px;
-    font-size: 50px;
+    line-height: 40px;
+    font-size: 35px;
     margin: auto;
     color:white;
     background-color: black;
     opacity: .85;
     border: black 4px solid;
-    margin-top: 15px;
+    margin-top: 10px;
 }
 
   .user_login2{
@@ -788,7 +788,7 @@ video{
     background-color: black;
     opacity: .9;
     border: black 5px solid;
-    margin-top: 15px;
+    margin-top: 10px;
 }
 .sign_up:hover{
     cursor: pointer;
@@ -805,7 +805,7 @@ video{
     background-color: black;
     opacity: .9;
     border: black 4px solid;
-    margin-top: 15px;
+    margin-top: 10px;
 }
 .guest_login:hover{
     cursor: pointer;
@@ -820,7 +820,7 @@ video{
 }
 
 .warning,.warning2 {
-    font-size: 30px;
+    font-size: 20px;
     font-weight: bold;
     color: red;
     display: none;
@@ -828,10 +828,11 @@ video{
 }
 
 .warning3 {
-    font-size: 30px;
+    font-size: 25px;
     font-weight: bold;
     color: red;
     margin-left: 5%;
+    display:none;
 }
 
 .input_signup{
@@ -858,4 +859,78 @@ video{
     border: black 4px solid;
     margin-top: 15px;
     pointer-events: none;
+}
+
+@media screen and (max-height: 900px) {
+    .input_signup{
+        background-color: rgba(255,255,255,.5);
+        height: 35px;
+        width: 93%;
+        color: black;
+        font-size: 25px;
+        z-index: 5;
+        padding-left: 5%;
+    }
+    .user_login, .user_login2{
+        text-align: center;
+        width: 100%;
+        line-height: 35px;
+        font-size: 25px;
+        margin: auto;
+        color:white;
+        background-color: black;
+        opacity: .85;
+        border: black 4px solid;
+        margin-top: 10px;
+    }
+    .user_login_notclick{
+        text-align: center;
+        width: 100%;
+        line-height: 35px;
+        font-size: 25px;
+        margin: auto;
+        color:white;
+        background-color: black;
+        opacity: .5;
+        border: black 4px solid;
+        margin-top: 10px;
+        pointer-events: none;
+    }
+}
+
+@media screen and (max-height: 830px) {
+    .input_signup{
+        background-color: rgba(255,255,255,.5);
+        height: 25px;
+        width: 93%;
+        color: black;
+        font-size: 20px;
+        z-index: 5;
+        padding-left: 5%;
+    }
+    .user_login, .user_login2{
+        text-align: center;
+        width: 100%;
+        line-height: 25px;
+        font-size: 20px;
+        margin: auto;
+        color:white;
+        background-color: black;
+        opacity: .85;
+        border: black 4px solid;
+        margin-top: 10px;
+    }
+    .user_login_notclick{
+        text-align: center;
+        width: 100%;
+        line-height: 25px;
+        font-size: 20px;
+        margin: auto;
+        color:white;
+        background-color: black;
+        opacity: .5;
+        border: black 4px solid;
+        margin-top: 10px;
+        pointer-events: none;
+    }
 }
