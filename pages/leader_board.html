@@ -1,0 +1,45 @@
+<div ng-controller="leaderboard as lb">
+    <div class="league_landing">
+        <div class="league_button_history">
+            <img src="images/Trophy.png"></img> Leader Board
+        </div>
+        <br>
+
+        <div ng-click="lb.username=''; lb.name='';lb.get_leaderboard_data()" class="league_button_history league_button_history_small">
+            Click here for top 10
+        </div>
+        <span class="error" ng-if="lb.error"><br>user not found</span>
+
+        <div class="loader hide">iBet<span class="loader_spinner"></span></div>
+        <div class="loader_background hide"></div>
+        <div class="date_landing">
+            <div class="date_landing bet_history">
+                <div class="dates_history  selected_date">
+                    Search For User:
+                </div>
+                <input class="search_input dates_input" ng-model="lb.name" ng-keyup="lb.enter_push($event)">
+                </input>
+                <button class="search_button" ng-click="lb.username=lb.name; lb.get_leaderboard_data()"> Go!
+                </button>
+            </div>
+        </div>
+        <div class='sched_landing'>
+            <div ng-repeat="board_data in lb.leaderboard_data" style="text-align: left">
+                <div class='game_history' ng-class="{selected2:ic.user_funds.username==board_data.sn,
+                selected:lb.name==board_data.sn}">
+              <span class="sel4">
+                  {{board_data.place+'.'}}
+              </span>
+              <span ng-if="board_data.place>=10" class="sel5">
+                  {{board_data.sn}}
+              </span>
+             <span ng-if="board_data.place<10" class='sel6'>
+                    {{board_data.sn}}
+                </span>
+                    <span class="sel2" style="float: right">
+                    <span ng-if="board_data.money < 0 ">-</span>${{board_data.money_abs}}
+                </span>
+                </div>
+            </div>
+        </div>
+    </div>

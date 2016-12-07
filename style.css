@@ -1,42 +1,64 @@
-.league_landing{
-    background-color: lavender;
-    width:100%;
-    height: 10%;
+*{
+    font-family: 'Roboto Condensed', sans-serif;
 }
-.date_landing{
-    background-color:lightblue;
-    height: 10%;
-    text-align: center;
-    overflow: scroll;
-    vertical-align: middle;
-    padding: 0;
-}
-.sched_landing{
-    background-color: lightgrey;
-    width:100%;
-    height: 80%;
+body{
+    margin:0;
+    font-size:0;
 }
 
-.container{
-    height:100vh;
-    width: 100vw;
+.league_landing{
+    height: 50px;
+    margin:auto;
+    margin-bottom: 3%;
+    text-align: center;
+    width: 80%;
+    max-width:900px;
+    min-width: 550px;
+}
+.date_landing {
+    height: 50px;
+    margin:auto;
+    text-align: center;
+    width: 80%;
+    max-width:900px;
+    min-width: 550px;
+}
+.sched_landing{
+    font-size: 20px;
+    margin:auto;
+    margin-top: 10%;
+    margin-bottom: 10%;
+    width:80%;
+    margin-top:-4px;
+    max-width:900px;
+    min-width: 550px;
+    position: relative;
+    border: 4px solid black;
+    box-sizing: border-box;
+    min-height: 100px;
 }
 
 .menu_button{
-    border: solid 2px black;
+    margin: 10px;
+    z-index: 5;
+    height: 35px;
 }
-.whole_menu{
-    display: none;
+.menu_button:hover{
+    cursor: pointer;
 }
+
 .menu{
     top:0px;
     left:0px;
-    position: absolute;
-    width: 40%;
-    height: 100%;
-    display:inherit;
-    background-color: #1DA1F2;
+    position: fixed;
+    background-color: white;
+    width: 40vw;
+    min-width: 315px;
+    max-width: 350px;
+    height: 100vh;
     z-index: 10;
+    border-right: 3px black solid;
+    background-color: white;
 }
 
 .menu_close{
@@ -44,49 +66,796 @@
     right:0px;
     position: fixed;
     height: 100%;
-    width: 60%;
+    width: 100%;
     z-index: 5;
-}
-body{
-    margin:0;
-    font-size:0;
-}
-.container{
-    font-size:30px;
+    background-color: rgba(0,0,0,.5);
 }
 
-.dates{
+.container {
+    height:95vh;
+    width: 100vw;
+    max-width: 92vw;
+}
+.container2 {
+    font-size: 20px;
+    top: 0;
+    left:0;
+    z-index: 10;
+}
+.dates, .dates_history{
     display:inline-block;
-    border: solid 2px black;
+    border: solid 4px black;
     height: 100%;
-    width: 18%;
+    width: 32%;
+    font-size: 25px;
+    line-height: 40px;
+    background-color: white;
+    color: black;
+    margin-right: -4px;
+}
+.dates:hover{
+    cursor: pointer;
 }
 
-.league_button{
-    display: inline-block;
+.league_button, .league_button_history{
+     display: inline-block;
+     font-family: 'Khand', sans-serif;
+     font-size: 2.6vw;
+    margin-left: 25px;
+    margin-right: 25px;
+ }
+.league_button:hover{
+    cursor: pointer;
+    font-weight: bold;
+    color: deepskyblue;
 }
-.home_img{
+
+.league_button_bold{
+    font-size: 20px;
     display: inline-block;
-    float: right;
-    height: 100px;
+    font-family: 'Khand', sans-serif;
+    font-size: 3.2vw;
+    font-weight: bold;
+    margin-left: 3.5%;
 }
-.away_img{
+.logo{
+    height: 75px;
+    position: fixed;
+    top: 15px;
+    right:15px;
+    vertical-align: bottom;
+}
+.logo_menu{
+    height: 32px;
+    width: 32px;
+    color: deepskyblue;
+    background-color: black;
+    border-radius: 100%;
+    font-size: 13px;
     display: inline-block;
-    float: right;
-    height: 100px;
+    text-align: center;
+    line-height: 32px;
+    vertical-align: middle;
 }
-.game{
-    border: solid 2px black;
-    height: 100px;
-    background-color: lightcoral;
+.home_img {
+    height: 40px;
+}
+
+.away_img {
+    height: 40px;
+}
+/*.away_img{*/
+    /*display: inline-block;*/
+    /*float: right;*/
+    /*height: 100px;*/
+/*}*/
+.game, .game_history{
+    font-size: 20px;
+    border: solid 1px black;
+    border-bottom: solid 2px black;
+    padding: 2%;
+    background-color: white;
+    overflow: auto;
+}
+
+.faq{
+    text-align: left;
+    font-size: 20px;
+    border: solid 1px black;
+    border-bottom: solid 2px black;
+    padding: 2%;
+    background-color: white;
+    overflow: auto;
+}
+
+.game:hover{
+    cursor: pointer;
 }
 .bet{
     border: solid 2px black;
-    height: 100px;
-    display:none;
-    background-color: whitesmoke;
+    background-color: lightgrey;
+    text-align: center;
+    transition: all linear 0.15s;
+    overflow:hidden;
+    height: 375px;
+}
+.started{
+    height: 240px;
+}
+
+.game_date{
+    background-color: white;
+    display:block;
+    text-align: right;
+    font-family: 'Concert One', cursive;
+    margin-bottom: 10px;
+}
+.teams_playing{
+    font-size: 30px;
+}
+
+.teams_playing_div {
+    text-align: left;
+}
+
+.modal-content {
+    text-align: center;
+    font-size: 4vw;
+}
+.modal-body{
+    border: 5px solid deepskyblue;
+    border-radius: 0;
+}
+.confirm-mdl, .cancel-mdl {
+    margin: 10px;
+}
+.spread_bet{
+    width: 35%;
+    background-color: white;
+    font-size: 25px;
+    margin: 15px 35px;
+    display: inline-block;
+    text-align: center;
+    border: 3px solid deepskyblue;
+    border-radius: 0;
+    color: deepskyblue;
+}
+
+.spread_bet_fake, .spread_bet_fake2{
+    opacity: .5;
+    pointer-events: none;
+}
+
+.spread_bet_fake:hover{
+    cursor: default;
+}
+
+.confirm_button{
+    width: 80%;
+    font-size: 50px;
+    text-align: center;
+    border: 5px solid deepskyblue;
+    margin: 20px auto;
+    color: deepskyblue;
+    border-radius: 0;
+    background-color:white;
 }
 
 .selected{
-    border: 5px red solid;
+    background-color: deepskyblue;
+    color: white;
+    font-weight: bold;
+}
+
+.selected2{
+    background-color: lightgrey;
+    color: white;
+    font-weight: bold;
+}
+
+.selected_date{
+    background-color: black;
+    color: deepskyblue;
+    font-weight: bold;
+    vertical-align: top;
+}
+
+.menu_option{
+    border-bottom: solid black 2px;
+    display: block;
+    padding: 2.5vh;
+    background-color: white;
+}
+.menu_option_top{
+    border-bottom: solid black 2px;
+    display: block;
+    padding: 2.5vh;
+    background-color: white;
+}
+
+.menu_option_logout{
+    border-top: solid black 2px;
+    border-bottom: solid black 2px;
+    display: block;
+    padding: 2.5vh;
+    background: white;
+    color: black;
+    margin-top: -6px;
+}
+.menu_option_logout:hover{
+    background-color: deepskyblue;
+}
+
+.menu_option, a{
+    color: black;
+    font-size: 3vh;
+}
+
+.account_info{
+    padding-bottom: 10vh;
+    width:100%;
+    background-color: black;
+    color:deepskyblue;
+}
+a:hover{
+    text-decoration:none;
+}
+.menu_option:hover{
+     background-color:deepskyblue;
+ }
+
+.menu_option_top:hover{
+    background-color:deepskyblue;
+}
+
+.confirm_button_fake{
+    width: 80%;
+    font-size: 50px;
+    text-align: center;
+    border: 5px solid deepskyblue;
+    border-radius: 0;
+    margin: 20px auto;
+    color: deepskyblue;
+    background-color:white;
+    opacity: .3;
+}
+* {
+    outline: none;
+}
+
+.ng-hide {
+    height: 0;
+}
+
+
+.bet_made_lander{
+    float: right;
+    vertical-align: bottom;
+    height: 30px;
+}
+
+.bet_made{
+    border: 2px solid deepskyblue;
+    border-radius: 100%;
+    color: deepskyblue;
+    font-weight: bold;
+    display: inline-block;
+    height: 30px;
+    width: 30px;
+    line-height: 28px;
+    font-size: 12px;
+    text-align: center;
+}
+
+.faq{
+    font-size: 20px;
+}
+.loader_background {
+    position: fixed;
+    top:0;
+    left:0;
+    background-color:black;
+    opacity: .5;
+    height: 100vh;
+    width: 100vw;
+    z-index: 5;
+}
+.loader{
+    position: absolute;
+    top: 30vh;
+    left: 45%;
+    border-radius: 50%;
+    width: 120px;
+    height: 120px;
+    z-index: 6;
+    background-color: black;
+    color: deepskyblue;
+    font-size: 30px;
+    text-align: center;
+    line-height: 120px;
+}
+.loader_spinner {
+    position: absolute;
+    left: 0;
+    border: 13px solid white; /* Light grey */
+    border-top: 13px solid deepskyblue; /* Blue */
+    border-radius: 50%;
+    width: 120px;
+    height: 120px;
+    animation: spin 1s linear infinite;
+    z-index: 6;
+}
+
+.loader2{
+    position: absolute;
+    border: 10px solid lightgrey; /* Light grey */
+    border-top: 10px solid deepskyblue; /* Blue */
+    border-radius: 50%;
+    width: 50%;
+    height: 50%;
+    animation: spin 1s linear infinite;
+    z-index: 6;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+100% { transform: rotate(360deg); }
+}
+
+.hide{
+    display: none;
+}
+
+.modal_color{
+    color: deepskyblue;
+}
+.modal_color_history{
+    color: deepskyblue;
+    font-size: 15px;
+}
+
+.funds{
+    font-size: 3vh;
+}
+.title{
+    text-align: center;
+    margin: auto;
+    font-family: 'Khand', sans-serif;
+    border: solid 4px black;
+    width: 32%;
+    font-size: 25px;
+    line-height: 40px;
+    color: deepskyblue;
+    background-color: black;
+    font-weight: bold;
+}
+.sel{
+    font-weight: bold;
+    color: deepskyblue;
+}
+.sel2{
+    color: black;
+}
+.sel3{
+     color: black;
+     font-weight: bold;
+ }
+.sel4{
+     color: black;
+     float: left;
+ }
+.sel5{
+    text-align: left;
+    color: black;
+    font-weight: bold;
+    margin-left: 33.3%;
+}
+.sel6{
+    margin-left: 35%;
+    color: black;
+    font-weight: bold;
+}
+
+video{
+    margin: 0;
+    padding: 0;
+}
+.video{
+    position: fixed;
+    top:75px;
+    z-index: -1;
+    top: 50%; left: 50%;
+    min-width: 100%;
+    min-height: 100%;
+    transform: translate(-50%, -50%);
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    opacity: .8;
+}
+
+.header{
+    margin: auto;
+    font-size: 85px;
+    z-index: 5;
+    color: deepskyblue;
+    height: 255px;
+    width: 255px;
+    line-height: 255px;
+    background-color: black;
+    opacity: .9;
+    text-align: center;
+    border-radius: 100%;
+    margin-bottom: 50px;
+    border: 35px solid rgba(0,0,0,1);
+}
+.header2{
+    margin: auto;
+    font-size: 85px;
+    z-index: 0;
+    height: 258px;
+    width: 258px;
+    line-height: 258px;
+    border-radius: 100%;
+    margin-top: -376px;
+    margin-left:36px;
+    display: none;
+}
+.loader2{
+    border: 35px solid white;
+    border-top-color:deepskyblue;
+    animation: spins 1s linear infinite;
+    z-index: 6;
+}
+
+@keyframes spins {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+.form{
+    margin:auto;
+    margin-top:10vh;
+    width: 400px;
+    z-index: 1;
+}
+@media screen and (min-height: 1100px) {
+    .form{
+        margin:auto;
+        margin-top:20vh;
+    }
+}
+
+.user{
+    line-height: 75px;
+    font-size: 75px;
+}
+.input{
+    margin-top: 10px;
+    background-color: rgba(255,255,255,.5);
+    height: 70px;
+    width: 93%;
+    border: black 4px solid;
+    color: black;
+    font-size: 50px;
+    z-index: 5;
+    padding-left: 5%;
+}
+
+.user_login, .user_login2{
+    text-align: center;
+    width: 100%;
+    line-height: 70px;
+    font-size: 50px;
+    margin: auto;
+    color:white;
+    background-color: black;
+    opacity: .85;
+    border: black 4px solid;
+    margin-top: 15px;
+}
+
+  .user_login2{
+      line-height: 45px;
+      font-size: 25px;
+  }
+
+
+.user_login:hover, .user_login2:hover{
+    cursor: pointer;
+    color: deepskyblue;
+}
+::-webkit-input-placeholder {
+    color: black;
+}
+
+.game_odds{
+     font-weight: bold;
+     float: right;
+ }
+
+.animate2{
+    transition:all .5s;
+    overflow: hidden;
+}
+.animate2.ng-hide {
+    left: -100%;
+    height: 100%;
+}
+
+.no_games_warning{
+    margin: auto;
+    margin-top: 50px;
+    text-align: center;
+}
+
+.final_score{
+    font-weight: bold;
+    float: right;
+}
+.final_display{
+    font-weight: bold;
+    float: left;
+}
+
+.league_button_history_small, .league_button_history_small2{
+    font-size: 20px;
+    margin-top: 10px;
+}
+.league_button_history_small:hover{
+    color: deepskyblue;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+@media screen and (min-height: 1200px) {
+
+    .funds{
+        font-size: 2vh;
+    }
+    .menu_option{
+        padding: 1vh;
+    }
+    .menu_option_top{
+        padding: 1vh;
+    }
+    .menu_option_logout{
+        padding: 1vh;
+    }
+    .menu_option_logout:hover{
+        padding:1vh;
+    }
+    .menu_option, a{
+        font-size: 2vh;
+    }
+    .account_info{
+        padding-bottom: 5vh;
+    }
+}
+@media screen and (max-height: 820px) {
+    .funds{
+        font-size: 20px;
+    }
+    .menu_option{
+        padding: 10px;
+    }
+    .menu_option_top{
+        padding: 10px;
+    }
+    .menu_option_logout{
+        padding: 10px;
+    }
+    .menu_option_logout:hover{
+        padding:10px;
+    }
+    .menu_option, a{
+        font-size: 20px;
+    }
+    .account_info{
+        padding-bottom: 10px;
+    }
+    .menu{
+        width: 40vw;
+        min-width: 200px;
+        max-width: 200px;
+    }
+}
+
+@media screen and (max-height: 450px) {
+    .menu{
+      overflow: scroll;
+    }
+}
+
+@media screen and (max-width: 1500px) {
+    .league_button, .league_button_history{
+        font-size: 3.25vw;
+        margin-left: 25px;
+        margin-right: 25px;
+    }
+    .league_button_history_small, .league_button_history_small2{
+        font-size: 20px;
+        margin-top: 10px;
+    }
+}
+
+@media screen and (max-width: 1000px) {
+    .league_button, .league_button_history{
+        font-size: 4vw;
+        margin-left: 15px;
+        margin-right: 15px;
+    }
+    .league_button_history_small, .league_button_history_small2{
+        font-size: 20px;
+        margin-top: 5px;
+    }
+    .spread_bet{
+        font-size: 20px;
+    }
+}
+
+@media screen and (max-width: 700px) {
+    .league_button, .league_button_history{
+        font-size: 5vw;
+        margin-left: 15px;
+        margin-right: 15px;
+    }
+    .league_button_history_small, .league_button_history_small2{
+        font-size: 15px;
+        margin-top: 0px;
+    }
+}
+
+@media screen and (max-width: 550px) {
+    .league_button, .league_button_history{
+        font-size: 6.5vw;
+        margin-left: 15px;
+        margin-right: 15px;
+    }
+    .league_button_history_small, .league_button_history_small2{
+        font-size: 15px;
+        margin-top: 0px;
+    }
+}
+
+.bet_history{
+    margin-top: 5%;
+}
+#moneygraph, #ratiograph{
+   width: 100%;
+    height:100%;
+}
+
+.graph_landing{
+    margin: auto;
+    width: 450px;
+    height: 300px;
+}
+.graph_button{
+    z-index: 5;
+}
+
+.faq_link{
+    font-size: 20px;
+    color: deepskyblue;
+    padding:10px;
+    font-weight: bold;
+}
+.faq_info{
+    border: solid 2px black;
+    background-color: lightgrey;
+    text-align: left;
+}
+
+.dates_input{
+    text-align: center;
+}
+
+.search_button,.search_input {
+    display: inline-block;
+    border: solid 4px black;
+    height: 100%;
+    width: 54%;
+    font-size: 25px;
+    line-height: 40px;
+    background-color: white;
+    color: black;
+    margin-right: -4px;
+}
+.search_button {
+    width: 10%;
+    background-color: lightgrey;
+    color: deepskyblue;
+    margin-right: -4px;
+    font-weight: bolder;
+}
+.search_button:hover {
+    background-color: darkgray;
+}
+
+.error{
+    color: red;
+    font-size: 20px;
+}
+.sign_up{
+    float: right;
+    text-align: center;
+    width: 47%;
+    line-height: 35px;
+    font-size: 25px;
+    margin: auto;
+    color:white;
+    background-color: black;
+    opacity: .9;
+    border: black 5px solid;
+    margin-top: 15px;
+}
+.sign_up:hover{
+    cursor: pointer;
+    color: deepskyblue;
+}
+
+.guest_login{
+    text-align: center;
+    width: 47%;
+    line-height: 35px;
+    font-size: 25px;
+    margin: auto;
+    color:white;
+    background-color: black;
+    opacity: .9;
+    border: black 4px solid;
+    margin-top: 15px;
+}
+.guest_login:hover{
+    cursor: pointer;
+    color: deepskyblue;
+}
+.guest_signup{
+    width: 100%;
+}
+
+.sign_up_menu{
+    display: none;
+}
+
+.warning,.warning2 {
+    font-size: 30px;
+    font-weight: bold;
+    color: red;
+    display: none;
+    margin-left: 5%;
+}
+
+.warning3 {
+    font-size: 30px;
+    font-weight: bold;
+    color: red;
+    margin-left: 5%;
+}
+
+.input_signup{
+    margin-top: 10px;
+    background-color: rgba(255,255,255,.5);
+    height: 45px;
+    width: 93%;
+    border: black 4px solid;
+    color: black;
+    font-size: 25px;
+    z-index: 5;
+    padding-left: 5%;
+}
+
+.user_login_notclick{
+    text-align: center;
+    width: 100%;
+    line-height: 45px;
+    font-size: 25px;
+    margin: auto;
+    color:white;
+    background-color: black;
+    opacity: .5;
+    border: black 4px solid;
+    margin-top: 15px;
+    pointer-events: none;
 }
