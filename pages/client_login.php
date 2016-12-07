@@ -47,7 +47,7 @@
             <input class="input_signup" type="text" name="email_signup" placeholder="Email"><br>
             <input id='password'class="input_signup" type="password" name="password_signup" placeholder="Password" onblur="checkPass()"><br>
             <input id='check_password'class="input_signup" type="password" name="password_signup_confirm" placeholder="Confirm Password" onblur="checkPass()"><span class="warning2">Passwords do not match</span><br>
-            <button id="sign_up_button" class="user_login_notclick" name="signup">
+            <button id="sign_up_button" class="user_login_notclick" name="signup" onclick="show_load()">
                 Sign Up
             </button>
             <button type='button'class="user_login2" name="cancel" onclick="display_login()">
@@ -77,6 +77,10 @@
         }
     }
 
+    var show_load = function(){
+        $('.header2').show();
+    }
+
     var checkPass = function (){
         var value1 = $('#password').val();
         var value2 = $('#check_password').val();
@@ -98,7 +102,6 @@
         }
     }
     var display_login = function(){
-        $('.warning3').show();
         setTimeout(function(){
             $('.input_signup').val('')
             $('.warning2').hide();
@@ -111,7 +114,6 @@
 
 
     var display_sign_up = function(){
-        $('.warning3').hide();
         setTimeout(function(){
             $('.sign_up_menu').slideToggle()},250)
             $('.login').slideToggle();
