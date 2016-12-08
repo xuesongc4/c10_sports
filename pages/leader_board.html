@@ -25,8 +25,7 @@
         </div>
         <div class='sched_landing'>
             <div ng-repeat="board_data in lb.leaderboard_data" style="text-align: left">
-                <div class='game_history' ng-class="{selected2:ic.user_funds.username==board_data.sn,
-                selected:lb.name==board_data.sn}">
+                <div class='game_history' ng-class="{selected:lb.name==board_data.sn, selected2:ic.user_funds.username==board_data.sn}">
               <span class="sel4">
                   {{board_data.place+'.'}}
               </span>
