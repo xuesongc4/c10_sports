@@ -29,7 +29,10 @@
         <div ng-cloak class="menu animate2" ng-hide="ic.menu_toggle">
             <div class="account_info">
              <br><span style="margin-top: 100px; font-weight: bolder"> {{ic.user_funds.username}}</span>
-                <div class="funds">Total Funds: <div style="display: inline-block"><span ng-if="ic.user_funds.funds < 0">-</span>${{ic.user_funds.funds_abs}}</div></div>
+                <div class="funds">Total Funds: <div style="display: inline-block"><span ng-if="ic.user_funds.funds < 0">-</span>${{ic.user_funds.funds_abs}}</div>
+                </div>
+                <div class="funds">Funds at Risk: <div style="display: inline-block">${{ic.user_funds.funds_at_risk}}</div>
+                </div>
             </div>
             <a class="menu_option_top" href="#/" ng-click="ic.menu_toggle=true; ic.getGameData()"><img
                     src="images/Football.png"></img> Game Screen</a>
