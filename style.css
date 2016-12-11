@@ -788,7 +788,7 @@ video{
     color:white;
     background-color: black;
     opacity: .9;
-    border: black 5px solid;
+    border: black 4px solid;
     margin-top: 10px;
 }
 .sign_up:hover{
@@ -871,17 +871,9 @@ video{
         z-index: 5;
         padding-left: 5%;
     }
-    .user_login, .user_login2{
-        text-align: center;
-        width: 100%;
+    .user_login, .user_login2, .guest_login, .sign_up{
         line-height: 35px;
         font-size: 25px;
-        margin: auto;
-        color:white;
-        background-color: black;
-        opacity: .85;
-        border: black 4px solid;
-        margin-top: 10px;
     }
     .user_login_notclick{
         text-align: center;
@@ -908,17 +900,9 @@ video{
         z-index: 5;
         padding-left: 5%;
     }
-    .user_login, .user_login2{
-        text-align: center;
-        width: 100%;
+    .user_login, .user_login2, .guest_login, .sign_up{
         line-height: 25px;
         font-size: 20px;
-        margin: auto;
-        color:white;
-        background-color: black;
-        opacity: .85;
-        border: black 4px solid;
-        margin-top: 10px;
     }
     .user_login_notclick{
         text-align: center;
