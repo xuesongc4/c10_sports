@@ -516,9 +516,9 @@ video{
 }
 .form{
     margin:auto;
-    margin-top:10vh;
     width: 400px;
     z-index: 1;
+    margin-top: -5vh;
 }
 @media screen and (min-height: 1100px) {
     .form{
