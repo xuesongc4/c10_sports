@@ -918,3 +918,11 @@ video{
         pointer-events: none;
     }
 }
+
+@media (max-width: 640px) {
+    #login_body {
+        background: url(images/background.jpg) #000!important;
+        background-size: cover;
+    }
+    .video { display: none; }
+}

@@ -8,10 +8,10 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <link rel="stylesheet" type="text/css" href="style.css">
 </head>
-<body>
+<body id="login_body">
     <video class="video" muted="muted" loop="loop" autoplay="autoplay">
         <source src="video/blurred.webm" type="video/webm">
-        <img src="/images/backgroun.jpg">
+        your browser does not support html5 video
     </video>
 
 <div class="login_background"></div>
