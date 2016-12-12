@@ -31,7 +31,7 @@
 <div class="video-responsive">
     <video class="video" muted="muted" loop="loop" autoplay="autoplay">
         <source src="video/blurred.webm" type="video/webm">
-        Your browser does not support HTML5 video.
+        <img src="/images/backgroun.jpg">
     </video>
 
     <canvas class="canvas"></canvas>
