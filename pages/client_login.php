@@ -7,37 +7,13 @@
     <link href="https://fonts.googleapis.com/css?family=Concert+One|Khand|Roboto+Condensed" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <link rel="stylesheet" type="text/css" href="style.css">
-    <script src="../script_video.js"></script>
-    <script>
-        var isIOS = /iPad|iPhone|iPod/.test(navigator.platform);
-        if (isIOS) {
-            var canvasVideo = new CanvasVideoPlayer({
-                videoSelector: '.video',
-                canvasSelector: '.canvas',
-                timelineSelector: false,
-                autoplay: true,
-                makeLoop: true,
-                pauseOnClick: false,
-                audio: false
-            });
-        }else {
-            // Use HTML5 video
-            document.querySelectorAll('.canvas')[0].style.display = 'none';
-        }
-    </script>
-
 </head>
-<body>
-<div class="video-responsive">
+<body id="login_body">
     <video class="video" muted="muted" loop="loop" autoplay="autoplay">
         <source src="video/blurred.webm" type="video/webm">
-        <img src="/images/backgroun.jpg">
+        your browser does not support html5 video
     </video>
 
-    <canvas class="canvas"></canvas>
-
-    <div id="over_video">Look at me</div>
-</div>
 <div class="login_background"></div>
 <div class="form">
     <div class="header">

@@ -518,7 +518,7 @@ video{
     margin:auto;
     width: 400px;
     z-index: 1;
-    margin-top: -5vh;
+    margin-top: 8vh;
 }
 @media screen and (min-height: 1100px) {
     .form{
@@ -917,4 +917,12 @@ video{
         margin-top: 10px;
         pointer-events: none;
     }
+}
+
+@media (max-width: 640px) {
+    #login_body {
+        background: url(images/background.jpg) #000!important;
+        background-size: cover;
+    }
+    .video { display: none; }
 }
