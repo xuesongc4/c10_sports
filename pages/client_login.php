@@ -7,13 +7,37 @@
     <link href="https://fonts.googleapis.com/css?family=Concert+One|Khand|Roboto+Condensed" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <link rel="stylesheet" type="text/css" href="style.css">
+    <script src="../script_video.js"></script>
+    <script>
+        var isIOS = /iPad|iPhone|iPod/.test(navigator.platform);
+        if (isIOS) {
+            var canvasVideo = new CanvasVideoPlayer({
+                videoSelector: '.video',
+                canvasSelector: '.canvas',
+                timelineSelector: false,
+                autoplay: true,
+                makeLoop: true,
+                pauseOnClick: false,
+                audio: false
+            });
+        }else {
+            // Use HTML5 video
+            document.querySelectorAll('.canvas')[0].style.display = 'none';
+        }
+    </script>
 
 </head>
 <body>
-<video class="video" autoplay loop>
-    <source src="video/blurred.webm" type="video/webm">
-    Your browser does not support HTML5 video.
-</video>
+<div class="video-responsive">
+    <video class="video" muted="muted" loop="loop" autoplay="autoplay">
+        <source src="video/blurred.webm" type="video/webm">
+        <img src="/images/backgroun.jpg">
+    </video>
+
+    <canvas class="canvas"></canvas>
+
+    <div id="over_video">Look at me</div>
+</div>
 <div class="login_background"></div>
 <div class="form">
     <div class="header">
@@ -36,9 +60,9 @@
                 <button class="guest_login" name="guest">
                     Guest Login
                 </button>
-                <div class="sign_up" onclick="display_sign_up()">
+                <button type="button" class="sign_up" onclick="display_sign_up()">
                     Sign Up
-                </div>
+                </button>
             </div>
         </div>
 
@@ -47,7 +71,7 @@
             <input id='password'class="input_signup" type="password" name="password_signup" placeholder="Password" onkeypress="checkPass()"><br>
             <input id='check_password'class="input_signup" type="password" name="password_signup_confirm" placeholder="Confirm Password" onkeypress="checkPass()"><span class="warning2">Passwords do not match</span><br>
             <input class="input_signup" type="text" name="email_signup" placeholder="Email"><br>
-            <button id="sign_up_button" class="user_login_notclick" name="signup" onclick="show_load()">
+            <button type="button"  id="sign_up_button" class="user_login_notclick" name="signup" onclick="show_load()">
                 Sign Up
             </button>
             <button type='button'class="user_login2" name="cancel" onclick="display_login()">
