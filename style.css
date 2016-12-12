@@ -935,5 +935,5 @@ video{
         background-size: contain;
     }
     .video { display: none; }
-    .background{ display:inherit;  }
+    .background{ display:inherit; }
 }
