@@ -746,6 +746,11 @@ video{
     background-color: lightgrey;
     text-align: left;
 }
+/*used on faq page to make image fit in modal*/
+.modal_color img{
+    width: 90%;
+    height: auto;
+}
 
 .dates_input{
     text-align: center;
