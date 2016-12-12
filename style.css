@@ -517,7 +517,7 @@ video{
 .form{
     margin:auto;
     width: 400px;
-    z-index: 1;
+    z-index: 5;
     margin-top: 8vh;
 }
 @media screen and (min-height: 1100px) {
@@ -539,7 +539,6 @@ video{
     border: black 4px solid;
     color: black;
     font-size: 35px;
-    z-index: 5;
     padding-left: 5%;
 }
 
@@ -919,10 +918,22 @@ video{
     }
 }
 
-@media (max-width: 640px) {
+.background{
+    background-color: rgba(255,255,255,.15);
+    position:fixed;
+    top:0;
+    right:0;
+    height: 100vh;
+    width: 100vw;
+    z-index: -1;
+    display: none;
+}
+
+@media (max-width: 750px) {
     #login_body {
         background: url(images/background.jpg) #000!important;
-        background-size: cover;
+        background-size: contain;
     }
     .video { display: none; }
+    .background{ display:inherit;  }
 }

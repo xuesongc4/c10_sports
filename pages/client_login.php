@@ -15,6 +15,7 @@
     </video>
 
 <div class="login_background"></div>
+    <div class="background"></div>
 <div class="form">
     <div class="header">
         iBet
@@ -47,7 +48,7 @@
             <input id='password'class="input_signup" type="password" name="password_signup" placeholder="Password" onkeypress="checkPass()"><br>
             <input id='check_password'class="input_signup" type="password" name="password_signup_confirm" placeholder="Confirm Password" onkeypress="checkPass()"><span class="warning2">Passwords do not match</span><br>
             <input class="input_signup" type="text" name="email_signup" placeholder="Email"><br>
-            <button type="button"  id="sign_up_button" class="user_login_notclick" name="signup" onclick="show_load()">
+            <button id="sign_up_button" class="user_login_notclick" name="signup" onclick="show_load()">
                 Sign Up
             </button>
             <button type='button'class="user_login2" name="cancel" onclick="display_login()">
@@ -64,6 +65,9 @@
 
     $('.user_login,.guest_login').on('click', function () {
         $('.header2').css('display', 'initial');
+        setTimeout(function(){
+            $('.header2').css('display', 'none');
+        },2000);
     });
 
     var check_sign_up = function(){
