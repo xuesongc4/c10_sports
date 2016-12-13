@@ -59,8 +59,8 @@
                         difference in the two teams’ scores will be. This difference in scores is based on who is
                         favored to win the game and is called the <em>points spread</em>. You can find the <em>points
                         spread</em> to the right of home team. For more information on how to read the <em>points
-                        spread</em>, see the section on favored teams <a class="faq_link" href="#faq/#favored_team">here</a>.
-                        <span class="faq_link" data-toggle="modal" data-target="#faqModal" ng-click="modal_text_index = 0">See featured example</span>
+                        spread</em>, see the section on favored teams <a class="faq_link" href="#faq/#favored_team">here.</a>
+                        <span class="faq_link" data-toggle="modal" data-target="#faqModal" ng-click="modal_text_index = 0">Example</span>
                     </p>
                 </li>
                 <li id="over_under_bets">
@@ -87,7 +87,7 @@
                         number next to the home team (the bottom team in American sports) called the <em>points
                         spread</em> or simply the <em>spread</em>. A negative spread means that the home team is favored
                         to win by that many points. A positive spread means that the away team is favored to win by that
-                        many points. <span class="faq_link" data-toggle="modal" data-target="#faqModal" ng-click="modal_text_index = 2" data-modal_number="2">See an example</span>
+                        many points. <span class="faq_link" data-toggle="modal" data-target="#faqModal" ng-click="modal_text_index = 2" data-modal_number="2">Example</span>
                     </p>
                     <p>
                         There can be instances when the spread is zero. This just means that the teams are relatively
@@ -114,7 +114,7 @@
                         If the odds of a bet are negative, then the odds are associated with a <em>win</em> of $100, and
                         the associated odds are the amount that you would have to <em>wager</em> to win $100. The total
                         payout would still be the original wager plus the amount won.
-                        <span class="faq_link" data-toggle="modal" data-target="#faqModal" ng-click="modal_text_index = 4" data-modal_number="4">See example</span>
+                        <span class="faq_link" data-toggle="modal" data-target="#faqModal" ng-click="modal_text_index = 4" data-modal_number="4">Example</span>
                     </p>
                     <!--<p>-->
                     <!--so this means that a riskier bet will pay more and a safer bet will pay out less.-->
@@ -131,30 +131,27 @@
         <!-- Modal content-->
         <div class="modal-content">
             <div class="modal-body">
-                <br>
                 <div class="modal_color">
                     <img src="images/bets_explanation_example.png">
-                    <p ng-if="modal_text_index === 0">In the associated example, the Pittsburgh Steelers are favored to win, and they are favored to
+                    <p class='faq_modal' ng-if="modal_text_index === 0">In the associated example, the Pittsburgh Steelers are favored to win, and they are favored to
                         win by 7.5 points. In order to win a <em>spread</em> bet on the Steelers, they would need to
                         beat the Browns by 7.5 points. In order to win a <em>spread</em> bet on the Browns, they would
                         need to not lose to the Steelers by more than 7.5 points. Since the final score of that game was
                         Steelers 24 and Browns 9, <em>spread</em> bets on the Steelers would have won and
                         <em>spread</em> bets on the Browns would have lost.</p>
-                    <p class="" ng-if="modal_text_index === 1">In this example the over/under is 49. The final score of that game was Steelers 24 - Browns 9, so
+                    <p class="faq_modal" ng-if="modal_text_index === 1">In this example the over/under is 49. The final score of that game was Steelers 24 - Browns 9, so
                         the total points scored were 33. Hence only bets for the under would have paid out.</p>
-                    <p class="" ng-if="modal_text_index === 2">   In the associated example, the <em>points spread</em> is positive which means that the away
+                    <p class="faq_modal" ng-if="modal_text_index === 2">   In the associated example, the <em>points spread</em> is positive which means that the away
                         team, the Pittsburgh Steelers, are favored.</p>
-                    <p class="" ng-if="modal_text_index === 3">In the example, the odds of the
+                    <p class="faq_modal" ng-if="modal_text_index === 3">In the example, the odds of the
                         Cleveland Browns winning this game were +273. A win on a wager of $100 on this bet would have
                         won $273 on top of your original $100 wager, so a win would have paid $373.</p>
-                    <p class="" ng-if="modal_text_index === 4">In this example, the odds of the
+                    <p class="faq_modal" ng-if="modal_text_index === 4">In this example, the odds of the
                         Cleveland Browns beating the spread, meaning that they win the game or lose by less than 7.5
                         points, in this game were -110. To win $100 one would have to place a $110 wager on this bet. If
                         the Browns would have beat the spread, then this bet would have won, and the bettor would have
                         won $100 on top of their original wager of $110 for a total payout of $210.</p>
-
                 </div>
-                <br>
                 <button type="button" class="spread_bet" data-dismiss="modal">Cancel</button>
             </div>
         </div>
