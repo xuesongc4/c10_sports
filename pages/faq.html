@@ -3,110 +3,160 @@
         <img src="images/Question.png"></img> FAQ
     </div>
     <br>
-<div class="loader hide">iBet<span class="loader_spinner"></span></div>
-<div class="loader_background hide"></div>
-<div class='sched_landing'>
-    <div class='faq'>
-        <ol>
-            <a href="#/faq#types_of_bets"><li class="faq_link">What types of bets can I make?</li></a>
-            <a href="#/faq#moneyline_bets"><li class="faq_link">How do <em>moneyline</em> bets work?</li></a>
-            <a href="#/faq#spread_bets"><li class="faq_link">How do <em>spread</em> bets work?</li></a>
-            <a href="#/faq#over_under_bets"><li class="faq_link">How do <em>over/under</em> bets work?</li></a>
-            <a href="#/faq#favored_team"><li class="faq_link">How do I know who is favored to win a game?</li></a>
-            <a href="#/faq#bet_payouts"><li class="faq_link">How do I know what my payout will be if I win?</li></a>
-        </ol>
-    </div>
-    <div class="faq_info">
-        <ol>
-            <li id="types_of_bets">
+    <div class="loader hide">iBet<span class="loader_spinner"></span></div>
+    <div class="loader_background hide"></div>
+    <div class='sched_landing'>
+        <div class='faq'>
+            <ol>
+                <a href="#/faq#types_of_bets">
+                    <li class="faq_link">What types of bets can I make?</li>
+                </a>
+                <a href="#/faq#moneyline_bets">
+                    <li class="faq_link">How do <em>moneyline</em> bets work?</li>
+                </a>
+                <a href="#/faq#spread_bets">
+                    <li class="faq_link">How do <em>spread</em> bets work?</li>
+                </a>
+                <a href="#/faq#over_under_bets">
+                    <li class="faq_link">How do <em>over/under</em> bets work?</li>
+                </a>
+                <a href="#/faq#favored_team">
+                    <li class="faq_link">How do I know who is favored to win a game?</li>
+                </a>
+                <a href="#/faq#bet_payouts">
+                    <li class="faq_link">How do I know what my payout will be if I win?</li>
+                </a>
+            </ol>
+        </div>
+        <div class="faq_info">
+            <ol>
+                <li id="types_of_bets">
                     <h3>
                         What types of bets can I make?
                     </h3>
                     <p>
-                        Our app, like other forms of betting, features three forms of betting for available games. These bets are the <em>spread</em>, the <em>moneyline</em>, and the <em>over/under</em>. Parlays and other forms of compounding bets are not currently supported on our platform.
+                        Our app, like other forms of betting, features three forms of betting for available games. These
+                        bets are the <em>spread</em>, the <em>moneyline</em>, and the <em>over/under</em>. Parlays and
+                        other forms of compounding bets are not currently supported on our platform.
                     </p>
-            </li>
-            <li id="moneyline_bets">
+                </li>
+                <li id="moneyline_bets">
                     <h3>
                         How do <em>moneyline</em> bets work?
                     </h3>
                     <p>
-                        The <em>moneyline</em> is simply a bet on who will win the game. If you placed a bet on a <em>moneyline</em> bet for a team to win, all you need to win the bet is for that team to win.
+                        The <em>moneyline</em> is simply a bet on who will win the game. If you placed a bet on a <em>moneyline</em>
+                        bet for a team to win, all you need to win the bet is for that team to win.
                     </p>
-            </li>
-            <li id="spread_bets">
+                </li>
+                <li id="spread_bets">
                     <h3>
                         How do <em>spread</em> bets work?
                     </h3>
                     <p>
-                        <em>Spread</em> bets look much like <em>moneyline</em> bets in that you pick sides based on a team except that it is not as much a pick for a team to win as it is a bet on what the difference in the two teams’ scores will be. This difference in scores is based on who is favored to win the game and is called the <em>points spread</em>. You can find the <em>points spread</em> to the right of home team. For more information on how to read the <em>points spread</em>, see the section on favored teams <a class="faq_link" href="#faq/#favored_team">here</a>.
+                        <em>Spread</em> bets look much like <em>moneyline</em> bets in that you pick sides based on a
+                        team except that it is not as much a pick for a team to win as it is a bet on what the
+                        difference in the two teams’ scores will be. This difference in scores is based on who is
+                        favored to win the game and is called the <em>points spread</em>. You can find the <em>points
+                        spread</em> to the right of home team. For more information on how to read the <em>points
+                        spread</em>, see the section on favored teams <a class="faq_link" href="#faq/#favored_team">here</a>.
+                        <span class="faq_link" data-toggle="modal" data-target="#faqModal" ng-click="modal_text_index = 0">See featured example</span>
                     </p>
-                    <p>
-                        In the associated example, the Pittsburgh Steelers are favored to win, and they are favored to win by 7.5 points. In order to win a <em>spread</em> bet on the Steelers, they would need to beat the Browns by 7.5 points. In order to win a <em>spread</em> bet on the Browns, they would need to not lose to the Steelers by more than 7.5 points. Since the final score of that game was Steelers 24 and Browns 9, <em>spread</em> bets on the Steelers would have won and <em>spread</em> bets on the Browns would have lost.
-                    </p>
-            </li>
-            <li id="over_under_bets">
+                </li>
+                <li id="over_under_bets">
                     <h3>
                         How do <em>over/under</em> bets work?
                     </h3>
                     <p>
-                        Over/ under bets are guesses as to whether or not the combined scores of both teams will reach a certain value. The value they need to equal is indicated as a number next to the away team (the team listed on top in American sports). A bet for the <em>over</em> means that both teams need to score more (or over) than the indicated number in order to win the bet. A bet for the <em>under</em> means that both teams need to score less than (or under) the indicated number in order to win the bet.
+                        Over/under bets are guesses as to whether or not the combined scores of both teams will reach a
+                        certain value. The value they need to equal is indicated as a number next to the away team (the
+                        team listed on top in American sports). A bet for the <em>over</em> means that both teams need
+                        to score more (or over) than the indicated number in order to win the bet. A bet for the <em>under</em>
+                        means that both teams need to score less than (or under) the indicated number in order to win
+                        the bet. A total score that is equal to the points value indicated in the over/under then the bet
+                        is a push, and you would get your original wager back.
+                        <span class="faq_link" data-toggle="modal" data-target="#faqModal" ng-click="modal_text_index = 1" data-modal_number="1">Example</span>
                     </p>
-            </li>
-            <li id="favored_team">
+                </li>
+                <li id="favored_team">
                     <h3>
                         How do I know who is favored to win a game?
                     </h3>
                     <p>
-                        Usually one team is favored to win the game. This is indicated on the primary game screen as a number next to the home team (the bottom team in American sports) called the <em>points spread</em> or simply the <em>spread</em>. A negative spread means that the home team is favored to win by that many points. A positive spread means that the away team is favored to win by that many points.
+                        Usually one team is favored to win the game. This is indicated on the primary game screen as a
+                        number next to the home team (the bottom team in American sports) called the <em>points
+                        spread</em> or simply the <em>spread</em>. A negative spread means that the home team is favored
+                        to win by that many points. A positive spread means that the away team is favored to win by that
+                        many points. <span class="faq_link" data-toggle="modal" data-target="#faqModal" ng-click="modal_text_index = 2" data-modal_number="2">See an example</span>
                     </p>
                     <p>
-                        There can be instances when the spread is zero. This just means that the teams are relatively closely matched and are considered to be equally likely to win the game.
+                        There can be instances when the spread is zero. This just means that the teams are relatively
+                        closely matched and are considered to be equally likely to win the game.
                     </p>
-                    <p>
-                        In the associated example, the <em>points spread</em> is positive which means that the away team, the Pittsburgh Steelers, are favored.
-                    </p>
-            </li>
-            <li id="bet_payouts">
+                </li>
+                <li id="bet_payouts">
                     <h3>
                         How do I know what my payout will be if I win?
                     </h3>
                     <p>
-                        The first thing to know about payouts is that the <em>odds</em> of a bet are used to determine how much money you will earn if you were to win a bet. The next thing to know is that <em>odds</em> are all based around $100. Also of note is that some of the numbers associated with <em>odds</em> are positive and some are negative.
+                        The first thing to know about payouts is that the <em>odds</em> of a bet are used to determine
+                        how much money you will earn if you were to win a bet. The next thing to know is that
+                        <em>odds</em> are all based around $100. Also of note is that some of the numbers associated
+                        with <em>odds</em> are positive and some are negative.
                     </p>
                     <p>
-                        If the odds of a bet are positive, then the odds are associated with a <em>wager</em> of $100, and the associated odds are the amount that you would <em>win</em> on that $100 wager. The total payout would then be the original wager plus the amount won. For example, the odds of the Cleveland Browns winning this game were +273. A win on a wager of $100 on this bet would have won $273 on top of your original $100 wager, so a win would have paid $373.
+                        If the odds of a bet are positive, then the odds are associated with a <em>wager</em> of $100,
+                        and the associated odds are the amount that you would <em>win</em> on that $100 wager. The total
+                        payout would then be the original wager plus the amount won.
+                        <span class="faq_link" data-toggle="modal" data-target="#faqModal" ng-click="modal_text_index = 3" data-modal_number="3">Example</span>
                     </p>
                     <p>
-                        If the odds of a bet are negative, then the odds are associated with a <em>win</em> of $100, and the associated odds are the amount that you would have to <em>wager</em> to win $100. The total payout would still be the original wager plus the amount won. For example, the odds of the Cleveland Browns beating the spread, meaning that they win the game or lose by less than 7.5 points, in this game were -110. To win $100 one would have to place a $110 wager on this bet. If the Browns would have beat the spread, then this bet would have won, and the bettor would have won $100 on top of their original wager of $110 for a total payout of $210.
+                        If the odds of a bet are negative, then the odds are associated with a <em>win</em> of $100, and
+                        the associated odds are the amount that you would have to <em>wager</em> to win $100. The total
+                        payout would still be the original wager plus the amount won.
+                        <span class="faq_link" data-toggle="modal" data-target="#faqModal" ng-click="modal_text_index = 4" data-modal_number="4">See example</span>
                     </p>
                     <!--<p>-->
-                        <!--so this means that a riskier bet will pay more and a safer bet will pay out less.-->
+                    <!--so this means that a riskier bet will pay more and a safer bet will pay out less.-->
                     <!--</p>-->
-            </li>
-        </ol>
+                </li>
+            </ol>
+        </div>
     </div>
 </div>
 
 <!-- Modal -->
-<div class="modal fade" id="myModal" role="dialog">
+<div class="modal fade" id="faqModal" role="dialog">
     <div class="modal-dialog">
         <!-- Modal content-->
         <div class="modal-content">
             <div class="modal-body">
                 <br>
                 <div class="modal_color">
-                    <span>{{ic.saveBetData.side_name}}</span>
-                    <span ng-if="ic.saveBetData.type_of_bet=='2'">ML</span>
-                    <span ng-if="ic.saveBetData.type_of_bet=='1'||ic.saveBetData.type_of_bet=='3'"><span ng-if="ic.saveBetData.line2>0 && ic.saveBetData.type_of_bet=='1'">+</span>{{ic.saveBetData.line2}}</span>
-                    <span>(<span ng-if="ic.saveBetData.odds>0">+</span>{{ic.saveBetData.odds}})</span>
-                    <span>Wagering: $100</span>
+                    <img src="images/bets_explanation_example.png">
+                    <p ng-if="modal_text_index === 0">In the associated example, the Pittsburgh Steelers are favored to win, and they are favored to
+                        win by 7.5 points. In order to win a <em>spread</em> bet on the Steelers, they would need to
+                        beat the Browns by 7.5 points. In order to win a <em>spread</em> bet on the Browns, they would
+                        need to not lose to the Steelers by more than 7.5 points. Since the final score of that game was
+                        Steelers 24 and Browns 9, <em>spread</em> bets on the Steelers would have won and
+                        <em>spread</em> bets on the Browns would have lost.</p>
+                    <p class="" ng-if="modal_text_index === 1">In this example the over/under is 49. The final score of that game was Steelers 24 - Browns 9, so
+                        the total points scored were 33. Hence only bets for the under would have paid out.</p>
+                    <p class="" ng-if="modal_text_index === 2">   In the associated example, the <em>points spread</em> is positive which means that the away
+                        team, the Pittsburgh Steelers, are favored.</p>
+                    <p class="" ng-if="modal_text_index === 3">In the example, the odds of the
+                        Cleveland Browns winning this game were +273. A win on a wager of $100 on this bet would have
+                        won $273 on top of your original $100 wager, so a win would have paid $373.</p>
+                    <p class="" ng-if="modal_text_index === 4">In this example, the odds of the
+                        Cleveland Browns beating the spread, meaning that they win the game or lose by less than 7.5
+                        points, in this game were -110. To win $100 one would have to place a $110 wager on this bet. If
+                        the Browns would have beat the spread, then this bet would have won, and the bettor would have
+                        won $100 on top of their original wager of $110 for a total payout of $210.</p>
+
                 </div>
                 <br>
-                <button type="button" class="spread_bet " data-dismiss="modal" ng-click="ic.sendBetData()">Confirm Bet</button>
-                <button type="button" class="spread_bet " data-dismiss="modal">Cancel</button>
+                <button type="button" class="spread_bet" data-dismiss="modal">Cancel</button>
             </div>
         </div>
-
     </div>
 </div>
