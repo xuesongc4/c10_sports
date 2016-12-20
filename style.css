@@ -943,11 +943,23 @@ video{
     display: none;
 }
 
-@media (max-width: 750px) {
-    #login_body {
-        background: url(images/background.jpg) #000!important;
-        background-size: contain;
-    }
-    .video { display: none; }
-    .background{ display:inherit; }
+*::-webkit-media-controls-panel {
+    display: none!important;
+    -webkit-appearance: none;
+}
+
+/* Old shadow dom for play button */
+
+*::--webkit-media-controls-play-button {
+    display: none!important;
+    -webkit-appearance: none;
+}
+
+/* New shadow dom for play button */
+
+/* This one works */
+
+*::-webkit-media-controls-start-playback-button {
+    display: none!important;
+    -webkit-appearance: none;
 }
