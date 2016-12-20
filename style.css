@@ -716,6 +716,10 @@ video{
         font-size: 15px;
         margin-top: 0px;
     }
+
+    .input{
+        padding:0;
+    }
 }
 
 .bet_history{
