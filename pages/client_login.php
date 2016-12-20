@@ -10,7 +10,7 @@
 </head>
 <body id="login_body">
 <video class="video" muted="muted" loop="loop" autoplay="autoplay">
-    <source src="video/blurred.webm" type="video/webm">
+    <source src="video/blurred.mp4" type="video/mp4">
     your browser does not support html5 video
 </video>
 
