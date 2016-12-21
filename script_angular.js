@@ -111,6 +111,7 @@ app.controller('controller', function (myFactory) {
     this.user_funds={};
     this.index = null;
     this.liveTime=null;
+    this.current_league=null;
 
     this.round_down = function(number){
         number *= 100;
@@ -158,14 +159,21 @@ app.controller('controller', function (myFactory) {
         myFactory.sendData(self.saveBetData)
             .then(function (response) {
                 console.log('bet succesfully sent: ', response);
-                self.saveBetData = {};
-                self.displayData[self.index].bets_placed.moneyline = response.data.bets_placed.moneyline;
-                self.displayData[self.index].bets_placed.spread = response.data.bets_placed.spread;
-                self.displayData[self.index].bets_placed['over/under'] = response.data.bets_placed['over/under'];
-                self.index=null;
                 for (var i = 0; i < self.displayData.length; i++) {
                     self.displayData[i].bet_toggle = false;
                 }
+                if(response.data.success==false){
+                    $('.error_reason').text("Unable to place this bet: "+response.data.errors[0]);
+                    $('#myModal2').modal({ show: false});
+                    $('#myModal2').modal('show');
+                }
+                else{
+                    self.displayData[self.index].bets_placed.moneyline = response.data.bets_placed.moneyline;
+                    self.displayData[self.index].bets_placed.spread = response.data.bets_placed.spread;
+                    self.displayData[self.index].bets_placed['over/under'] = response.data.bets_placed['over/under'];
+                }
+                self.saveBetData = {};
+                self.index=null;
             }),
             function (response) {
                 alert('error!');
@@ -224,21 +232,27 @@ app.controller('controller', function (myFactory) {
         switch (league) {
             case 'NFL':
                 self.league_highlight = ['sel',0,0,0,0,0];
+                self.current_league = 'NFL';
                 break;
             case 'NBA':
                 self.league_highlight = [0,'sel',0,0,0,0];
+                self.current_league = 'NBA';
                 break;
             case 'MLB':
                 self.league_highlight = [0,0,'sel',0,0,0];
+                self.current_league = 'MLB';
                 break;
             case 'NHL':
                 self.league_highlight = [0,0,0,'sel',0,0];
+                self.current_league = 'NHL';
                 break;
             case 'NCAAF':
                 self.league_highlight = [0,0,0,0,'sel',0];
+                self.current_league = 'NCAAF';
                 break;
             case 'NCAAB':
                 self.league_highlight = [0,0,0,0,0,'sel'];
+                self.current_league = 'NCAAB';
                 break;
         }
 
@@ -307,7 +321,6 @@ app.controller('controller', function (myFactory) {
                         }
 
                         var date = new Date(response[i].game_time * 1000);
-                        response[i].utc_game_time=response[i].game_time * 1000;
                         response[i].utc_game_time=response[i].game_time * 1000;
                         var temp_date=date.toString().slice(0,15);
                         var temp_time=date.toString().slice(16,21);

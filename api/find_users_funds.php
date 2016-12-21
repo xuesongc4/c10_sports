@@ -20,6 +20,21 @@ if(mysqli_num_rows($funds_results)){
 }else{
     $data['errors'][] = 'user has no transactions';
 }
+//query to find the amount the user currently has at risk
+$funds_at_risk_query = "SELECT SUM(amount) AS funds_at_risk FROM `bets` WHERE user_id = '$user_id' AND settled = 0";
+$funds_at_risk_results = mysqli_query($connection, $funds_at_risk_query);
+$otherInfo = [];    //temp
+if(mysqli_num_rows($funds_at_risk_results)){
+    while ($row = mysqli_fetch_assoc($funds_at_risk_results)) {
+        if(round($row['funds_at_risk'], 2, PHP_ROUND_HALF_UP) > 0){
+            $data['funds_at_risk'] = round($row['funds_at_risk'], 2, PHP_ROUND_HALF_UP);
+        }else{
+            $data['funds_at_risk'] = 0;
+        }
+    }
+}else{
+    $data['funds_at_risk'] = 0;
+}
 
 //json encode the data
 $json_encoded_object = json_encode($data);

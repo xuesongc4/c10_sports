@@ -241,14 +241,14 @@ body{
     background-color:white;
 }
 
-.selected{
-    background-color: deepskyblue;
+.selected2{
+    background-color: lightgrey;
     color: white;
     font-weight: bold;
 }
 
-.selected2{
-    background-color: lightgrey;
+.selected{
+    background-color: deepskyblue;
     color: white;
     font-weight: bold;
 }
@@ -292,10 +292,11 @@ body{
 }
 
 .account_info{
-    padding-bottom: 10vh;
+    padding-bottom: 100px;
     width:100%;
     background-color: black;
     color:deepskyblue;
+    font-size: 40px;
 }
 a:hover{
     text-decoration:none;
@@ -487,7 +488,7 @@ video{
     opacity: .9;
     text-align: center;
     border-radius: 100%;
-    margin-bottom: 50px;
+    margin-bottom: 20px;
     border: 35px solid rgba(0,0,0,1);
 }
 .header2{
@@ -498,7 +499,7 @@ video{
     width: 258px;
     line-height: 258px;
     border-radius: 100%;
-    margin-top: -376px;
+    margin-top: -346px;
     margin-left:36px;
     display: none;
 }
@@ -515,9 +516,9 @@ video{
 }
 .form{
     margin:auto;
-    margin-top:10vh;
     width: 400px;
-    z-index: 1;
+    z-index: 5;
+    margin-top: 8vh;
 }
 @media screen and (min-height: 1100px) {
     .form{
@@ -533,26 +534,26 @@ video{
 .input{
     margin-top: 10px;
     background-color: rgba(255,255,255,.5);
-    height: 70px;
-    width: 93%;
+    height: 50px;
+    width: 100%;
     border: black 4px solid;
     color: black;
-    font-size: 50px;
-    z-index: 5;
-    padding-left: 5%;
+    font-size: 35px;
+    padding-left:5%;
+    box-sizing: border-box;
 }
 
 .user_login, .user_login2{
     text-align: center;
     width: 100%;
-    line-height: 70px;
-    font-size: 50px;
+    line-height: 40px;
+    font-size: 35px;
     margin: auto;
     color:white;
     background-color: black;
     opacity: .85;
     border: black 4px solid;
-    margin-top: 15px;
+    margin-top: 10px;
 }
 
   .user_login2{
@@ -741,10 +742,24 @@ video{
     padding:10px;
     font-weight: bold;
 }
+.faq_link:hover{
+    cursor: pointer;
+    color: darkblue;
+}
+.faq_modal{
+    font-size: 20px;
+    text-align: left;
+}
 .faq_info{
     border: solid 2px black;
     background-color: lightgrey;
     text-align: left;
+}
+/*used on faq page to make image fit in modal*/
+.modal_color img{
+    width: 90%;
+    height: auto;
+    margin: 20px;
 }
 
 .dates_input{
@@ -787,8 +802,8 @@ video{
     color:white;
     background-color: black;
     opacity: .9;
-    border: black 5px solid;
-    margin-top: 15px;
+    border: black 4px solid;
+    margin-top: 10px;
 }
 .sign_up:hover{
     cursor: pointer;
@@ -805,7 +820,7 @@ video{
     background-color: black;
     opacity: .9;
     border: black 4px solid;
-    margin-top: 15px;
+    margin-top: 10px;
 }
 .guest_login:hover{
     cursor: pointer;
@@ -820,7 +835,7 @@ video{
 }
 
 .warning,.warning2 {
-    font-size: 30px;
+    font-size: 20px;
     font-weight: bold;
     color: red;
     display: none;
@@ -828,7 +843,7 @@ video{
 }
 
 .warning3 {
-    font-size: 30px;
+    font-size: 25px;
     font-weight: bold;
     color: red;
     margin-left: 5%;
@@ -838,12 +853,13 @@ video{
     margin-top: 10px;
     background-color: rgba(255,255,255,.5);
     height: 45px;
-    width: 93%;
+    width: 100%;
     border: black 4px solid;
     color: black;
     font-size: 25px;
     z-index: 5;
     padding-left: 5%;
+    box-sizing: border-box;
 }
 
 .user_login_notclick{
@@ -858,4 +874,84 @@ video{
     border: black 4px solid;
     margin-top: 15px;
     pointer-events: none;
+}
+
+@media screen and (max-height: 900px) {
+    .input_signup{
+        background-color: rgba(255,255,255,.5);
+        height: 35px;
+        width: 93%;
+        color: black;
+        font-size: 25px;
+        z-index: 5;
+        padding-left: 5%;
+    }
+    .user_login, .user_login2, .guest_login, .sign_up{
+        line-height: 35px;
+        font-size: 25px;
+    }
+    .user_login_notclick{
+        text-align: center;
+        width: 100%;
+        line-height: 35px;
+        font-size: 25px;
+        margin: auto;
+        color:white;
+        background-color: black;
+        opacity: .5;
+        border: black 4px solid;
+        margin-top: 10px;
+        pointer-events: none;
+    }
+}
+
+@media screen and (max-height: 830px) {
+    .input_signup{
+        background-color: rgba(255,255,255,.5);
+        height: 25px;
+        width: 93%;
+        color: black;
+        font-size: 20px;
+        z-index: 5;
+        padding-left: 5%;
+    }
+    .user_login, .user_login2, .guest_login, .sign_up{
+        line-height: 25px;
+        font-size: 20px;
+    }
+    .user_login_notclick{
+        text-align: center;
+        width: 100%;
+        line-height: 25px;
+        font-size: 20px;
+        margin: auto;
+        color:white;
+        background-color: black;
+        opacity: .5;
+        border: black 4px solid;
+        margin-top: 10px;
+        pointer-events: none;
+    }
+}
+
+
+*::-webkit-media-controls-panel {
+    display: none!important;
+    -webkit-appearance: none;
+}
+
+/* Old shadow dom for play button */
+
+*::--webkit-media-controls-play-button {
+    display: none!important;
+    -webkit-appearance: none;
+}
+
+/* New shadow dom for play button */
+
+/* This one works */
+
+*::-webkit-media-controls-start-playback-button {
+    display: none!important;
+    -webkit-appearance: none;
 }

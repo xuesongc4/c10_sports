@@ -21,7 +21,26 @@
         </div>
 </div>
 <div class="sched_landing">
-    <div class="no_games_warning" ng-hide="ic.displayDataLength"><h1>No games available</h1></div>
+    <div class="no_games_warning" ng-hide="ic.displayDataLength">
+        <h1 ng-if="ic.current_league==='NBA'">
+            No NBA games available
+        </h1>
+        <h1 ng-if="ic.current_league==='NFL'">
+            No NFL games available
+        </h1>
+        <h1 ng-if="ic.current_league==='MLB'">
+            No MLB games available
+        </h1>
+        <h1 ng-if="ic.current_league==='NHL'">
+            No NHL games available
+        </h1>
+        <h1 ng-if="ic.current_league==='NCAAB'">
+            Feature not yet available
+        </h1>
+        <h1 ng-if="ic.current_league==='NCAAF'">
+            Feature not yet available
+        </h1>
+    </div>
     <div ng-repeat='bet_data in ic.displayData'>
         <div class='game' ng-click="ic.betToggle($index)">
             <div class="game_date">
@@ -37,7 +56,7 @@
             </div>
             <div class='teams_playing_div'>
                 <div class="teams_playing"><img class="home_img" ng-src="{{bet_data.logo_src_a}}"> {{bet_data.full_name_a}} <span ng-if="bet_data.final_score_a==-1 && bet_data.overunder_points>0 && bet_data.utc_game_time > ic.liveTime" class="game_odds">{{bet_data.overunder_points}}</span> <span ng-if="bet_data.final_score_a>-1" class="final_score">{{bet_data.final_score_a}}</span> </div>
-                <div class="teams_playing"><img class="away_img" ng-src="{{bet_data.logo_src_h}}"> {{bet_data.full_name_h}} <span ng-if="bet_data.final_score_h==-1 && bet_data.overunder_points>0 && bet_data.utc_game_time > ic.liveTime" class="game_odds"><span ng-if="bet_data.home_spread>0 && bet_data.final_score_h==-1">+</span>{{bet_data.home_spread}}</span> <span ng-if="bet_data.final_score_h>-1" class="final_score">{{bet_data.final_score_h}}</span></div>
+                <div class="teams_playing"><img class="away_img" ng-src="{{bet_data.logo_src_h}}"> {{bet_data.full_name_h}} <span ng-if="bet_data.final_score_h==-1 && bet_data.overunder_points>0 && bet_data.utc_game_time > ic.liveTime" class="game_odds"><span ng-if="bet_data.home_spread>0 && bet_data.final_score_h==-1">+</span><span ng-if="bet_data.home_spread>0||bet_data.home_spread<0">{{bet_data.home_spread}}</span><span ng-if="bet_data.home_spread==0">EVEN</span></span><span ng-if="bet_data.final_score_h>-1" class="final_score">{{bet_data.final_score_h}}</span></div>
             </div>
             <div class="bet_made_lander">
                 <div class="bet_made" ng-if="bet_data.bets_placed.spread=='true'">S</div>
@@ -49,8 +68,8 @@
         <div ng-class="{myClass: myvarformyclas, }"></div>
 
         <div class="bet" ng-class="bet_data.start_not_started" ng-show="bet_data.bet_toggle">
-            <button class='spread_bet' ng-class='{selected:ic.highlight[0], spread_bet_fake: ic.liveTime>bet_data.utc_game_time, spread_bet_fake2:bet_data.spread_odds_h==0&&bet_data.spread_odds_a==0}' ng-click="ic.saveData(0,bet_data.game_id,'1',0,bet_data.home_spread,bet_data.spread_odds_a,0,bet_data.abbr_name_a,bet_data.home_spread*-1,$index)">{{bet_data.abbr_name_a}} <span ng-if="bet_data.home_spread*-1>0">+</span>{{bet_data.home_spread*-1}} (<span ng-if="bet_data.spread_odds_a>0">+</span>{{bet_data.spread_odds_a}})</button>
-            <button class='spread_bet' ng-class='{selected:ic.highlight[1], spread_bet_fake: ic.liveTime>bet_data.utc_game_time, spread_bet_fake2:bet_data.spread_odds_h==0&&bet_data.spread_odds_a==0}' ng-click="ic.saveData(1,bet_data.game_id,'1',1,bet_data.home_spread,bet_data.spread_odds_h,1,bet_data.abbr_name_h,bet_data.home_spread,$index)">{{bet_data.abbr_name_h}} <span ng-if="bet_data.home_spread>0">+</span>{{bet_data.home_spread}} (<span ng-if="bet_data.spread_odds_h>0">+</span>{{bet_data.spread_odds_h}})</button>
+            <button class='spread_bet' ng-class='{selected:ic.highlight[0], spread_bet_fake: ic.liveTime>bet_data.utc_game_time, spread_bet_fake2:bet_data.spread_odds_h==0&&bet_data.spread_odds_a==0}' ng-click="ic.saveData(0,bet_data.game_id,'1',0,bet_data.home_spread,bet_data.spread_odds_a,0,bet_data.abbr_name_a,bet_data.home_spread*-1,$index)">{{bet_data.abbr_name_a}} <span ng-if="bet_data.home_spread*-1>0">+</span><span ng-if="bet_data.home_spread*-1!=0">{{bet_data.home_spread*-1}}</span> <span ng-if="bet_data.home_spread*-1==0">EVEN</span> (<span ng-if="bet_data.spread_odds_a>0">+</span>{{bet_data.spread_odds_a}})</button>
+            <button class='spread_bet' ng-class='{selected:ic.highlight[1], spread_bet_fake: ic.liveTime>bet_data.utc_game_time, spread_bet_fake2:bet_data.spread_odds_h==0&&bet_data.spread_odds_a==0}' ng-click="ic.saveData(1,bet_data.game_id,'1',1,bet_data.home_spread,bet_data.spread_odds_h,1,bet_data.abbr_name_h,bet_data.home_spread,$index)">{{bet_data.abbr_name_h}} <span ng-if="bet_data.home_spread>0">+</span><span ng-if="bet_data.home_spread!=0">{{bet_data.home_spread}}</span> <span ng-if="bet_data.home_spread==0">EVEN</span> (<span ng-if="bet_data.spread_odds_h>0">+</span>{{bet_data.spread_odds_h}})</button>
             <button class='spread_bet' ng-class='{selected:ic.highlight[2], spread_bet_fake: ic.liveTime>bet_data.utc_game_time, spread_bet_fake2:bet_data.moneyline_odds_h==0&&bet_data.moneyline_odds_a==0}' ng-click="ic.saveData(2,bet_data.game_id,'2',0,bet_data.moneyline_odds_a,bet_data.moneyline_odds_a,2,bet_data.abbr_name_a,bet_data.moneyline_odds_a,$index)">{{bet_data.abbr_name_a}} ML (<span ng-if="bet_data.moneyline_odds_a>0">+</span>{{bet_data.moneyline_odds_a}})</button>
             <button class='spread_bet' ng-class='{selected:ic.highlight[3], spread_bet_fake: ic.liveTime>bet_data.utc_game_time, spread_bet_fake2:bet_data.moneyline_odds_h==0&&bet_data.moneyline_odds_a==0}' ng-click="ic.saveData(3,bet_data.game_id,'2',1,bet_data.moneyline_odds_h,bet_data.moneyline_odds_h,3,bet_data.abbr_name_h,bet_data.moneyline_odds_h,$index)">{{bet_data.abbr_name_h}} ML (<span ng-if="bet_data.moneyline_odds_h>0">+</span>{{bet_data.moneyline_odds_h}})</button>
             <button class='spread_bet' ng-class='{selected:ic.highlight[4], spread_bet_fake: ic.liveTime>bet_data.utc_game_time, spread_bet_fake2:bet_data.overunder_odds_o==0&&bet_data.overunder_odds_u==0}' ng-click="ic.saveData(4,bet_data.game_id,'3',1,bet_data.overunder_points,bet_data.overunder_odds_o,4,'OVER',bet_data.overunder_points,$index)">OVER  {{bet_data.overunder_points}} (<span ng-if="bet_data.overunder_odds_o>0">+</span>{{bet_data.overunder_odds_o}})</button>
@@ -84,4 +103,21 @@
 
         </div>
     </div>
+
+<div class="modal fade" id="myModal2" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-body">
+                <br>
+                <div class="modal_color">
+                  <span class="error_reason"></span>
+                </div>
+                <br>
+                <button type="button" class="spread_bet " data-dismiss="modal">Okay</button>     <!--necessary for modals to go away-->
+            </div>
+        </div>
+
+    </div>
+</div>
 
