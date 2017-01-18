@@ -535,11 +535,12 @@ video{
     margin-top: 10px;
     background-color: rgba(255,255,255,.5);
     height: 50px;
-    width: 93%;
+    width: 100%;
     border: black 4px solid;
     color: black;
     font-size: 35px;
-    padding-left: 5%;
+    padding-left:5%;
+    box-sizing: border-box;
 }
 
 .user_login, .user_login2{
@@ -852,12 +853,13 @@ video{
     margin-top: 10px;
     background-color: rgba(255,255,255,.5);
     height: 45px;
-    width: 93%;
+    width: 100%;
     border: black 4px solid;
     color: black;
     font-size: 25px;
     z-index: 5;
     padding-left: 5%;
+    box-sizing: border-box;
 }
 
 .user_login_notclick{
@@ -932,22 +934,24 @@ video{
     }
 }
 
-.background{
-    background-color: rgba(255,255,255,.15);
-    position:fixed;
-    top:0;
-    right:0;
-    height: 100vh;
-    width: 100vw;
-    z-index: -1;
-    display: none;
+
+*::-webkit-media-controls-panel {
+    display: none!important;
+    -webkit-appearance: none;
 }
 
-@media (max-width: 750px) {
-    #login_body {
-        background: url(images/background.jpg) #000!important;
-        background-size: contain;
-    }
-    .video { display: none; }
-    .background{ display:inherit; }
+/* Old shadow dom for play button */
+
+*::--webkit-media-controls-play-button {
+    display: none!important;
+    -webkit-appearance: none;
+}
+
+/* New shadow dom for play button */
+
+/* This one works */
+
+*::-webkit-media-controls-start-playback-button {
+    display: none!important;
+    -webkit-appearance: none;
 }

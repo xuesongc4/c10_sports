@@ -1,4 +1,5 @@
 <?php
+require('check_wins.php');
 //execution of the method to correct old, bad bet results
 print('<pre>');
 print_r(correct_wins_on_past_games($connection));

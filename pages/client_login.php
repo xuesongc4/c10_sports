@@ -9,13 +9,11 @@
     <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body id="login_body">
-    <video class="video" muted="muted" loop="loop" autoplay="autoplay">
-        <source src="video/blurred.webm" type="video/webm">
-        your browser does not support html5 video
-    </video>
+<video class="video" muted="muted" loop="loop" autoplay="autoplay">
+    <source src="video/blurred.mp4" type="video/mp4">
+    your browser does not support html5 video
+</video>
 
-<div class="login_background"></div>
-    <div class="background"></div>
 <div class="form">
     <div class="header">
         iBet
@@ -44,14 +42,18 @@
         </div>
 
         <div class="sign_up_menu">
-            <input class="input_signup" type="text" name="username_signup" placeholder="Username" id="username" onkeypress="checkUsername()"><span class="warning">Username Taken</span><br>
-            <input id='password'class="input_signup" type="password" name="password_signup" placeholder="Password" onkeypress="checkPass()"><br>
-            <input id='check_password'class="input_signup" type="password" name="password_signup_confirm" placeholder="Confirm Password" onkeypress="checkPass()"><span class="warning2">Passwords do not match</span><br>
+            <input class="input_signup" type="text" name="username_signup" placeholder="Username" id="username"
+                   onkeypress="checkUsername()"><span class="warning">Username Taken</span><br>
+            <input id='password' class="input_signup" type="password" name="password_signup" placeholder="Password"
+                   onkeypress="checkPass()"><br>
+            <input id='check_password' class="input_signup" type="password" name="password_signup_confirm"
+                   placeholder="Confirm Password" onkeypress="checkPass()"><span
+                class="warning2">Passwords do not match</span><br>
             <input class="input_signup" type="text" name="email_signup" placeholder="Email"><br>
             <button id="sign_up_button" class="user_login_notclick" name="signup" onclick="show_load()">
                 Sign Up
             </button>
-            <button type='button'class="user_login2" name="cancel" onclick="display_login()">
+            <button type='button' class="user_login2" name="cancel" onclick="display_login()">
                 Cancel
             </button>
         </div>
@@ -61,77 +63,78 @@
 <script>
     var newUser = false;
     var matchPass = false;
-    var password_val = $('.password').val()!=''
+    var password_val = $('.password').val() != ''
 
     $('.user_login,.guest_login').on('click', function () {
         $('.header2').css('display', 'initial');
-        setTimeout(function(){
+        setTimeout(function () {
             $('.header2').css('display', 'none');
-        },2000);
+        }, 2000);
     });
 
-    var check_sign_up = function(){
-        if((password_val != '')&&newUser&&matchPass) {
+    var check_sign_up = function () {
+        if ((password_val != '') && newUser && matchPass) {
             $('#sign_up_button').removeClass();
             $('#sign_up_button').addClass('user_login2');
         }
-        else{
+        else {
             $('#sign_up_button').removeClass();
             $('#sign_up_button').addClass('user_login_notclick');
         }
     }
 
-    var show_load = function(){
+    var show_load = function () {
         $('.header2').show();
     }
 
     var passTimeout;
-    var checkPass = function (){
+    var checkPass = function () {
         clearTimeout(passTimeout);
-        passTimeout = setTimeout(function() {
+        passTimeout = setTimeout(function () {
             var value1 = $('#password').val();
             var value2 = $('#check_password').val();
 
-            if(value1=='' || value2==''){
+            if (value1 == '' || value2 == '') {
                 matchPass = false;
                 check_sign_up();
                 return;
             }
-            if (value1 !== value2){
+            if (value1 !== value2) {
                 $('.warning2').slideToggle();
                 matchPass = false;
                 check_sign_up();
             }
-            else{
+            else {
                 $('.warning2').hide();
                 matchPass = true;
                 check_sign_up();
             }
-        },800);
+        }, 800);
     }
-    
-    var display_login = function(){
-        setTimeout(function(){
+
+    var display_login = function () {
+        setTimeout(function () {
             $('.input_signup').val('');
             $('.warning2').hide();
             $('.warning').hide();
             newUser = false;
             matchPass = false;
-            $('.login').slideToggle()},250)
+            $('.login').slideToggle()
+        }, 250)
         $('.sign_up_menu').slideToggle();
     }
 
 
-    var display_sign_up = function(){
-        
-        setTimeout(function(){
+    var display_sign_up = function () {
+
+        setTimeout(function () {
             $('.warning3').hide();
             $('.sign_up_menu').slideToggle()
-        },250);
-        
+        }, 250);
+
         $('.login').slideToggle();
     }
-    
+
     var ajaxTimeout;
     var illegalChars = /\W/;
     var checkUsername = function(){
@@ -158,7 +161,6 @@
                     }
                 })
                 .done(function(data) {
-
                     if(data.userFound) {
                         console.log(data.userFound);
                         newUser = false;
@@ -176,8 +178,6 @@
                 });
             }, 700);
         }, 50)
-        
-        
     };
 </script>
 <script>
