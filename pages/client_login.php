@@ -133,36 +133,51 @@
     }
     
     var ajaxTimeout;
+    var illegalChars = /\W/;
     var checkUsername = function(){
         clearTimeout(ajaxTimeout);
-        ajaxTimeout = setTimeout(function() {
-            console.log('sent');
-            $.ajax({
-                url: 'api/check_user.php',
-                type: "POST",
-                dataType: 'JSON',
-                data: {
-                    username: $('#username').val()
-                }
-            })
-            .done(function(data) {
+        setTimeout(function() {
+            var username = $('#username').val();
+            console.log(username);
+            if (illegalChars.test(username)) {
+                console.log(illegalChars.test(username));
+                $('.warning').text('Username can only contain letters, numbers, and underscores').slideToggle();
+                return;
+            } else {
+                console.log('ok');
+                $('.warning').hide();
+            }
+            ajaxTimeout = setTimeout(function() {
+                console.log('sent');
+                $.ajax({
+                    url: 'api/check_user.php',
+                    type: "POST",
+                    dataType: 'JSON',
+                    data: {
+                        username: $('#username').val()
+                    }
+                })
+                .done(function(data) {
 
-                if(data.userFound) {
-                    console.log(data.userFound);
-                    newUser = false;
-                    $('.warning').slideToggle();
-                    check_sign_up()
-                }
-                else{
-                    $('.warning').hide();
-                    newUser = true;
-                    check_sign_up();
-                }
-            })
-            .fail(function() {
-                alert("unable to reach user name database");
-            });
-        }, 700);
+                    if(data.userFound) {
+                        console.log(data.userFound);
+                        newUser = false;
+                        $('.warning').text('Username Taken').slideToggle();
+                        check_sign_up()
+                    }
+                    else{
+                        $('.warning').hide();
+                        newUser = true;
+                        check_sign_up();
+                    }
+                })
+                .fail(function() {
+                    alert("unable to reach user name database");
+                });
+            }, 700);
+        }, 50)
+        
+        
     };
 </script>
 <script>
