@@ -153,7 +153,7 @@
         ajaxTimeout = setTimeout(function() {
             var username = $('#username').val();
             if (username.length < 3) {
-                $('.username-warning').text('Username must be at least 3 characters (sorry Vu)').slideDown();
+                $('.username-warning').text('Name needs at least 3 characters (sorry Vu)').slideDown();
                 check_sign_up();
                 return;
             } else {
