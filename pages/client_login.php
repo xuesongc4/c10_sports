@@ -49,7 +49,8 @@
             <input id='check_password' class="input_signup" type="password" name="password_signup_confirm"
                    placeholder="Confirm Password" onkeypress="checkPass()"><span
                 class="warning2">Passwords do not match</span><br>
-            <input class="input_signup" type="text" name="email_signup" placeholder="Email"><br>
+            <input class="input_signup" type="text" name="email_signup" placeholder="Email"><span
+                class="warning email">Must input proper email</span><br>
             <button id="sign_up_button" class="user_login_notclick" name="signup" onclick="show_load()">
                 Sign Up
             </button>
@@ -93,14 +94,20 @@
         passTimeout = setTimeout(function () {
             var value1 = $('#password').val();
             var value2 = $('#check_password').val();
-
+            if (value1.length < 4) {
+                $('.warning2').text('Password must be at least 4 characters long').slideToggle();
+                console.log('less');
+                return;
+            } else {
+                $('.warning2').hide();
+            }
             if (value1 == '' || value2 == '') {
                 matchPass = false;
                 check_sign_up();
                 return;
             }
             if (value1 !== value2) {
-                $('.warning2').slideToggle();
+                $('.warning2').text('Passwords do not match').slideToggle();
                 matchPass = false;
                 check_sign_up();
             }
@@ -110,7 +117,7 @@
                 check_sign_up();
             }
         }, 800);
-    }
+    };
 
     var display_login = function () {
         setTimeout(function () {
@@ -141,13 +148,16 @@
         clearTimeout(ajaxTimeout);
         setTimeout(function() {
             var username = $('#username').val();
-            console.log(username);
+            if (username.length < 3) {
+                $('.warning').text('Username must be at least 3 characters (sorry Vu)');
+                return;
+            } else {
+                $('.warning').hide();
+            }
             if (illegalChars.test(username)) {
-                console.log(illegalChars.test(username));
                 $('.warning').text('Username can only contain letters, numbers, and underscores').slideToggle();
                 return;
             } else {
-                console.log('ok');
                 $('.warning').hide();
             }
             ajaxTimeout = setTimeout(function() {
@@ -177,7 +187,7 @@
                     alert("unable to reach user name database");
                 });
             }, 700);
-        }, 50)
+        }, 500)
     };
 </script>
 <script>
