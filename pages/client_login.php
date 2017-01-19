@@ -43,14 +43,14 @@
 
         <div class="sign_up_menu">
             <input class="input_signup" type="text" name="username_signup" placeholder="Username" id="username"
-                   onkeypress="checkUsername()"><span class="warning">Username Taken</span><br>
+                   onkeypress="checkUsername()"><span class="warning username-warning">Username Taken</span><br>
             <input id='password' class="input_signup" type="password" name="password_signup" placeholder="Password"
                    onkeypress="checkPass()"><br>
             <input id='check_password' class="input_signup" type="password" name="password_signup_confirm"
                    placeholder="Confirm Password" onkeypress="checkPass()"><span
                 class="warning2">Passwords do not match</span><br>
-            <input class="input_signup" type="text" name="email_signup" placeholder="Email"><span
-                class="warning email">Must input proper email</span><br>
+            <input id="email" class="input_signup" type="text" name="email_signup" placeholder="Email" onkeypress="checkEmail()"><span
+                class="warning email-warning">Must input proper email</span><br>
             <button id="sign_up_button" class="user_login_notclick" name="signup" onclick="show_load()">
                 Sign Up
             </button>
@@ -64,6 +64,7 @@
 <script>
     var newUser = false;
     var matchPass = false;
+    var validEmail = false;
     var password_val = $('.password').val() != ''
 
     $('.user_login,.guest_login').on('click', function () {
@@ -74,7 +75,7 @@
     });
 
     var check_sign_up = function () {
-        if ((password_val != '') && newUser && matchPass) {
+        if ((password_val != '') && newUser && matchPass && validEmail) {
             $('#sign_up_button').removeClass();
             $('#sign_up_button').addClass('user_login2');
         }
@@ -90,16 +91,19 @@
 
     var passTimeout;
     var checkPass = function () {
+        console.log('password press');
         clearTimeout(passTimeout);
         passTimeout = setTimeout(function () {
             var value1 = $('#password').val();
             var value2 = $('#check_password').val();
             if (value1.length < 4) {
-                $('.warning2').text('Password must be at least 4 characters long').slideToggle();
                 console.log('less');
+                $('.warning2').text('Password must be at least 4 characters long').slideDown();
+                check_sign_up();
                 return;
             } else {
                 $('.warning2').hide();
+                check_sign_up();
             }
             if (value1 == '' || value2 == '') {
                 matchPass = false;
@@ -107,7 +111,7 @@
                 return;
             }
             if (value1 !== value2) {
-                $('.warning2').text('Passwords do not match').slideToggle();
+                $('.warning2').text('Passwords do not match').slideDown();
                 matchPass = false;
                 check_sign_up();
             }
@@ -146,48 +150,69 @@
     var illegalChars = /\W/;
     var checkUsername = function(){
         clearTimeout(ajaxTimeout);
-        setTimeout(function() {
+        ajaxTimeout = setTimeout(function() {
             var username = $('#username').val();
             if (username.length < 3) {
-                $('.warning').text('Username must be at least 3 characters (sorry Vu)');
+                $('.username-warning').text('Username must be at least 3 characters (sorry Vu)').slideDown();
+                check_sign_up();
                 return;
             } else {
-                $('.warning').hide();
+                $('.username-warning').hide();
+                check_sign_up();
             }
             if (illegalChars.test(username)) {
-                $('.warning').text('Username can only contain letters, numbers, and underscores').slideToggle();
+                $('.username-warning').text('Username can only contain letters, numbers, and underscores').slideDown();
+                check_sign_up();
                 return;
             } else {
-                $('.warning').hide();
+                $('.username-warning').hide();
+                check_sign_up();
             }
-            ajaxTimeout = setTimeout(function() {
-                console.log('sent');
-                $.ajax({
-                    url: 'api/check_user.php',
-                    type: "POST",
-                    dataType: 'JSON',
-                    data: {
-                        username: $('#username').val()
-                    }
-                })
-                .done(function(data) {
-                    if(data.userFound) {
-                        console.log(data.userFound);
-                        newUser = false;
-                        $('.warning').text('Username Taken').slideToggle();
-                        check_sign_up()
-                    }
-                    else{
-                        $('.warning').hide();
-                        newUser = true;
-                        check_sign_up();
-                    }
-                })
-                .fail(function() {
-                    alert("unable to reach user name database");
-                });
-            }, 700);
-        }, 500)
+            $.ajax({
+                url: 'api/check_user.php',
+                type: "POST",
+                dataType: 'JSON',
+                data: {
+                    username: $('#username').val()
+                }
+            })
+            .done(function(data) {
+                if(data.userFound) {
+                    console.log(data.userFound);
+                    newUser = false;
+                    $('.username-warning').text('Username Taken').slideDown();
+                    check_sign_up()
+                }
+                else{
+                    $('.username-warning').hide();
+                    newUser = true;
+                    check_sign_up();
+                }
+            })
+            .fail(function() {
+                alert("unable to reach user name database");
+            });
+        }, 800);
+    };
+
+    function validateEmail(email) {  
+        return /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email) ? true : false;
+    }
+    var emailTimeout;
+    var checkEmail = function() {
+        clearTimeout(emailTimeout);
+        emailTimeout = setTimeout(function() {
+            var email = $('#email').val();
+            if (validateEmail(email)) {
+                $('.email-warning').hide();
+                validEmail = true;
+                check_sign_up();
+            } else {
+                validEmail = false;
+                $('.email-warning').slideDown();
+                check_sign_up();
+            }
+        }, 800);
     };
 </script>
 <script>
