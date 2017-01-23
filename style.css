@@ -756,6 +756,9 @@ video{
     text-align: left;
     padding: 25px;
 }
+.faq_info ol {
+    padding-left: 20px;
+}
 /*used on faq page to make image fit in modal*/
 .modal_color img{
     width: 90%;
