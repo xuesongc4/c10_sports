@@ -39,7 +39,7 @@
             <a class="menu_option" href="#/bethistory" ng-click="ic.menu_toggle=true"><img
                     src="images/GraphBar.png"></img> Bet History</a>
             <a class="menu_option" href="#/leaderboard" ng-click="ic.menu_toggle=true"><img src="images/Trophy.png"></img>
-                Leader Board</a>
+                Leaderboard</a>
             <a class="menu_option" href="#/faq" ng-click="ic.menu_toggle=true"><img
                     src="images/Question.png"></img> FAQ</a>
             <a class="menu_option" href="#/aboutus" ng-click="ic.menu_toggle=true"><div class="logo_menu">iBet</div>

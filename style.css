@@ -754,6 +754,7 @@ video{
     border: solid 2px black;
     background-color: lightgrey;
     text-align: left;
+    padding: 25px;
 }
 /*used on faq page to make image fit in modal*/
 .modal_color img{
