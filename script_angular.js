@@ -16,10 +16,10 @@ app.factory("myFactory", function ($http, $q) {
         })
             .then(function (response) {
                 data.find_users_funds = response.data;
-                console.log("funds data in my factory: ", data);
+                // console.log("funds data in my factory: ", data);
                 q.resolve(data.find_users_funds);
             }, function () {
-                console.log('error in getting data');
+                // console.log('error in getting data');
                 q.reject('error in getting data')
             });
         return q.promise;
@@ -34,10 +34,10 @@ app.factory("myFactory", function ($http, $q) {
         })
             .then(function (response) {
                 data.retrieve_bet_history = response.data;
-                console.log("response in my factory for bet history: ", data);
+                // console.log("response in my factory for bet history: ", data);
                 q.resolve(data.retrieve_bet_history);
             }, function () {
-                console.log('error in getting data');
+                // console.log('error in getting data');
                 q.reject('error in getting data')
             });
         return q.promise
@@ -53,12 +53,12 @@ app.factory("myFactory", function ($http, $q) {
             method: 'post'
         })
             .then(function (response) {
-                console.log('username in factory is: '+username);
+                // console.log('username in factory is: '+username);
                 data.leaderboard_data = response.data;
-                console.log("response in my factory for leader board: ", data);
+                // console.log("response in my factory for leader board: ", data);
                 q.resolve(data.leaderboard_data);
             }, function () {
-                console.log('error in getting data');
+                // console.log('error in getting data');
                 q.reject('error in getting data')
             });
         return q.promise
@@ -74,10 +74,10 @@ app.factory("myFactory", function ($http, $q) {
         })
             .then(function (response) {
                 data.bet_data = response.data;
-                console.log("response in my factory for data: ", data);
+                // console.log("response in my factory for data: ", data);
                 q.resolve(data.bet_data);
             }, function () {
-                console.log('error in getting data');
+                // console.log('error in getting data');
                 q.reject('error in getting data')
             });
         return q.promise
@@ -142,7 +142,7 @@ app.controller('controller', function (myFactory) {
             .then(function (response) {
                 response.funds_abs=Math.abs(response.funds);
                 self.user_funds = response;
-                console.log("myfunds reponse: ",response);
+                // console.log("myfunds reponse: ",response);
 
                 }),
                  function (response) {
@@ -155,10 +155,10 @@ app.controller('controller', function (myFactory) {
         self.bet_button_toggle=false;
         self.highlight = [];
         self.bet_index_mem=100;
-        console.log('the bet data I am sending the server is: ', self.saveBetData);
+        // console.log('the bet data I am sending the server is: ', self.saveBetData);
         myFactory.sendData(self.saveBetData)
             .then(function (response) {
-                console.log('bet succesfully sent: ', response);
+                // console.log('bet succesfully sent: ', response);
                 for (var i = 0; i < self.displayData.length; i++) {
                     self.displayData[i].bet_toggle = false;
                 }
@@ -200,7 +200,7 @@ app.controller('controller', function (myFactory) {
             self.highlight[select_index] = 'selected';
             self.bet_button_toggle = true;
             self.index = index;
-            console.log('index of bet is' + self.index);
+            // console.log('index of bet is' + self.index);
         }
     };
     this.betToggle = function (index) {
@@ -298,12 +298,12 @@ app.controller('controller', function (myFactory) {
             // --------------------------------------------------------------------
         }
         self.sendData.start_end = utcMidnights;
-        console.log('sending including start / end dates: ',self.sendData);
+        // console.log('sending including start / end dates: ',self.sendData);
 
         if(league) {
             self.sendData.league = league;
         }
-   //     console.log('the data I am sending the server is: ', self.sendData);
+   //     // console.log('the data I am sending the server is: ', self.sendData);
    // var offset = new Date().getTimezoneOffset();
         myFactory.getData(self.sendData)
             .then(function (response) {
@@ -339,7 +339,7 @@ app.controller('controller', function (myFactory) {
                          response[i].game_time = temp_time;
                          response[i].game_date = temp_date;
                     };
-                    console.log("response with toggle information and started or not information: ", response);
+                    // console.log("response with toggle information and started or not information: ", response);
 
                     self.displayData = response;
                     self.gotData = true;
@@ -351,7 +351,7 @@ app.controller('controller', function (myFactory) {
                     else{
                         self.displayDataLength=true;
                     }
-                    console.log('display data length',self.displayDataLength)
+                    // console.log('display data length',self.displayDataLength)
                 },
                 function (response) {
                     console('error!');
@@ -416,13 +416,13 @@ app.controller('leaderboard', function (myFactory) {
                 else{
                     self.error=false;
                 }
-                console.log('response is :',response);
-                console.log("searching for user:"+self.username);
+                // console.log('response is :',response);
+                // console.log("searching for user:"+self.username);
                 for(i=0;i<response.leaderboard_info.length;i++) {
                     response.leaderboard_info[i].money_abs = Math.abs(response.leaderboard_info[i].money);
                 }
                     self.leaderboard_data=response.leaderboard_info;
-                console.log('leader board data: ',self.leaderboard_data);
+                // console.log('leader board data: ',self.leaderboard_data);
                     $('.loader').addClass('hide');
                     $('.loader_background').addClass('hide');
                  },
@@ -572,12 +572,12 @@ app.controller('bethistory', function (myFactory) {
                             self.graph_data_ratio.push(temp_data_ratio);
                         }
                     }
-                    console.log('graph money data is: ', self.graph_data_money);
-                    console.log('graph ratio data is: ', self.graph_data_ratio);
+                    // console.log('graph money data is: ', self.graph_data_money);
+                    // console.log('graph ratio data is: ', self.graph_data_ratio);
                     //----------------------------------------------------------------------
                     self.get_ratio();
                     self.bet_history=response;
-                    console.log(self.bet_history);
+                    // console.log(self.bet_history);
                     $('.loader').addClass('hide');
                     $('.loader_background').addClass('hide');
                 },
