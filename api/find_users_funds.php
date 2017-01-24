@@ -44,7 +44,7 @@ function calculate_win_total($bet_amount, $odds) {
     } else {
         $win = $odds / 100 * $bet_amount;
     }
-    $win = round_down($win);
+    $win = round($win, 2, PHP_ROUND_HALF_DOWN);
     return $bet_amount + $win;
 }
 
