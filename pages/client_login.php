@@ -219,8 +219,5 @@
         }, 800);
     };
 </script>
-<script>
-    localStorage.removeItem('bet_user_id');
-</script>
 </body>
 </html>
