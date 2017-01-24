@@ -449,10 +449,12 @@ a:hover{
     text-align: left;
     color: black;
     font-weight: bold;
-    margin-left: 33.3%;
+    /*margin-left: 33.3%;*/
+    margin-left: 6px;
 }
 .sel6{
-    margin-left: 35%;
+    /*margin-left: 35%;*/
+    margin-left: 15px;
     color: black;
     font-weight: bold;
 }
