@@ -36,6 +36,33 @@ if(mysqli_num_rows($funds_at_risk_results)){
     $data['funds_at_risk'] = 0;
 }
 
+function calculate_win_total($bet_amount, $odds) {
+    $win = null;
+    if ($odds < 0) {
+        $odds *= -1;
+        $win = 100 / $odds * $bet_amount;
+    } else {
+        $win = $odds / 100 * $bet_amount;
+    }
+    $win = round_down($win);
+    return $bet_amount + $win;
+}
+
+$unsettled_bets_query = "SELECT amount, odds FROM `bets` WHERE user_id = '$user_id' AND settled = 0";
+$unsettled_bets_results = mysqli_query($connection, $unsettled_bets_query);
+$potential_returning_funds = 0;
+if (mysqli_num_rows($unsettled_bets_results)) {
+    while ($row = mysqli_fetch_assoc($unsettled_bets_results)) {
+        $potential_returning_funds += calculate_win_total($row['amount'], $row['odds']);
+    }
+}
+
+if ($potential_returning_funds) {
+    $data['potential_returning_funds'] = $potential_returning_funds;
+} else {
+    $data['potential_returning_funds'] = 0;
+}
+
 //json encode the data
 $json_encoded_object = json_encode($data);
 //print the json encoded object

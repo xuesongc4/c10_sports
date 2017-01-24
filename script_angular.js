@@ -16,7 +16,7 @@ app.factory("myFactory", function ($http, $q) {
         })
             .then(function (response) {
                 data.find_users_funds = response.data;
-                // console.log("funds data in my factory: ", data);
+                console.log("funds data in my factory: ", data);
                 q.resolve(data.find_users_funds);
             }, function () {
                 // console.log('error in getting data');
