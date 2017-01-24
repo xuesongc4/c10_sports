@@ -189,6 +189,7 @@ app.controller('controller', function (myFactory) {
 
         else{
             self.bet_index_mem=bet_index;
+            self.saveBetData.bet_amount = 100;
             self.saveBetData.game_id = id;
             self.saveBetData.side = side;
             self.saveBetData.type_of_bet = type_of_bet;

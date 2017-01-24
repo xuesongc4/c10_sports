@@ -19,6 +19,7 @@ date_default_timezone_set('UTC');
 //$odds = -107;
 $bet_amount = 100;      //necessary when testing and not
 
+$bet_amount = $_POST['bet_amount'];
 //dynamic variables
 $user_id = $_SESSION['ID'];
 $game_id = $_POST['game_id'];

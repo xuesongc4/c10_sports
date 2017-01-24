@@ -221,6 +221,12 @@ body{
     color: deepskyblue;
 }
 
+.wager_amount{
+    width: 12%;
+    margin: 1px;
+    margin-bottom: 50px;
+}
+
 .spread_bet_fake, .spread_bet_fake2{
     opacity: .5;
     pointer-events: none;
