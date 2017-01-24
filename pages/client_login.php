@@ -91,6 +91,7 @@
     }
 
     var passTimeout;
+    var illegalChars = /\W/;
     var checkPass = function () {
         console.log('password press');
         clearTimeout(passTimeout);
@@ -102,6 +103,9 @@
                 $('.warning2').text('Password must be at least 4 characters long').slideDown();
                 check_sign_up();
                 return;
+            } else if (illegalChars.test(value1)){
+                $('.warning2').text('Password can only contain letters, numbers, and underscores').slideDown();
+                check_sign_up();
             } else {
                 $('.warning2').hide();
                 check_sign_up();
@@ -148,7 +152,6 @@
     }
 
     var ajaxTimeout;
-    var illegalChars = /\W/;
     var checkUsername = function(){
         clearTimeout(ajaxTimeout);
         ajaxTimeout = setTimeout(function() {
@@ -197,7 +200,7 @@
     };
 
     function validateEmail(email) {  
-        return /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email) ? true : false;
+        return /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,})+$/.test(email) ? true : false;
     }
     var emailTimeout;
     var checkEmail = function() {
