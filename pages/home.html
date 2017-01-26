@@ -67,7 +67,7 @@
                         <span ng-if="bet_data.home_spread==0">EVEN</span>
                     </span>
                     <span ng-if="ic.current_league === 'NHL' && bet_data.final_score_h==-1 && bet_data.overunder_points>0 && bet_data.utc_game_time > ic.liveTime" class="game_odds">
-                        <span ng-if="bet_data.moneyline_odds_h>0 && bet_data.final_score_h==-1">+</span><span ng-if="bet_data.moneyline_odds_h>0||bet_data.moneyline_odds_h<0">{{bet_data.home_spread}}</span>
+                        <span ng-if="bet_data.moneyline_odds_h>0 && bet_data.final_score_h==-1">+</span><span ng-if="bet_data.moneyline_odds_h>0||bet_data.moneyline_odds_h<0">{{bet_data.moneyline_odds_h}}</span>
                         <span ng-if="bet_data.moneyline_odds_h==0">EVEN</span>
                     </span>
                     <span ng-if="bet_data.final_score_h>-1" class="final_score">{{bet_data.final_score_h}}</span></div>
