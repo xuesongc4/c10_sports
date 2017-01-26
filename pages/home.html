@@ -55,8 +55,22 @@
                 </span>
             </div>
             <div class='teams_playing_div'>
-                <div class="teams_playing"><img class="home_img" ng-src="{{bet_data.logo_src_a}}"> {{bet_data.full_name_a}} <span ng-if="bet_data.final_score_a==-1 && bet_data.overunder_points>0 && bet_data.utc_game_time > ic.liveTime" class="game_odds">{{bet_data.overunder_points}}</span> <span ng-if="bet_data.final_score_a>-1" class="final_score">{{bet_data.final_score_a}}</span> </div>
-                <div class="teams_playing"><img class="away_img" ng-src="{{bet_data.logo_src_h}}"> {{bet_data.full_name_h}} <span ng-if="bet_data.final_score_h==-1 && bet_data.overunder_points>0 && bet_data.utc_game_time > ic.liveTime" class="game_odds"><span ng-if="bet_data.home_spread>0 && bet_data.final_score_h==-1">+</span><span ng-if="bet_data.home_spread>0||bet_data.home_spread<0">{{bet_data.home_spread}}</span><span ng-if="bet_data.home_spread==0">EVEN</span></span><span ng-if="bet_data.final_score_h>-1" class="final_score">{{bet_data.final_score_h}}</span></div>
+                <div class="teams_playing">
+                    <img class="home_img" ng-src="{{bet_data.logo_src_a}}"> {{bet_data.full_name_a}} 
+                    <span ng-if="bet_data.final_score_a==-1 && bet_data.overunder_points>0 && bet_data.utc_game_time > ic.liveTime" class="game_odds">{{bet_data.overunder_points}}</span> 
+                    <span ng-if="bet_data.final_score_a>-1" class="final_score">{{bet_data.final_score_a}}</span> 
+                </div>
+                <div class="teams_playing">
+                    <img class="away_img" ng-src="{{bet_data.logo_src_h}}"> {{bet_data.full_name_h}} 
+                    <span ng-if="ic.current_league !== 'NHL' && bet_data.final_score_h==-1 && bet_data.overunder_points>0 && bet_data.utc_game_time > ic.liveTime" class="game_odds">
+                        <span ng-if="bet_data.home_spread>0 && bet_data.final_score_h==-1">+</span><span ng-if="bet_data.home_spread>0||bet_data.home_spread<0">{{bet_data.home_spread}}</span>
+                        <span ng-if="bet_data.home_spread==0">EVEN</span>
+                    </span>
+                    <span ng-if="ic.current_league === 'NHL' && bet_data.final_score_h==-1 && bet_data.overunder_points>0 && bet_data.utc_game_time > ic.liveTime" class="game_odds">
+                        <span ng-if="bet_data.moneyline_odds_h>0 && bet_data.final_score_h==-1">+</span><span ng-if="bet_data.moneyline_odds_h>0||bet_data.moneyline_odds_h<0">{{bet_data.home_spread}}</span>
+                        <span ng-if="bet_data.moneyline_odds_h==0">EVEN</span>
+                    </span>
+                    <span ng-if="bet_data.final_score_h>-1" class="final_score">{{bet_data.final_score_h}}</span></div>
             </div>
             <div class="bet_made_lander">
                 <div class="bet_made" ng-if="bet_data.bets_placed.spread=='true'">S</div>
