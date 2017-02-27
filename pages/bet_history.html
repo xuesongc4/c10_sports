@@ -26,7 +26,7 @@
     <div class="loader hide">iBet<span class="loader_spinner"></span></div>
     <div class="loader_background hide"></div>
     <div class='sched_landing'>
-        <div ng-repeat="hist_data in bh.bet_history">
+        <div ng-repeat="hist_data in bh.bet_history | limitTo: bh.resultsLimit">
             <div class='game_history'>
                 <div class="game_date">
                     <span class="sel2">
@@ -67,6 +67,9 @@
                     <span ng-if="hist_data.odds>0">+</span>{{hist_data.odds}})
                 </div>
             </div>
+        </div>
+        <div class="more-results-div" ng-click="bh.moreResults()">
+            More Results
         </div>
     </div>
 

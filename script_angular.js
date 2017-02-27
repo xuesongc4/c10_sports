@@ -490,6 +490,7 @@ app.controller('bethistory', function (myFactory) {
         }
     }
 
+    this.resultsLimit = 10;
     this.get_bet_history = function(){
         $('.loader').removeClass('hide');
         $('.loader_background').removeClass('hide');
@@ -588,5 +589,14 @@ app.controller('bethistory', function (myFactory) {
                     console('error!');
                 });
     }
+    this.moreResults = function() {
+        $('.loader').removeClass('hide');
+        $('.loader_background').removeClass('hide');
+        setTimeout(function() {
+            this.resultsLimit += 10;
+            $('.loader').addClass('hide');
+            $('.loader_background').addClass('hide');
+        }, 500);
+    };
     this.get_bet_history();
 });

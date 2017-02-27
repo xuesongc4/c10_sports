@@ -37,6 +37,21 @@ body{
     box-sizing: border-box;
     min-height: 100px;
 }
+.more-results-div{
+    font-size: 20px;
+    max-width:900px;
+    min-width: 550px;
+    position: relative;
+    box-sizing: border-box;
+    height: 50px;
+    line-height: 50px;
+    border: 1px solid black;
+    text-align: center;
+    cursor: pointer;
+}
+.more-results-div:hover{
+    color: deepskyblue;
+}
 
 .menu_button{
     margin: 10px;
